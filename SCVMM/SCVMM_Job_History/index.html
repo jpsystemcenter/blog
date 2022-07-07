@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SCVMM ジョブ保存設定変更方法 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 [本ページが対象とする SCVMM バージョン]SCVMM 2016SCVMM 2019SCVMM 2022 [概要]SCVMM で実行される処理の多くは、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCVMM ジョブ保存設定変更方法">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 [本ページが対象とする SCVMM バージョン]SCVMM 2016SCVMM 2019SCVMM 2022 [概要]SCVMM で実行される処理の多くは、">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2022-07-07T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-07T07:20:00.851Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCVMM">
+<meta property="article:tag" content="HowTo">
+<meta property="article:tag" content="SCVMM Server">
+<meta property="article:tag" content="Job">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCVMM/SCVMM_Job_History" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SCVMM ジョブ保存設定変更方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-07-07T03:00:00.000Z" itemprop="datePublished">2022-07-07</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+67242cd7-f977-5e41-bae1-dfdc5065493b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%82%B8%E3%83%A7%E3%83%96%E4%BF%9D%E5%AD%98%E8%A8%AD%E5%AE%9A%E5%A4%89%E6%9B%B4%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Job_History%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Job_History.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Job_History.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/" data-id="cl5ap8gna00060mjpfc0qcxyl" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p>
+<p>今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。</p>
+<h3 id="本ページが対象とする-SCVMM-バージョン"><a href="#本ページが対象とする-SCVMM-バージョン" class="headerlink" title="[本ページが対象とする SCVMM バージョン]"></a>[本ページが対象とする SCVMM バージョン]</h3><p>SCVMM 2016<br>SCVMM 2019<br>SCVMM 2022</p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="[概要]"></a>[概要]</h3><p>SCVMM で実行される処理の多くは、ジョブという形で実行されます。<br>このジョブが実行されると、実行可否に関わらず、履歴としてすべて SCVMM データベースに存在する [dbo].[tbl_TR_TaskTrail] というテーブルに保存されます。<br>ジョブ履歴ですが、バッチ処理を組まれる等して大量のジョブが短期間で実行される環境においては、このテーブルが肥大化する要因となります。<br>テーブルが肥大化することで、SCVMM 観点においては下記の影響が発生します。</p>
+<ul>
+<li>単純に [dbo].[tbl_TR_TaskTrail] テーブルサイズが肥大化し、データベースファイルサイズの肥大化</li>
+<li>SCVMM へのパフォーマンスへの影響</li>
+</ul>
+<p>意外に思われるかもしれませんが、ジョブ履歴が大量に保存されている環境においては、SCVMM へのパフォーマンス影響が発生する可能性がございます。<br>特段負荷が大きい処理を連続して実施されていないにも関わらず、SCVMM ジョブの実行速度や SCVMM 自体が以前より遅くなったといった状況では、ジョブ履歴が大量に保存されている可能性がございます。</p>
+<h3 id="対処手順"><a href="#対処手順" class="headerlink" title="[対処手順]"></a>[対処手順]</h3><p>このジョブ履歴ですが、レジストリ値によってジョブ履歴保持日数および削除処理が行われる周期を設定いただけます。<br>そのため、”概要” 項で説明しました影響が発生されている場合は、そのレジストリ値設定を変更いただくのが切り分けとして有用となります。</p>
+<p>追加いただくレジストリは、以下の 2 種類が該当いたします。</p>
+<blockquote>
+<p>レジストリキー:<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Settings\Sql</p>
+<p>レジストリの種類:<br>DWORD (32 ビット) 値</p>
+<p>レジストリの名称:<br>TaskGC</p>
+<p>レジストリ値:<br>ジョブの保持日数を整数値で指定します。<br>例えば、本レジストリ値が 7 に設定された場合、ジョブ履歴削除処理が行われた日付時刻から 7 日以内のジョブは保持され、それ以外はすべて削除対象となります。<br>レジストリが未作成の状態である場合、本レジストリ値は 90 に設定されたものとして動作が行われます。<br>こちらのレジストリ設定値を、ご利用の環境でどの程度ジョブ履歴を重要視されるかに応じて設定します。<br>また、本レジストリ値の設定値に関わらず、一度のジョブ履歴削除処理で削除されるジョブ数は最大で 50000 件となります。<br>そのため、各処理間で 50000 件以上のジョブ履歴が保存される場合、ジョブ履歴は傾向として増加される状況となります。<br>ご利用の環境に合わせて、もう一つのレジストリである “DBGCUpdateInterval” のレジストリ値を構成します。</p>
+</blockquote>
+<blockquote>
+<p>レジストリキー:<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Settings</p>
+<p>レジストリの種類:<br>DWORD (32 ビット) 値</p>
+<p>キーの名称 :<br>DBGCUpdateInterval</p>
+<p>レジストリ値:<br>ジョブ削除ジョブが実行される周期を秒単位の整数値で指定します。<br>レジストリが未作成の状態である場合、本レジストリ値は 72000 (= 20 時間) に設定されたものとして動作が行われます。</p>
+</blockquote>
+<p>レジストリの作成は、下記手順で行えます。</p>
+<ol>
+<li>レジストリを追加する SCVMM サーバーに管理者権限でログインします。</li>
+<li>[Win] + [R] キーを押下し、”regedit” と入力して実行します。</li>
+<li>画面左ペインより、各レジストリの追加先となるレジストリキーにアクセスします。</li>
+<li> レジストリが表示された画面上で右クリックし、[新規] -&gt; [DWORD (32 ビット) 値] をクリックします。</li>
+<li>追加されたレジストリに対して、”キーの名称” で指定された文字列を入力します。</li>
+<li>追加されたレジストリをダブルクリックし、レジストリの編集を行います。</li>
+<li>ウィンドウ右側に表示された [10 進数] を選択し、レジストリで指定いただく値を入力します。</li>
+<li>レジストリ追加完了後、SCVMM サーバーに関するサービスである “System Center Virtual Machine Manager” サービスを再起動します。</li>
+</ol>
+<h3 id="ご参考"><a href="#ご参考" class="headerlink" title="[ご参考]"></a>[ご参考]</h3><p>既に弊社にて公開がされていないサイトとなりますので、こちらのブログにて併せてそちらのサイトの内容をご紹介いたします。<br>その公開終了されたサイトでは、SCVMM のジョブについて要約すると以下の内容が書かれておりました。</p>
+<ul>
+<li>SCVMM の仕様として、目安ではあるものの 10000 の同時並行実施ジョブが処理可能であること。</li>
+<li>10000 以上のジョブが同時並行で実施されている場合、SCVMM サーバーのパフォーマンスに多大な影響を及ぼす可能性があること。</li>
+<li>大量のジョブが並行実施される動作とは別に、SCVMM ジョブ履歴が大量に保存されている場合、それによっても SCVMM サーバーのパフォーマンスに多大な影響を及ぼす可能性があること。</li>
+</ul>
+<p>公開終了とされる前に記載されております内容について、原文のままご紹介いたします。</p>
+<ul>
+<li><p>SCVMM で同時並行で実行可能なジョブ数に関する記述:</p>
+<blockquote>
+<p>The maximum number of running jobs that an SCVMM system should be able to handle is around 10,000 and hitting this many running jobs at one time would be an exceptionally rare occurrence.<br>Should it occur, however, it can have a severe impact on the performance of the SCVMM engine.</p>
+</blockquote>
+</li>
+<li><p>SCVMM ジョブ履歴が大量に保存されていることで発生しうる影響に関する記述:</p>
+<blockquote>
+<p>The number of retained Jobs count refers to the number of running tasks tracked in the TaskTrail database table in SQL.<br>The size of this database can have as much of an impact on performance as the actual running jobs.<br>If the number of running jobs nowhere reaches 10,000 then it may be that the tombstone limit on entries tracked in the TaskTrail database is too conservative</p>
+</blockquote>
+</li>
+</ul>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCVMM/SCVMM_Job_History.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../general/JapanSCEM_000_NewBlogOpened/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Japan System Center Enterprise Management (SCEM) チームの Blog 新規開設のお知らせ</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SCVMM ジョブ保存設定変更方法</a>
+          </li>
+        
+          <li>
+            <a href="../../general/JapanSCEM_000_NewBlogOpened/">Japan System Center Enterprise Management (SCEM) チームの Blog 新規開設のお知らせ</a>
+          </li>
+        
+          <li>
+            <a href="../../general/Prerequisites_SQL2019/">一部の System Center 2019 で SQL Server 2019 を使用する際の前提条件</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_2012R2_Uninstall-TroubleCase/">SCOM 2012 R2 エージェントのアンインストール時のトラブル事例</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_agent_failures/">SCOM エージェントの入れ替え作業の失敗事例</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">3</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 20px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/General/" style="font-size: 15px;">General</a> <a href="../../tags/HowTo/" style="font-size: 20px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCVMM/" style="font-size: 15px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Troubleshoot/" style="font-size: 20px;">Troubleshoot</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

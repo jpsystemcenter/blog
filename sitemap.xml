@@ -16,6 +16,13 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
+    
+    <lastmod>2022-07-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
     
     <lastmod>2022-07-07</lastmod>
@@ -103,6 +110,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/HowTo/</loc>
+    <lastmod>2022-07-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/tags/SCVMM-Server/</loc>
+    <lastmod>2022-07-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/tags/Job/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
