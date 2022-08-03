@@ -4,21 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>SCOM 2012 R2 エージェントのアンインストール時のトラブル事例 | Japan System Center Support Blog</title>
+  <title>SCOM 2019 以降で Windows 検出ウィザードで検出失敗 | Japan System Center Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以後 SCOM）のエージェントの入れ替え作業の失敗事例をご紹介いたします。2022 年 1 月現在の状況として、（SCOM 2012 R2の延長サポートのフェーズが2022年7月に終了）することに伴い、SCOM 2016や2019 など後継バージョ">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以後 SCOM）  2019 で変更のあった仕様の 1 つをご紹介いたします。2022 年 8 月現在の状況として、（SCOM 2012 R2の延長サポートのフェーズが2022年7月に終了）したことに伴い、SCOM 2019 や 2022 など後継">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SCOM 2012 R2 エージェントのアンインストール時のトラブル事例">
-<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/index.html">
+<meta property="og:title" content="SCOM 2019 以降で Windows 検出ウィザードで検出失敗">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/index.html">
 <meta property="og:site_name" content="Japan System Center Support Blog">
-<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以後 SCOM）のエージェントの入れ替え作業の失敗事例をご紹介いたします。2022 年 1 月現在の状況として、（SCOM 2012 R2の延長サポートのフェーズが2022年7月に終了）することに伴い、SCOM 2016や2019 など後継バージョ">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以後 SCOM）  2019 で変更のあった仕様の 1 つをご紹介いたします。2022 年 8 月現在の状況として、（SCOM 2012 R2の延長サポートのフェーズが2022年7月に終了）したことに伴い、SCOM 2019 や 2022 など後継">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2022-02-04T03:00:00.000Z">
+<meta property="article:published_time" content="2022-08-03T06:00:00.000Z">
 <meta property="article:modified_time" content="2022-08-03T06:30:50.989Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Troubleshoot">
-<meta property="article:tag" content="Agent">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
@@ -81,7 +80,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-SCOM/SCOM_2012R2_Uninstall-TroubleCase" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SCOM/SCOM_service_logon_access" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -90,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SCOM 2012 R2 エージェントのアンインストール時のトラブル事例
+      SCOM 2019 以降で Windows 検出ウィザードで検出失敗
     </h1>
   
 
@@ -98,31 +97,35 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-02-04T03:00:00.000Z" itemprop="datePublished">2022-02-04</time>
+  <time datetime="2022-08-03T06:00:00.000Z" itemprop="datePublished">2022-08-03</time>
 </a>
         
         
-        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+5dba1df9-da03-5bec-aca8-4f42483f3db9%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+2012+R2+%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%AE%E3%82%A2%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%99%82%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E4%BA%8B%E4%BE%8B%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_2012R2_Uninstall-TroubleCase%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_2012R2_Uninstall-TroubleCase.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_2012R2_Uninstall-TroubleCase.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+123d45ab-d0c9-5242-aea7-f6e1b286d3f0%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+2019+%E4%BB%A5%E9%99%8D%E3%81%A7+Windows+%E6%A4%9C%E5%87%BA%E3%82%A6%E3%82%A3%E3%82%B6%E3%83%BC%E3%83%89%E3%81%A7%E6%A4%9C%E5%87%BA%E5%A4%B1%E6%95%97%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_service_logon_access%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_service_logon_access.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_service_logon_access.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/" data-id="cl6d8d8sr00010noc3cqg4tvl" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/" data-id="cl6d8d8sz00060noc5d4a75gu" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <span id="more"></span>
 <p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p>
-<p>本日は System Center Operations Manager（以後 SCOM）のエージェントの入れ替え作業の失敗事例をご紹介いたします。<br>2022 年 1 月現在の状況として、（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/lifecycle/products/microsoft-system-center-2012-r2-operations-manager">SCOM 2012 R2の延長サポートのフェーズが2022年7月に終了</a>）することに伴い、SCOM 2016や2019 など後継バージョンの環境を新規構築して移行を進めている、もしくはご計画されているお客様もいるかと存じます。</p>
-<p>その際、監視対象コンピューターにて <strong>SCOM 2012 R2 のエージェントのアンインストールを行う事となりますが、アンインストール時に想定外に発生したトラブル事例</strong>についてご紹介いたします。</p>
-<p>アンインストールした際には下記パスのように SCOM エージェント専用のフォルダやフォルダ配下のファイルが削除されるのは当然ですが、その他に別ソフトウェアでも使用するファイルが配置しているフォルダにある SCOM エージェント で使用するファイルも削除する対象となります。</p>
+<p>本日は System Center Operations Manager（以後 SCOM）  2019 で変更のあった仕様の 1 つをご紹介いたします。<br>2022 年 8 月現在の状況として、（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/lifecycle/products/microsoft-system-center-2012-r2-operations-manager">SCOM 2012 R2の延長サポートのフェーズが2022年7月に終了</a>）したことに伴い、SCOM 2019 や 2022 など後継バージョンの環境を新規構築して移行を進めている、もしくはご計画されているお客様もいるかと存じます。</p>
+<p>SCOM 2019 の新規環境を構築後に Windows コンピューターを検出する際に SCOM インストール ユーザ以外で検出を試みると下図のエラー（対象コンピューターがいない）と出力される場合がございます。</p>
+<p>この事象はこれまでのバージョンと異なり検出する実行アカウントに対しててサービス ログオンアクセス許可を有効にいない場合に発生している可能性がございます。<br>設定をされていなければ、下記手順にて一度設定をいただき、事象が改善するかご確認いただければと存じます。</p>
+<p>SCOM 管理サーバーにて以下設定をする事で、サービス ログオンアクセス許可を有効にできます。</p>
+<ol>
+<li>SCOM 管理サーバーに管理者特権でサインインします。</li>
+<li>[管理ツール] に移動し、 [ローカル セキュリティ ポリシー] をクリックします。<br>　例えば、Windows Server 2016 以降では、スタートメニューを開き、[Windows 管理ツール] -&gt; [ローカル セキュリティ ポリシー] をクリックします。</li>
+<li>[ローカル ポリシー] を展開し、 [ユーザー権利の割り当て] をクリックします。</li>
+<li>右側のウィンドウで、 [サービスとしてログオン] を右クリックし、 [プロパティ] を選択します。</li>
+<li>[ユーザーまたはグループの追加] オプションをクリックし、以下どちらかを追加します。</li>
+<li>サーバーを再起動します。</li>
+</ol>
+<p>参考サイト：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/enable-service-logon?view=sc-om-2019#enable-service-log-on-permission-for-run-as-accounts">https://docs.microsoft.com/ja-jp/system-center/scom/enable-service-logon?view=sc-om-2019#enable-service-log-on-permission-for-run-as-accounts</a></p>
 <blockquote>
-<p>例）<br>SCOM エージェント専用のフォルダの例<br>　C:\Program Files\Microsoft Monitoring Agent\Agent<br>別ソフトウェアでも使用するファイルが配置しているフォルダの例<br>　C:\Windows\System32</p>
-<p>上記例に記載しているフォルダ「C:\Windows\System32」からは以下ファイルが削除対象となります。<br>　AcsMsgs.dll<br>　AdtAgent.exe<br>　InterceptCounters.dll<br>　msvcp100.dll<br>　msvcr100.dll</p>
+<p>対象バージョン：<br>　System Center Operations Manager 2019<br>　System Center Operations Manager 2022</p>
 </blockquote>
-<p>通常他ソフトウェアで上記ファイルを使用している場合は Windows のレジストリの設定値（複数のプログラムで使用しているため、アンインストールしない設定）によりアンインストール時に削除されないようになっているはずが、その設定がされておらず想定外にファイル msvcp100.dll が削除される事例がございました。</p>
-<h4 id="■レジストリ設定個所"><a href="#■レジストリ設定個所" class="headerlink" title="■レジストリ設定個所"></a>■レジストリ設定個所</h4><blockquote>
-<p>　HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SharedDLLs</p>
-</blockquote>
-<p>当事象は基本発生しないはずですが、万一発生してしまった場合は削除されたファイルを再度インストールする事で基本は復旧いたします。<br>必要なファイルについては各ソフトウェア次第でございますので、ここでのご説明は省略させていただきますが、上記ファイル msvcp100.dll の例でしたら当ファイル含むランタイム一式を下記サイトから取得いただき、再度インストールいただく事で復旧いたしました。<br>x86 と x64 については、今回消失してしまったモジュールにあわせて選択していただく必要がありますのでご留意ください。<br><a target="_blank" rel="noopener" href="https://www.microsoft.com/ja-jp/download/details.aspx?id=26999">https://www.microsoft.com/ja-jp/download/details.aspx?id=26999</a> </p>
 
       
       
@@ -136,10 +139,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li></ul>
 
         
-        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_2012R2_Uninstall-TroubleCase.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_service_logon_access.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -147,19 +150,10 @@
     
 <nav id="article-nav">
   
-    <a href="../../general/Prerequisites_SQL2019/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          一部の System Center 2019 で SQL Server 2019 を使用する際の前提条件
-        
-      </div>
-    </a>
   
-  
-    <a href="../SCOM_agent_failures/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../../SCVMM/SCVMM_Job_History/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">SCOM エージェントの入れ替え作業の失敗事例</div>
+      <div class="article-nav-title">SCVMM ジョブ保存設定変更方法</div>
     </a>
   
 </nav>
@@ -178,7 +172,7 @@
       <ul>
         
           <li>
-            <a href="../SCOM_service_logon_access/">SCOM 2019 以降で Windows 検出ウィザードで検出失敗</a>
+            <a href="">SCOM 2019 以降で Windows 検出ウィザードで検出失敗</a>
           </li>
         
           <li>
@@ -194,7 +188,7 @@
           </li>
         
           <li>
-            <a href="">SCOM 2012 R2 エージェントのアンインストール時のトラブル事例</a>
+            <a href="../SCOM_2012R2_Uninstall-TroubleCase/">SCOM 2012 R2 エージェントのアンインストール時のトラブル事例</a>
           </li>
         
       </ul>

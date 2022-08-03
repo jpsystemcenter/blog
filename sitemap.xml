@@ -16,20 +16,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/general/JapanSCEM_000_NewBlogOpened/</loc>
     
     <lastmod>2022-08-03</lastmod>
@@ -44,7 +30,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
     
     <lastmod>2022-08-03</lastmod>
     
@@ -59,6 +52,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2022-08-03</lastmod>
     
