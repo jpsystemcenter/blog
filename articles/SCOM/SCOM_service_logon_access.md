@@ -14,7 +14,7 @@ tags:
 
 SCOM 2019 の新規環境を構築後に Windows コンピューターを検出する際に SCOM インストール ユーザ以外で検出を試みると下図のエラー（対象コンピューターがいない）と出力される場合がございます。
 
-![](./img/SCOM_detection_computer_failures.png)
+![](./SCOM_service_logon_access/SCOM_detection_computer_failures.png)
 
 
 この事象はこれまでのバージョンと異なり検出する実行アカウントに対しててサービス ログオンアクセス許可を有効にいない場合に発生している可能性がございます。
