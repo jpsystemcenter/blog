@@ -63,5 +63,3 @@ SCOM 2016 に対応する OS バージョン
 OS や SQL Server のバージョンアップや 要件を満たす HW へ移行をすることで実現できる可能性はございます。
 ※ 2
 [監視対象の要件](https://docs.microsoft.com/ja-jp/system-center/scom/system-requirements?view=sc-om-2022#microsoft-monitoring-agent-operating-system)
-
-※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。 
