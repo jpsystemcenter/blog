@@ -14,7 +14,7 @@
 <meta property="og:description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。本日は System Center Operations Manager（以後 SCOM）  の新環境への移行やアップグレードについての考え方をご紹介いたします。 まず前提として SCOM の仕様内容について以下記述いたします。  SCOM 管理サーバーのバージョン違いの共存について　基本的には 1 バージョン前の最新の">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2022-08-18T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-18T04:51:05.034Z">
+<meta property="article:modified_time" content="2022-08-18T04:53:37.159Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="アップグレード">
@@ -104,7 +104,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+233d9dff-c9ee-53bc-811e-187b8217dfa8%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+2016+%E3%81%8B%E3%82%89+SCOM+2022+%E3%81%B8%E7%A7%BB%E8%A1%8C+or+%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_migration%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_migration.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_migration.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/" data-id="cl6ykepo000060mnv4sg26s5e" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/" data-id="cl6ykhyso00060mmqdphq9yav" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -125,7 +125,6 @@
 <p>また新環境を構築することで以下のメリットがございます。<br>　・旧環境と併設できるため、エージェント側の状況（監視を停止できる時間）を踏まえて移行できる<br>　・アップグレードの場合サポートしていない管理パックが引き継がれるリスクが混在するが、その問題を回避できる<br>　・新バージョンでサポートしていない監視対象については、引き続き旧環境で監視できる<br>　　　例） SCOM 2022 で監視対象となる Windows のバージョン（※2）は Windows Server 2012 以降/ Windows 10 以降となります。</p>
 <p>新環境への移行やアップグレードについてお困りごとがございましたら Microsoft までお問合せくださいませ。</p>
 <p>※ 1<br>OS や SQL Server のバージョンアップや 要件を満たす HW へ移行をすることで実現できる可能性はございます。<br>※ 2<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/system-requirements?view=sc-om-2022#microsoft-monitoring-agent-operating-system">監視対象の要件</a></p>
-<p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。 </p>
 
       
       
