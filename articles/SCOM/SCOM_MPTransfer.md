@@ -150,7 +150,7 @@ SCOM における非サポートの管理パックをインポートすること
 
 また管理パックガイドからも同様の内容を確認いただけます。
 こちらの管理パックでは、ドキュメント内の ”Supported Configurations” 項から内容をご確認いただけます。
-![](https://github.com/jpsystemcenter/blog/blob/53467ea239369d3ce5e16392b2dfeb5993a443c0/articles/SCOM/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPDoc.png)
+![](https://raw.githubusercontent.com/jpsystemcenter/blog/53467ea239369d3ce5e16392b2dfeb5993a443c0/articles/SCOM/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016%2BMPDoc.png)
 
 管理パックのドキュメントは、対応する管理パックによって記述の意匠が異なります。
 そのため、管理パックのドキュメントからサポートする SCOM バージョンを確認される場合、適宜そのドキュメントからサポート対象に関する内容をご確認ください。
