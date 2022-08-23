@@ -108,7 +108,7 @@ DB 機能を [always-on 構成](https://docs.microsoft.com/ja-jp/system-center/s
 
 ### OS が 4 台の場合
 4 台目は SCOM 管理サーバーの 2号機を構築いただく事が構成として考えられます。
-追加する手順については[管理グループに追加の管理サーバーをインストールするには](https://docs.microsoft.com/ja-jp/system-center/scom/deploy-install-mgmt-server?view=sc-om-2019#to-install-additional-management-servers-in-the-management-group)をご参照ください。。
+追加する手順については [管理グループに追加の管理サーバーをインストールするには](https://docs.microsoft.com/ja-jp/system-center/scom/deploy-install-mgmt-server?view=sc-om-2019#to-install-additional-management-servers-in-the-management-group) をご参照ください。
 SCOM 管理サーバーの 2 台目を構築いただく事が可能であり、それにより管理サーバーも冗長化されるとともに以下のように役割りを分散させる事が可能となります。
 
 #### パターン 1
