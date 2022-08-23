@@ -52,9 +52,8 @@ tags:
 
 
 ### OS が 2 台の場合
-管理グループを分散インストールすると、Operations Manager を展開するための基盤が 99% 整います。 これにより、複数のサーバーに機能とサービスを配布して、環境を拡張できます。 
-[SQL Server の設計に関する考慮事項](https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2019)に記載しているように
-中規模から大規模の分散型展開では、SQL Server インスタンスを専用スタンドアロン サーバーまたは SQL Server 高可用性構成に配置する必要があります。
+管理グループを分散インストールすると、複数のサーバーに機能とサービスを配布して、環境を拡張できます。 
+[SQL Server の設計に関する考慮事項](https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2019)に記載しているように中規模から大規模の分散型展開では、SQL Server インスタンスを専用スタンドアロン サーバーまたは SQL Server 高可用性構成に配置する必要があります。
 
 OS が 2 台の場合、具体的には下図のように DB 機能とサーバー機能を分散させます。
 ![](SCOM_construction/0201.png)
@@ -84,7 +83,7 @@ DB 機能を [always-on 構成](https://docs.microsoft.com/ja-jp/system-center/s
 ![](SCOM_construction/0301.png)
 
 この場合にレポートサーバー向けデータベース構成については、always-on の可用性グループには登録できない点ご留意ください。
-レポートサーバー向けデータベースをホストする OS が故障した際には[eporting Server の役割を移動する方法](https://docs.microsoft.com/ja-jp/system-center/scom/manage-move-reporting-services-role?view=sc-om-2019)
+レポートサーバー向けデータベースをホストする OS が故障した際には [Reporting Server の役割を移動する方法](https://docs.microsoft.com/ja-jp/system-center/scom/manage-move-reporting-services-role?view=sc-om-2019)
 に従いもう片方の OS 上で構築するようお願いいたします。
 尚、データウェアハウスデーターベースが健在であれば、その情報からレポーティングに必要なデーターベースは構成可能でございます。
 
