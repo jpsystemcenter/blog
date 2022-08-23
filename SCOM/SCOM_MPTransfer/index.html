@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/jpsystemcenter/blog/53467ea239369d3ce5e16392b2dfeb5993a443c0/articles/SCOM/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016%2BMPPage.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/jpsystemcenter/blog/53467ea239369d3ce5e16392b2dfeb5993a443c0/articles/SCOM/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016%2BMPDoc.png">
 <meta property="article:published_time" content="2022-08-23T03:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-23T05:11:00.582Z">
+<meta property="article:modified_time" content="2022-08-23T06:29:04.873Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="アップグレード">
@@ -108,7 +108,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+f0613e05-6ac1-58c4-8ee0-4553c27ff0af%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+%E7%AE%A1%E7%90%86%E3%83%91%E3%83%83%E3%82%AF%E7%A7%BB%E8%A1%8C%E3%81%AB%E3%82%88%E3%82%8B%E5%88%A5%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E8%A8%AD%E5%AE%9A%E7%A7%BB%E8%A1%8C%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_MPTransfer%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_MPTransfer.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_MPTransfer.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/" data-id="cl75qblbj001v0pp9gablatut" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/" data-id="cl75t411z001v0nmse3s6aqki" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -158,7 +158,12 @@
 </li>
 </ol>
 <p>こちらの手順を実施いただくと、”MPs” フォルダに、SCOM でご利用のすべての管理パックが “&lt;SCOM に保存された管理パックの名称&gt;.xml” のファイル名でエクスポートされます。<br>管理パックの名称にスペースが存在する場合、スペースは “.” に変換の上エクスポートされます。<br>管理パックの名称に日本語が 1 文字でも含まれる場合、エクスポートされる管理パックは “ManagementPack&lt;管理パック毎の固有文字列&gt;” の名称でエクスポートされます。<br>このエクスポートされた管理パックの内、お客様が独自に定義された管理パックを新規環境に移行します。</p>
-<h2 id="2-既存環境からエクスポートされた管理パックを、新規-SCOM-環境にコピー"><a href="#2-既存環境からエクスポートされた管理パックを、新規-SCOM-環境にコピー" class="headerlink" title="2. 既存環境からエクスポートされた管理パックを、新規 SCOM 環境にコピー"></a>2. 既存環境からエクスポートされた管理パックを、新規 SCOM 環境にコピー</h2><p>下記の説明では、特にご要望が多い以下の観点でご案内いたします。<br>\1) 独自定義ルール / モニターのインポート方法<br>\2) ルール / モニターの上書き設定のインポート方法<br>\3) 配信登録設定のインポート方法</p>
+<h2 id="2-既存環境からエクスポートされた管理パックを、新規-SCOM-環境にコピー"><a href="#2-既存環境からエクスポートされた管理パックを、新規-SCOM-環境にコピー" class="headerlink" title="2. 既存環境からエクスポートされた管理パックを、新規 SCOM 環境にコピー"></a>2. 既存環境からエクスポートされた管理パックを、新規 SCOM 環境にコピー</h2><p>下記の説明では、特にご要望が多い以下の観点でご案内いたします。</p>
+<ol>
+<li>独自定義ルール / モニターのインポート方法</li>
+<li>ルール / モニターの上書き設定のインポート方法</li>
+<li>配信登録設定のインポート方法</li>
+</ol>
 <h3 id="1-独自定義ルール-モニターのインポート"><a href="#1-独自定義ルール-モニターのインポート" class="headerlink" title="1) 独自定義ルール / モニターのインポート"></a>1) 独自定義ルール / モニターのインポート</h3><p>“1. 既存の SCOM 環境から管理パックをエクスポート” でエクスポートされた管理パックの内、独自定義ルール / モニターを作成される際に指定された管理パックを新規環境にコピーします。<br>その管理パックを新規環境にインポートいただくことで、新規環境でもそのモニターをご利用いただくことが可能となります。</p>
 <h3 id="2-ルール-モニターの上書き設定のインポート"><a href="#2-ルール-モニターの上書き設定のインポート" class="headerlink" title="2) ルール / モニターの上書き設定のインポート"></a>2) ルール / モニターの上書き設定のインポート</h3><p>“1. 既存の SCOM 環境から管理パックをエクスポート” でエクスポートされた管理パックの内、既存環境で上書き設定を保存さる際に使用された管理パックを、新規環境にコピーします。<br>なお、新規環境に存在しないルール / モニターの上書き設定が保存されている管理パックを新規環境でインポートしようとすると、依存関係となる管理パックが存在しないとして、インポートが実施いただけない場合がございます。<br>この依存関係となる、新規環境に存在しないルール / モニターは、例えば Exchange Server 管理パックで使用いただけるルール / モニター等、お客様にて別途入手いただく必要がある管理パックが該当いたします。<br>この場合、まず “1. 既存の SCOM 環境から管理パックをエクスポート” でエクスポートされた管理パックより、当該管理パックと依存関係となる管理パックを新規環境にコピーおよびインポートいただきます。<br>基本的に、依存関係となる管理パックは既存環境に存在しますので、依存関係に関するエラーが出力されましたら、既存環境から依存関係となる管理パックをコピーいただきます様お願いいたします。<br>通常であれば、お客様が別途入手された管理パックは、すべて既定で下記フォルダ上に保存されます。</p>
 <blockquote>
