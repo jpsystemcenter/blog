@@ -3,7 +3,7 @@ title: SCOM サーバー の取り得る構成について
 date: 2022-08-23 11:00:00
 tags:
   - SCOM
-  - How-to
+  - Howto
   - SCOM サーバーの構成
 ---
 
