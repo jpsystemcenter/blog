@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/0301.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/0302.png">
 <meta property="article:published_time" content="2022-08-23T02:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-23T04:25:40.802Z">
+<meta property="article:modified_time" content="2022-08-23T04:30:34.571Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Howto">
@@ -109,7 +109,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+ffd2a8b3-f898-542a-b044-a0d32e19cfbe%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC+%E3%81%AE%E5%8F%96%E3%82%8A%E5%BE%97%E3%82%8B%E6%A7%8B%E6%88%90%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_construction%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_construction.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_construction.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/" data-id="cl75opaly00060nmo1i7pa0sp" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/" data-id="cl75ovn0d00060nld7c36av2z" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -178,7 +178,7 @@
 <h3 id="OS-が-1-台の場合"><a href="#OS-が-1-台の場合" class="headerlink" title="OS が 1 台の場合"></a>OS が 1 台の場合</h3><p>1 台のサーバー管理グループに展開するのは、評価やテスト、管理パックの開発など、通常、ラボ、開発、または実稼働以外の環境にインストールする場合を想定しております。<br><img src="/blog/SCOM/SCOM_construction/0101.png"></p>
 <p>構築方法については下記参考ページをご参照ください。　　</p>
 <p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/deploy-single-server?view=sc-om-2019">Operations Manager を 1 台サーバー構成で展開する</a><br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/quickstart-install-single-server?view=sc-om-2019">Operations Manager を 1 台のサーバーにインストールする手順</a></p>
-<h3 id="OS-が-2-台の場合"><a href="#OS-が-2-台の場合" class="headerlink" title="OS が 2 台の場合"></a>OS が 2 台の場合</h3><p>管理グループを分散インストールすると、Operations Manager を展開するための基盤が 99% 整います。 これにより、複数のサーバーに機能とサービスを配布して、環境を拡張できます。<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2019">SQL Server の設計に関する考慮事項</a>に記載しているように<br>中規模から大規模の分散型展開では、SQL Server インスタンスを専用スタンドアロン サーバーまたは SQL Server 高可用性構成に配置する必要があります。</p>
+<h3 id="OS-が-2-台の場合"><a href="#OS-が-2-台の場合" class="headerlink" title="OS が 2 台の場合"></a>OS が 2 台の場合</h3><p>管理グループを分散インストールすると、複数のサーバーに機能とサービスを配布して、環境を拡張できます。<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2019">SQL Server の設計に関する考慮事項</a>に記載しているように中規模から大規模の分散型展開では、SQL Server インスタンスを専用スタンドアロン サーバーまたは SQL Server 高可用性構成に配置する必要があります。</p>
 <p>OS が 2 台の場合、具体的には下図のように DB 機能とサーバー機能を分散させます。<br><img src="/blog/SCOM/SCOM_construction/0201.png"></p>
 <blockquote>
 <p>[!WARNING]<br>システム要件に明確に記載しておらず恐縮ですが、<code>以下の構成は実績上取れない事を確認しているため避ける</code>ようお願いいたします。</p>
@@ -190,7 +190,7 @@
 <p>もし 2 台(この場合は OS というより故障の単位となる筐体でしょうか）で管理サーバー、及びデーターベース機能を冗長構成とすることが必須の場合は、WSFC の役割りとして VM ごと冗長構成とすることをご検討ください。<br>WSFC のフェールオーバー機能を使用して、片方（OS1）が故障した際に、もう片方（OS2）にフェールオーバーする構成となります。別途 CSV を担うサーバー/機能が必要となります。<br>しかし、上記「 OS が 1 台の場合」に記載しておりますとおり、<br> 1 台のサーバー管理グループに展開するのは、評価やテスト、管理パックの開発など、通常、ラボ、開発、または実稼働以外の環境にインストールする場合を想定している点についてご留意くださいませ。</p>
 <h3 id="OS-が-3-台の場合"><a href="#OS-が-3-台の場合" class="headerlink" title="OS が 3 台の場合"></a>OS が 3 台の場合</h3><p>OS が 3 台の場合は<br>DB 機能を <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2022#sql-server-always-on-1">always-on 構成</a> で冗長化させる構成（パターン 1）<br>または<br>オペレーションデータベース と データウェアハウスデータベースを別 OS として構成（パターン 2）<br>が考えられます。</p>
 <h4 id="パターン-1"><a href="#パターン-1" class="headerlink" title="パターン 1"></a>パターン 1</h4><p><img src="/blog/SCOM/SCOM_construction/0301.png"></p>
-<p>この場合にレポートサーバー向けデータベース構成については、always-on の可用性グループには登録できない点ご留意ください。<br>レポートサーバー向けデータベースをホストする OS が故障した際には<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-move-reporting-services-role?view=sc-om-2019">eporting Server の役割を移動する方法</a><br>に従いもう片方の OS 上で構築するようお願いいたします。<br>尚、データウェアハウスデーターベースが健在であれば、その情報からレポーティングに必要なデーターベースは構成可能でございます。</p>
+<p>この場合にレポートサーバー向けデータベース構成については、always-on の可用性グループには登録できない点ご留意ください。<br>レポートサーバー向けデータベースをホストする OS が故障した際には <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-move-reporting-services-role?view=sc-om-2019">Reporting Server の役割を移動する方法</a><br>に従いもう片方の OS 上で構築するようお願いいたします。<br>尚、データウェアハウスデーターベースが健在であれば、その情報からレポーティングに必要なデーターベースは構成可能でございます。</p>
 <p>下記に当社の海外エンジニアが記載したレポーティングサーバーの取り得る構成について記載した下記ブログがございますので、よろしければご参照ください。<br><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/system-center-blog/operations-manager-reporting-8211-supported-ssrs-configurations/ba-p/340385">レポーティングサーバーの取り得る構成</a></p>
 <h4 id="パターン-2"><a href="#パターン-2" class="headerlink" title="パターン 2"></a>パターン 2</h4><p><img src="/blog/SCOM/SCOM_construction/0302.png"></p>
 <p>当構成に関する情報は<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2019#operations-manager-data-warehouse-database">Operations Manager データ ウェアハウス データベース</a><br>に以下のように記載しております。</p>

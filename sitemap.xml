@@ -44,13 +44,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
-    
-    <lastmod>2022-08-23</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2022-08-23</lastmod>
@@ -80,6 +73,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    
+    <lastmod>2022-08-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
     
     <lastmod>2022-08-23</lastmod>
     
