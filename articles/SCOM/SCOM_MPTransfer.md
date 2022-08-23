@@ -142,11 +142,11 @@ SCOM における非サポートの管理パックをインポートすること
 弊社が公開しております管理パックは、下記サイトにて一覧で掲載されております。
 [Microsoft Management Packs](https://social.technet.microsoft.com/wiki/contents/articles/16174.microsoft-management-packs.aspx)
 この一覧から、例えばサイト内の下図管理パックのリンク先へ遷移しますと、管理パックならびに管理パックガイドがダウンロードいただけます。
-![](./img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPLink.png)
+![](https://raw.githubusercontent.com/jpsystemcenter/blog/53467ea239369d3ce5e16392b2dfeb5993a443c0/articles/SCOM/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016%2BMPLink.png)
 
 このページの ”System Requirements” を確認いただくことで、管理パックのサポート範囲を確認いただけます。
 今回の例で確認しました、Windows Server 2016 以降の Windows Server OS を監視する際に使用する "Windows Server Operating System 2016 and above" 管理パックは、SCOM 2016 / 2019 / 2022 で使用することをサポートすることが確認いただけます。
-![](./img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPPage.png)
+![](https://raw.githubusercontent.com/jpsystemcenter/blog/53467ea239369d3ce5e16392b2dfeb5993a443c0/articles/SCOM/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016%2BMPPage.png)
 
 また管理パックガイドからも同様の内容を確認いただけます。
 こちらの管理パックでは、ドキュメント内の ”Supported Configurations” 項から内容をご確認いただけます。
