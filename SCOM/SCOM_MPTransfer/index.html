@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SCOM 管理パック移行による別環境への設定移行 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆さまこんにちは、System Center サポートチームの保科です。本日は、System Center Operations Manager (以降は SCOM と略称) をアップグレードせずに新規環境を構築された場合、既存環境の一部設定を新規環境へ以降する手順をご紹介いたします。 2022 年になり SCOM 2016 が延長サポート期間へ移行したり、SCOM 2012 系は延長サポート期">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCOM 管理パック移行による別環境への設定移行">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆さまこんにちは、System Center サポートチームの保科です。本日は、System Center Operations Manager (以降は SCOM と略称) をアップグレードせずに新規環境を構築された場合、既存環境の一部設定を新規環境へ以降する手順をご紹介いたします。 2022 年になり SCOM 2016 が延長サポート期間へ移行したり、SCOM 2012 系は延長サポート期">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPLink.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPPage.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPDoc.png">
+<meta property="article:published_time" content="2022-08-23T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-23T01:25:48.443Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="アップグレード">
+<meta property="article:tag" content="新環境への移行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPLink.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCOM/SCOM_MPTransfer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SCOM 管理パック移行による別環境への設定移行
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-08-23T03:00:00.000Z" itemprop="datePublished">2022-08-23</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+f0613e05-6ac1-58c4-8ee0-4553c27ff0af%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+%E7%AE%A1%E7%90%86%E3%83%91%E3%83%83%E3%82%AF%E7%A7%BB%E8%A1%8C%E3%81%AB%E3%82%88%E3%82%8B%E5%88%A5%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E8%A8%AD%E5%AE%9A%E7%A7%BB%E8%A1%8C%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_MPTransfer%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_MPTransfer.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_MPTransfer.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/" data-id="cl75i9z3h001r0mp7gncg8y1c" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<p>皆さまこんにちは、System Center サポートチームの保科です。<br>本日は、System Center Operations Manager (以降は SCOM と略称) をアップグレードせずに新規環境を構築された場合、既存環境の一部設定を新規環境へ以降する手順をご紹介いたします。</p>
+<p>2022 年になり SCOM 2016 が延長サポート期間へ移行したり、SCOM 2012 系は延長サポート期間が終了となりました。<br>このように、SCOM に限らず弊社がリリースしておりますオンプレミス製品は原則としてサポート期間が設定されております。<br>サポート期間終了に伴い、古いバージョンの SCOM をご利用のお客様においては、サポート期間中の SCOM 環境へリプレースされることをご検討いただいている状況と存じます。<br>SCOM 環境のリプレースには、既存環境のアップグレードと、既存環境と並行して新規環境を作成いただく 2 種類の方法がございます。<br>詳細は、本ブログ内で別途公開しております下記ページも併せてご確認ください。<br><a href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/">SCOM 2016 から SCOM 2022 へ移行 or アップグレードについて</a></p>
+<p>本記事では、新規環境へ設定を移行する方法について、移行に使用する管理パックの概要と含めて詳細な手順をご説明いたします。</p>
+<h1 id="管理パックとは"><a href="#管理パックとは" class="headerlink" title="管理パックとは"></a>管理パックとは</h1><p>“概要” 項でも簡単に触れました通り、既存環境から新規環境へ設定を移行する場合、管理パックを使用して移行を行います。<br>管理パック移行方法の解説の前に、管理パックとはそもそも何かについてご説明いたします。</p>
+<p>管理パックは、SCOM におけるいわゆるプラグインのような働きをするファイルとなります。<br>管理パックを SCOM 環境内に導入いただくことで、初期状態では存在しない、サーバーの CPU 使用率の監視といった監視機能の拡張を行うことが出来ます。<br>管理パックによって提供される内容は様々な内容が存在し、下記の弊社サイトにも詳細が掲載されております。<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-overview-management-pack?view=sc-om-2022">Operations Manager の管理パックに含まれている内容</a></p>
+<p>こちらのサイトに記載された、管理パックに含まれる内容を抜粋いたします。</p>
+<blockquote>
+<p>管理パックには通常、アプリケーションとサービスの監視設定が含まれます。 管理パックが管理グループの System Center - Operations Manager にインポートされると、既定の構成と管理パックで定義されたしきい値に基づいて直ちにオブジェクトの監視が開始されます。<br>各管理パックには次の部分のいずれかまたはすべてが含まれていることがあります。</p>
+<ul>
+<li>管理されたコンポーネントの各種要素の状態を追跡するよう、エージェントに指示を送るモニター。</li>
+<li>パフォーマンス データや検出データの収集やアラートやイベントの送信などを行うよう、エージェントに指示を送るルール。</li>
+<li>エージェントまたはコンソールが実行可能なアクティビティを定義する、タスク。</li>
+<li>オペレーターが診断や問題解決できるよう、テキストでアドバイスを出すナレッジ。</li>
+<li>このコンポーネントの監視や管理用にカスタマイズしたユーザー インターフェイスを提供する、表示。</li>
+<li>この管理されたコンポーネントに関する情報を報告するための特定の方法を定義する、レポート。</li>
+<li>監視されるべきオブジェクトを特定する、オブジェクト検出。</li>
+<li>異なるコンピューターの異なるアカウントでさまざまなルール、タスク、モニター、検出を実行することを可能にする、実行プロファイル。</li>
+</ul>
+</blockquote>
+<p>上記の事項については管理パックに含まれる内容となります。<br>そのため、管理パックをエクスポートいただくことで、上記設定を纏めてエクスポートいただくことが可能となります。<br>その後、エクスポートされた管理パックを新規環境にインポートいただくことで、上記設定については従前どおりの設定でご利用いただけます。</p>
+<p>しかし、逆の言い方をすれば、管理パックに含まれない内容についてはエクスポートすることが出来ないため、新規環境に引き継ぐことは出来ません。<br>これには、例えば現在監視されているサーバーならびにその監視設定、今までの監視データやアラート情報、実行アカウント、SCOM データベースのクリーンアップ設定等が含まれます。<br>管理パックに含まれない内容については、従前の環境と同等の設定を手動で実施いただく必要がございます。<br>また、今までの監視データはすべて喪失することとなりますので、予めご了承ください。</p>
+<p>管理パックは、大きく分けると下記の 2 種類に分けることが可能です。</p>
+<ul>
+<li>弊社やサードパーティから提供されている管理パック:<br>監視されたいハードウェアやソフトウェア用に、弊社やサードパーティから管理パックがリリースされております。<br>それらの管理パックを導入することで、その管理パックによって提供される監視機能の一式が提供されます。<br>例えば、Windows Server 2016 以降の Windows Server OS を監視する弊社提供の管理パックを導入することで、その OS の監視が実現いただけます。<br>管理パック毎に提供される監視機能はその管理パックの実装面で定義されております。</li>
+<li>お客様が SCOM 運用に際して独自に作成いただいた管理パック:<br>SCOM で動作するルールやモニターは、オーバーライドを行うことでお客様の監視要件に応じて動作方法やアラートのしきい値といった設定値を変更いただけます。<br>また、お客様の監視要件に応じて、SCOM ではお客様が独自にルールやモニターを作成いただける仕組みもございます。<br>こういった内容を保存する際に、お客様の方で SCOM 内に独自の管理パックを作成いただくことが可能です。</li>
+</ul>
+<p>今回の移行手順のご案内では、上記 2 種類の管理パックを移行する手順をご案内としております。<br>それでは、具体的に管理パックをどのように移行することが可能か説明していきます。</p>
+<h1 id="具体的な管理パック移行方法"><a href="#具体的な管理パック移行方法" class="headerlink" title="具体的な管理パック移行方法"></a>具体的な管理パック移行方法</h1><p>既存環境から新規環境に管理パックを移行する方法として、大きく分けて下記の手順を実施いただきます。</p>
+<ol>
+<li>既存の SCOM 環境から管理パックをエクスポート</li>
+<li>既存環境からエクスポートされた管理パックを新規 SCOM 環境にインポート</li>
+</ol>
+<p>各手順の詳細をご案内いたします。</p>
+<h2 id="1-既存の-SCOM-環境から管理パックをエクスポート"><a href="#1-既存の-SCOM-環境から管理パックをエクスポート" class="headerlink" title="1. 既存の SCOM 環境から管理パックをエクスポート"></a>1. 既存の SCOM 環境から管理パックをエクスポート</h2><p>こちらの手順は、既存環境より新規環境に移行するための管理パックをエクスポートする手順となります。<br>エクスポートを実施いただく場合、下記手順を実施します。</p>
+<ol>
+<li>管理者の権限を持つユーザーで Operations Manager 管理サーバーにログオンします。</li>
+<li>C: ドライブの直下に MPs フォルダーを作成します。</li>
+<li>[スタート] 画面から [Operations Manager Shell] を選択します (※)。</li>
+<li>[Operations Manager Shell] ウィンドウのプロンプトで以下のコマンドを実行します。<blockquote>
+<p>Get-SCOMManagementPack | Export-SCOMManagementPack -Path:C:\MPs</p>
+</blockquote>
+</li>
+</ol>
+<p>こちらの手順を実施いただくと、”MPs” フォルダに、SCOM でご利用のすべての管理パックが “&lt;SCOM に保存された管理パックの名称&gt;.xml” のファイル名でエクスポートされます。<br>管理パックの名称にスペースが存在する場合、スペースは “.” に変換の上エクスポートされます。<br>管理パックの名称に日本語が 1 文字でも含まれる場合、エクスポートされる管理パックは “ManagementPack&lt;管理パック毎の固有文字列&gt;” の名称でエクスポートされます。<br>このエクスポートされた管理パックの内、お客様が独自に定義された管理パックを新規環境に移行します。</p>
+<h2 id="2-既存環境からエクスポートされた管理パックを、新規-SCOM-環境にコピー"><a href="#2-既存環境からエクスポートされた管理パックを、新規-SCOM-環境にコピー" class="headerlink" title="2. 既存環境からエクスポートされた管理パックを、新規 SCOM 環境にコピー"></a>2. 既存環境からエクスポートされた管理パックを、新規 SCOM 環境にコピー</h2><p>下記の説明では、特にご要望が多い以下の観点でご案内いたします。</p>
+<ol>
+<li>独自定義ルール / モニターのインポート方法</li>
+<li>ルール / モニターの上書き設定のインポート方法</li>
+<li>配信登録設定のインポート方法</li>
+</ol>
+<h3 id="1-独自定義ルール-モニターのインポート"><a href="#1-独自定義ルール-モニターのインポート" class="headerlink" title="1) 独自定義ルール / モニターのインポート"></a>1) 独自定義ルール / モニターのインポート</h3><p>“1. 既存の SCOM 環境から管理パックをエクスポート” でエクスポートされた管理パックの内、独自定義ルール / モニターを作成される際に指定された管理パックを新規環境にコピーします。<br>その管理パックを新規環境にインポートいただくことで、新規環境でもそのモニターをご利用いただくことが可能となります。</p>
+<h3 id="2-ルール-モニターの上書き設定のインポート"><a href="#2-ルール-モニターの上書き設定のインポート" class="headerlink" title="2) ルール / モニターの上書き設定のインポート"></a>2) ルール / モニターの上書き設定のインポート</h3><p>“1. 既存の SCOM 環境から管理パックをエクスポート” でエクスポートされた管理パックの内、既存環境で上書き設定を保存さる際に使用された管理パックを、新規環境にコピーします。<br>なお、新規環境に存在しないルール / モニターの上書き設定が保存されている管理パックを新規環境でインポートしようとすると、依存関係となる管理パックが存在しないとして、インポートが実施いただけない場合がございます。<br>この依存関係となる、新規環境に存在しないルール / モニターは、例えば Exchange Server 管理パックで使用いただけるルール / モニター等、お客様にて別途入手いただく必要がある管理パックが該当いたします。<br>この場合、まず “1. 既存の SCOM 環境から管理パックをエクスポート” でエクスポートされた管理パックより、当該管理パックと依存関係となる管理パックを新規環境にコピーおよびインポートいただきます。<br>基本的に、依存関係となる管理パックは既存環境に存在しますので、依存関係に関するエラーが出力されましたら、既存環境から依存関係となる管理パックをコピーいただきます様お願いいたします。<br>通常であれば、お客様が別途入手された管理パックは、すべて既定で下記フォルダ上に保存されます。</p>
+<blockquote>
+<p>C:\Program Files (x86)\System Center Management Packs</p>
+</blockquote>
+<p>そのため、既存環境上に存在するこちらのフォルダを全て新規環境にコピーいただき、フォルダ内の管理パックの内新規環境のバージョンで使用することをサポートされる管理パックを全てインポートします。</p>
+<h3 id="3-配信登録設定のインポート"><a href="#3-配信登録設定のインポート" class="headerlink" title="3) 配信登録設定のインポート"></a>3) 配信登録設定のインポート</h3><p>SCOM では、特定のアラートをトリガーとしてスクリプトを実行したり、そのアラート内容を特定のアドレスにメール通知する配信登録設定が提供されております。<br>配信登録設定については、下記の弊社サイトにも詳細な内容が掲載されております。<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-notifications-alert-notifications?view=sc-om-2022">Operations Manager でアラート通知をサブスクライブする</a></p>
+<p>こちらの機能は、多くのお客様がアラート情報を担当者に迅速に連携するべくご利用いただいている状況かと思います。<br>この設定も、”1. 既存の SCOM 環境から管理パックをエクスポート” でエクスポートされた管理パックの内 “Microsoft.SystemCenter.Notifications.Internal.xml” を新規環境にインポートいただくことで、既存環境の配信登録設定を引き継いで利用いただくことが可能です。<br>なお、インポートの際は、既に新しいバージョンの管理パックがインポートされている旨の情報が表示されますが、<br>インポート自体は可能で、この状態でインポートいただいても問題ございません。<br>弊社検証環境での動作内容や過去事例より、古いバージョンの管理パックを上書きする形で新規環境にインポートいただくことで、<br>SCOM の動作上特に問題が発生しないことを確認しております。<br>一例として、SCOM 2012 から 2019 へ当管理パックをインポート後、SCOM 2012 にて設定いただいた内容が正常に SCOM 2019 側へ反映されることも確認しております。<br>念のため、既存環境の “Microsoft.SystemCenter.Notifications.Internal.xml” を新規環境にインポートいただく際は、<br>“1. 既存の SCOM 環境から管理パックをエクスポート” 項の手順に沿って一度新規環境内の管理パックを全てエクスポートしてください。<br>その後、新規環境内にてエクスポートされた “Microsoft.SystemCenter.Notifications.Internal.xml” を任意のフォルダにコピーします。<br>これにより、万が一既存環境の “Microsoft.SystemCenter.Notifications.Internal.xml” を新規環境へインポート後に予期せぬ動作が発生された場合、既存環境よりエクスポートいただいた “Microsoft.SystemCenter.Notifications.Internal.xml” をインポートいただくことで、状況を改善いただけます。</p>
+<p>なお、管理パックの上書きインポートという作業の性質上、新規環境の配信登録設定はすべて既存環境の設定に上書きされることとなります。<br>新規環境で既に配信登録設定が実施されている場合、その設定もすべて消失されることとなりますのでご注意ください。</p>
+<h3 id="ご参考-管理パックのインポート方法"><a href="#ご参考-管理パックのインポート方法" class="headerlink" title="(ご参考) 管理パックのインポート方法"></a>(ご参考) 管理パックのインポート方法</h3><p>管理パックのインポート方法は、下記の弊社サイトに詳しく掲載されております。<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-mp-import-remove-delete?view=sc-om-2022#import-a-management-pack-from-disk">Operations Manager 管理パックをインポート、エクスポート、および削除する方法</a><br>本ページ内で解説しております操作を実施いただく手順としては、”管理パックをディスクからインポートする” 項の手順が適切になります。</p>
+<h1 id="管理パックインポート時のご注意事項"><a href="#管理パックインポート時のご注意事項" class="headerlink" title="管理パックインポート時のご注意事項"></a>管理パックインポート時のご注意事項</h1><p>少なくとも弊社より提供されております管理パックについては、その管理パックのインポートをサポートする SCOM バージョンが予め指定されております。<br>SCOM における非サポートの管理パックをインポートすることは、”管理パック自体は動作し、使用することが出来るものの、使用に際して予期せぬ動作が発生される可能性がある” ことを意味します。<br>そのため、非サポートの管理パックをインポートいただく際は、予期せぬ動作が発生することをご理解いただいた上でインポートしてください。<br>非サポートの管理パックによる監視によって問題が発生された場合、弊社としてはその管理パックを削除いただく以外の対処方法のご案内をいたしかねますので、予めご了承ください。</p>
+<p>弊社が公開しております管理パックは、下記サイトにて一覧で掲載されております。<br><a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/wiki/contents/articles/16174.microsoft-management-packs.aspx">Microsoft Management Packs</a><br>この一覧から、例えばサイト内の下図管理パックのリンク先へ遷移しますと、管理パックならびに管理パックガイドがダウンロードいただけます。<br><img src="./img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPLink.png"></p>
+<p>このページの ”System Requirements” を確認いただくことで、管理パックのサポート範囲を確認いただけます。<br>今回の例で確認しました、Windows Server 2016 以降の Windows Server OS を監視する際に使用する “Windows Server Operating System 2016 and above” 管理パックは、SCOM 2016 / 2019 / 2022 で使用することをサポートすることが確認いただけます。<br><img src="./img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPPage.png"></p>
+<p>また管理パックガイドからも同様の内容を確認いただけます。<br>こちらの管理パックでは、ドキュメント内の ”Supported Configurations” 項から内容をご確認いただけます。<br><img src="./img/SCOM_MPTransfer/SCOM_MPTransfer_WS2016+MPDoc.png"></p>
+<p>管理パックのドキュメントは、対応する管理パックによって記述の意匠が異なります。<br>そのため、管理パックのドキュメントからサポートする SCOM バージョンを確認される場合、適宜そのドキュメントからサポート対象に関する内容をご確認ください。</p>
+<p>SCOM 2019 のみではありますが、SCOM 2019 で使用することをサポートする管理パックが一覧で掲載されております。<br><a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/wiki/contents/articles/52876.scom-2019-management-packs.aspx">SCOM 2019 Management Packs</a><br>そのため、SCOM 2019 に関しては、上記の手順による確認ではなく、こちらのサイトからサポートされる管理パックをご確認いただくのが有用でございます。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_MPTransfer.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../SCOM_migration/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCOM 2016 から SCOM 2022 へ移行 or アップグレードについて</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SCOM 管理パック移行による別環境への設定移行</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_migration/">SCOM 2016 から SCOM 2022 へ移行 or アップグレードについて</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_service_logon_access/">SCOM 2019 以降で Windows 検出ウィザードで検出失敗</a>
+          </li>
+        
+          <li>
+            <a href="../../SCVMM/SCVMM_Job_History/">SCVMM ジョブ保存設定変更方法</a>
+          </li>
+        
+          <li>
+            <a href="../../general/JapanSCEM_000_NewBlogOpened/">Japan System Center Enterprise Management (SCEM) チームの Blog 新規開設のお知らせ</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">6</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">4</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">新環境への移行</a><span class="tag-list-count">2</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 15px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/General/" style="font-size: 12.5px;">General</a> <a href="../../tags/HowTo/" style="font-size: 15px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCVMM/" style="font-size: 12.5px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Troubleshoot/" style="font-size: 17.5px;">Troubleshoot</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 12.5px;">アップグレード</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12.5px;">新環境への移行</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
