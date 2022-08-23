@@ -44,6 +44,13 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
+    
+    <lastmod>2022-08-23</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2022-08-23</lastmod>
@@ -73,13 +80,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
-    
-    <lastmod>2022-08-23</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
     
     <lastmod>2022-08-23</lastmod>
     
@@ -130,7 +130,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/Howto/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/HowTo/</loc>
     <lastmod>2022-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -159,13 +159,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/SCVMM/</loc>
-    <lastmod>2022-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/HowTo/</loc>
     <lastmod>2022-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
