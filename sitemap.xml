@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/googlef661e4bda983601a.html</loc>
+    <loc>https://jpsystemcenter.github.io/blog/index.html</loc>
     
     <lastmod>2022-08-23</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/index.html</loc>
+    <loc>https://jpsystemcenter.github.io/blog/googlef661e4bda983601a.html</loc>
     
     <lastmod>2022-08-23</lastmod>
     
@@ -38,13 +38,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/</loc>
-    
-    <lastmod>2022-08-23</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2022-08-23</lastmod>
     
@@ -80,6 +73,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
+    
+    <lastmod>2022-08-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2022-08-23</lastmod>
     
