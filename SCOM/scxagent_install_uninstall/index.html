@@ -14,7 +14,7 @@
 <meta property="og:description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。本日は SCOM サーバーで監視できる UNIX&#x2F;Linux 監視方法や監視を構成しているエージェント側のコンポーネント、ならびに具体的なインストール&#x2F;アンインストール方法についてご紹介いたします。 監視対象とエージェントのコンポーネントについて監視対象まず各 SCOM バージョンで監視対象にできる UNIX&#x2F;Linux">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2022-09-08T02:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-08T01:24:16.210Z">
+<meta property="article:modified_time" content="2022-09-08T01:30:25.899Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="HowTo">
@@ -104,7 +104,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+d540e494-f297-5441-a2a0-e29798469263%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLinux+%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%2F%E3%82%A2%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2Fscxagent_install_uninstall%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2Fscxagent_install_uninstall.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2Fscxagent_install_uninstall.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/" data-id="cl7sd9nb8000a0oqncx2w7m04" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/" data-id="cl7sdhk34000a0npx8iv063yn" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -132,7 +132,7 @@
 <td><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/plan-supported-crossplat-os?view=sc-om-2022">サポートされている UNIX/Linux の OS </a></td>
 </tr>
 </tbody></table>
-<h3 id="エージェントのコンポーネント"><a href="#エージェントのコンポーネント" class="headerlink" title="エージェントのコンポーネント"></a>エージェントのコンポーネント</h3><p>監視対象に UNIX/Linux に SCOM エージェント（以後、SCXAgent）をインストールしますと下記当社公開ドキュメントに記載がございますとおり下記ディレクトリ（ならびにその配下にファイル）が生成されます。</p>
+<h3 id="エージェントのコンポーネント"><a href="#エージェントのコンポーネント" class="headerlink" title="エージェントのコンポーネント"></a>エージェントのコンポーネント</h3><p>監視対象に UNIX/Linux に SCOM エージェント（以後、SCXAgent）をインストールしますと下記ディレクトリ、ならびにその配下にファイルが生成されます。</p>
 <table>
 <thead>
 <tr>
@@ -141,7 +141,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>/opt/omi</td>
+<td>/opt/omi/</td>
 <td>Open Management Infrastructure (OMI) は次のディレクトリにインストールされます</td>
 </tr>
 <tr>
@@ -161,12 +161,12 @@
 <td>証明書などのエージェントの構成ファイルは次のディレクトリに格納されます</td>
 </tr>
 <tr>
-<td>/etc/opt/omi</td>
+<td>/etc/opt/omi/</td>
 <td>OMI 構成ファイルは次のディレクトリに格納されます</td>
 </tr>
 </tbody></table>
 <h2 id="インストール方法とアンインストール方法について"><a href="#インストール方法とアンインストール方法について" class="headerlink" title="インストール方法とアンインストール方法について"></a>インストール方法とアンインストール方法について</h2><h3 id="インストール方法"><a href="#インストール方法" class="headerlink" title="インストール方法"></a>インストール方法</h3><p>ここからは具体的なインストール方法は記載いたします。</p>
-<p>まず監視をするため UNIX / Linux 管理パックを SCOM 管理サーバーにインポートする必要がございます。<br>以下ダウンロード先から対象管理パックをダウンロードいただき、SCOM 管理サーバーに [インポート]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-mp-import-remove-delete?view=sc-om-2019%EF%BC%89%E3%81%97%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/ja-jp/system-center/scom/manage-mp-import-remove-delete?view=sc-om-2019）します。</a></p>
+<p>まず監視をするため UNIX / Linux 管理パックを SCOM 管理サーバーにインポートする必要がございます。<br>以下ダウンロード先から対象管理パックをダウンロードいただき、SCOM 管理サーバーに [ インポート ]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-mp-import-remove-delete?view=sc-om-2019%EF%BC%89%E3%81%97%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/ja-jp/system-center/scom/manage-mp-import-remove-delete?view=sc-om-2019）します。</a></p>
 <table>
 <thead>
 <tr>
@@ -184,8 +184,8 @@
 </tr>
 </tbody></table>
 <p>SCXAgent のインストールは以下２つの方法がございます。</p>
-<h4 id="1-SCOM-Operations-Console-画面での操作"><a href="#1-SCOM-Operations-Console-画面での操作" class="headerlink" title="1. SCOM Operations Console 画面での操作"></a>1. SCOM Operations Console 画面での操作</h4><p>手順は[当ページ]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-deploy-crossplat-agent-console?view=sc-om-2019#to-discover-and-install-an-agent-on-a-unix-or-linux-computer%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/ja-jp/system-center/scom/manage-deploy-crossplat-agent-console?view=sc-om-2019#to-discover-and-install-an-agent-on-a-unix-or-linux-computer）に記載がございます。</a><br>下記を確認できる事から可能な限りこちらの操作方法でのインストールを推奨しております。<br>　・SCOM 管理サーバーに必要な管理パックが入っているか<br>　・エージェントコンピューターと通信できる環境となっているか<br>　・インストール時に指定する Linux のユーザーが使用できるか</p>
-<h4 id="2-Linux-のローカルでの操作"><a href="#2-Linux-のローカルでの操作" class="headerlink" title="2. Linux のローカルでの操作"></a>2. Linux のローカルでの操作</h4><p>手順は [当ページ]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/system-center/scom/manage-install-crossplat-agent-cmdline?view=sc-om-2019%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/en-us/system-center/scom/manage-install-crossplat-agent-cmdline?view=sc-om-2019）に記載がございます。</a><br>CentOS を例に記載しますと、上記ページの下記箇所のコマンドを実行いただくことでインストールできます。</p>
+<h4 id="1-SCOM-Operations-Console-画面での操作"><a href="#1-SCOM-Operations-Console-画面での操作" class="headerlink" title="1. SCOM Operations Console 画面での操作"></a>1. SCOM Operations Console 画面での操作</h4><p>手順は[ 当ページ ]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-deploy-crossplat-agent-console?view=sc-om-2019#to-discover-and-install-an-agent-on-a-unix-or-linux-computer%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/ja-jp/system-center/scom/manage-deploy-crossplat-agent-console?view=sc-om-2019#to-discover-and-install-an-agent-on-a-unix-or-linux-computer）に記載がございます。</a><br>下記を確認できる事から可能な限りこちらの操作方法でのインストールを推奨しております。<br>　・SCOM 管理サーバーに必要な管理パックが入っているか<br>　・エージェントコンピューターと通信できる環境となっているか<br>　・インストール時に指定する Linux のユーザーが使用できるか</p>
+<h4 id="2-Linux-のローカルでの操作"><a href="#2-Linux-のローカルでの操作" class="headerlink" title="2. Linux のローカルでの操作"></a>2. Linux のローカルでの操作</h4><p>手順は [ 当ページ ]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/system-center/scom/manage-install-crossplat-agent-cmdline?view=sc-om-2019%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/en-us/system-center/scom/manage-install-crossplat-agent-cmdline?view=sc-om-2019）に記載がございます。</a><br>CentOS を例に記載しますと、上記ページの下記箇所のコマンドを実行いただくことでインストールできます。</p>
 <ul>
 <li><p>事前作業としてエージェントのインストールシェル （ scx-<version>.universalr.<version>.<arch>.sh ）を事前に対象コンピューターに任意フォルダに格納します。<br> エージェント パッケージは、管理サーバーの次のフォルダーにあります。<br>　%ProgramFiles%\Microsoft System Center\Operations Manager\Server\AgentManagement\UnixAgents\DownloadedKits</p>
 </li>
@@ -197,8 +197,8 @@
 </li>
 </ul>
 <p>　<br>(結果例) omiagent については実行した後ある程度時間が経過したのち 1 instance 以上が実行状態となります。<br>omiserver: is running<br>omiagent: is stopped<br>または<br>omiserver: is running<br>omiagent: XX instance running</p>
-<h3 id="アンインストール方法"><a href="#アンインストール方法" class="headerlink" title="アンインストール方法"></a>アンインストール方法</h3><h4 id="1-SCOM-Operations-Console-画面での操作-1"><a href="#1-SCOM-Operations-Console-画面での操作-1" class="headerlink" title="1. SCOM Operations Console 画面での操作"></a>1. SCOM Operations Console 画面での操作</h4><p>手順は [当ページ]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-upgrade-uninstall-crossplat-agent?view=sc-om-2019#uninstalling-agents%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/ja-jp/system-center/scom/manage-upgrade-uninstall-crossplat-agent?view=sc-om-2019#uninstalling-agents）に記載がございます。</a></p>
-<h4 id="2-Linux-のローカルでの操作-1"><a href="#2-Linux-のローカルでの操作-1" class="headerlink" title="2. Linux のローカルでの操作"></a>2. Linux のローカルでの操作</h4><p>手順は [当ページ] （<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/system-center/scom/manage-uninstall-crossplat-agent?view=sc-om-2016%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/en-us/system-center/scom/manage-uninstall-crossplat-agent?view=sc-om-2016）に記載がございます。</a><br>CentOS を例に記載しますと、上記ページの下図箇所のコマンドを実行いただくことでアンインストールできます。</p>
+<h3 id="アンインストール方法"><a href="#アンインストール方法" class="headerlink" title="アンインストール方法"></a>アンインストール方法</h3><h4 id="1-SCOM-Operations-Console-画面での操作-1"><a href="#1-SCOM-Operations-Console-画面での操作-1" class="headerlink" title="1. SCOM Operations Console 画面での操作"></a>1. SCOM Operations Console 画面での操作</h4><p>手順は [ 当ページ ]（<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-upgrade-uninstall-crossplat-agent?view=sc-om-2019#uninstalling-agents%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/ja-jp/system-center/scom/manage-upgrade-uninstall-crossplat-agent?view=sc-om-2019#uninstalling-agents）に記載がございます。</a></p>
+<h4 id="2-Linux-のローカルでの操作-1"><a href="#2-Linux-のローカルでの操作-1" class="headerlink" title="2. Linux のローカルでの操作"></a>2. Linux のローカルでの操作</h4><p>手順は [ 当ページ ] （<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/system-center/scom/manage-uninstall-crossplat-agent?view=sc-om-2016%EF%BC%89%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%82">https://docs.microsoft.com/en-us/system-center/scom/manage-uninstall-crossplat-agent?view=sc-om-2016）に記載がございます。</a><br>CentOS を例に記載しますと、上記ページの下図箇所のコマンドを実行いただくことでアンインストールできます。</p>
 <ul>
 <li>rootユーザでログオンし、以下コマンドでパッケージをアンインストールします<br>　rpm -e scx</li>
 <li>パッケージがアンインストールされたことを確認するには、次のように入力します。何も出力されなければアンインストールできております。<br>　rpm -q scx</li>
