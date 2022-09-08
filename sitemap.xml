@@ -16,20 +16,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
-    
-    <lastmod>2022-09-08</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
-    
-    <lastmod>2022-09-08</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
     
     <lastmod>2022-09-08</lastmod>
@@ -51,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
     
     <lastmod>2022-09-08</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
     
     <lastmod>2022-09-08</lastmod>
     
@@ -87,6 +73,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    
+    <lastmod>2022-09-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
+    
+    <lastmod>2022-09-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2022-09-08</lastmod>
     
