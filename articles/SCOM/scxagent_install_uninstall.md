@@ -25,16 +25,16 @@ tags:
 
 ### エージェントのコンポーネント
 
-監視対象に UNIX/Linux に SCOM エージェント（以後、SCXAgent）をインストールしますと下記当社公開ドキュメントに記載がございますとおり下記ディレクトリ（ならびにその配下にファイル）が生成されます。
+監視対象に UNIX/Linux に SCOM エージェント（以後、SCXAgent）をインストールしますと下記ディレクトリ、ならびにその配下にファイルが生成されます。
 
 |ディレクトリパス|内容|
 |------------|------------|
-| /opt/omi | Open Management Infrastructure (OMI) は次のディレクトリにインストールされます |
+| /opt/omi/ | Open Management Infrastructure (OMI) は次のディレクトリにインストールされます |
 | /opt/microsoft/scx/| UNIX/Linux エージェントは次のディレクトリにインストールされます |
 | /var/opt/microsoft/scx/log/ | UNIX/Linux エージェントは次のディレクトリにログ ファイルを保持します |
 | /var/opt/omi/log/ | OMI は次のディレクトリにログ ファイルを保持します |
 | /etc/opt/microsoft/scx/ | 証明書などのエージェントの構成ファイルは次のディレクトリに格納されます |
-| /etc/opt/omi | OMI 構成ファイルは次のディレクトリに格納されます |
+| /etc/opt/omi/ | OMI 構成ファイルは次のディレクトリに格納されます |
 
 
 ## インストール方法とアンインストール方法について
@@ -44,7 +44,7 @@ tags:
 ここからは具体的なインストール方法は記載いたします。
 
 まず監視をするため UNIX / Linux 管理パックを SCOM 管理サーバーにインポートする必要がございます。
-以下ダウンロード先から対象管理パックをダウンロードいただき、SCOM 管理サーバーに [インポート]（https://docs.microsoft.com/ja-jp/system-center/scom/manage-mp-import-remove-delete?view=sc-om-2019）します。
+以下ダウンロード先から対象管理パックをダウンロードいただき、SCOM 管理サーバーに [ インポート ]（https://docs.microsoft.com/ja-jp/system-center/scom/manage-mp-import-remove-delete?view=sc-om-2019）します。
 
 |バージョン|確認先 URL|
 |------------|------------|
@@ -54,7 +54,7 @@ tags:
 
 SCXAgent のインストールは以下２つの方法がございます。
 #### 1. SCOM Operations Console 画面での操作
-手順は[当ページ]（https://docs.microsoft.com/ja-jp/system-center/scom/manage-deploy-crossplat-agent-console?view=sc-om-2019#to-discover-and-install-an-agent-on-a-unix-or-linux-computer）に記載がございます。
+手順は[ 当ページ ]（https://docs.microsoft.com/ja-jp/system-center/scom/manage-deploy-crossplat-agent-console?view=sc-om-2019#to-discover-and-install-an-agent-on-a-unix-or-linux-computer）に記載がございます。
 下記を確認できる事から可能な限りこちらの操作方法でのインストールを推奨しております。
 　・SCOM 管理サーバーに必要な管理パックが入っているか
 　・エージェントコンピューターと通信できる環境となっているか
@@ -62,7 +62,7 @@ SCXAgent のインストールは以下２つの方法がございます。
 
  
 #### 2. Linux のローカルでの操作
-手順は [当ページ]（https://docs.microsoft.com/en-us/system-center/scom/manage-install-crossplat-agent-cmdline?view=sc-om-2019）に記載がございます。
+手順は [ 当ページ ]（https://docs.microsoft.com/en-us/system-center/scom/manage-install-crossplat-agent-cmdline?view=sc-om-2019）に記載がございます。
 CentOS を例に記載しますと、上記ページの下記箇所のコマンドを実行いただくことでインストールできます。
 - 事前作業としてエージェントのインストールシェル （ scx-<version>.universalr.<version>.<arch>.sh ）を事前に対象コンピューターに任意フォルダに格納します。
    エージェント パッケージは、管理サーバーの次のフォルダーにあります。
@@ -85,11 +85,11 @@ omiagent: XX instance running
 ### アンインストール方法
 
 #### 1. SCOM Operations Console 画面での操作
-手順は [当ページ]（https://docs.microsoft.com/ja-jp/system-center/scom/manage-upgrade-uninstall-crossplat-agent?view=sc-om-2019#uninstalling-agents）に記載がございます。
+手順は [ 当ページ ]（https://docs.microsoft.com/ja-jp/system-center/scom/manage-upgrade-uninstall-crossplat-agent?view=sc-om-2019#uninstalling-agents）に記載がございます。
 
 
 #### 2. Linux のローカルでの操作
-手順は [当ページ] （https://docs.microsoft.com/en-us/system-center/scom/manage-uninstall-crossplat-agent?view=sc-om-2016）に記載がございます。
+手順は [ 当ページ ] （https://docs.microsoft.com/en-us/system-center/scom/manage-uninstall-crossplat-agent?view=sc-om-2016）に記載がございます。
 CentOS を例に記載しますと、上記ページの下図箇所のコマンドを実行いただくことでアンインストールできます。
 - rootユーザでログオンし、以下コマンドでパッケージをアンインストールします
 　rpm -e scx
