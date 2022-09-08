@@ -65,7 +65,7 @@ SCXAgent のインストールは以下２つの方法がございます。
 手順は [当ページ](https://docs.microsoft.com/en-us/system-center/scom/manage-install-crossplat-agent-cmdline?view=sc-om-2019) に記載がございます。
 CentOS を例に記載しますと、上記ページの下記箇所のコマンドを実行いただくことでインストールできます。
 - 事前作業としてエージェントのインストールシェル （ scx-<version>.universalr.<version>.<arch>.sh ）を事前に対象コンピューターに任意フォルダに格納します。
-   エージェント パッケージは、管理サーバーの次のフォルダーにあります。
+   エージェント パッケージは、管理サーバーの次のフォルダにあります。
 　%ProgramFiles%\Microsoft System Center\Operations Manager\Server\AgentManagement\UnixAgents\DownloadedKits
 
 - 以下コマンドでパッケージをインストールします
@@ -91,7 +91,7 @@ omiagent: XX instance running
 #### 2. Linux のローカルでの操作
 手順は [当ページ](https://docs.microsoft.com/en-us/system-center/scom/manage-uninstall-crossplat-agent?view=sc-om-2019) に記載がございます。
 CentOS を例に記載しますと、上記ページの下図箇所のコマンドを実行いただくことでアンインストールできます。
-- rootユーザでログオンし、以下コマンドでパッケージをアンインストールします
+- rootユーザーでログオンし、以下コマンドでパッケージをアンインストールします
 　rpm -e scx
 - パッケージがアンインストールされたことを確認するには、次のように入力します。何も出力されなければアンインストールできております。
 　rpm -q scx
