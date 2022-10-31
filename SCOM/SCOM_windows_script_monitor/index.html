@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>スクリプト監視の設定手順 - Windows 編 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。本日は System Center Operations Manager（以後 SCOM） で監視対象の Windows サーバーにて任意のスクリプトを実行する手順を紹介いたします。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="スクリプト監視の設定手順 - Windows 編">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。本日は System Center Operations Manager（以後 SCOM） で監視対象の Windows サーバーにて任意のスクリプトを実行する手順を紹介いたします。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/013.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/014.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/015.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/016.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/017.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/018.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/019.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/020.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/021.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/022.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/012.png">
+<meta property="article:published_time" content="2022-10-31T09:10:00.000Z">
+<meta property="article:modified_time" content="2022-10-31T08:11:50.168Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="Operations Manager">
+<meta property="article:tag" content="スクリプト">
+<meta property="article:tag" content="スクリプト監視">
+<meta property="article:tag" content="スクリプト実行">
+<meta property="article:tag" content="VBS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCOM/SCOM_windows_script_monitor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      スクリプト監視の設定手順 - Windows 編
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-10-31T09:10:00.000Z" itemprop="datePublished">2022-10-31</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c381d80b-7b41-5553-9ad7-dd5e584e6128%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96%E3%81%AE%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86+-+Windows+%E7%B7%A8%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_windows_script_monitor%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_windows_script_monitor.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_windows_script_monitor.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/" data-id="cl9wi5yha000d0mp83esjhbug" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。<br>本日は System Center Operations Manager（以後 SCOM） で監視対象の Windows サーバーにて任意のスクリプトを実行する手順を紹介いたします。 </p>
+<span id="more"></span>
+<p>SCOM では監視対象のサーバーで任意のスクリプトを実行し、その返り値を収集することや、しきい値を設定してアラートを生成することができます。<br>SCOM には各種 OS や ソフトウェアの監視を行うための管理パックがたくさん存在しますが、それらの管理パックを用いた監視だけでは不足する監視項目が存在した場合、それらの情報を取得するスクリプトを用いて補うことができますので、スクリプト監視はとても有効です。<br>※ UNIX/Linux サーバーの手順は、<a href="/blog/SCOM/SCOM_unix_script_monitor/">スクリプト監視の設定手順 - UNIX/Linux 編</a> にて手順を紹介していますので、こちらも合わせてご参照ください。</p>
+<h2 id="目的ごとの設定手順について"><a href="#目的ごとの設定手順について" class="headerlink" title="目的ごとの設定手順について"></a>目的ごとの設定手順について</h2><p>以下の目的ごとに、設定の手順が異なります。<br>　① スクリプトの返り値をパフォーマンス データとして収集すること<br>　② スクリプトの返り値に対してしきい値を設定してアラートを生成すること</p>
+<p>①のデータ収集が目的の場合は、まず、データ収集の [収集ルール] を作成し、収集したデータを参照するための [パフォーマンスビュー] を作成します。<br>②のアラート生成が目的の場合は、[モニター] を作成します。</p>
+<hr>
+<p>各々の手順について以下記述いたします。</p>
+<h2 id="①-スクリプトの返り値をパフォーマンス-データとして収集する手順"><a href="#①-スクリプトの返り値をパフォーマンス-データとして収集する手順" class="headerlink" title="① スクリプトの返り値をパフォーマンス データとして収集する手順"></a>① スクリプトの返り値をパフォーマンス データとして収集する手順</h2><ol>
+<li>SCOM コンソールにログインして、画面左下ペインの [作成] をクリックして、[作成] 画面を開きます。</li>
+<li>[作成] -&gt; [管理パック オブジェクト] -&gt; [ルール] をクリックして、画面右ペインから [新しいルールの作成] をクリックします。<br><img src="001.png"></li>
+</ol>
+<ol start="3">
+<li>[ルールの作成ウィザード] の [作成するルールの種類を選択] で [スクリプト (パフォーマンス) ] を選択して [次へ] をクリックします。<br><img src="002.png"></li>
+</ol>
+<ol start="4">
+<li>[全般] 画面で [ルールのターゲット] に Windows に関する任意のターゲットを指定し、[次へ] をクリックします。<br>例えば、今回作成するルールの対象を Windows Server 2016 以降の OS を対象とする場合、ターゲットは [Windows Server 2016 以降のコンピューター] を選択します。<br>インポートしている管理パックのバージョンにより [Windows Server 2016 以降のコンピューター] が存在しない場合は、下位のバージョンの [Windows Server XXXX のコンピューター] を選択してください。<br><img src="003.png"></li>
+</ol>
+<ol start="5">
+<li>スクリプトを実行してデータ収集する間隔を設定します。<br><img src="004.png"></li>
+</ol>
+<ol start="6">
+<li>スクリプト情報の入力画面にスクリプトをセットします。<br>※スクリプト画面には固定で 「10」 を返すひな形かセットされています。<br><img src="005.png"></li>
+</ol>
+<p>重要なメソッドは以下の値をセットしている箇所です。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>ここに皆さまの方で用意されたスクリプトが取得した値をセットするようにしてください。<br>サンプルとして 0 ～ 1000 までのランダムな数値をセットするスクリプトは以下の通りです。<br><img src="006.png"></p>
+<p>スクリプトは以下の通りです。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x27; オブジェクト準備</span><br><span class="line">Dim oAPI, oBag</span><br><span class="line"><span class="built_in">Set</span> oAPI = CreateObject(&quot;MOM.ScriptAPI&quot;)</span><br><span class="line"><span class="built_in">Set</span> oBag = oAPI.CreatePropertyBag()</span><br><span class="line">&#x27; 属性値をセット</span><br><span class="line">Randomize</span><br><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;,Rnd * <span class="number">1000</span>)</span><br><span class="line">&#x27; オブジェクトを返す</span><br><span class="line"><span class="keyword">Call</span> oAPI.Return(oBag)</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>パフォーマンス マッピング画面を確認して [作成] をクリックします。<br>この設定内容が、後続の手順のパフォーマンスビューでパフォーマンスデータを表示した際に表示されるパフォーマンスデータに関する情報となります。<br>“オブジェクト”、”カウンター” および “インスタンス” は表示されるパフォーマンスデータの情報に関する内容を指定するものですので、必要に応じてデータを識別しやすい名称にします。<br><img src="007.png"></li>
+</ol>
+<p>以上で、任意のスクリプトの値を指定間隔で収集する [ルール] の作成は完了です。<br>次に、この情報を表示する [パフォーマンス ビュー] を作成します。</p>
+<ol>
+<li>SCOM コンソールの画面左下ペインの [監視] をクリックして、[監視] 画面を開きます。</li>
+<li>右クリックメニュー の [新規] -&gt; [パフォーマンス ビュー] をクリックします。<br><img src="008.png"></li>
+</ol>
+<ol start="3">
+<li>[特定のルールによって収集された] にチェックを入れて、画面下部の [条件の説明] で、上で作成したルールを選択して [OK] をクリックします。<br><img src="009.png"></li>
+</ol>
+<p>以下の通り、ランダムな値を取得する VBS を実行して収集した値が表示されます。<br><img src="010.png"></p>
+<p>以上で、スクリプトの返り値をパフォーマンスデータとして収集する [ルール] と収集データを表示する [ビュー] の作成が完了です。</p>
+<hr>
+<h2 id="②-スクリプトの返り値に対してしきい値を設定してアラートを生成する手順"><a href="#②-スクリプトの返り値に対してしきい値を設定してアラートを生成する手順" class="headerlink" title="② スクリプトの返り値に対してしきい値を設定してアラートを生成する手順"></a>② スクリプトの返り値に対してしきい値を設定してアラートを生成する手順</h2><ol>
+<li>SCOM コンソールにログインして、画面左下ペインの [作成] をクリックして、[作成] 画面を開きます。</li>
+<li>[作成] -&gt; [管理パックオブジェクト] -&gt; [モニター] をクリックして、画面中央の一覧から対象の OS 種類を選択します。<br><img src="013.png"></li>
+</ol>
+<ol start="3">
+<li>画面右ペインで [モニター] -&gt; [モニターの作成] をクリックして [ユニットモニター] を選択します。</li>
+<li>[モニターの種類] で [スクリプト機能] -&gt; [一般] の中から該当するモニター種類を選択して、[次へ] をクリックします。<br>※今回の例では [タイマー スクリプト - 2 つの状態の監視] を選択しました。<br><img src="014.png"></li>
+</ol>
+<ol start="6">
+<li> [全般] 画面で [モニターのターゲット] に Windows に関する任意のターゲット (以下図は例として [Windows Server 2016 以降のコンピューター] を指定) を選択して [次へ] をクリックします。<br><img src="015.png"></li>
+</ol>
+<ol start="7">
+<li>任意のスケジュールを設定して [次へ] をクリックします。<br><img src="016.png"></li>
+</ol>
+<ol start="8">
+<li>スクリプト情報の入力画面にスクリプトをセットします。<br>※スクリプト画面には固定で 「OK」 という文字列を返すひな形かセットされています。<br><img src="017.png"></li>
+</ol>
+<p>上の [ルール] の時と同様に、サンプルとして 0 ～ 1000 までのランダムな数値を返すように修正します。<br><img src="006.png"></p>
+<p>スクリプトは以下の通りです。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x27; オブジェクト準備</span><br><span class="line">Dim oAPI, oBag</span><br><span class="line"><span class="built_in">Set</span> oAPI = CreateObject(&quot;MOM.ScriptAPI&quot;)</span><br><span class="line"><span class="built_in">Set</span> oBag = oAPI.CreatePropertyBag()</span><br><span class="line">&#x27; 属性値をセット</span><br><span class="line">Randomize</span><br><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;,Rnd * <span class="number">1000</span>)</span><br><span class="line">&#x27; オブジェクトを返す</span><br><span class="line"><span class="keyword">Call</span> oAPI.Return(oBag)</span><br></pre></td></tr></table></figure>
+
+<p>ファイル名に拡張子を追加すると [次へ] ボタンが有効になりますので、[次へ] をクリックします。<br><img src="018.png"></p>
+<ol start="9">
+<li>[異常な式] にエラーとなる返り値を設定して [次へ] をクリックします。<br>※下の画面ショットは返り値が 700より大きい場合にエラーとする設定です。<br>　パラーメーター名にはスクリプト内で用いたパラメーター PerfValue を用いて <em>Property[@Name=’PerfValue’]</em> を設定します。<br><img src="019.png"></li>
+</ol>
+<ol start="10">
+<li>[正常な式] にエラーが回復する返り値を設定して [次へ] をクリックします。<br>※下の画面ショットは返り値が 700以下になった場合に正常に回復する設定です。<br>　パラーメーター名にはスクリプト内で用いたパラメーター PerfValue を用いて <em>Property[@Name=’PerfValue’]</em> を設定します。<br><img src="020.png"></li>
+</ol>
+<ol start="11">
+<li>[ヘルスの構成] を設定して [次へ] をクリックします。<br><img src="021.png"></li>
+</ol>
+<ol start="12">
+<li>ヘルス状態の変化でアラートを生成する場合は [このモニターにアラートを生成する] にチェックを入れて [作成] をクリックします。<br>※アラートの重大度は任意に指定可能です。<br><img src="022.png"></li>
+</ol>
+<p>これにより、スクリプトの返り値に応じてアラートを生成する [モニター] の作成が完了です。</p>
+<hr>
+<p>いかがでしょうか。</p>
+<p>まとめますと、スクリプトの返り値をパフォーマンス データとして収集する場合は [ルール] を作成して参照用の [パフォーマンス ビュー] を用意します。<br>しきい値を設定してアラートを生成する場合は [モニター] を作成します。<br>ルールもモニターも [スクリプト] 画面で、Windows サーバーで実行するスクリプトを記述します。</p>
+<p>最後にスクリプトの記述方法について少しだけ補足します。</p>
+<p>【 スクリプトの記述方法の補足 】<br>スクリプト画面で入力するスクリプトは、以下のメソッドで値をセットすることで SCOM にデータを送ることができます。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>C ドライブの残容量を取得するサンプルを下に貼りましたので、参考にしていただければと存じます。<br>赤枠で囲った個所は [C ドライブの残容量を取得する処理] です。<br>SCOM に依存しないスクリプトです。<br>取得した値を <em>Call oBag.AddValue()</em> にセットしています。 </p>
+<p>この例の通り、まずは単独で動作する情報収集スクリプトを実装します。<br>それをスクリプト内に挿入し、取得した値を <em>Call oBag.AddValue()</em> にセットするというのが作法になります。<br><img src="011.png"></p>
+<p>スクリプトは以下の通りです。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x27; オブジェクト準備</span><br><span class="line">Dim oAPI, oBag</span><br><span class="line"><span class="built_in">Set</span> oAPI = CreateObject(&quot;MOM.ScriptAPI&quot;)</span><br><span class="line"><span class="built_in">Set</span> oBag = oAPI.CreatePropertyBag()</span><br><span class="line"></span><br><span class="line">&#x27; 情報取得</span><br><span class="line">Dim objWMIService, objSWbemObjectCollection, objSWbemObject</span><br><span class="line"><span class="built_in">Set</span> objWMIService = GetObject(&quot;winmgmts:&#123;impersonationLevel=impersonate&#125;!\\.\root\cimv2&quot;)</span><br><span class="line"><span class="built_in">Set</span> objSWbemObjectCollection = objWMIService.ExecQuery(&quot;Select * from Win32_LogicalDisk Where DriveType = <span class="number">3</span>&quot;)</span><br><span class="line"></span><br><span class="line">&#x27; 取得情報を解析</span><br><span class="line"><span class="keyword">For</span> Each objSWbemObject <span class="keyword">in</span> objSWbemObjectCollection</span><br><span class="line">    &#x27; C ドライブの場合</span><br><span class="line">    <span class="keyword">If</span> InStr(objSWbemObject.DeviceID, &quot;C&quot;) &gt; <span class="number">0</span> Then</span><br><span class="line">        &#x27; 残容量 （MB） をセット</span><br><span class="line">        <span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;,objSWbemObject.FreeSpace/<span class="number">1000</span>/<span class="number">1000</span>)</span><br><span class="line">    End <span class="keyword">If</span></span><br><span class="line">Next</span><br><span class="line"></span><br><span class="line">&#x27; オブジェクトを返す</span><br><span class="line"><span class="keyword">Call</span> oAPI.Return(oBag)</span><br></pre></td></tr></table></figure>
+
+<p>収集したデータはパフォーマンス ビューにて確認できます。<br><img src="012.png"></p>
+<p>本記事を参考にご要件に応じたスクリプト監視を設定いただければ幸いです。 </p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_windows_script_monitor.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../SCOM_unix_script_monitor/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">スクリプト監視の設定手順 - UNIX/Linux 編</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">スクリプト監視の設定手順 - Windows 編</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_unix_script_monitor/">スクリプト監視の設定手順 - UNIX/Linux 編</a>
+          </li>
+        
+          <li>
+            <a href="../scxagent_install_uninstall/">Linux エージェントのインストール/アンインストール方法について</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_MPTransfer/">SCOM 管理パック移行による別環境への設定移行</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_construction/">SCOM サーバー の取り得る構成について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">10</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">4</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">新環境への移行</a><span class="tag-list-count">2</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 14px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/HowTo/" style="font-size: 18px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Operations-Manager/" style="font-size: 12px;">Operations Manager</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 10px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 12px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Troubleshoot/" style="font-size: 16px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 12px;">アップグレード</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 12px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 12px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 12px;">スクリプト監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12px;">新環境への移行</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
