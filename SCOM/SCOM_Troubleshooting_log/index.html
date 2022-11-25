@@ -14,7 +14,7 @@
 <meta property="og:description" content="本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2022-11-25T05:11:00.000Z">
-<meta property="article:modified_time" content="2022-11-25T05:23:50.239Z">
+<meta property="article:modified_time" content="2022-11-25T05:44:17.869Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Troubleshoot">
@@ -106,7 +106,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+4111ff1e-6447-53b6-ba59-252c1d590301%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_Troubleshooting_log%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_Troubleshooting_log.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_Troubleshooting_log.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/" data-id="claw265un00050mpc24hi3hzr" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/" data-id="claw2wi5j002o0mpbepoph7cv" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -151,6 +151,27 @@
 <blockquote>
 <p>C:\Users&lt;SCOM をインストールする際に使用したユーザー名&gt;\AppData\Local\SCOM</p>
 </blockquote>
+<h2 id="管理パック"><a href="#管理パック" class="headerlink" title="管理パック"></a>管理パック</h2><p><a href="/blog/SCOM/SCOM_MPTransfer/">こちらの記事</a> でも書かれております通り、SCOM の監視動作は基本的に管理パック内で定義されます。<br>例えば以下の状況が発生した場合においては、ご利用の管理パック側から調査を行う必要があります。</p>
+<ul>
+<li>検出されると想定されていた内容が検出されない。</li>
+<li>今まで出力されなかったアラートが出力されるようになった。<br>また、このアラートが解消と発生を繰り返している。</li>
+<li>認識していなかったコマンドが監視対象サーバーで実行されているように見えるため、このコマンドが SCOM から実行されている可能性があるか調査したい。</li>
+</ul>
+<p>管理パックは、以下手順でご利用の全管理パックを xml 形式での出力と、ご利用の管理パックを一覧化した html ファイルを出力いただけます。</p>
+<ol>
+<li><p>管理者の権限を持つユーザーで Operations Manager 管理サーバーにログオンします。</p>
+</li>
+<li><p>C: ドライブの直下に MPs フォルダーを作成します。</p>
+</li>
+<li><p>[スタート] 画面から [Operations Manager Shell] を選択します (※)。</p>
+</li>
+<li><p>[Operations Manager Shell] ウィンドウのプロンプトで以下のコマンドを実行します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Get-SCOMManagementPack | Export-SCOMManagementPack -Path:C:\MPs</span><br><span class="line">Get-SCOMManagementPack | ConvertTo-HTML &gt; C:\MPs\MpList.html</span><br></pre></td></tr></table></figure></li>
+<li><p>の 1 行目のコマンドを実行することで、ご利用の環境に導入されているすべての管理パックを xml 形式でエクスポートいただけます。<br>xml 形式でエクスポートされた管理パックには、その管理パックで定義されている内容がすべて記載されております。<br>基本的に SCOM で行われる監視内容は Powershell や VBS、Javascript 等で作成されたスクリプトを、対象となるコンピューターで実行するものとなります。<br>これらの実装を確認することで、管理パックに関するトラブルシューティングが可能になるというものです。</p>
+</li>
+</ol>
+<p>こちらの手順で、ご利用の管理パックが最新であるかを確認することもできます。<br>ご申告いただきました事象が、そのバージョンにおいて既知の事象であり、管理パックのアップデートによって解消される可能性もございます。<br>この場合、管理パックのアップデートによってご申告いただきました事象が解消される可能性が高いため、管理パックのアップデートをお願いいたします。<br>なお、このような既知の事象は、ほとんどの管理パックの場合はその管理パックを入手するサイトで入手いただける管理パックドキュメントに記載されております。<br>ドキュメントはほとんどの場合は英語での記述となりますが、ワークフローの一覧等管理パックに関する有用な内容が多く記載されております。</p>
+<p>なお、一部お客様におかれましては、弊社が提供しております管理パック以外にも、サードパーティによって作成された管理パックを導入されている可能性がございます。<br>管理パックを調査した結果、このサードパーティ製の管理パックによってご申告いただきました事象が発生されている場合、弊社での詳細な調査はいたしかねております。<br>サードパーティ製の管理パックは、その管理パックを開発されたベンダーへ別途ご確認いただく必要がございます。<br>サードパーティ製の管理パックに関する調査をご所望でございましたら、その管理パックについて弊社で調査することが出来ないことをあらかじめご認識いただけます様お願いいたします。</p>
 <h2 id="トレースログ"><a href="#トレースログ" class="headerlink" title="トレースログ"></a>トレースログ</h2><p>上記までに記載したログは、いずれも事象発生後に後追いで原因調査を行うために採取される資料となります。<br>これらの資料で大半の事象は原因を特定することが出来ますが、中には事象発生後に採取される資料に情報が一切記載されず、調査が困難な場合がございます。<br>この場合、事象発生時のログをリアルタイムで収集し、そのログから SCOM 内部で行われた処理を時系列で調査する必要があります。<br>この調査は SCOM 標準で備わるトレースログの採取によって可能となります。<br>以下手順にて SCOM トレースログの取得を開始します。</p>
 <ol>
 <li>トレースログを取得するコンピューターに、管理者権限でログインします。</li>

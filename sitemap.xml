@@ -58,13 +58,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
-    
-    <lastmod>2022-11-25</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
     
     <lastmod>2022-11-25</lastmod>
@@ -86,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
-    
-    <lastmod>2022-11-25</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
     
     <lastmod>2022-11-25</lastmod>
@@ -107,7 +93,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
+    
+    <lastmod>2022-11-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
     
     <lastmod>2022-11-25</lastmod>
     
@@ -115,6 +108,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
+    
+    <lastmod>2022-11-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/</loc>
     
     <lastmod>2022-11-25</lastmod>
     
@@ -158,27 +158,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/Operations-Manager/</loc>
-    <lastmod>2022-11-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/</loc>
-    <lastmod>2022-11-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/</loc>
-    <lastmod>2022-11-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/HowTo/</loc>
     <lastmod>2022-11-25</lastmod>
     <changefreq>daily</changefreq>
@@ -201,6 +180,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/</loc>
+    <lastmod>2022-11-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/tags/Operations-Manager/</loc>
     <lastmod>2022-11-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -285,6 +271,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/SQL-Server/</loc>
+    <lastmod>2022-11-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/</loc>
+    <lastmod>2022-11-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/</loc>
     <lastmod>2022-11-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
