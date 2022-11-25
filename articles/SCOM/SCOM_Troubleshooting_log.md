@@ -96,7 +96,8 @@ Get-SCOMManagementPack | Export-SCOMManagementPack -Path:C:\MPs
 Get-SCOMManagementPack | ConvertTo-HTML > C:\MPs\MpList.html
 ```
 
-\4. の 1 行目のコマンドを実行することで、ご利用の環境に導入されているすべての管理パックを xml 形式でエクスポートいただけます。
+
+4\. の 1 行目のコマンドを実行することで、ご利用の環境に導入されているすべての管理パックを xml 形式でエクスポートいただけます。
 xml 形式でエクスポートされた管理パックには、その管理パックで定義されている内容がすべて記載されております。
 基本的に SCOM で行われる監視内容は Powershell や VBS、Javascript 等で作成されたスクリプトを、対象となるコンピューターで実行するものとなります。
 これらの実装を確認することで、管理パックに関するトラブルシューティングが可能になるというものです。
