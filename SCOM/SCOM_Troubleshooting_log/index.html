@@ -14,7 +14,7 @@
 <meta property="og:description" content="本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2022-11-25T05:11:00.000Z">
-<meta property="article:modified_time" content="2022-11-25T05:13:53.467Z">
+<meta property="article:modified_time" content="2022-11-25T05:20:27.751Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Troubleshoot">
@@ -106,7 +106,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+4111ff1e-6447-53b6-ba59-252c1d590301%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_Troubleshooting_log%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_Troubleshooting_log.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_Troubleshooting_log.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/" data-id="claw1tdxt00050mpg4244hmg8" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/" data-id="claw21tpg00050mo3fa0a0lmv" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -115,7 +115,7 @@
 <span id="more"></span>
 <p>皆さまこんにちは。<br>System Center サポートチームの保科です。 </p>
 <p>System Center Operations Manager (SCOM) をご利用中に様々な問題に対面された経験はございませんでしょうか。<br>この問題を対処するにあたり、弊社までお問合わをいただくことも多いかと存じます。<br>基本的にご申告いただきました問題を対処するにあたってログ等を含めた調査が必須となります。<br>本記事では、弊社が SCOM 観点のトラブルシューティングを行う際に一般的にお客様へ採取依頼を行うログとその採取方法について解説いたします。</p>
-<p>イベントログの調査は、SCOM のトラブルシューティングを行うにあたって最も一般的なログとなります。<br>基本的に SCOM で発生した問題の多くとその詳細はイベントログにも転記されます。<br>そのため、多くの問題はイベントログを調べることで原因の特定を行える可能性があります。<br>イベントログを採取いただく場合は、状況に応じて以下コンピューターから採取を行います。</p>
+<h2 id="イベントログ"><a href="#イベントログ" class="headerlink" title="イベントログ"></a>イベントログ</h2><p>イベントログの調査は、SCOM のトラブルシューティングを行うにあたって最も一般的なログとなります。<br>基本的に SCOM で発生した問題の多くとその詳細はイベントログにも転記されます。<br>そのため、多くの問題はイベントログを調べることで原因の特定を行える可能性があります。<br>イベントログを採取いただく場合は、状況に応じて以下コンピューターから採取を行います。</p>
 <ul>
 <li>SCOM 管理サーバー:<br>トラブルシューティングの種類に依らず、必ず SCOM 管理サーバーのイベントログを採取します。<br>ご利用の環境で複数台の SCOM 管理サーバーをご利用の場合、それらすべての SCOM 管理サーバーからイベントログの採取を行います。<br>ゲートウェイサーバーを介した別ドメインコンピューターの監視で問題が発生されている場合、ゲートウェイサーバーからもイベントログを採取します。</li>
 <li>事象が発生した監視対象コンピューター:<br>監視の問題が発生している場合、その問題が発生しているすべての監視対象コンピューターよりイベントログを採取します。<br>特定の監視対象コンピューターの問題ではなく、SCOM 全体的な問題によるトラブルシューティングを行う場合は、こちらのコンピューターからのログ採取は不要です。</li>
@@ -139,7 +139,7 @@
 </li>
 </ol>
 <p>イベントログ取得手順は以上となります。<br>弊社までイベントログを送付いただく場合は、コンピューター毎にイベントログを 1 つのフォルダに纏め、それらのフォルダをさらに 1 つのフォルダに纏めて圧縮いただいてお寄せくださいませ。<br>採取対象コンピューターが複数台存在する場合、イベントログ自体のファイル名やそれを格納するフォルダにコンピューター名を付与いただく等、採取対象が分かりやすく識別できるように送付をいただけると幸いです。</p>
-<h1 id="アラート情報"><a href="#アラート情報" class="headerlink" title="アラート情報"></a>アラート情報</h1><p>アラートの状態 (オープンの状態、解決済みの状態等) によらず、SCOM データベースに存在するアラート情報を出力いただけます。<br>こちらもイベントログ程ではありませんが、トラブルシューティングを行う際に有用な情報が確認できる場合が多い資料です。<br>アラート情報を取得する場合は、Operations Manager Shell を利用し、CSV 形式で一覧として取得します。</p>
+<h2 id="アラート情報"><a href="#アラート情報" class="headerlink" title="アラート情報"></a>アラート情報</h2><p>アラートの状態 (オープンの状態、解決済みの状態等) によらず、SCOM データベースに存在するアラート情報を出力いただけます。<br>こちらもイベントログ程ではありませんが、トラブルシューティングを行う際に有用な情報が確認できる場合が多い資料です。<br>アラート情報を取得する場合は、Operations Manager Shell を利用し、CSV 形式で一覧として取得します。</p>
 <ol>
 <li><p>SCOM 管理サーバー、SCOM 管理者権限を持つアカウントでログインします。</p>
 </li>
@@ -152,11 +152,11 @@
 <li><p>出力された “Alert.csv” を弊社までお寄せください。</p>
 </li>
 </ol>
-<h1 id="インストールログ"><a href="#インストールログ" class="headerlink" title="インストールログ"></a>インストールログ</h1><p>インストールログの調査は、SCOM のインストールやエージェントのプッシュインストールが正常に行えない場合に調査する資料となります。<br>インストールに関する問題が発生しましたら、こちらのログを調査する必要があります。<br>ログは以下のフォルダに格納されております。</p>
+<h2 id="インストールログ"><a href="#インストールログ" class="headerlink" title="インストールログ"></a>インストールログ</h2><p>インストールログの調査は、SCOM のインストールやエージェントのプッシュインストールが正常に行えない場合に調査する資料となります。<br>インストールに関する問題が発生しましたら、こちらのログを調査する必要があります。<br>ログは以下のフォルダに格納されております。</p>
 <blockquote>
 <p>C:\Users&lt;SCOM をインストールする際に使用したユーザー名&gt;\AppData\Local\SCOM</p>
 </blockquote>
-<h1 id="トレースログ"><a href="#トレースログ" class="headerlink" title="トレースログ"></a>トレースログ</h1><p>上記までに記載したログは、いずれも事象発生後に後追いで原因調査を行うために採取される資料となります。<br>これらの資料で大半の事象は原因を特定することが出来ますが、中には事象発生後に採取される資料に情報が一切記載されず、調査が困難な場合がございます。<br>この場合、事象発生時のログをリアルタイムで収集し、そのログから SCOM 内部で行われた処理を時系列で調査する必要があります。<br>この調査は SCOM 標準で備わるトレースログの採取によって可能となります。<br>以下手順にて SCOM トレースログの取得を開始します。</p>
+<h2 id="トレースログ"><a href="#トレースログ" class="headerlink" title="トレースログ"></a>トレースログ</h2><p>上記までに記載したログは、いずれも事象発生後に後追いで原因調査を行うために採取される資料となります。<br>これらの資料で大半の事象は原因を特定することが出来ますが、中には事象発生後に採取される資料に情報が一切記載されず、調査が困難な場合がございます。<br>この場合、事象発生時のログをリアルタイムで収集し、そのログから SCOM 内部で行われた処理を時系列で調査する必要があります。<br>この調査は SCOM 標準で備わるトレースログの採取によって可能となります。<br>以下手順にて SCOM トレースログの取得を開始します。</p>
 <ol>
 <li>トレースログを取得するコンピューターに、管理者権限でログインします。</li>
 <li>管理者としてコマンドプロンプトを開きます。</li>
