@@ -71,7 +71,6 @@ SCOM 観点のイベントログは、以下 3 種類のイベントログを採
 ```
 Get-SCOMAlert | export-csv -path "c:/temp/Alert.csv" -encoding UTF8
 ```
-
 5. 出力された "Alert.csv" を弊社までお寄せください。
 
 ## インストールログ
