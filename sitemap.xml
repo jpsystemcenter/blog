@@ -16,20 +16,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
-    
-    <lastmod>2022-11-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
-    
-    <lastmod>2022-11-25</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
     
     <lastmod>2022-11-25</lastmod>
@@ -45,6 +31,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/</loc>
+    
+    <lastmod>2022-11-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
+    
+    <lastmod>2022-11-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
     
     <lastmod>2022-11-25</lastmod>
     
