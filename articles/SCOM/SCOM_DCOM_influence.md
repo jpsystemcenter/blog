@@ -7,9 +7,9 @@ tags:
   - CVE-2021-26414
 ---
 
+<!-- more -->
 皆様こんにちは、System Center サポートチームの 石原 です。 
 
-<!-- more -->
  System Center Operations Manager（以後 SCOM） では、Windows サーバーの管理における一部の処理で**分散コンポーネントオブジェクトモデル/Distributed Component Object Model（DCOM）** の通信を用います。
 インフラ内に **DCOM の脆弱性 (CVE-2021-26414)** に対応する更新プログラムが未適用の Windows サーバーが混在する場合、SCOM での管理に影響するケースがございます。
 本日は、DCOM の脆弱性 (CVE-2021-26414) に対応する更新プログラムの SCOM への影響についてご説明いたします。
