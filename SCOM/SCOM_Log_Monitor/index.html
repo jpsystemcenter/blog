@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>UNIX/Linuxログファイルの監視をカスタマイズして、個別のアラートとして全件検知する方法 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UNIX&#x2F;Linuxログファイルの監視をカスタマイズして、個別のアラートとして全件検知する方法">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/000.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/012.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/013.png">
+<meta property="article:published_time" content="2022-11-28T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-28T05:57:55.458Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="Operations Manager">
+<meta property="article:tag" content="ログ監視">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/000.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCOM/SCOM_Log_Monitor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UNIX/Linuxログファイルの監視をカスタマイズして、個別のアラートとして全件検知する方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-11-28T03:00:00.000Z" itemprop="datePublished">2022-11-28</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+a99d4c25-fa45-58a0-b9b5-b7f60ef12603%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BUNIX%2FLinux%E3%83%AD%E3%82%B0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E7%9B%A3%E8%A6%96%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%97%E3%81%A6%E3%80%81%E5%80%8B%E5%88%A5%E3%81%AE%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E3%81%A8%E3%81%97%E3%81%A6%E5%85%A8%E4%BB%B6%E6%A4%9C%E7%9F%A5%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_Log_Monitor%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_Log_Monitor.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_Log_Monitor.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/" data-id="clb0dpk2c00060mmr9meuaorb" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。 </p>
+<span id="more"></span>
+<p> System Center Operations Manager（以後 SCOM） には<strong>製品標準の管理パック テンプレート</strong>に <strong>[UNIX/Linuxログファイルの監視]</strong> があります。<br>[UNIX/Linuxログファイルの監視] を用いることで、UNIX/Linux サーバー内のログファイルに指定の文字列が出力された際にアラートを生成するログファイル監視を設定することができます。<br>SCOM は 5分間隔でログファイル内の文字列の存在チェックを行い、指定文字列が存在していた場合にアラートを発生させます。<br>既にアラート発生中の場合、発生中のアラートの繰り返し回数をカウントアップすることで、同じアラートが多数発生しないように制御しています。<br>本日は、この [UNIX/Linuxログファイルの監視] をカスタマイズして、指定文字列が出力されるたびに全件、個別のアラートとする手順を紹介いたします。</p>
+<h2 id="UNIX-Linuxログファイルの監視-の設定手順と標準の動作"><a href="#UNIX-Linuxログファイルの監視-の設定手順と標準の動作" class="headerlink" title="[UNIX/Linuxログファイルの監視] の設定手順と標準の動作"></a>[UNIX/Linuxログファイルの監視] の設定手順と標準の動作</h2><p><strong>最初に通常の手順でログファイル監視を設定します。</strong></p>
+<ol>
+<li><p>SCOM コンソールにログインして、画面左下ペインの [作成] をクリックして、画面右ペインから [監視の追加ウィザード] をクリックします。<br><img src="000.png"></p>
+</li>
+<li><p>監視の種類で [UNIX/Linuxログファイルの監視] を選択して [次へ] をクリックします。</p>
+</li>
+<li><p>[管理パック] は <em>[新規] ボタンをクリック</em>して、専用の新規の管理パックを作成・指定して [次へ] をクリックします。<br>※後述の手順で、このルールをエクスポートしてカスタマイズし、再インポートする手順があります。<br>　その手順に備えて本ルール専用の管理パックを作成しておくことで、他の設定に影響しないようにします。<br><img src="001.png"></p>
+</li>
+<li><p>[ログ ファイルの監視の詳細] ページでは、監視設定、ログファイルのパス、式などを設定して [次へ] をクリックします。<br><img src="002.png"></p>
+</li>
+<li><p>[概要] ページで概要を確認して [作成] ボタンをクリックします。</p>
+</li>
+</ol>
+<p><strong>以上で通常の [UNIX/Linuxログファイルの監視] の設定は完了です。</strong></p>
+<p>ログファイルに対象の文字列が出力されるとアラートが生成されます。<br>生成されたアラートは [アクティブなアラート] 画面で確認できます。<br>SCOM は <em>5分間隔でログファイル内の文字列の存在チェック</em>しますので、その間に条件に合致する行が複数行存在した場合、以下のようにまとめて検知します。<br><img src="003.png"></p>
+<p>SCOM コンソールでアラートを閉じる前に再度、同じ文字列が出力された場合、発生中のアラートの<strong>繰り返し回数</strong>をカウントアップします。<br>この<strong>繰り返し回数</strong>を [アクティブなアラート] 画面で確認するためには、[ビューの個人用設定] で [繰り返し回数] を表示するようにします。<br><img src="004.png"></p>
+<p>繰り返し回数がカウントアップされていることが分かります。<br><img src="005.png"></p>
+<h2 id="UNIX-Linuxログファイルの監視-をカスタマイズして全件アラート生成させる"><a href="#UNIX-Linuxログファイルの監視-をカスタマイズして全件アラート生成させる" class="headerlink" title="[UNIX/Linuxログファイルの監視] をカスタマイズして全件アラート生成させる"></a>[UNIX/Linuxログファイルの監視] をカスタマイズして全件アラート生成させる</h2><p><strong>標準の [UNIX/Linuxログファイルの監視] をカスタマイズ</strong>して、ログファイルに対象の文字列が出力されるごとに個別のアラートが生成されるようにします。</p>
+<p>―――<span style="color: red; ">ご注意</span><span style="font-size: 80%;">―――――――――――――――――――――――――――<br><em>独自にカスタマイズされた管理パックは、製品サポートの対象外になります。<br>本章に記載の手順は管理パックのカスタマイズになりますので、カスタマイズ部分につきましては製品サポートの対象外になりますことを予めご承知おきください。</em></span><br>――――――――――――――――――――――――――――</p>
+<ol>
+<li><p>SCOM コンソールの画面左下ペインの [管理] をクリックして [管理] 画面を開きます。</p>
+</li>
+<li><p>[管理] -&gt; [管理パック] -&gt; [インストール済み管理パック] を選択し、画面中央の管理パック一覧から前述の No.3 で作成した [ログファイル監視用管理パック] を選択します。</p>
+</li>
+<li><p>画面右ペインから [管理パックのエクスポート] をクリックして、任意の場所に管理パックをエクスポートします。<br><img src="006.png"></p>
+</li>
+<li><p>エクスポートした管理パック ファイル （拡張子は xml です） をテキストエディターで開いて以下の3行を削除して上書き保存します。</p>
+</li>
+</ol>
+<p><strong>XML ファイルの該当箇所</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Suppression&gt;</span><br><span class="line">	&lt;SuppressionValue /&gt;</span><br><span class="line">&lt;/Suppression&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="007.png"></p>
+<ol start="5">
+<li>[インストール済み管理パック] 画面で [管理パックのインポート] をクリックします。</li>
+<li>[追加] -&gt; [ディスクから追加する] をクリックして、No.4 でカスタマイズした管理パック ファイル （ xml ファイル） を選択します。</li>
+<li>[インストール] ボタンをクリックして、カスタマイズした管理パックをインストールします。<br><img src="008.png"></li>
+</ol>
+<p>このカスタマイズにより、既にアラートが発生中に同じ文字列がログファイルに出力された場合、SCOM は既存のアラートの繰り返し回数をカウントアップするのではなく、別のアラートが生成されます。<br><img src="009.png"></p>
+<h2 id="ルールの設定をオーバーライドして纏められたデータを個別のアラートとして生成する"><a href="#ルールの設定をオーバーライドして纏められたデータを個別のアラートとして生成する" class="headerlink" title="ルールの設定をオーバーライドして纏められたデータを個別のアラートとして生成する"></a>ルールの設定をオーバーライドして纏められたデータを個別のアラートとして生成する</h2><p>SCOM は <em>5分間隔でログファイル内の文字列の存在チェック</em>しますので、その間に条件に合致する行が複数行存在した場合、それらをまとめて検知します。<br>この仕様は標準の [UNIX/Linuxログファイルの監視] をカスタマイズしても同様で、以下の通りまとめて検知されます。<br><img src="010.png"></p>
+<p><strong>これらの纏められたアラートについて、[ルール] の [個別のアラート] をオーバーライドすることで、個別のアラートとして生成することができます。</strong><br>[ルール] の [個別のアラート] をオーバーライドする手順は以下の通りです。</p>
+<ol>
+<li><p>SCOM コンソールの画面左下ペインの [作成] をクリックして [作成] 画面を開きます。</p>
+</li>
+<li><p>[作成] -&gt; [管理パック オブジェクト] -&gt; [ルール] を選択して、検索欄に [ログファイル監視用管理パック] と入力して検索します。</p>
+</li>
+<li><p>[Unix/Linux コンピューター] 内のルールを選択して、画面右ペインから [オーバーライド] をクリックします。<br><img src="011.png"></p>
+</li>
+<li><p>[オーバーライド] -&gt; [ルールのオーバーライド] -&gt; [クラス UNIX/Linux コンピューターの特定のオブジェクト] を選択します。</p>
+</li>
+<li><p>ログファイル監視を行うコンピューターを選択して、オーバーライドのプロパティ画面を開きます。</p>
+</li>
+<li><p><strong>[個別のアラート]</strong> を <strong>[真]</strong> に設定して、 [適用] -&gt; [OK] をクリックして、オーバーライド設定を保存します。<br><img src="012.png"></p>
+</li>
+</ol>
+<p>以上の設定により、指定の文字列がログファイルに出力されるたびに、たとえ短時間に条件に合致するログが複数出力された場合も纏められることもなく、全件、個別のアラートとして生成されます。<br><img src="013.png"></p>
+<hr>
+<p>いかがでしょうか。</p>
+<p>標準の [UNIX/Linuxログファイルの監視] は、検知した事象の対処が完了してアラートを手動で閉じるまでは、対象のログを再検知しても同じアラートが多数発生しないように制御しています。<br>基本的にはこの仕様が多くの現場の運用に最も適すると考えますが、ケースに応じてご参考にしていただければと存じます。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_Log_Monitor.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../SCOM_DCOM_influence/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          DCOM の脆弱性 (CVE-2021-26414) に対応する更新プログラムの SCOM への影響について
+        
+      </div>
+    </a>
+  
+  
+    <a href="../SCOM_Troubleshooting_log/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCOM で使用する一般的なログ収集方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../SCOM_DCOM_influence/">DCOM の脆弱性 (CVE-2021-26414) に対応する更新プログラムの SCOM への影響について</a>
+          </li>
+        
+          <li>
+            <a href="">UNIX/Linuxログファイルの監視をカスタマイズして、個別のアラートとして全件検知する方法</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_Troubleshooting_log/">SCOM で使用する一般的なログ収集方法</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_windows_script_monitor/">スクリプト監視の設定手順 - Windows 編</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_unix_script_monitor/">スクリプト監視の設定手順 - UNIX/Linux 編</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">13</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96">ログ監視</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">新環境への移行</a><span class="tag-list-count">2</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 15px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/General/" style="font-size: 12.5px;">General</a> <a href="../../tags/HowTo/" style="font-size: 17.5px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Operations-Manager/" style="font-size: 17.5px;">Operations Manager</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 10px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 12.5px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Troubleshoot/" style="font-size: 17.5px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 12.5px;">アップグレード</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 12.5px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 12.5px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 12.5px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 10px;">トラブルシューティング</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 10px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12.5px;">新環境への移行</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
