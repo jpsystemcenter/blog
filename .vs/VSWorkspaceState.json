@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\articles",
-    "\\articles\\SCOM",
-    "\\articles\\SCVMM"
+    "\\articles\\SCOM"
   ],
-  "SelectedNode": "\\articles\\SCOM\\SCOM_windows_script_monitor.md",
+  "SelectedNode": "\\articles\\SCOM\\SCOM_Troubleshooting_log.md",
   "PreviewInSolutionExplorer": false
 }
