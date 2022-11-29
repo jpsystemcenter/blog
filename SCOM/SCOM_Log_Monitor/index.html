@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/012.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/013.png">
 <meta property="article:published_time" content="2022-11-28T03:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-28T06:00:19.331Z">
+<meta property="article:modified_time" content="2022-11-29T08:51:42.389Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Operations Manager">
@@ -119,7 +119,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+a99d4c25-fa45-58a0-b9b5-b7f60ef12603%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BUNIX%2FLinux%E3%83%AD%E3%82%B0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E7%9B%A3%E8%A6%96%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%97%E3%81%A6%E3%80%81%E5%80%8B%E5%88%A5%E3%81%AE%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E3%81%A8%E3%81%97%E3%81%A6%E5%85%A8%E4%BB%B6%E6%A4%9C%E7%9F%A5%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_Log_Monitor%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_Log_Monitor.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_Log_Monitor.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/" data-id="clb0dsmxq00060mmwgmyw4veu" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Log_Monitor/" data-id="clb1zcwf900060mrr21aq0c9r" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -127,6 +127,7 @@
         <span id="more"></span>
 <p>皆様こんにちは、System Center サポートチームの 石原 です。 </p>
 <p> System Center Operations Manager（以後 SCOM） には<strong>製品標準の管理パック テンプレート</strong>に <strong>[UNIX/Linuxログファイルの監視]</strong> があります。<br>[UNIX/Linuxログファイルの監視] を用いることで、UNIX/Linux サーバー内のログファイルに指定の文字列が出力された際にアラートを生成するログファイル監視を設定することができます。<br>SCOM は 5分間隔でログファイル内の文字列の存在チェックを行い、指定文字列が存在していた場合にアラートを発生させます。<br>既にアラート発生中の場合、発生中のアラートの繰り返し回数をカウントアップすることで、同じアラートが多数発生しないように制御しています。<br>本日は、この [UNIX/Linuxログファイルの監視] をカスタマイズして、指定文字列が出力されるたびに全件、個別のアラートとする手順を紹介いたします。</p>
+<p>―――<span style="color: red; ">ご注意</span><span style="font-size: 80%;">―――――――――――――――――――――――――――<br>以下にご案内します<a href="#UNIX-Linux%E3%83%AD%E3%82%B0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E7%9B%A3%E8%A6%96-%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%97%E3%81%A6%E5%85%A8%E4%BB%B6%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E7%94%9F%E6%88%90%E3%81%95%E3%81%9B%E3%82%8B">UNIX-Linuxログファイルの監視-をカスタマイズ</a> は、管理パックを直接編集する手順となります。<br>管理パックを直接編集する手順は注意が必要です。<br>本設定によって SCOM の動作に不備が発生した場合、設定実施前の状態の管理パックをインポートしてください。<br>こちらの点から、設定実施前の管理パックは別途バックアップとして個別にファイルを保存いただくことを推奨いたします。</span><br>―――――――――――――――――――――――――――</p>
 <h2 id="UNIX-Linuxログファイルの監視-の設定手順と標準の動作"><a href="#UNIX-Linuxログファイルの監視-の設定手順と標準の動作" class="headerlink" title="[UNIX/Linuxログファイルの監視] の設定手順と標準の動作"></a>[UNIX/Linuxログファイルの監視] の設定手順と標準の動作</h2><p><strong>最初に通常の手順でログファイル監視を設定します。</strong></p>
 <ol>
 <li><p>SCOM コンソールにログインして、画面左下ペインの [作成] をクリックして、画面右ペインから [監視の追加ウィザード] をクリックします。<br><img src="000.png"></p>
@@ -145,7 +146,6 @@
 <p>SCOM コンソールでアラートを閉じる前に再度、同じ文字列が出力された場合、発生中のアラートの<strong>繰り返し回数</strong>をカウントアップします。<br>この<strong>繰り返し回数</strong>を [アクティブなアラート] 画面で確認するためには、[ビューの個人用設定] で [繰り返し回数] を表示するようにします。<br><img src="004.png"></p>
 <p>繰り返し回数がカウントアップされていることが分かります。<br><img src="005.png"></p>
 <h2 id="UNIX-Linuxログファイルの監視-をカスタマイズして全件アラート生成させる"><a href="#UNIX-Linuxログファイルの監視-をカスタマイズして全件アラート生成させる" class="headerlink" title="[UNIX/Linuxログファイルの監視] をカスタマイズして全件アラート生成させる"></a>[UNIX/Linuxログファイルの監視] をカスタマイズして全件アラート生成させる</h2><p><strong>標準の [UNIX/Linuxログファイルの監視] をカスタマイズ</strong>して、ログファイルに対象の文字列が出力されるごとに個別のアラートが生成されるようにします。</p>
-<p>―――<span style="color: red; ">ご注意</span><span style="font-size: 80%;">―――――――――――――――――――――――――――<br><em>独自にカスタマイズされた管理パックは、製品サポートの対象外になります。<br>本章に記載の手順は管理パックのカスタマイズになりますので、カスタマイズ部分につきましては製品サポートの対象外になりますことを予めご承知おきください。</em></span><br>――――――――――――――――――――――――――――</p>
 <ol>
 <li><p>SCOM コンソールの画面左下ペインの [管理] をクリックして [管理] 画面を開きます。</p>
 </li>
