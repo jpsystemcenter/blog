@@ -16,11 +16,9 @@ disableDisclaimer: false
 今回は、System Center Virtual Machine Manager (SCVMM) で使用する自己署名証明書の有効期限が切れた場合や、削除をされた場合の対処方法についてご案内いたします。
 
 ### [本ページが対象とする SCVMM バージョン]
-SCVMM 2012
-SCVMM 2012 SP1
-SCVMM 2012 R2
 SCVMM 2016
 SCVMM 2019
+SCVMM 2022
 
 ### [概要]
 SCVMM では、SCVMM サーバー機能をインストールしたサーバーや、SCVMM にて管理対象となる Hyper-V サーバーに SCVMM エージェントがインストールされた際、同時に自己署名証明書も当該サーバーにインストールされます。
