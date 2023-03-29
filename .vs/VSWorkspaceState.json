@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\articles",
-    "\\articles\\SCOM"
+    "\\articles\\SCOM",
+    "\\articles\\SCVMM"
   ],
-  "SelectedNode": "\\articles\\SCOM\\SCOM_DCOM_influence.md",
+  "SelectedNode": "\\articles\\SCVMM\\SCVMM_Troubleshooting_log",
   "PreviewInSolutionExplorer": false
 }
