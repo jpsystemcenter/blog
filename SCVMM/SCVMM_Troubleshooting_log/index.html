@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SCVMM で使用する一般的なログ収集方法 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。本記事は、System Center Virtual Machine Manager （以後、SCVMM） で発生したトラブルの調査を行う際に採取いただく機会が多いログ等の取得方法について解説します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCVMM で使用する一般的なログ収集方法">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。本記事は、System Center Virtual Machine Manager （以後、SCVMM） で発生したトラブルの調査を行う際に採取いただく機会が多いログ等の取得方法について解説します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/004.png">
+<meta property="article:published_time" content="2023-03-29T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-29T09:04:33.459Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="Troubleshoot">
+<meta property="article:tag" content="SCVMM">
+<meta property="article:tag" content="トラブルシューティング">
+<meta property="article:tag" content="ログ収集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCVMM/SCVMM_Troubleshooting_log" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SCVMM で使用する一般的なログ収集方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-03-29T04:00:00.000Z" itemprop="datePublished">2023-03-29</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+eb45ec22-8b2f-59c9-af8d-da5646ee0fff%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Troubleshooting_log%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/" data-id="clftgnnjo000q0no63xbc4p01" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。<br>本記事は、System Center Virtual Machine Manager （以後、SCVMM） で発生したトラブルの調査を行う際に採取いただく機会が多いログ等の取得方法について解説します。</p>
+<span id="more"></span>
+<h2 id="トラブルシューティングに必要な情報"><a href="#トラブルシューティングに必要な情報" class="headerlink" title="[トラブルシューティングに必要な情報]"></a>[トラブルシューティングに必要な情報]</h2><p>SCVMM のトラブルシューティングの際には、お客様環境と SCVMM の動作を把握するために以下の情報をお送りいただいております。<br>本記事では、各々の取得目的と取得手順について解説します。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center">No</th>
+      <th style="text-align:center">項目</th>
+      <th style="text-align:center">取得目的</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:center">1</td>
+      <td><a href="#No-1-トレースログ">トレースログ</a></td>
+      <td>再現可能な不具合動作が発生した場合、事象再現中のトレースログを取得することで、処理の流れを追いかけて原因調査します。</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">2</td>
+      <td><a href="#No-2-ジョブ一覧">ジョブ一覧</a></td>
+      <td>SCVMM のジョブが正常終了しなかった場合、ジョブ一覧にて実行ジョブの名称、実行時間、発生したエラーなどを確認します。</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">3</td>
+      <td><a href="#No-3-SCVMM-環境情報-SCVMM-サーバー情報-ホスト情報-仮想マシン情報">SCVMM 環境情報</a></td>
+      <td>お客様環境を把握するための情報です。取得対象は、SCVMM サーバー情報, ホスト情報, 仮想マシン情報の3 種類です。</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">4</td>
+      <td><a href="#No-4-クラスター-ホスト-仮想マシンのプロパティ画面">クラスター/ホスト/仮想マシンのプロパティ画面</a></td>
+      <td>お客様環境を把握するための情報です。取得対象は、問題が発生している [クラスター/ホスト/仮想マシン] のプロパティ画面です。</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">5</td>
+      <td><a href="#No-5-SCVMM-エラーログ">SCVMM エラーログ</a></td>
+      <td>SCVMM にてエラーが発生した場合や、SCVMM コンソールがエラーで異常終了した場合の調査に使用します。</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">6</td>
+      <td><a href="#No-6-イベントログ">イベントログ</a></td>
+      <td>不具合動作が発生した時間帯のイベントログを確認して、該当時間の OS や SCVMM の状態を確認します。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="No-1-トレースログ"><a href="#No-1-トレースログ" class="headerlink" title="[No.1 トレースログ]"></a>[No.1 トレースログ]</h2><p>想定外の事象が発生した際に、事象を再現して、その間の動作を記録するトレースログは、原因調査で最も有益な情報になります。<br>トレースログの取得方法は下記の通りです。</p>
+<p><b>■ 取得手順</b><br>SCVMM サーバーと問題が発生している仮想マシンの展開先仮想化ホストサーバー ( Hyper-V サーバー) において、以下の手順で並行して情報を採取してください。</p>
+<ol>
+<li>コマンド プロンプトを管理者として実行します。</li>
+<li>VMM フォルダー（C:\VMMlogs）を作成します。</li>
+<li>以下のコマンドを順番に実行して VMM トレースの採取を開始します。</li>
+</ol>
+<ul>
+<li>事前準備 ①<br>【実施対象】 SCVMM サーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman delete VMM</span><br></pre></td></tr></table></figure>
+【実施対象】SCVMM サーバーおよび、問題が発生している仮想化ホストサーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br></pre></td></tr></table></figure>
+(※) 上記コマンドを実行した際に “データ コレクター セットが見つかりませんでした。” というメッセージが表示される場合があります。特に問題ありませんので、そのまま進めてください。</li>
+<li>事前準備 ②<br>【実施対象】 SCVMM サーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman create trace VMM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_VMMLog.ETL -p Microsoft-VirtualMachineManager-Debug -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br></pre></td></tr></table></figure>
+【実施対象】SCVMM サーバーおよび、問題が発生している仮想化ホストサーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman create trace WinRM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WinRM.ETL -p Microsoft-Windows-WinRM 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br><span class="line">logman create trace WMI -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WMI.ETL -p WMI_Tracing 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br></pre></td></tr></table></figure>
+(※) “C:\VMMLogs” 直下に -max オプションにて、それぞれ最大2GBを上限値としてトレース ファイルを取得します。<br>実施の際は、事前に C ドライブの空き容量をご確認いただくか、容量の大きなドライブをご指定ください。</li>
+<li>取得開始　( C:\VMMLogs フォルダ配下に etl ファイルが作成されます。 )<br>【実施対象】 SCVMM サーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman start VMM</span><br></pre></td></tr></table></figure>
+【実施対象】SCVMM サーバーおよび、問題が発生している仮想化ホストサーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman start WinRM</span><br><span class="line">logman start WMI</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>事象の再現手順を実行します。<b><font color="red"> ※ この処理中のトレースログを解析に使用します。</font></b><br></li>
+<li>以下のコマンドを順番に実行してトレースの採取を停止します。<br>【実施対象】 SCVMM サーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman stop VMM</span><br><span class="line">logman delete VMM</span><br></pre></td></tr></table></figure>
+【実施対象】SCVMM サーバーおよび、問題が発生している仮想化ホストサーバー<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logman stop WinRM</span><br><span class="line">logman stop WMI</span><br><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br></pre></td></tr></table></figure></li>
+<li>以下のコマンドを各 etl ファイルに対して実行してトレースファイルをコンバートします（.txt ファイルが生成されます）。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh trace convert C:\VMMLogs\&lt;コンピューター名&gt;_&lt;各ETLファイル&gt;.etl</span><br></pre></td></tr></table></figure>
+(※) &lt;各 ETL ファイル&gt; には、WMI、WinRM、VMMLog と3種類ございます。</li>
+<li>C:\VMMLogs フォルダを圧縮して、弊社までお寄せください。<br><br></li>
+</ol>
+<h2 id="No-2-ジョブ一覧"><a href="#No-2-ジョブ一覧" class="headerlink" title="[No.2 ジョブ一覧]"></a>[No.2 ジョブ一覧]</h2><p>SCVMM で実行したジョブが正常終了しなかった場合、ジョブ一覧を確認することで、実行したジョブと発生したエラー、エラーメッセージが確認できます。<br>ジョブ一覧の取得方法は下記の通りです。</p>
+<p><b>■ 取得手順</b></p>
+<ol>
+<li>SCVMM 管理サーバーに管理者権限でログインします。</li>
+<li>事前に、C ドライブの直下に “temp” という名前のフォルダを作成します。</li>
+<li>スタートメニューより [Virtual Machine Manager Command Shell] を実行します。</li>
+<li>以下のコマンドを実行します。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCJOB -All -Full | export-csv -path &quot;C:\temp\scjob.csv&quot; -encoding UTF8</span><br></pre></td></tr></table></figure></li>
+<li>“temp” フォルダに出力された “scjob.csv” を弊社までお寄せください。<br><br></li>
+</ol>
+<h2 id="No-3-SCVMM-環境情報-SCVMM-サーバー情報-ホスト情報-仮想マシン情報"><a href="#No-3-SCVMM-環境情報-SCVMM-サーバー情報-ホスト情報-仮想マシン情報" class="headerlink" title="[No.3 SCVMM 環境情報 (SCVMM サーバー情報, ホスト情報, 仮想マシン情報)]"></a>[No.3 SCVMM 環境情報 (SCVMM サーバー情報, ホスト情報, 仮想マシン情報)]</h2><p>問題が発生している環境とご利用状況を把握する必要がある場合、SCVMM のバージョン情報、SCVMM で管理されているホストの情報、仮想マシンの情報をお送りいただいております。<br>各情報の取得方法は下記の通りです。</p>
+<p><b>■ 取得手順</b></p>
+<ol>
+<li>SCVMM 管理サーバーに管理者権限でログインします。</li>
+<li>事前に、C ドライブの直下に “temp” という名前のフォルダを作成します。</li>
+<li>スタートメニューより [Virtual Machine Manager Command Shell] を実行します。</li>
+<li>以下のコマンドを実行して SCVMM サーバー情報を取得します。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVMMServer -ComputerName &quot;*** VMMサーバーのFQDN ***&quot; | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8</span><br></pre></td></tr></table></figure>
+例）Get-SCVMMServer -ComputerName “VMMServer01.Contoso.com” | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8</li>
+<li>以下のコマンドを実行して SCVMM で管理しているホスト情報を取得します。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVMHost | export-csv -path C:\temp\Hostlist.csv -encoding UTF8</span><br><span class="line">Get-SCVMHostCluster | export-csv -path C:\temp\Clusterlist.csv -encoding UTF8</span><br><span class="line">Get-SCVMMManagedComputer | export-csv -path C:\temp\ManagedComputer.csv -encoding UTF8</span><br></pre></td></tr></table></figure></li>
+<li>以下のコマンドを実行して SCVMM で管理しているホスト情報を取得します。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVirtualMachine | export-csv -path C:\temp\VirtualMachine.csv -encoding UTF8</span><br></pre></td></tr></table></figure></li>
+<li>“temp” フォルダに出力された “VMMinfo.csv”, “Hostlist.csv”, “Clusterlist.csv”, “ManagedComputer.csv”, “VirtualMachine.csv” を弊社までお寄せください。<br><br></li>
+</ol>
+<h2 id="No-4-クラスター-ホスト-仮想マシンのプロパティ画面"><a href="#No-4-クラスター-ホスト-仮想マシンのプロパティ画面" class="headerlink" title="[No.4 クラスター/ホスト/仮想マシンのプロパティ画面]"></a>[No.4 クラスター/ホスト/仮想マシンのプロパティ画面]</h2><p>SCVMM で管理しているクラスターやホスト、仮想マシンでステータス異常などの警告が発生している場合、発生している警告と設定内容の確認のために該当のプロパティ画面の画面ショットをお送りいただいております。<br>各情報の取得方法は下記の通りです。<br><br><b>■ 取得手順</b></p>
+<ol>
+<li>SCVMM コンソールにログインします。</li>
+<li>[VMとサービス] 画面を開きます。</li>
+<li>警告が発生している対象を選択して、右クリックメニューからプロパティをクリックします。<br><img src="001.png"></li>
+<li>プロパティ画面にて [全般] 画面、[状態] 画面を開き、画面ショットを取得します。<br>① <b>クラスター</b> の [全般] 画面と [状態] 画面<br><img src="002.png"><br>② <b>ホスト</b> の [全般] 画面と [状態] 画面<br>状態画面にて警告が表示されている場合、対象が分かる形で画面ショットを取得してください。<br>また、[エラーのコピー] ボタンにてコピーしたエラーメッセージを error.txt として保存してください。<br><img src="003.png"><br>③ <b>仮想マシン</b> の [全般] 画面と [状態] 画面<br>状態画面にて警告が表示されている場合、対象が分かる形で画面ショットを取得してください。<br>また、[エラーのコピー] ボタンにてコピーしたエラーメッセージを error.txt として保存してください。<br><img src="004.png"></li>
+<li>取得いただいた画面ショットと error.txt を弊社までお寄せください。 <br><br></li>
+</ol>
+<h2 id="No-5-SCVMM-エラーログ"><a href="#No-5-SCVMM-エラーログ" class="headerlink" title="[No.5 SCVMM エラーログ]"></a>[No.5 SCVMM エラーログ]</h2><p>SCVMM にてエラーが発生した場合や、SCVMM コンソールがエラーで異常終了した場合、発生原因などの情報がエラーログに記載されることがあります。<br>エラーログの取得方法は下記の通りです。</p>
+<p><b>■ 取得手順</b><br>本手順は以下のサーバーにて実施します。<br> - SCVMM サーバー<br> - SCVMM コンソールの異常終了が発生したサーバー<br> ※ SCVMM サーバー上で SCVMM コンソールが開かれていた場合、本ログは SCVMM サーバーのみから採取してください。</p>
+<ol>
+<li>対象のサーバーに管理者権限でログインします。</li>
+<li>エクスプローラーを開き、下記のフォルダにアクセスします。<br>C:\ProgramData<br>既定では、<b>“ProgramData” フォルダ</b> は隠しフォルダに設定されています。<br>こちらのフォルダにアクセスされる場合は、エクスプローラー上で隠しフォルダを表示する設定を有効化してください。</li>
+<li><ol start="2">
+<li>でアクセスしたフォルダ上に存在する <b>“VMMLogs” フォルダ</b> を圧縮して、弊社までお寄せください。<br>採取対象が複数台存在する場合、採取された対象が判別いただけるように “VMMLogs” の圧縮ファイルの名称を変更してください。<br>例えば、管理サーバーから採取された場合は “MS_VMMLogs”、仮想化ホストから採取された場合は “Host_VMMLogs” といった具合に変更します。<br><br></li>
+</ol>
+</li>
+</ol>
+<h2 id="No-6-イベントログ"><a href="#No-6-イベントログ" class="headerlink" title="[No.6 イベントログ]"></a>[No.6 イベントログ]</h2><p>SCVMM の処理の一部はイベントログに記録されますので、問題の解析のためにイベントログをお送りいただいております。<br>イベント ログの取得方法は下記の通りです。</p>
+<p><b>■ 取得手順</b><br>本手順は、下記コンピューター上にて実施をお願いします。<br>・SCVMM サーバー<br>・問題が発生した仮想化ホストサーバー ( Hyper-V サーバー) </p>
+<p>作業手順は下記弊社公開ドキュメントに沿って、イベント ログを「evt(x) 形式」と「csv 形式」の両方でエクスポートの実施をお願いします。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/security-updates/planningandimplementationguide/19871931">監査の管理 ‐ イベント ログの保存 | Microsoft Learn</a></p>
+<p>取得対象のログは下記 7 点でございます。<br>　- Application<br>　- システム<br>　- セキュリティ<br>　- WinRM-Operational （VMM サーバーのみ）(※1)<br>　- WMIActivity-Operational (※1)<br>　- Admin (※2)<br>　- Operational (※2)</p>
+<p>(※1) のログは [アプリケーションとサービス ログ] -&gt; [Microsoft] -&gt; [Windows] を展開すると表示されます。<br>(※1) のイベントログが表示されない場合、そのサーバーから (※1) のイベントログの採取は不要でございます。<br>(※2) のログは [アプリケーションとサービス ログ] -&gt; [Microsoft] -&gt; [VirtualMachineManager] -&gt; [Server] を展開すると表示されます。<br>(※2) のイベントログが表示されない場合、そのサーバーから (※2) のイベントログの採取は不要でございます。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCVMM/SCVMM_Troubleshooting_log.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../SCOM/SCOM_Install_Manual/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCOM 管理サーバー構築手順 ～ 全画面ショット付き</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SCVMM で使用する一般的なログ収集方法</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_Install_Manual/">SCOM 管理サーバー構築手順 ～ 全画面ショット付き</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_DCOM_influence/">DCOM の脆弱性 (CVE-2021-26414) に対応する更新プログラムの SCOM への影響について</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_Log_Monitor/">UNIX/Linuxログファイルの監視をカスタマイズして、個別のアラートとして全件検知する方法</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_Troubleshooting_log/">SCOM で使用する一般的なログ収集方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">14</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">6</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96">ログ監視</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">新環境への移行</a><span class="tag-list-count">2</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 14px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/HowTo/" style="font-size: 16px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Operations-Manager/" style="font-size: 18px;">Operations Manager</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 10px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 14px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Troubleshoot/" style="font-size: 18px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 12px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 10px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 12px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 12px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 12px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 12px;">トラブルシューティング</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 12px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12px;">新環境への移行</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
