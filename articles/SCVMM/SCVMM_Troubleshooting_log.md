@@ -157,7 +157,7 @@ SCVMM で実行したジョブが正常終了しなかった場合、ジョブ�
  Get-SCVMHostCluster | export-csv -path C:\temp\Clusterlist.csv -encoding UTF8
  Get-SCVMMManagedComputer | export-csv -path C:\temp\ManagedComputer.csv -encoding UTF8
  ```
-6. 以下のコマンドを実行して SCVMM で管理しているホスト情報を取得します。
+6. 以下のコマンドを実行して SCVMM で管理している仮想マシンの情報を取得します。
  ```
  Get-SCVirtualMachine | export-csv -path C:\temp\VirtualMachine.csv -encoding UTF8
  ```
