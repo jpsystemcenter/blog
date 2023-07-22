@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>WORKGROUP コンピューターの管理方法について | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。 今回は、SCOM 管理サーバーと同じ信頼境界内に存在しない Windows サーバー  ( ※ 信頼関係を結んでいない別ドメイン内のサーバーや WORKGROUP コンピューター) に導入した SCOM エージェントを、証明書認証を用いて管理する方法について説明します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WORKGROUP コンピューターの管理方法について">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。 今回は、SCOM 管理サーバーと同じ信頼境界内に存在しない Windows サーバー  ( ※ 信頼関係を結んでいない別ドメイン内のサーバーや WORKGROUP コンピューター) に導入した SCOM エージェントを、証明書認証を用いて管理する方法について説明します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/012.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/013.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/014.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/015.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/016.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/017.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/018.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/019.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/020.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/021.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/022.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/023.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/024.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/025.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/026.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/027.png">
+<meta property="article:published_time" content="2023-07-21T08:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-22T06:45:46.479Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="アップグレード">
+<meta property="article:tag" content="新環境への移行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCOM/SCOM_Workgroup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WORKGROUP コンピューターの管理方法について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-07-21T08:00:00.000Z" itemprop="datePublished">2023-07-21</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+5672d005-df8e-5c70-bb1e-2a5596446ac8%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BWORKGROUP+%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_Workgroup%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_Workgroup.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_Workgroup.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/" data-id="clkdnc6sf003c0npn5g9j0b2m" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。</p>
+<p>今回は、SCOM 管理サーバーと同じ信頼境界内に存在しない Windows サーバー  ( ※ 信頼関係を結んでいない別ドメイン内のサーバーや WORKGROUP コンピューター) に導入した SCOM エージェントを、証明書認証を用いて管理する方法について説明します。<br><br></p>
+<span id="more"></span>
+<h2 id="SCOM-管理サーバーと同じ信頼境界内に存在しない-Windows-サーバーの管理方法について"><a href="#SCOM-管理サーバーと同じ信頼境界内に存在しない-Windows-サーバーの管理方法について" class="headerlink" title="SCOM 管理サーバーと同じ信頼境界内に存在しない Windows サーバーの管理方法について"></a>SCOM 管理サーバーと同じ信頼境界内に存在しない Windows サーバーの管理方法について</h2><p>System Center Operations Manager（以後、SCOM） は、Windows サーバーの管理に SCOM エージェント ( MMA：Microsoft Monitoring Agent ) を使用します。<br>エージェントと管理サーバーとの間で情報交換を開始する前に相互認証を実行しますが、この認証プロセスは保護のために暗号化されます。エージェントと管理サーバーが同じ Active Directory ドメイン内に存在する場合、または信頼関係が確立された異なる Active Directory ドメイン内に存在する場合は、Active Directory によって提供される Kerberos V5 認証メカニズムを使用します。この認証プロセス用には特に設定等は不要です。<br>エージェントと管理サーバーが同じ信頼境界内に存在しない場合 ( ※信頼関係を結んでいない別ドメイン内のサーバーや WORKGROUP コンピューターの場合) は、セキュリティで保護された相互認証要件を満たすために他のメカニズムを使用する必要があります。</p>
+<p>相互認証が完了していない場合、エージェントは管理サーバーに接続できず、エージェント サーバー側にイベントログ (<strong>21016</strong> と <strong>21007</strong>) が記録されます。</p>
+<p>==========================================<br><span style="font-size: 80%;"><span style="text-decoration: underline"><strong>イベント ID : 21016</strong></span><br>ログの名前 : Operations Manager<br>ソース : OpsMgr Connector<br>レベル : エラー<br>コンピューター :  <span style="text-decoration: underline">エージェントサーバーのコンピューター名</span><br>説明 : OpsMgr は <span style="text-decoration: underline">SCOM 管理サーバーのFQDN</span> との通信チャネルを設定できませんでした。フェールオーバー ホストがありません。<span style="text-decoration: underline">SCOM 管理サーバーのFQDN</span> が使用可能になり、このコンピューターからの通信が許可されるようになったら、通信が再開されます。</span></p>
+<p><span style="font-size: 80%;"><span style="text-decoration: underline"><strong>イベント ID : 21007</strong></span><br>ログの名前 : Operations Manager<br>ソース : OpsMgr Connector<br>レベル:           エラー<br>コンピューター :  <span style="text-decoration: underline">エージェントサーバーのコンピューター名</span><br>説明 : OpsMgr コネクタは、信頼されたドメインにないため、<span style="text-decoration: underline">SCOM 管理サーバーのFQDN</span> への相互に認証された接続を作成できません。<br></span>==========================================</p>
+<p>相互認証のプロセスを完了させる方法には、以下の 2 つの方法があります。</p>
+<p>　<strong>１）ゲートウェイ サーバーを構築する方法</strong>　　　※参考：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-mgmt-group-design?view=sc-om-2022#gateway-server">ゲートウェイ サーバー | Microsoft Learn</a><br>　<strong>２）証明書認証を設定する方法　　　　　　　　<span style="color: red; ">← 本記事の内容</strong><span style="color: red; "></p>
+<p>本記事では、管理サーバーとエージェントとサーバーに証明書を登録して証明書認証を行う手順について説明します。<br><br></p>
+<h2 id="証明書認証の設定の流れ"><a href="#証明書認証の設定の流れ" class="headerlink" title="証明書認証の設定の流れ"></a>証明書認証の設定の流れ</h2><p>証明書認証の設定の流れは以下の通りです。<br>次章にて、各々の具体的な設定手順について説明します。</p>
+<p>A. <a href="#A-%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90%EF%BC%88CA-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%EF%BC%89">証明書テンプレートの作成（CA サーバー）</a><br>B. <a href="#B-%E4%BF%A1%E9%A0%BC%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AB%E3%83%BC%E3%83%88%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%EF%BC%88SCOM-%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%EF%BC%89">信頼されているルート証明書のダウンロード（SCOM 管理サーバー）</a><br>C. <a href="#C-%E4%BF%A1%E9%A0%BC%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AB%E3%83%BC%E3%83%88%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%EF%BC%88SCOM-%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%EF%BC%89">信頼されているルート証明書のインポート（SCOM 管理サーバー）</a><br>D. <a href="#D-%E4%BF%A1%E9%A0%BC%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AB%E3%83%BC%E3%83%88%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%EF%BC%88WorkGroup-%E3%81%AB%E3%81%82%E3%82%8B%E7%9B%A3%E8%A6%96%E5%AF%BE%E8%B1%A1%EF%BC%89">信頼されているルート証明書のダウンロード（WORKGROUP にある監視対象）</a><br>E. <a href="#E-%E4%BF%A1%E9%A0%BC%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AB%E3%83%BC%E3%83%88%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%EF%BC%88WorkGroup-%E3%81%AB%E3%81%82%E3%82%8B%E7%9B%A3%E8%A6%96%E5%AF%BE%E8%B1%A1%EF%BC%89">信頼されているルート証明書のインポート（WORKGROUP にある監視対象）</a><br>F. <a href="#F-CA-%E3%81%B8%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E8%A6%81%E6%B1%82%EF%BC%88SCOM-%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%EF%BC%89">CA へ証明書の要求（SCOM 管理サーバー）</a><br>G. <a href="#G-CA-%E3%81%B8%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E8%A6%81%E6%B1%82%EF%BC%88WorkGroup-%E3%81%AB%E3%81%82%E3%82%8B%E7%9B%A3%E8%A6%96%E5%AF%BE%E8%B1%A1%EF%BC%89">CA へ証明書の要求（WORKGROUP にある監視対象）</a><br>H. <a href="#H-%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%82%B9%E3%83%88%E3%82%A2%E3%81%AB%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%EF%BC%88SCOM-%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%EF%BC%89">証明書ストアに証明書のインポート（SCOM 管理サーバー）</a><br>I. <a href="#I-%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%82%B9%E3%83%88%E3%82%A2%E3%81%AB%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%EF%BC%88WorkGroup-%E3%81%AB%E3%81%82%E3%82%8B%E7%9B%A3%E8%A6%96%E5%AF%BE%E8%B1%A1%EF%BC%89">証明書ストアに証明書のインポート（WORKGROUP にある監視対象）</a><br>J. <a href="#J-MOMCertImport-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-Operations-Manager-%E3%81%AB%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%EF%BC%88SCOM-%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%EF%BC%89">MOMCertImport を使って Operations Manager に証明書をインポートします。（SCOM 管理サーバー）</a><br>K. <a href="#K-MOMCertImport-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-Operations-Manager-%E3%81%AB%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%EF%BC%88WorkGroup-%E3%81%AB%E3%81%82%E3%82%8B%E7%9B%A3%E8%A6%96%E5%AF%BE%E8%B1%A1%EF%BC%89">MOMCertImport を使って Operations Manager に証明書をインポートします。（WORKGROUP にある監視対象）</a><br><br></p>
+<h2 id="証明書認証の設定手順"><a href="#証明書認証の設定手順" class="headerlink" title="証明書認証の設定手順"></a>証明書認証の設定手順</h2><h3 id="A-証明書テンプレートの作成（CA-サーバー）"><a href="#A-証明書テンプレートの作成（CA-サーバー）" class="headerlink" title="A. 証明書テンプレートの作成（CA サーバー）"></a>A. 証明書テンプレートの作成（CA サーバー）</h3><ol>
+<li>CA の管理権限を持つアカウントで、証明書サービスをホストしているコンピューター にログインします。</li>
+<li>[管理ツール] より、[証明機関] を起動します。</li>
+<li>ナビゲーション ウィンドウで、CA 名を展開します。</li>
+<li>[証明書テンプレート] を右クリックし、[管理] を選択して、”証明書テンプレート コンソール” を開きます。<br><img src="001.png"></li>
+<li>画面中央のウィンドウの “テンプレート表示名” の列にある [IPsec (オフライン要求)] を右クリックし、[テンプレートの複製] を選択し、”新しいテンプレートのプロパティ” を開きます。<br><img src="002.png"></li>
+<li>[全般] タブの[テンプレート表示名] のテキスト ボックスに、このテンプレートは名を入力します。<br>例えば、「OperationsManagerCert」とします。(※必要に応じて、[有効期間] を変更してください。)<br><img src="003.png"></li>
+<li>[要求処理] タブの [秘密キーのエクスポートを許可する] にチェックをします。<br><img src="004.png"></li>
+<li>[拡張機能] タブの [このテンプレートに含まれる拡張] に表示されている [アプリケーション ポリシー] を選択し、[編集] をクリックします。</li>
+<li>“アプリケーション ポリシーの拡張の編集” ダイアログ ボックスで [IP セキュリティ IKE 中間] を選択し、[削除] をクリックします。次に、[追加] をクリックし、[クライアント認証] と [サーバー認証] を選択し、[OK] をクリックします。<br><img src="005.png"></li>
+<li>“アプリケーション ポリシーの拡張の編集” ダイアログ ボックスで[OK] をクリックします。</li>
+<li>[セキュリティ] タブを選択し、[Authenticated Users] グループに [読み取り] と [登録] のアクセスを許可し、[OK] をクリックします。<br><img src="006.png"></li>
+<li>“証明書テンプレート コンソール” を閉じます。</li>
+<li>[証明書テンプレート] を右クリックし、[新規作成] - [発行する証明書テンプレート] を選択します。</li>
+<li>先ほど作成したテンプレートを選択し、[OK] をクリックします。(※今回の場合、作成したテンプレートは「OperationsManagerCert」です。)<br><img src="007.png"><br></li>
+</ol>
+<h3 id="B-信頼されているルート証明書のダウンロード（SCOM-管理サーバー）"><a href="#B-信頼されているルート証明書のダウンロード（SCOM-管理サーバー）" class="headerlink" title="B. 信頼されているルート証明書のダウンロード（SCOM 管理サーバー）"></a>B. 信頼されているルート証明書のダウンロード（SCOM 管理サーバー）</h3><ol>
+<li>管理者権限を持つアカウントにて、SCOM 管理サーバーにログインします。</li>
+<li>“Internet Explorer” を起動し、以下のURL より、証明書サービスをホストしているコンピューターへの接続します。<br>　<span style="text-decoration: underline">http://&lt;AD CS サーバーのFQDN 名&gt;/certsrv</span></li>
+<li>“ようこそ” ページで、[CA 証明書、証明書チェーン、または CRL のダウンロード] をクリックします。<br><img src="008.png"></li>
+<li>“CA 証明書、証明書チェーン、または CRL のダウンロード” ページ内にある “エンコード方法” で [Base 64] を選択し、[CA 証明書チェーンのダウンロード] をクリックします。<br><img src="009.png"></li>
+<li>ファイルをダウンロード のダイアログ ボックス で [保存] を選択し、 証明書を保存します。(※例えば [Trustedca.p7b] とします。)</li>
+<li>ダウンロードが完了したら、Internet Explorer を閉じます。<br></li>
+</ol>
+<h3 id="C-信頼されているルート証明書のインポート（SCOM-管理サーバー）"><a href="#C-信頼されているルート証明書のインポート（SCOM-管理サーバー）" class="headerlink" title="C. 信頼されているルート証明書のインポート（SCOM 管理サーバー）"></a>C. 信頼されているルート証明書のインポート（SCOM 管理サーバー）</h3><ol>
+<li>SCOM 管理サーバー上で、[mmc] (※Microsoft Management Console) を起動します。</li>
+<li>“コンソール 1” ウィンドウ上方の[ファイル] をクリックし、[スナップインの追加と削除] をクリックします。</li>
+<li>“利用できるスナップイン” 内にある[証明書] を選択し、[追加] をクリックします。</li>
+<li>“証明書スナップイン” ダイアログ ボックスで、[コンピュータ アカウント] を選択し、[次へ] をクリックします。<br><img src="010.png"></li>
+<li>“コンピューターの選択” ダイアログ ボックスで、[ローカル コンピューター:(このコンソールを実行しているコンピューター)] が選択されていることを確認し、[完了] をクリックします。</li>
+<li>“スナップインの追加と削除” のダイアログ ボックスで、[OK] をクリックします。</li>
+<li>“コンソール 1” ウィンドウで左ペインの[証明書 (ローカル コンピューター)] - [信頼されたルート証明機関] を展開します。</li>
+<li>[証明書] を右クリックし、[すべてのタスク] - [インポート] をクリックします。”証明書のインポート ウィザード” が開きます。</li>
+<li>“証明書のインポート ウィザードの開始” ページで [次へ] をクリックします。</li>
+<li>“インポートする証明書ファイル” のページで[参照] をクリックし、手順 B でダウンロードした CA の証明書ファイルを選択します。(※例えば、[TrustedCA.p7b] を選択します。)<br>※ 画面右下のダイアログ ボックスより、[X.509 証明書] を[すべてのファイル] に変更することで、手順 B でダウンロードした CA の証明書ファイルを一覧から選択できます。<br><img src="011.png"></li>
+<li>“インポートする証明書ファイル” のページで [次へ] をクリックします。</li>
+<li>“証明書ストア” のページで [証明書をすべて次のストアに配置する] が選択されており、[証明書ストア] が<br>「信頼されたルート証明機関」となっていることを確認し、[次へ] をクリックします。</li>
+<li>“証明書のインポート ウィザードの完了” ページで [完了] をクリックします。<br><img src="012.png"><br></li>
+</ol>
+<h3 id="D-信頼されているルート証明書のダウンロード（WorkGroup-にある監視対象）"><a href="#D-信頼されているルート証明書のダウンロード（WorkGroup-にある監視対象）" class="headerlink" title="D. 信頼されているルート証明書のダウンロード（WorkGroup にある監視対象）"></a>D. 信頼されているルート証明書のダウンロード（WorkGroup にある監視対象）</h3><p>手順 B を、ワークグループ上の監視対象となるコンピューターにて実施します。<br>(※下の画面ショットは、ワークグループ コンピューターにダウンロードしたルート証明書です。)<br><img src="013.png"><br><br></p>
+<h3 id="E-信頼されているルート証明書のインポート（WorkGroup-にある監視対象）"><a href="#E-信頼されているルート証明書のインポート（WorkGroup-にある監視対象）" class="headerlink" title="E. 信頼されているルート証明書のインポート（WorkGroup にある監視対象）"></a>E. 信頼されているルート証明書のインポート（WorkGroup にある監視対象）</h3><p>手順 C を、ワークグループ上の監視対象となるコンピューターにて実施します。<br>(※下の画面ショットは、ワークグループ コンピューターにインポートしたルート証明書です。)<br><img src="014.png"><br><br></p>
+<h3 id="F-CA-へ証明書の要求（SCOM-管理サーバー）"><a href="#F-CA-へ証明書の要求（SCOM-管理サーバー）" class="headerlink" title="F. CA へ証明書の要求（SCOM 管理サーバー）"></a>F. CA へ証明書の要求（SCOM 管理サーバー）</h3><ol>
+<li><p>管理者権限を持つアカウントにて、SCOM 管理サーバーにログインします。</p>
+</li>
+<li><p>以下の記述を含む内容をテキスト ファイルに作成します。<br>※ 「Subject= “CN=&lt;SCOM 管理サーバーのFQDN 名&gt;”」については、作業を実施するコンピューターのFQDN 名に置き換えてください。<br><span style="font-size: 80%;">- - - - - - - - - - ここから - - - - - - - - - -<br>[NewRequest]<br>Subject= “CN=&lt;SCOM 管理サーバーの完全修飾ドメイン名&gt;”<br>Exportable=TRUE<br>KeyLength=2048<br>KeySpec=1<br>KeyUsage=0xf0<br>MachineKeySet=TRUE<br>[EnhancedKeyUsageExtension]<br>OID=1.3.6.1.5.5.7.3.1<br>OID=1.3.6.1.5.5.7.3.2</span><br><span style="font-size: 80%;">- - - - - - - - - - ここまで - - - - - - - - - -</span></p>
+</li>
+<li><p>上記のテキスト ファイルを「.inf」の拡張子つけて保存します。(※例えば、[RequestConfig.inf] とします。)<br>※下の画面ショットは、弊社検証環境の [RequestConfig.inf] です。<br><img src="015.png"></p>
+</li>
+<li><p>[コマンド プロンプト] を起動し、以下のコマンドを実行し、リクエスト ファイルを作成します。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CertReq -New -f RequestConfig.inf CertRequest.req</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>※コマンドが成功すると、下の画面ショットの通り表示されます。<br><img src="016.png"><br>5. 作成されたファイル (CertRequest.req) をメモ帳で開き、内容を全てクリップボードにコピーします。<br>6. “Internet Explorer” を起動し、以下のURL より、証明書サービスをホストしているコンピューターへの接続します。<br>　<span style="text-decoration: underline">http://&lt;AD CS サーバーのFQDN 名&gt;/certsrv</span><br>7. “ようこそ” ページで、[証明書を要求する] をクリックします。<br><img src="017.png"><br>8. “証明書の要求” ページで [証明書の要求の詳細設定] をクリックします。<br><img src="018.png"><br>9. “証明書の要求の詳細設定” ページで、[Base 64 エンコード CMC または PKCS #10 ファイルを使用して証明書の要求を送信するか、または Base 64 エンコード PKCS #7 ファイルを使用して更新の要求を送信する。] をクリックします。(※ 環境によっては、このページが表示されないこともございますが、そのまま次へお進みください。)<br>10. “証明書の要求または更新要求の送信” ページで、[保存された要求] に上記の手順 5 でコピーした内容を貼り付けます。[証明書テンプレート] で、手順 A で作成した「OperationsManagerCert」を選択し、[送信] します。<br><img src="019.png"><br>11. “証明書は発行されました” ページで、[Base 64 エンコード] を選択し、[証明書のダウンロード]を選択し、証明書を保存します。(※例えば、ファイル名を「NewCertificate.cer」とします。)<br><img src="020.png"><br>12. ダウンロードが完了したら、”Internet Explorer” を閉じます。 <br><br></p>
+<h3 id="G-CA-へ証明書の要求（WorkGroup-にある監視対象）"><a href="#G-CA-へ証明書の要求（WorkGroup-にある監視対象）" class="headerlink" title="G. CA へ証明書の要求（WorkGroup にある監視対象）"></a>G. CA へ証明書の要求（WorkGroup にある監視対象）</h3><p>手順 F を、ワークグループ上の監視対象となるコンピューターにて実施します。<br>なお、手順 F-2 で使用する記述内容は以下のものに置き換えて実施してください。<br>※ 「Subject= “CN=&lt; WorkGroup にある監視対象の FQDN 名&gt;”」については、作業を実施するコンピューターの FQDN 名に置き換えてください。</p>
+<p><span style="font-size: 80%;">- - - - - - - - - - ここから - - - - - - - - - -<br>[NewRequest]<br>Subject= “CN=&lt;WorkGroup にある監視対象の完全修飾ドメイン名&gt;”<br>Exportable=TRUE<br>KeyLength=2048<br>KeySpec=1<br>KeyUsage=0xf0<br>MachineKeySet=TRUE<br>[EnhancedKeyUsageExtension]<br>OID=1.3.6.1.5.5.7.3.1<br>OID=1.3.6.1.5.5.7.3.2</span><br><span style="font-size: 80%;">- - - - - - - - - - ここまで - - - - - - - - - -</span></p>
+<p>※下の画面ショットは、弊社検証環境の [RequestConfig.inf] です。<br><img src="021.png"></p>
+<h3 id="H-証明書ストアに証明書のインポート（SCOM-管理サーバー）"><a href="#H-証明書ストアに証明書のインポート（SCOM-管理サーバー）" class="headerlink" title="H. 証明書ストアに証明書のインポート（SCOM 管理サーバー）"></a>H. 証明書ストアに証明書のインポート（SCOM 管理サーバー）</h3><ol>
+<li>管理者権限を持つアカウントにて、SCOM 管理サーバーにログインします。</li>
+<li>[コマンド プロンプト] を起動し、以下のコマンドを実行し、証明書をインポートします。<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. CertReq -Accept NewCertificate.cer</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>※コマンドが成功すると、下の画面ショットの通り表示されます。<br><img src="022.png"></p>
+<h3 id="I-証明書ストアに証明書のインポート（WorkGroup-にある監視対象）"><a href="#I-証明書ストアに証明書のインポート（WorkGroup-にある監視対象）" class="headerlink" title="I. 証明書ストアに証明書のインポート（WorkGroup にある監視対象）"></a>I. 証明書ストアに証明書のインポート（WorkGroup にある監視対象）</h3><p>手順 H を、ワークグループ上の監視対象となるコンピューターにて実施します。</p>
+<p>※コマンドが成功すると、下の画面ショットの通り表示されます。<br><img src="023.png"><br><br></p>
+<p><strong>続けて、SCOM のインストール メディアを利用して、エージェントのインストールを行います。</strong><br>(※指定する管理グループ・SCOM 管理サーバーの指定を誤りますと、正常に監視を行うことはできません。一旦、エージェントの再インストールが必要となりますので、ご注意くださいませ。)<br><br></p>
+<h3 id="J-MOMCertImport-を使って-Operations-Manager-に証明書をインポートします。（SCOM-管理サーバー）"><a href="#J-MOMCertImport-を使って-Operations-Manager-に証明書をインポートします。（SCOM-管理サーバー）" class="headerlink" title="J. MOMCertImport を使って Operations Manager に証明書をインポートします。（SCOM 管理サーバー）"></a>J. MOMCertImport を使って Operations Manager に証明書をインポートします。（SCOM 管理サーバー）</h3><p>事前にSCOM のインストール メディアをマウントする必要があります。</p>
+<ol>
+<li>[コマンド プロンプト] を起動し、インストール メディアが配置されているドライブへカレントディレクトリを変更します。</li>
+<li>以下のコマンドを実行し、メディア内のフォルダを開きます。<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (インストール メディアパス)\SupportTools\AMD64</span><br></pre></td></tr></table></figure>
+32 bit コンピューターの場合は、以下のコマンドを実行してください。<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (インストール メディアパス)\SupportTools\i386</span><br></pre></td></tr></table></figure></li>
+<li>以下のコマンドを実行します。<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOMCertImport</span><br></pre></td></tr></table></figure>
+<br></li>
+</ol>
+<p>※下の画面ショットは、弊社検証環境での実行画面です。<br><img src="024.png"><br>4. 表示された証明書の一覧から、有効期限の情報をもとに新しい証明書を識別して選択します。<br><img src="025.png"><br><br></p>
+<h3 id="K-MOMCertImport-を使って-Operations-Manager-に証明書をインポートします。（WorkGroup-にある監視対象）"><a href="#K-MOMCertImport-を使って-Operations-Manager-に証明書をインポートします。（WorkGroup-にある監視対象）" class="headerlink" title="K. MOMCertImport を使って Operations Manager に証明書をインポートします。（WorkGroup にある監視対象）"></a>K. MOMCertImport を使って Operations Manager に証明書をインポートします。（WorkGroup にある監視対象）</h3><p>手順 J を、ワークグループ上の監視対象となるコンピューターにて実施します。<br><img src="026.png"></p>
+<p>上記の操作によって、新しい証明書を使用するように Operations Manager が構成されます。<br>必要に応じて、Operations Manager のサービスを再起動してください。</p>
+<p>※ Operations Manager のサービスを再起動するには、以下の手順を実施して下さい。<br> 1. 管理者権限を持つアカウントで SCOM サーバーにログインします。<br>2. [管理ツール] より[サービス] を起動します。<br>3. サービスの一覧から [System Center Management Configuration] を右クリックして[再起動] をクリックします。</p>
+<p>以上で証明書の設定は完了です。この後、SCOM 環境にてワークグループコンピューターから接続された SCOM エージェントの承認をご実施ください。承認が完了すると、管理対処のエージェントに WORKGROUP コンピューターが追加されます。<br><img src="027.png"></p>
+<hr>
+<p>WORKGROUP コンピューターの管理や信頼関係を結んでいない別ドメインサーバーを管理する際に、本手順を参考にしていただければと存じます。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_Workgroup.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../SCVMM/SCVMM_Troubleshooting_log/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCVMM で使用する一般的なログ収集方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">WORKGROUP コンピューターの管理方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_Install_Manual/">SCOM 管理サーバー構築手順 ～ 全画面ショット付き</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_DCOM_influence/">DCOM の脆弱性 (CVE-2021-26414) に対応する更新プログラムの SCOM への影響について</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_Log_Monitor/">UNIX/Linuxログファイルの監視をカスタマイズして、個別のアラートとして全件検知する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">15</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">6</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96">ログ監視</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">新環境への移行</a><span class="tag-list-count">3</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 14px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/HowTo/" style="font-size: 16px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Operations-Manager/" style="font-size: 18px;">Operations Manager</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 10px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 14px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Troubleshoot/" style="font-size: 18px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 14px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 10px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 12px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 12px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 12px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 12px;">トラブルシューティング</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 12px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 14px;">新環境への移行</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
