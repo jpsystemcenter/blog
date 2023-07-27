@@ -55,6 +55,8 @@ SCVMM では、SCVMM サーバー機能をインストールしたサーバー�
 ご利用の SCVMM バージョンが、証明書を更新するコマンドを使用できるバージョンではない場合、SCVMM サーバーに対する Update Rollup の適用が必須となります。
 もし証明書の有効期限切れ間近で、ご利用の SCVMM サーバーのバージョンが指定されたバージョンより小さい場合、SCVMM サーバーの更新もご検討いただく必要がございます。
 あらかじめご了承ください。
+SCVMM の高可用性構成については、以下の弊社公開情報をご参照ください。
+[高可用性用の VMM を展開する | Microsoft Learn](https://learn.microsoft.com/ja-jp/system-center/vmm/high-availability?view=sc-vmm-2022)
 
 ### [対処手順 ①]
 1. 自己署名証明書を更新いただくサーバーに管理者権限でログインします。
