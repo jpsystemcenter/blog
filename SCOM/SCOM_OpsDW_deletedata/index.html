@@ -14,7 +14,7 @@
 <meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2023-07-31T03:00:00.000Z">
-<meta property="article:modified_time" content="2023-07-31T06:36:23.439Z">
+<meta property="article:modified_time" content="2023-07-31T06:38:56.426Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Trouble">
@@ -105,7 +105,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+df87704f-dbe6-5884-a35f-c158c907b9be%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+OperationsManagerDW+%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E5%AE%B9%E9%87%8F%E5%89%8A%E6%B8%9B%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_OpsDW_deletedata%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_OpsDW_deletedata.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_OpsDW_deletedata.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/" data-id="clkqhyrrp00070np3bfi7gjca" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/" data-id="clkqi23ba00070np46qyoba0r" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -143,7 +143,7 @@
 <li>設定した GroomingIntervalMinutes の時間が経過後、OpsDW の消費容量が小さくなったか確認します。<br>容量が小さくなっていることを確認できましたら、OpsDW を圧縮し、ファイルサイズの縮小を行います。<br>データベースの圧縮手順は、下記の弊社 SQL Server の公開情報を参照ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sql/relational-databases/databases/shrink-a-database?view=sql-server-ver16">データベースの圧縮 - SQL Server | Microsoft Learn</a><br>データベースの圧縮が不要の場合、こちらの手順の実施も不要です。</li>
 <li>以後、各テーブルのデータ最大保持日数が目的の値となるまで、5. ~ 8. の手順を繰り返します。<br>なお、ディスクの空き容量が増加するに従い、”MaxDataAgeDays” にて減らされる値を大きくされたり、<br>“MaxRowsToGroom” の値を大きくされても問題ございません。</li>
 </ol>
-<h3 id="補足"><a href="#補足" class="headerlink" title="補足"></a>補足</h3><p>[補足]<br>SQL Server の復旧モデルが “完全” の場合、トランザクションログの肥大化が懸念されます。<br>復旧モデルは、SQL Server Always On を構成されていない場合、既定で “単純” となり、”単純” で運用されることが推奨されます。<br>なお、SQL Server Always On を構成されている場合、復旧モデルは “完全” で固定となり、それ以外の復旧モデルに変更いただくことは出来ません。。<br>復旧モデルは、下記の手順で確認を行います。</p>
+<h3 id="補足"><a href="#補足" class="headerlink" title="補足"></a>補足</h3><p>SQL Server の復旧モデルが “完全” の場合、トランザクションログの肥大化が懸念されます。<br>復旧モデルは、SQL Server Always On を構成されていない場合、既定で “単純” となり、”単純” で運用されることが推奨されます。<br>なお、SQL Server Always On を構成されている場合、復旧モデルは “完全” で固定となり、それ以外の復旧モデルに変更いただくことは出来ません。。<br>復旧モデルは、下記の手順で確認を行います。</p>
 <ol>
 <li>SQL Server Management Studio (SSMS) を開きます。</li>
 <li>復旧モデルを確認するデータべースが存在するサーバーに、管理者権限でログインします。</li>
