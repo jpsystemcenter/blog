@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SCOM OperationsManagerDW データベースの容量削減手順 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCOM OperationsManagerDW データベースの容量削減手順">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2023-07-31T03:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-31T06:36:23.439Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="Trouble">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="OperationsManagerDW">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCOM/SCOM_OpsDW_deletedata" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SCOM OperationsManagerDW データベースの容量削減手順
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-07-31T03:00:00.000Z" itemprop="datePublished">2023-07-31</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+df87704f-dbe6-5884-a35f-c158c907b9be%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+OperationsManagerDW+%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E5%AE%B9%E9%87%8F%E5%89%8A%E6%B8%9B%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_OpsDW_deletedata%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_OpsDW_deletedata.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_OpsDW_deletedata.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/" data-id="clkqhyrrp00070np3bfi7gjca" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p>
+<p>今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。</p>
+<span id="more"></span>
+<h3 id="本ページが対象とする-SCOM-バージョン"><a href="#本ページが対象とする-SCOM-バージョン" class="headerlink" title="本ページが対象とする SCOM バージョン"></a>本ページが対象とする SCOM バージョン</h3><p>SCOM 2016<br>SCOM 2019<br>SCOM 2022</p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>SCOM を最小限の構成でインストールすると、以下 2 種類のデータベースが作成されます。</p>
+<ul>
+<li>OperationsManager:<br>SCOM の監視構成やインポートされた管理パック、監視対象の情報、監視データやアラート情報等 SCOM に関するあらゆる情報が保存されるデータベースです。<br>このデータベースが動作不備になったり、容量がいっぱいになると、SCOM 自体を使用することが出来なくなります。</li>
+<li>OperationsManagerDW<br>SCOM のレポート機能で使用するための監視データや監視対象の情報等が保存されるデータベースです。<br>保存されるデータは、SCOM の監視動作に準ずるものとなります。<br>例えば、パフォーマンスカウンターの収集を実施されている場合、まずは “OperationsManager” データベースにその監視内容が保存されます。<br>その後、その監視内容が “OperationsManagerDW” 側でも保存され、更にレポート用のデータとしてその保存されたデータが加工されます。<br>“OperationsManager” データベースと異なり、本データベースが極端の場合存在しない場合でも、SCOM の機能を使用することが出来ます。<br>(データベースの削除自体を推奨しているものではございません。)<br>一方で、本データベースに不備が発生すると、レポートに関するデータが取得できない、つまりレポートを閲覧することが出来なくなります。</li>
+</ul>
+<p>詳細は割愛しますが、”OperationsManagerDW” では監視データの全データ、時間単位で纏められたデータ、日単位でまとめられたデータが保存されます。<br>収集されるデータによってはデータ数が膨大となることがあり、これが要因でデータベースの容量が非常に大きくなる場合がございます。<br>上記に記載した “OperationsManagerDW” に対するデータ保存の仕組みから、一般的に SCOM の監視内容が多いほどデータベースが肥大化しやすい傾向となります。<br>本記事では、肥大化した “OperationsManagerDW” データベースのデータ削除方法と、具体的に削除するデータの選定方法を説明いたします。</p>
+<h3 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h3><p>以降のご説明では、”OperationsManagerDW” データベースの名称を “OpsDW” と略称いたします。<br>SCOM インストール時に “OperationsManagerDW” データベースの名称を変更されている場合、適宜そのデータベース名に “OpsDW” を読み替えてください。</p>
+<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>クリーンアップの設定を実施いただく前に、まずどのデータセットが OpsDW のデータの多くを占めるか確認する必要がございます。<br>こちらは、以下の手順で OpsDW のテーブル毎のデータ使用量を確認することで確認いただけます。</p>
+<ol>
+<li>OpsDW データベースを運用する SQL Server が存在するサーバーに管理者権限でログインします。</li>
+<li>SQL Server Management Studio (SSMS) を開きます。</li>
+<li>OpsDW の管理者権限を持つアカウントで、OpsDW が存在するサーバーにログインします。</li>
+<li>OpsDW を画面左ペインより [&lt;サーバー名&gt;] -&gt; [データベース] -&gt; [OperationsManagerDW] を右クリックし、[レポート] -&gt; [標準レポート] -&gt; [上位のデーブルによるディスク使用量] をクリックします。<br>(OpsDW のデータベース名が変更されている場合、適宜そのデータベースを [&lt;サーバー名&gt;] -&gt; [データベース] より選択します。)</li>
+</ol>
+<p>こちらの手順で、現在 OpsDW にはどのようなテーブルが存在し、各テーブルでどの程度データを使用しているか確認いただけます。<br>これにより、表示されたテーブルの内、どのデータセットが OpsDW のデータの多くを占めているか確認します。<br>例えば、”perf.perfhourly_&lt;テーブル毎の固有文字列&gt;” が、固有文字列の内容こそ異なるものの “perf.perfhourly_” で始まるテーブルが大量に存在する場合を想定します。<br>この場合、”perf.perfhourly”、つまり下記の弊社サイト内に記載されているテーブルにおける “データセット” が “パフォーマンス” かつ集計の種類が “1 時間ごと” のデータが大量に存在することが確認いただけます。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/manage-omdwdb-grooming-settings?view=sc-om-2022">レポート データ ウェアハウス データベースのクリーンアップ設定を構成する方法 | Microsoft Learn</a></p>
+<p>このように、適宜お客様環境における OpsDW で [上位のデーブルによるディスク使用量] を開き、どのテーブルが消費容量の多くを占めるか確認いただくことで、クリーンアップ設定実施方針が定義いただけます。</p>
+<h3 id="対処手順"><a href="#対処手順" class="headerlink" title="対処手順"></a>対処手順</h3><p>[事前準備] に記載しました方法でどのデータが OpsDW において多くのデータを消費しているか確認いただけましたら、次の手順としてはこのクリーンアップの設定を行います。<br>クリーンアップの設定手順は、下記の手順にて実施いただけます。</p>
+<ol>
+<li>OpsDW データベースを運用する SQL Server が存在するサーバーに管理者権限でログインします。</li>
+<li>SQL Server Management Studio (SSMS) を開きます。</li>
+<li>OpsDW の管理者権限を持つアカウントで、OpsDW が存在するサーバーにログインします。</li>
+<li>以下弊社公開情報の “レポート データ ウェアハウスのクリーンアップ設定を変更するには” 項に記載された 4. ~ 6. の手順に沿って、削除を実施するデータの GUID を確認します。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/manage-omdwdb-grooming-settings?view=sc-om-2022">レポート データ ウェアハウス データベースのクリーンアップ設定を構成する方法 | Microsoft Learn</a><br>本公開情報の 4. の手順は機械翻訳されて分かりづらいですが、”dbo.Dataset” テーブルを開くという手順が英語版の公開情報では示されています。</li>
+<li>画面左ペインより [&lt;サーバー名&gt;] -&gt; [データベース] -&gt; [OperationsManagerDW] -&gt; [テーブル] -&gt; [dbo.StandardDatasetAggregation] を右クリックし、[上位 200 行の編集] をクリックします。<br>(OpsDW のデータベース名が変更されている場合、適宜そのデータベースを [&lt;サーバー名&gt;] -&gt; [データベース] より選択します。)<br>dbo.StandardDatasetAggregation のテーブルを編集開始します。</li>
+<li>4. で確認された GUID を持つ行の“MaxDataAgeDays” カラムの各値を、お客様が保持されたいデータの日数で指定します。<br>保持日数変更対象となるデータセットおよび集計の種類の確認方法は、下記の弊社公開情報の内容に基づいて確認します。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/manage-omdwdb-grooming-settings?view=sc-om-2022">レポート データ ウェアハウス データベースのクリーンアップ設定を構成する方法 | Microsoft Learn</a><br>なお、お客様環境によってはディスクの空き容量がひっ迫している状況も想定されると存じます。<br>この場合、トランザクションログ用の領域も十分に確保することが出来ない可能性もございます。<br>これは、クリーンアップ処理が実行される際、処理のコミットが完了するまで、データがトランザクションログに保存されるためです。<br>(データベースの復旧モデルを、SQL Server Always On 可用性グループをご利用いただく等して “完全” で構成されている場合、トランザクションログはバックアップされない限り保存され続けます。)<br>こういった場合では、“MaxDataAgeDays” の値は目的の値に達成されるまで段階的に減らされることを推奨いたします。<br>例えば、最初の段階では 2 ずつ減らし、ディスクの空き容量が確保いただける状況となった場合に減らす数値を増加する、といった流れでデータ削除を実施ください。</li>
+<li>6. で編集された行の “GroomingIntervalMinutes” に、非常に小さな値を指定します。まずは 5 で設定されることを推奨いたします。<br>これにより、その行で指定されているテーブルのデータを、指定した分間隔で、”MaxDataAgeDays” で指定した日数以上経過しているデータを削除します。<br>例えば、“GroomingIntervalMinutes” の値を 5、”MaxDataAgeDays” の値を 100 と設定すると、５分間隔で、100 日以上経過した対象テーブル内データを削除する処理を行います。<br>なお、“GroomingIntervalMinutes” の値が小さいほど、ログデータ削除の処理が行われる回数も増えるので、実運用において小さな値を指定し続けることは推奨いたしません。<br>なので、“GroomingIntervalMinutes” の値を変更する前の値については、あらかじめメモを取得の上、一通りクリーンアップが完了したタイミングで値を元に戻します。<br>本設定値の変更は、例えばディスクの空き容量を早急に確保する必要があるといったご要望が存在する場合、空き容量が確保できるまでクリーンアップ実行周期を短くします。<br>即座に空き容量を確保いただく必要がない場合、本手順の設定は省略いただいても問題ございません。</li>
+<li>必要に応じて、6. で編集された行の ”MaxRowsToGroom” の値を変更します。<br>一度のクリーンアップによって対象のテーブルより削除されるデータ行数は、”MaxRowsToGroom” にて指定された行数となります。<br>例えば、State データセットのテーブルは、既定で ”MaxRowsToGroom” の値が 50,000 となっております。<br>つまり、この設定状況では、一度のクリーンアップで削除されるデータ行数は 50,000 行までとなります。<br>クリーンアップ量に対して入力されるデータ数が多い場合、データ数は減ることなく増加することが想定されます。<br>こういった状況が想定されますため、必要に応じて、”MaxRowsToGroom” の値を変更します。<br>事例より、”MaxRowsToGroom” の値を 1,000,000 と設定した場合に大きなトランザクションログの容量を消費しないことを確認しております。<br>こちらは “GroomingIntervalMinutes” とは異なり、一通りクリーンアップが完了した後も設定値を保持いただいても問題ございません。<br>なお、こちらの値についても、ディスク空き容量がひっ迫している場合、段階的に値を増加いただく等の操作をご検討ください。</li>
+<li>設定した GroomingIntervalMinutes の時間が経過後、OpsDW の消費容量が小さくなったか確認します。<br>容量が小さくなっていることを確認できましたら、OpsDW を圧縮し、ファイルサイズの縮小を行います。<br>データベースの圧縮手順は、下記の弊社 SQL Server の公開情報を参照ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sql/relational-databases/databases/shrink-a-database?view=sql-server-ver16">データベースの圧縮 - SQL Server | Microsoft Learn</a><br>データベースの圧縮が不要の場合、こちらの手順の実施も不要です。</li>
+<li>以後、各テーブルのデータ最大保持日数が目的の値となるまで、5. ~ 8. の手順を繰り返します。<br>なお、ディスクの空き容量が増加するに従い、”MaxDataAgeDays” にて減らされる値を大きくされたり、<br>“MaxRowsToGroom” の値を大きくされても問題ございません。</li>
+</ol>
+<h3 id="補足"><a href="#補足" class="headerlink" title="補足"></a>補足</h3><p>[補足]<br>SQL Server の復旧モデルが “完全” の場合、トランザクションログの肥大化が懸念されます。<br>復旧モデルは、SQL Server Always On を構成されていない場合、既定で “単純” となり、”単純” で運用されることが推奨されます。<br>なお、SQL Server Always On を構成されている場合、復旧モデルは “完全” で固定となり、それ以外の復旧モデルに変更いただくことは出来ません。。<br>復旧モデルは、下記の手順で確認を行います。</p>
+<ol>
+<li>SQL Server Management Studio (SSMS) を開きます。</li>
+<li>復旧モデルを確認するデータべースが存在するサーバーに、管理者権限でログインします。</li>
+<li>対象のデータベースを右クリックし、[プロパティ] をクリックします。<br>ウィンドウ左の [オプション] をクリックし、 [復旧モデル] の内容を確認します。</li>
+</ol>
+<h3 id="おわりに"><a href="#おわりに" class="headerlink" title="おわりに"></a>おわりに</h3><p>OpsDW の不要なデータ削除手順は以上となります。<br>上記の通り、OpsDW は、主に SCOM レポートで使用するデータを保存するために使用されるデータベースとなります。<br>お客様が使用されているレポートの要件に応じて、各データの保持日数およびその削除量を調整いただければと思います。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_OpsDW_deletedata.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../SCOM_Workgroup/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">WORKGROUP コンピューターの管理方法について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SCOM OperationsManagerDW データベースの容量削減手順</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_Workgroup/">WORKGROUP コンピューターの管理方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_Install_Manual/">SCOM 管理サーバー構築手順 ～ 全画面ショット付き</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_DCOM_influence/">DCOM の脆弱性 (CVE-2021-26414) に対応する更新プログラムの SCOM への影響について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">16</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Database">Database</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">6</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManagerDW">OperationsManagerDW</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Trouble">Trouble</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96">ログ監視</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 14px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/Database/" style="font-size: 10px;">Database</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/HowTo/" style="font-size: 16px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Operations-Manager/" style="font-size: 18px;">Operations Manager</a> <a href="../../tags/OperationsManagerDW/" style="font-size: 10px;">OperationsManagerDW</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 10px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 14px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Trouble/" style="font-size: 10px;">Trouble</a> <a href="../../tags/Troubleshoot/" style="font-size: 18px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 14px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 10px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 12px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 12px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 12px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 12px;">トラブルシューティング</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 12px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 14px;">新環境への移行</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
