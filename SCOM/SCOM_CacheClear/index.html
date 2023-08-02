@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>SCVMM ジョブ保存設定変更方法 | Japan System Center Support Blog</title>
+  <title>SCOM の各種キャッシュクリアの手順 | Japan System Center Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 [本ページが対象とする SCVMM バージョン]SCVMM 2016SCVMM 2019SCVMM 2022 [概要]SCVMM で実行される処理の多くは、">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、System Center Operations Manager (SCOM) が保持する各種のキャッシュデータを必要に応じてクリアする手順についてご紹介いたします。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SCVMM ジョブ保存設定変更方法">
-<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/index.html">
+<meta property="og:title" content="SCOM の各種キャッシュクリアの手順">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/index.html">
 <meta property="og:site_name" content="Japan System Center Support Blog">
-<meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 [本ページが対象とする SCVMM バージョン]SCVMM 2016SCVMM 2019SCVMM 2022 [概要]SCVMM で実行される処理の多くは、">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、System Center Operations Manager (SCOM) が保持する各種のキャッシュデータを必要に応じてクリアする手順についてご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2022-07-07T03:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-02T07:14:13.502Z">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/001.png">
+<meta property="article:published_time" content="2023-08-02T08:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-02T07:14:13.458Z">
 <meta property="article:author" content="Japan System Center Support">
-<meta property="article:tag" content="HowTo">
-<meta property="article:tag" content="SCVMM">
-<meta property="article:tag" content="SCVMM Server">
-<meta property="article:tag" content="Job">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="Trouble">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/001.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
   
@@ -82,7 +82,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-SCVMM/SCVMM_Job_History" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SCOM/SCOM_CacheClear" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -91,7 +91,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SCVMM ジョブ保存設定変更方法
+      SCOM の各種キャッシュクリアの手順
     </h1>
   
 
@@ -99,71 +99,49 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-07-07T03:00:00.000Z" itemprop="datePublished">2022-07-07</time>
+  <time datetime="2023-08-02T08:00:00.000Z" itemprop="datePublished">2023-08-02</time>
 </a>
         
         
-        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+67242cd7-f977-5e41-bae1-dfdc5065493b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%82%B8%E3%83%A7%E3%83%96%E4%BF%9D%E5%AD%98%E8%A8%AD%E5%AE%9A%E5%A4%89%E6%9B%B4%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Job_History%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Job_History.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Job_History.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7fc0fd1c-d1dc-517c-a311-b44ddb755a19%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+%E3%81%AE%E5%90%84%E7%A8%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%82%AF%E3%83%AA%E3%82%A2%E3%81%AE%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_CacheClear%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_CacheClear.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_CacheClear.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/" data-id="clkte74nb000p0mp2cn888n6g" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/" data-id="clkte74mt00050mp26ssvgp8o" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
-<p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p>
-<p>今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。</p>
-<h3 id="本ページが対象とする-SCVMM-バージョン"><a href="#本ページが対象とする-SCVMM-バージョン" class="headerlink" title="[本ページが対象とする SCVMM バージョン]"></a>[本ページが対象とする SCVMM バージョン]</h3><p>SCVMM 2016<br>SCVMM 2019<br>SCVMM 2022</p>
-<h3 id="概要"><a href="#概要" class="headerlink" title="[概要]"></a>[概要]</h3><p>SCVMM で実行される処理の多くは、ジョブという形で実行されます。<br>このジョブが実行されると、実行可否に関わらず、履歴としてすべて SCVMM データベースに存在する [dbo].[tbl_TR_TaskTrail] というテーブルに保存されます。<br>ジョブ履歴ですが、バッチ処理を組まれる等して大量のジョブが短期間で実行される環境においては、このテーブルが肥大化する要因となります。<br>テーブルが肥大化することで、SCVMM 観点においては下記の影響が発生します。</p>
-<ul>
-<li>単純に [dbo].[tbl_TR_TaskTrail] テーブルサイズが肥大化し、データベースファイルサイズの肥大化</li>
-<li>SCVMM へのパフォーマンスへの影響</li>
-</ul>
-<p>意外に思われるかもしれませんが、ジョブ履歴が大量に保存されている環境においては、SCVMM へのパフォーマンス影響が発生する可能性がございます。<br>特段負荷が大きい処理を連続して実施されていないにも関わらず、SCVMM ジョブの実行速度や SCVMM 自体が以前より遅くなったといった状況では、ジョブ履歴が大量に保存されている可能性がございます。</p>
-<h3 id="対処手順"><a href="#対処手順" class="headerlink" title="[対処手順]"></a>[対処手順]</h3><p>このジョブ履歴ですが、レジストリ値によってジョブ履歴保持日数および削除処理が行われる周期を設定いただけます。<br>そのため、”概要” 項で説明しました影響が発生されている場合は、そのレジストリ値設定を変更いただくのが切り分けとして有用となります。</p>
-<p>追加いただくレジストリは、以下の 2 種類が該当いたします。</p>
-<blockquote>
-<p>レジストリキー:<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Settings\Sql</p>
-<p>レジストリの種類:<br>DWORD (32 ビット) 値</p>
-<p>レジストリの名称:<br>TaskGC</p>
-<p>レジストリ値:<br>ジョブの保持日数を整数値で指定します。<br>例えば、本レジストリ値が 7 に設定された場合、ジョブ履歴削除処理が行われた日付時刻から 7 日以内のジョブは保持され、それ以外はすべて削除対象となります。<br>レジストリが未作成の状態である場合、本レジストリ値は 90 に設定されたものとして動作が行われます。<br>こちらのレジストリ設定値を、ご利用の環境でどの程度ジョブ履歴を重要視されるかに応じて設定します。<br>また、本レジストリ値の設定値に関わらず、一度のジョブ履歴削除処理で削除されるジョブ数は最大で 50000 件となります。<br>そのため、各処理間で 50000 件以上のジョブ履歴が保存される場合、ジョブ履歴は傾向として増加される状況となります。<br>ご利用の環境に合わせて、もう一つのレジストリである “DBGCUpdateInterval” のレジストリ値を構成します。</p>
-</blockquote>
-<blockquote>
-<p>レジストリキー:<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Settings</p>
-<p>レジストリの種類:<br>DWORD (32 ビット) 値</p>
-<p>キーの名称 :<br>DBGCUpdateInterval</p>
-<p>レジストリ値:<br>ジョブ削除ジョブが実行される周期を秒単位の整数値で指定します。<br>レジストリが未作成の状態である場合、本レジストリ値は 72000 (= 20 時間) に設定されたものとして動作が行われます。</p>
-</blockquote>
-<p>レジストリの作成は、下記手順で行えます。</p>
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、System Center Operations Manager (SCOM) が保持する各種のキャッシュデータを必要に応じてクリアする手順についてご紹介いたします。<br><br></p>
+<span id="more"></span>
+<h2 id="SCOM-が保持するキャッシュについて"><a href="#SCOM-が保持するキャッシュについて" class="headerlink" title="SCOM が保持するキャッシュについて"></a>SCOM が保持するキャッシュについて</h2><p>SCOM は、各コンポーネントの基本的な動作、コンポーネント間のデータの安定的な引き渡し、場合により高速処理のためにキャッシュを保持します。<br>キャッシュは、以下のコンポーネントに存在します。<br>　① SCOM エージェント　　：<a href="#%E2%91%A0-SCOM-%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%82%AF%E3%83%AA%E3%82%A2%E6%89%8B%E9%A0%86">キャッシュクリア手順</a><br>　② SCOM 管理サーバー　　：<a href="#%E2%91%A1-SCOM-%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%82%AF%E3%83%AA%E3%82%A2%E6%89%8B%E9%A0%86">キャッシュクリア手順</a><br>　③ SCOM 管理コンソール　：<a href="#%E2%91%A2-SCOM-%E7%AE%A1%E7%90%86%E3%82%B3%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%82%AF%E3%83%AA%E3%82%A2%E6%89%8B%E9%A0%86">キャッシュクリア手順</a></p>
+<p>サーバーのメンテナンス作業等で OS 再起動を繰り返した後や、SCOM 管理サーバーと断続的な通信断が発生した後などに、稀にキャッシュ データに不整合が発生することがあります。<br>① や ② のキャッシュに不整合が発生すると、起動中のサーバーが SCOM では管理不可と表示されたり、監視設定の通りにエージェントが動作しないことがあります。<br>③ のキャッシュに不整合が発生すると、削除したアラートが残存して表示されたり、ビューの情報が適切に更新されないことがあります。<br>そのような場合、キャッシュをクリアすることで事象を解消することができます。<br>以降の章にキャッシュクリアの手順を記載しましたので、相当する事象が発生した際にはキャッシュクリアを実施ください。</p>
+<p>　ご参考：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/manage-clear-healthservice-cache?view=sc-om-2022">キャッシュをクリアする方法とタイミング | Microsoft Learn</a></p>
+<p><strong>【SCOM のキャッシュの概要図】</strong><br><img src="001.png"></p>
+<h2 id="①-SCOM-エージェントのキャッシュクリア手順"><a href="#①-SCOM-エージェントのキャッシュクリア手順" class="headerlink" title="① SCOM エージェントのキャッシュクリア手順"></a>① SCOM エージェントのキャッシュクリア手順</h2><p>【手順】<br>1. SCOM エージェントサーバーにコンピューターの管理者権限を持つユーザーでログオンします。<br>2. “Microsoft Monitoring Agent” サービスを停止します。<br>　手順：タスクマネージャーを開き、[サービス] タブより [名前] が [HealthService] の行を右クリックし、[停止] をクリックします。<br>3. 以下のフォルダを開きます。<br>　C:\Program Files\Microsoft Monitoring Agent\Agent\Health Service State<br>　(※) SCOM エージェントのインストール先を変更している場合には、適切なフォルダを開いてください。<br>4. フォルダ内のすべてのファイルとフォルダを削除します。<br>5. 停止していた “Microsoft Monitoring Agent” サービスを再起動します。<br>　手順：タスクマネージャーを開き、[サービス] タブより [名前] が [HealthService] の行を右クリックし、[開始] をクリックします。</p>
+<p>【作業影響】<br>・サービスを止めている間、SCOM エージェントの監視機能（性能情報収集、SCOM 管理サーバーへのデータ送信など）は動作しません。<br>・3. の手順で削除したフォルダは、5. の手順実施後に再生成されます。</p>
+<h2 id="②-SCOM-管理サーバーのキャッシュクリア手順"><a href="#②-SCOM-管理サーバーのキャッシュクリア手順" class="headerlink" title="② SCOM 管理サーバーのキャッシュクリア手順"></a>② SCOM 管理サーバーのキャッシュクリア手順</h2><p>【手順】<br>1. SCOM 管理サーバーに、管理者権限のあるユーザーでログインします。<br>2. 下記のサービスを、この順序で停止します。<br>　2-1. Microsoft Monitoring Agent<br>　2-2. System Center Management Configuration (<span style="color: red; ">※1</span>)<br>　2-3. System Center Data Access Service<br>3. 以下のフォルダを開きます。<br>　C:\Program Files\Microsoft System Center\Operations Manager\Server\Health Service State<br>　(※) SCOM のインストール先を変更している場合には、適切なフォルダを開いてください。<br>4. フォルダ内のすべてのファイルとフォルダを削除します。<br>5. 下記のサービスを、この順序で開始します。<br>　5-1. System Center Data Access Service<br>　5-2. System Center Management Configuration (<span style="color: red; ">※1</span>)<br>　5-3. Microsoft Monitoring Agent<br><span style="color: red; ">※1 日本語環境の SCOM 2022 では、サービス名は “System Center 管理構成” と表記されます。</span></p>
+<p>【作業影響】<br>・サービスを止めている間、SCOM 管理サーバーの監視機能（アラート発砲やメール通知、SCOM コンソールの利用など）は動作しません。<br>・SCOM エージェントが収集している情報は、サービス起動後にSCOM 管理サーバーに連携されます。<br>・「Health Service State」フォルダにキャッシュされている一時情報を削除するため、エージェントから連携されたパフォーマンスデータなどが 1 回分程度 欠損する可能性がございます。<br>・3. の手順で削除したフォルダは、5-3. の手順実施後に再生成されます。</p>
+<h2 id="③-SCOM-管理コンソールのキャッシュクリア手順"><a href="#③-SCOM-管理コンソールのキャッシュクリア手順" class="headerlink" title="③ SCOM 管理コンソールのキャッシュクリア手順"></a>③ SCOM 管理コンソールのキャッシュクリア手順</h2><p>【手順】<br>1. SCOM コンソールを閉じます。<br>2. 管理者権限にてコマンドプロンプトを実行し、以下のコマンドにてキャッシュクリアを実行します。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　<span class="built_in">cd</span> &quot;C:\Program Files\Microsoft System Center\Operations Manager\Console&quot;</span><br><span class="line">　Microsoft.EnterpriseManagement.Monitoring.Console.exe /Clearcache</span><br></pre></td></tr></table></figure>
+<p>※ SCOM のインストール先を変更している場合は、cd で移動するパスを変更して実施して下さい。<br>3. 上記コマンド実行後、コンソールが開きますので、あらためてログインします。</p>
+<p>【作業影響】<br>特に無し。</p>
+<hr>
+<h2 id="●よくあるお問い合わせ-作業影響について"><a href="#●よくあるお問い合わせ-作業影響について" class="headerlink" title="●よくあるお問い合わせ (作業影響について)"></a>●よくあるお問い合わせ (作業影響について)</h2><p><strong>Q</strong><br>SCOM 管理サーバーのキャッシュの内容は、SCOM エージェントで取得した監視のためのデータ（パフォーマンスデータのような）でしょうか？または、アラート、警告といった２次的な情報でしょうか？<br><strong>A</strong><br>キャッシュには、フォーマンスデータと、アラートの条件となる状態の情報の両方のデータが含まれます。<br>なお、状態の情報については、キャッシュクリア時点で発生していた状態がキャッシュクリア後のサービス起動後も続いていた場合、その時点であらためてアラート、警告の状態を判定する処理が動作いたします。 </p>
+<p><strong>Q</strong><br>SCOM エージェントのキャッシュクリアをすると、キャッシュに残っていた未送信の情報が削除されると思いますが、強制的に SCOM 管理サーバーへデータを送信することは可能でしょうか？<br><strong>A.</strong><br>強制的に SCOM 管理サーバーへデータを送信する方法はございません。<br>基本的には SCOM エージェントが収集したデータは、常にすぐにSCOM 管理サーバーへ送信されています。</p>
+<p><strong>Q</strong><br>キャッシュクリアにより削除される情報の時間（期間）を確認する方法はありますでしょうか？<br><strong>A</strong><br>キャッシュクリアにより削除される情報の時間（期間）を確認する方法はございません。<br>以下のようにご認識いただければと存じます。<br>・アラートの条件となる状態の情報については起動後にあらためて判定される。<br>・基本的にはエージェントが収集したパフォーマンスデータなどデータは常にサーバー側へ送信されているため、削除されない。<br>　(※ 削除されても取得頻度の 1 回分程度)</p>
+<p><strong>Q</strong><br>「SCOMエージェントが収集したデータ」が SCOM 管理サーバに送信されずに残っているかどうかを確認する方法はありますでしょうか？<br><strong>A</strong><br>未送信情報の有無について確認する方法はございません。</p>
+<hr>
+<h2 id="SCOM-エージェントおよび-SCOM-管理サーバーのキャッシュの仕様詳細"><a href="#SCOM-エージェントおよび-SCOM-管理サーバーのキャッシュの仕様詳細" class="headerlink" title="SCOM エージェントおよび SCOM 管理サーバーのキャッシュの仕様詳細"></a>SCOM エージェントおよび SCOM 管理サーバーのキャッシュの仕様詳細</h2><p>既定では、SCOM 管理サーバーは 100MB、SCOM エージェントは 15MB 分の監視データを、一時キャッシュとして保存することが可能です。</p>
+<p>SCOM エージェントのキャッシュデータは、対象サーバーが SCOM 管理サーバーとの疎通を行えない場合に、管理サーバーに送付する予定の監視データを一時的に保存するものです。その後、SCOM 管理サーバーと対象サーバー間の通信が回復した際、キャッシュに保管した監視データが一斉に SCOM 管理サーバーに送付されるものとなります。</p>
+<p>つまり、<span style="text-decoration: underline">通信が行えない間も監視データは絶えず収集され、通信が回復した際はその間の監視データをご利用いただくことが可能</span>となります。また、キャッシュにある程度の余裕があることが重要であることを意味します。</p>
+<p>確保されているキャッシュ容量 (既定で 15MB) に対する現在のキャッシュ使用量の割合は、”Health Service Management Groups\Send Queue % Used” パフォーマンス カウンターにて確認できます。このパフォーマンス カウンターは、SCOM 管理グループ毎にインスタンスが作成されますので、適切なインスタンスのパフォーマンス カウンターを確認してください。</p>
+<p>キャッシュ容量の使用量は、監視対象のサーバーの動作状況によって変化します。お客様の監視ワークフロー量等の要因によっても使用量が増減します。そのため、一概に経過時間に対するキャッシュ使用量を見積もることは困難です。<br>ただし、参考情報として、弊社の検証環境でいくつかのサーバーのキャッシュ消費量を計測した中で、最もキャッシュ消費量が多かったサーバー (SQL Server が動作するサーバー) において、半日で約 12 MB 程を使用したという測定結果があります。<br>キャッシュ使用量が多い環境においても既定の 15MB の範囲に収まっていますので、一般的なサーバーにおいて SCOM 管理サーバーと短時間の通信断が発生した場合は、以下の状況となり、データ欠損が無いことが期待されます。<br>・通信が途絶する際は、リアルタイムの監視が行えなくなる。<br>・通信が回復した瞬間に、キャッシュに保存された監視データが SCOM 管理サーバーに送付され、そのデータを使用することが可能となる。</p>
+<p><strong>キャッシュサイズの増加手順について</strong><br>キャッシュに保存されたデータが指定容量を超えた場合、古い監視データから順番にキャッシュから消去されます。<br>データの欠損を防ぐためにキャッシュのサイズを増加する場合、下記の手順を行います。</p>
 <ol>
-<li>レジストリを追加する SCVMM サーバーに管理者権限でログインします。</li>
-<li>[Win] + [R] キーを押下し、”regedit” と入力して実行します。</li>
-<li>画面左ペインより、各レジストリの追加先となるレジストリキーにアクセスします。</li>
-<li> レジストリが表示された画面上で右クリックし、[新規] -&gt; [DWORD (32 ビット) 値] をクリックします。</li>
-<li>追加されたレジストリに対して、”キーの名称” で指定された文字列を入力します。</li>
-<li>追加されたレジストリをダブルクリックし、レジストリの編集を行います。</li>
-<li>ウィンドウ右側に表示された [10 進数] を選択し、レジストリで指定いただく値を入力します。</li>
-<li>レジストリ追加完了後、SCVMM サーバーに関するサービスである “System Center Virtual Machine Manager” サービスを再起動します。</li>
+<li>SCOM エージェントがインストールされている監視対象のサーバーに、管理者権限を持つアカウントでログインします。</li>
+<li>Win + R キーを押下し、”ファイル名を指定して実行” ウィンドウを出力します。”regedit” と入力し、”OK” ボタンを押下します。</li>
+<li>レジストリ エディタ” ウィンドウが開きますので、以下のレジストリを参照します。<br>“HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HealthService\Parameters\Management Groups&lt;SCOM 管理グループ名&gt;\maximumQueueSizeKb”</li>
+<li>レジストリをダブルクリックします。”表記” から “10 進数” を選択し、任意の数値を KB 単位で指定します。</li>
 </ol>
-<h3 id="ご参考"><a href="#ご参考" class="headerlink" title="[ご参考]"></a>[ご参考]</h3><p>既に弊社にて公開がされていないサイトとなりますので、こちらのブログにて併せてそちらのサイトの内容をご紹介いたします。<br>その公開終了されたサイトでは、SCVMM のジョブについて要約すると以下の内容が書かれておりました。</p>
-<ul>
-<li>SCVMM の仕様として、目安ではあるものの 10000 の同時並行実施ジョブが処理可能であること。</li>
-<li>10000 以上のジョブが同時並行で実施されている場合、SCVMM サーバーのパフォーマンスに多大な影響を及ぼす可能性があること。</li>
-<li>大量のジョブが並行実施される動作とは別に、SCVMM ジョブ履歴が大量に保存されている場合、それによっても SCVMM サーバーのパフォーマンスに多大な影響を及ぼす可能性があること。</li>
-</ul>
-<p>公開終了とされる前に記載されております内容について、原文のままご紹介いたします。</p>
-<ul>
-<li><p>SCVMM で同時並行で実行可能なジョブ数に関する記述:</p>
-<blockquote>
-<p>The maximum number of running jobs that an SCVMM system should be able to handle is around 10,000 and hitting this many running jobs at one time would be an exceptionally rare occurrence.<br>Should it occur, however, it can have a severe impact on the performance of the SCVMM engine.</p>
-</blockquote>
-</li>
-<li><p>SCVMM ジョブ履歴が大量に保存されていることで発生しうる影響に関する記述:</p>
-<blockquote>
-<p>The number of retained Jobs count refers to the number of running tasks tracked in the TaskTrail database table in SQL.<br>The size of this database can have as much of an impact on performance as the actual running jobs.<br>If the number of running jobs nowhere reaches 10,000 then it may be that the tombstone limit on entries tracked in the TaskTrail database is too conservative</p>
-</blockquote>
-</li>
-</ul>
 
       
       
@@ -177,10 +155,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li></ul>
 
         
-        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCVMM/SCVMM_Job_History.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_CacheClear.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -188,19 +166,10 @@
     
 <nav id="article-nav">
   
-    <a href="../../SCOM/SCOM_service_logon_access/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          SCOM 2019 以降で Windows 検出ウィザードで検出失敗
-        
-      </div>
-    </a>
   
-  
-    <a href="../../general/JapanSCEM_000_NewBlogOpened/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../SCOM_OpsDW_deletedata/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Japan System Center Enterprise Management (SCEM) チームの Blog 新規開設のお知らせ</div>
+      <div class="article-nav-title">SCOM OperationsManagerDW データベースの容量削減手順</div>
     </a>
   
 </nav>
@@ -219,23 +188,23 @@
       <ul>
         
           <li>
-            <a href="../../SCOM/SCOM_CacheClear/">SCOM の各種キャッシュクリアの手順</a>
+            <a href="">SCOM の各種キャッシュクリアの手順</a>
           </li>
         
           <li>
-            <a href="../../SCOM/SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
+            <a href="../SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
           </li>
         
           <li>
-            <a href="../../SCOM/SCOM_Workgroup/">WORKGROUP コンピューターの管理方法について</a>
+            <a href="../SCOM_Workgroup/">WORKGROUP コンピューターの管理方法について</a>
           </li>
         
           <li>
-            <a href="../SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a>
+            <a href="../../SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a>
           </li>
         
           <li>
-            <a href="../../SCOM/SCOM_Install_Manual/">SCOM 管理サーバー構築手順 ～ 全画面ショット付き</a>
+            <a href="../SCOM_Install_Manual/">SCOM 管理サーバー構築手順 ～ 全画面ショット付き</a>
           </li>
         
       </ul>
