@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>管理パック (MP) のインポートについて | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。 今回は、System Center Operations Manager (SCOM) に管理パック (MP：Management Pack) をインポートすることにより監視機能を拡充する手順についてご紹介します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="管理パック (MP) のインポートについて">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。 今回は、System Center Operations Manager (SCOM) に管理パック (MP：Management Pack) をインポートすることにより監視機能を拡充する手順についてご紹介します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/012.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/013.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/021.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/014.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/015.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/016.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/017.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/018.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/019.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/020.png">
+<meta property="article:published_time" content="2023-09-22T09:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-24T06:14:02.455Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="Operations Manager">
+<meta property="article:tag" content="インストール">
+<meta property="article:tag" content="How To">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCOM/SCOM_ManagementPacks" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      管理パック (MP) のインポートについて
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-09-22T09:00:00.000Z" itemprop="datePublished">2023-09-22</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e18919ff-a86b-5088-b4ef-c16c079b9919%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E7%AE%A1%E7%90%86%E3%83%91%E3%83%83%E3%82%AF+%28MP%29+%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_ManagementPacks%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_ManagementPacks.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_ManagementPacks.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/" data-id="clmx2dxmh003l0olqacsi0hag" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。</p>
+<p>今回は、System Center Operations Manager (SCOM) に管理パック (MP：Management Pack) をインポートすることにより監視機能を拡充する手順についてご紹介します。<br><br></p>
+<span id="more"></span>
+<h2 id="管理パック-MP-Management-Pack-導入による監視機能の追加について"><a href="#管理パック-MP-Management-Pack-導入による監視機能の追加について" class="headerlink" title="管理パック (MP:Management Pack) 導入による監視機能の追加について"></a>管理パック (MP:Management Pack) 導入による監視機能の追加について</h2><p>以前のブログ (<a href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Install_Manual/">SCOM 管理サーバー構築手順 ～ 全画面ショット付き | Japan System Center Support Blog</a>) では SCOM 管理サーバー環境の構築手順を紹介しました。SCOM 管理サーバー環境の構築完了後、エージェントの展開などの前にまず最初に行う必要がある作業が管理パックの導入です。</p>
+<p>SCOM には OS 種別やソフトウェアごとに『管理パック』というモジュールが存在していて、管理パックを導入することで初めて対象システムの監視が有効になります。<br><br><b>管理パックの一覧サイト</b> <a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/wiki/contents/articles/16174.microsoft-management-packs.aspx">Microsoft Management Packs - TechNet Articles - United States - TechNet Wiki</a><br><img src="001.png" width="400"></p>
+<p>代表的な管理パックには以下のようなものがあります。<br>【管理パックの例】<br>・Windows Server の監視用管理パック　　　　 ：System Center Management Pack for Windows Server Operating System<br>・Microsoft SQL Server の監視用管理パック　　：Microsoft System Center MP for SQL Server<br>・Microsoft Adtive Directory の監視要管理パック：Microsoft System Center Management Pack for ADDS</p>
+<p>SCOM 管理サーバーの構築時に導入される管理パックは、SCOM のサーバー機能の動作に必要な最小限の管理パックに限られていて、上に記載したような代表的な管理パックについても導入されていません。<br>　※SCOM サーバーの構築時にインストールされる管理パックについては、以下のサイトをご参照ください。<br>　　<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/manage-mp-installed-during-seutp?view=sc-om-2022">Operations Manager と一緒にインストールされる管理パック | Microsoft Learn</a></p>
+<p>つまり、SCOM で適切な監視を開始するためには、対応する管理パックを導入する必要があります。</p>
+<p>管理パックの導入は、以下の手順で進めます。<br>　① <a href="#%E2%91%A0-%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99%EF%BC%91%EF%BC%9AOperationsManager-%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%AE%E6%8B%A1%E5%BC%B5">事前準備１：OperationsManager データベースのファイルサイズの拡張</a><br>　② <a href="#%E2%91%A1-%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99%EF%BC%92%EF%BC%9A%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E6%A9%9F%E8%83%BD%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E8%A8%AD%E5%AE%9A%E5%A4%89%E6%9B%B4-%E2%80%BB%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E6%A9%9F%E8%83%BD%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AE%E3%81%BF">事前準備２：レポート機能用データベースの設定変更 (※レポート機能をインストールした場合のみ)</a><br>　③ <a href="#%E2%91%A2-%E7%AE%A1%E7%90%86%E3%83%91%E3%83%83%E3%82%AF%E3%81%AE%E5%B0%8E%E5%85%A5">管理パックの導入</a></p>
+<h2 id="①-事前準備１：OperationsManager-データベースのファイルサイズの拡張"><a href="#①-事前準備１：OperationsManager-データベースのファイルサイズの拡張" class="headerlink" title="① 事前準備１：OperationsManager データベースのファイルサイズの拡張"></a>① 事前準備１：OperationsManager データベースのファイルサイズの拡張</h2><p>SCOM 管理サーバーのインストール時に OperationsManager と OperationsManagerDW の２つのデータベースが作成されます。<br>これらのデータベースは、インストール ウィザードに沿ってインストールを行うと、既定で以下の設定になります。</p>
+<table border="1">
+    <tr>
+        <th style="background-color: royalblue; text-align: center; color: black;">データベース名</th>
+        <th style="background-color: royalblue; text-align: center; color: black;">ファイル</th>
+        <th style="background-color: royalblue; text-align: center; color: black;">初期サイズ (MB)</th>
+        <th style="background-color: royalblue; text-align: center; color: black;">自動拡張</th>
+        <th style="background-color: royalblue; text-align: center; color: black;">用途</th>
+    </tr>
+    <tr style="font-size: 12px;">
+        <td rowspan="2">OperationsManager</td>
+        <td>OperationsManager.mdf</td>
+        <td style="background-color: yellow; text-align: center;"><b>1,000</b></td>
+        <td style="background-color: yellow; text-align: center;"><b>無し</b></td>
+        <td rowspan="2">主に短期データを保管するデータベース<br>
+        <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2022#operations-manager-database">Operations Manager データベース | Microsoft Learn</a></td>
+    </tr>
+    <tr style="font-size: 12px;">
+        <td>OperationsManager.ldf</td>
+        <td style="background-color: yellow; text-align: center;"><b>500</b></td>
+        <td style="background-color: yellow; text-align: center;"><b>無し</b></td>
+    </tr>
+    <tr style="font-size: 12px;">
+        <td rowspan="2">OperationsManagerDW</td>
+        <td>OperationsManagerDW.mdf</td>
+        <td style="text-align: center;">1,000</td>
+        <td>あり。10 MB 単位</td>
+        <td rowspan="2">主に長期データを保管するデータベース<br>
+        <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2022#operations-manager-data-warehouse-database">Operations Manager データウェアハウス データベース | Microsoft Learn</a></td>
+    </tr>
+    <tr style="font-size: 12px;">
+        <td>OperationsManagerDW.ldf</td>
+        <td style="text-align: center;">500</td>
+        <td>あり。10 MB 単位</td>
+    </tr>
+</table>
+
+<p>SCOM に管理パックを導入すると、管理パックに包含されるモジュール (監視を定義する xml ファイルなど) がデータベースに保管されます。大部分の管理パックは数 MB 程度以内のファイルサイズですが、中には 100 MB を超える管理パックも存在します。<br>[OperationsManager] データベースは <b>自動拡張</b>が <b>[なし]</b> の設定のため、多数の管理パックを導入する場合、データベースの使用量が増加してファイルサイズを圧迫することになります。そのため、管理パックの導入の前に予めデータベースのファイルサイズを拡大しておく必要があります。</p>
+<p>■ データベースファイルの拡張手順<br>ファイルサイズの拡張は、SQL Server Management Studio から実施できます。<br><br> 1. SQL Server Management Studio にて、データベース管理者アカウントで SCOM データベースに接続します。<br> 2. [データベース] -&gt; [OperationsManager] を選択して、右クリックメニューの [プロパティ] をクリックします。<br> 3. データベースのプロパティ画面にて [File] を開きます。<br> 4. サイズを拡大して、OK ボタンをクリックします。<br> <img src="002.png"></p>
+<p>※ 拡張するサイズの目安について<br>データベースサーバーのディスクサイズに余裕がある場合は OperationsManager.mdf を 10,000 MB、OperationsManager.ldf を 5,000 MB程度に拡大することを推奨します。このサイズであれば、将来に渡って管理パックによるディスクサイズの圧迫は懸念する必要がなくなります。ただし、[OperationsManager] データベースには、管理パックデータ以外にもエージェントが収集した短期データなどが保管されますので、実際には環境ごとにチューニングが必要です。</p>
+<h2 id="②-事前準備２：レポート機能用データベースの設定変更-※レポート機能をインストールした場合のみ"><a href="#②-事前準備２：レポート機能用データベースの設定変更-※レポート機能をインストールした場合のみ" class="headerlink" title="② 事前準備２：レポート機能用データベースの設定変更 (※レポート機能をインストールした場合のみ)"></a>② 事前準備２：レポート機能用データベースの設定変更 (※レポート機能をインストールした場合のみ)</h2><p>レポート機能をインストールした場合、管理パックに含まれるレポートの定義情報がレポートデータベースに展開されます。SQL Server レポーティングサービスの既定の設定を変更して、正しくコンテンツが展開できるようにする必要があります。<br>　※本設定については、以下のユーザーマニュアルサイトもご参照ください。<br>　　<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/troubleshoot/system-center/scom/cannot-deploy-operations-manager-reports">Operations Manager レポートの展開に失敗する - Operations Manager | Microsoft Learn</a></p>
+<p>レポートデータベースの設定変更の手順は以下の通りです。<br> 1. SQL Server Management Studio (SSMS) を起動し、SCOM が使用するレポートサーバーインスタンスに接続します。<br>　- サーバーの種類: Reporting Services<br>　- サーバー名: &lt;SSRS インスタンスが存在するサーバー名&gt;&lt;SSRS インスタンス名&gt;<br>　※ SSRS の既定のインスタンス名は “SSRS” です。SSRS インスタンス名は、[スタート] メニューより<br>　　[Microsoft SQL Server Reporting Services] -&gt; [Report Server Configuration Manager] を開き<br>　　[レポートサーバーの構成の接続] の [レポート サーバー インスタンス] の名称にて確認できます。<br>　- 認証、ユーザー名、パスワード: SSRS 側で設定いただいた認証方式およびパスワード<br> <img src="003.png"><br> 2. レポートサーバー名を右クリックし、[ プロパティ] を選択して、[ 詳細設定] を選択します。<br> 3. AllowedResourceExtensionsForUploadの設定を見つけ、 設定値に<b> *.* </b>を入力して、[OK] をクリックします。<br>【設定箇所】<br> <img src="004.png">【変更後の値】<br> <img src="005.png"><br> 4. SSRS を以下手順で再起動します。<br>　- Reporting Services 構成ツールを起動して、レポート サーバーに接続します。<br>　- [レポート サーバーの状態] ページで [停止] をクリックし、その後 [開始] を選択します。</p>
+<h2 id="③-管理パックの導入"><a href="#③-管理パックの導入" class="headerlink" title="③ 管理パックの導入"></a>③ 管理パックの導入</h2><p>事前準備が完了したら、いよいよ管理パックの導入です。<br>管理パックの導入方法には、３つの方法があります。</p>
+<p>　<a href="#link1">１）SCOM 管理コンソールの [更新プログラムと推奨機能]  にて推奨管理パックを導入</a><br>　<a href="#link2">２）SCOM 管理コンソールにて、カタログから管理パックをダウンロードして導入</a><br>　<a href="#link3">３）管理パック一覧サイトから選択した管理パックを導入</a></p>
+<p>今回は、基本的な管理パックを [更新プログラムと推奨機能] にて導入して、追加の管理パックをカタログからダウンロードして導入した後、最後に一覧サイトからダウンロードした管理パックを追加導入するシナリオで手順を説明します。</p>
+<div id="link1"><b>１）SCOM 管理コンソールの [更新プログラムと推奨機能]  にて推奨管理パックを導入</b></div>
+SCOM 管理サーバーの構築の後、たくさん存在する管理パックの中からどの管理パックの導入から開始すべきかが分からない場合、最も簡易的に進められる方法です。
+手順は以下の通りです。
+
+<ol>
+<li>SCOM コンソールにログインして、画面左下ペインの [管理] をクリックして、[管理] 画面を開きます。</li>
+<li> [管理] -&gt; [管理パック] -&gt; [更新プログラムと推奨機能] をクリックします。</li>
+<li>特定の管理パックを選択して [管理パックを取得] をクリックするか、[すべての管理パックを取得] をクリックします。<br>今回の例では [すべての管理パックを取得] をクリックしました。<br><img src="006.png"></li>
+<li>[管理パックのインポート] 画面にて [インストール] ボタンをクリックして、管理パックをインポートします。<br></li>
+</ol>
+<p>※ 注意事項<br> ① 管理パックの中には、日本語の言語パックが存在するものがありますが、[更新プログラムと推奨機能] では言語パックは選択されません。日本語の言語パックが必要な場合は、あとで追加で導入する必要があります。<br> ② [更新プログラムと推奨機能] では、最初、多数の管理パックが表示されます。管理パックには依存関係 (導入の順番) が存在するものがあるため、一部の管理パックの導入が失敗することがありますが、失敗した場合は、再度、[すべての管理パックを取得] を行うことで、依存関係を満たした管理パックの導入が成功するようになりますので、何度か本作業を繰り返してください。<br> <img src="007.png"></p>
+<div id="link2"><b>２）SCOM 管理コンソールにて、カタログから管理パックをダウンロードして導入</b></div>
+[更新プログラムと推奨機能] に含まれる管理パックを導入することで、Windows Server や Unix/Linux サーバーの基本的な監視は可能になります。
+一方で、Microsoft SQL Server や Active Directory などのソフトウェア用の管理パックは [更新プログラムと推奨機能] には含まれておらず、相変わらず監視できません。
+また、[更新プログラムと推奨機能] に含まれない言語パックも未導入です。
+
+<p>これらの管理パックは、Microsoft のカタログサイトから取得して導入することができます。</p>
+<p>手順は以下の通りです。<br> 1. SCOM コンソールにログインして、画面左下ペインの [管理] をクリックして、[管理] 画面を開きます。<br> 2. 右クリックメニューにて [管理パックのインポート] をクリックします。<br> <img src="008.png"><br> 3. [管理パックのインポート] 画面にて [追加] -&gt; [カタログから追加する] をクリックします。<br> <img src="009.png"><br> 4. [検索] を実行することでカタログからインポート可能な管理パックが表示されます。<br>　必要な管理パックを選択して [追加] ボタンをクリックします。</p>
+<p>　例１）Active Directory Domain Service の管理パック<br>　　[Windows Server] - [Active Directory Domain Services 2016 and above]<br> <img src="010.png"><br>　例２）Windows Server 1026 and above 用の日本語言語パック<br>　　[Windows Server] - [Core OS 2016 and above] - [Japanese]<br> <img src="011.png"><br> 5. 管理パックの追加が完了したら [OK] ボタン -&gt; [インストール] ボタンをクリックして導入します。<br> <img src="012.png"></p>
+<div id="link3"><b>３）管理パック一覧サイトから選択した管理パックを導入</b></div>
+SCOM 管理サーバーがインターネット接続できない場合や Microsoft のカタログサイトから取得できない管理パックを導入する場合、管理パックをローカルディスクにコピーして、ディスクから追加することができます。
+
+<p>ここでは、SQL Server の管理パックの導入を例に説明します。</p>
+<ol>
+<li>管理パックの一覧サイト (<a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/wiki/contents/articles/16174.microsoft-management-packs.aspx">Microsoft Management Packs - TechNet Articles - United States (English) - TechNet Wiki</a>) にアクセスします。</li>
+<li>SQL Server 用管理パックのリンク (<a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/details.aspx?id=56203">Download Microsoft System Center MP for SQL Server from Official Microsoft Download Center</a>) をクリックします。<br><img src="013.png"></li>
+<li>[Download] をクリックします。<img src="021.png" width="500"></li>
+<li>必要なファイルを選択して [Download] をクリックします。<br><span style="color: red;">※ 重要<br>[SQLServerMPWorkflowList.pdf] は、SQL Server 用管理パックのマニュアルです。管理パックの導入手順、システム要件、サポート対象、含まれるルールやモニター、ビューなどの情報を確認できます。多くの管理パックは、ダウンロードページにてマニュアルを取得することができます。</span><br><img src="014.png"></li>
+<li>SCOM 管理サーバー内に msi ファイルをコピーして、管理者で実行します。<br>ローカルディスクに管理パック ファイルが解凍されます。<br>例）SQLServerMP.Windows.msi を実行して解凍した管理パックファイル<br><img src="015.png"></li>
+<li>SCOM コンソールにログインして、画面左下ペインの [管理] をクリックして、[管理] 画面を開きます。</li>
+<li>右クリックメニューにて [管理パックのインポート] をクリックします。</li>
+<li>[管理パックのインポート] 画面にて [追加] -&gt; [ディスクから追加する] をクリックします。<br><img src="016.png"></li>
+<li>解凍した管理パックファイルをすべて選択して [インストール] ボタンをクリックします。<br><img src="017.png"></li>
+</ol>
+<br>
+以上により管理パックの導入作業は完了です。
+
+
+<h2 id="管理パックの導入確認"><a href="#管理パックの導入確認" class="headerlink" title="管理パックの導入確認"></a>管理パックの導入確認</h2><p>管理パックの導入が完了すると、モニターやルールに該当する OS やソフトウェアの設定が追加されたことが確認できます。<br> 例）モニター画面：Active Diretory 監視用のモニター<br> <img src="018.png"><br>収集したデータを確認するためのビューが追加されたことが確認できます。<br> 例）監視画面：Active Diretory に関する収集データを確認するビュー<br> <img src="019.png"><br>レポートが追加されたことも確認できます。<br> 例）レポート画面：Active Diretory に関する収集データを確認するレポート<br> <img src="020.png"></p>
+<p>以上により、監視の準備が完了しましたので、監視対象サーバーにエージェントを展開して、SCOM による監視ができるようになります。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_ManagementPacks.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../SCOM_CacheClear/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCOM の各種キャッシュクリアの手順</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">管理パック (MP) のインポートについて</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_CacheClear/">SCOM の各種キャッシュクリアの手順</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_Workgroup/">WORKGROUP コンピューターの管理方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">18</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Database">Database</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/How-To">How To</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManagerDW">OperationsManagerDW</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Trouble">Trouble</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 13.33px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/Database/" style="font-size: 10px;">Database</a> <a href="../../tags/General/" style="font-size: 11.67px;">General</a> <a href="../../tags/How-To/" style="font-size: 10px;">How To</a> <a href="../../tags/HowTo/" style="font-size: 15px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Operations-Manager/" style="font-size: 18.33px;">Operations Manager</a> <a href="../../tags/OperationsManagerDW/" style="font-size: 10px;">OperationsManagerDW</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 10px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 13.33px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Trouble/" style="font-size: 11.67px;">Trouble</a> <a href="../../tags/Troubleshoot/" style="font-size: 16.67px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 13.33px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 11.67px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 11.67px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 11.67px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 11.67px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 11.67px;">トラブルシューティング</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 11.67px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 13.33px;">新環境への移行</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
