@@ -6,15 +6,15 @@
   
   <title>SCVMM ジョブ保存設定変更方法 | Japan System Center Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 [本ページが対象とする SCVMM バージョン]SCVMM 2016SCVMM 2019SCVMM 2022 [概要]SCVMM で実行される処理の多くは、">
+  <meta name="description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 本ページが対象とする SCVMM バージョンSCVMM 2016SCVMM 2019SCVMM 2022 概要SCVMM で実行される処理の多くは、ジョブと">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SCVMM ジョブ保存設定変更方法">
 <meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/index.html">
 <meta property="og:site_name" content="Japan System Center Support Blog">
-<meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 [本ページが対象とする SCVMM バージョン]SCVMM 2016SCVMM 2019SCVMM 2022 [概要]SCVMM で実行される処理の多くは、">
+<meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。 本ページが対象とする SCVMM バージョンSCVMM 2016SCVMM 2019SCVMM 2022 概要SCVMM で実行される処理の多くは、ジョブと">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2022-07-07T03:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-24T06:14:02.491Z">
+<meta property="article:modified_time" content="2023-11-13T01:50:15.060Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="HowTo">
 <meta property="article:tag" content="SCVMM">
@@ -105,7 +105,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+67242cd7-f977-5e41-bae1-dfdc5065493b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%82%B8%E3%83%A7%E3%83%96%E4%BF%9D%E5%AD%98%E8%A8%AD%E5%AE%9A%E5%A4%89%E6%9B%B4%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Job_History%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Job_History.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Job_History.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/" data-id="clmx2dxkj000p0olq9dx25kqe" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/" data-id="clow8z7yn000p0np1a5xl6dl2" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -113,20 +113,20 @@
         <span id="more"></span>
 <p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p>
 <p>今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。</p>
-<h3 id="本ページが対象とする-SCVMM-バージョン"><a href="#本ページが対象とする-SCVMM-バージョン" class="headerlink" title="[本ページが対象とする SCVMM バージョン]"></a>[本ページが対象とする SCVMM バージョン]</h3><p>SCVMM 2016<br>SCVMM 2019<br>SCVMM 2022</p>
-<h3 id="概要"><a href="#概要" class="headerlink" title="[概要]"></a>[概要]</h3><p>SCVMM で実行される処理の多くは、ジョブという形で実行されます。<br>このジョブが実行されると、実行可否に関わらず、履歴としてすべて SCVMM データベースに存在する [dbo].[tbl_TR_TaskTrail] というテーブルに保存されます。<br>ジョブ履歴ですが、バッチ処理を組まれる等して大量のジョブが短期間で実行される環境においては、このテーブルが肥大化する要因となります。<br>テーブルが肥大化することで、SCVMM 観点においては下記の影響が発生します。</p>
+<h3 id="本ページが対象とする-SCVMM-バージョン"><a href="#本ページが対象とする-SCVMM-バージョン" class="headerlink" title="本ページが対象とする SCVMM バージョン"></a>本ページが対象とする SCVMM バージョン</h3><p>SCVMM 2016<br>SCVMM 2019<br>SCVMM 2022</p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>SCVMM で実行される処理の多くは、ジョブという形で実行されます。<br>このジョブが実行されると、実行可否に関わらず、履歴としてすべて SCVMM データベースに存在する [dbo].[tbl_TR_TaskTrail] というテーブルに保存されます。<br>ジョブ履歴ですが、バッチ処理を組まれる等して大量のジョブが短期間で実行される環境においては、このテーブルが肥大化する要因となります。<br>テーブルが肥大化することで、SCVMM 観点においては下記の影響が発生します。</p>
 <ul>
 <li>単純に [dbo].[tbl_TR_TaskTrail] テーブルサイズが肥大化し、データベースファイルサイズの肥大化</li>
 <li>SCVMM へのパフォーマンスへの影響</li>
 </ul>
 <p>意外に思われるかもしれませんが、ジョブ履歴が大量に保存されている環境においては、SCVMM へのパフォーマンス影響が発生する可能性がございます。<br>特段負荷が大きい処理を連続して実施されていないにも関わらず、SCVMM ジョブの実行速度や SCVMM 自体が以前より遅くなったといった状況では、ジョブ履歴が大量に保存されている可能性がございます。</p>
-<h3 id="対処手順"><a href="#対処手順" class="headerlink" title="[対処手順]"></a>[対処手順]</h3><p>このジョブ履歴ですが、レジストリ値によってジョブ履歴保持日数および削除処理が行われる周期を設定いただけます。<br>そのため、”概要” 項で説明しました影響が発生されている場合は、そのレジストリ値設定を変更いただくのが切り分けとして有用となります。</p>
+<h3 id="対処手順"><a href="#対処手順" class="headerlink" title="対処手順"></a>対処手順</h3><p>このジョブ履歴ですが、レジストリ値によってジョブ履歴保持日数および削除処理が行われる周期を設定いただけます。<br>そのため、”概要” 項で説明しました影響が発生されている場合は、そのレジストリ値設定を変更いただくのが切り分けとして有用となります。</p>
 <p>追加いただくレジストリは、以下の 2 種類が該当いたします。</p>
 <blockquote>
 <p>レジストリキー:<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Settings\Sql</p>
 <p>レジストリの種類:<br>DWORD (32 ビット) 値</p>
 <p>レジストリの名称:<br>TaskGC</p>
-<p>レジストリ値:<br>ジョブの保持日数を整数値で指定します。<br>例えば、本レジストリ値が 7 に設定された場合、ジョブ履歴削除処理が行われた日付時刻から 7 日以内のジョブは保持され、それ以外はすべて削除対象となります。<br>レジストリが未作成の状態である場合、本レジストリ値は 90 に設定されたものとして動作が行われます。<br>こちらのレジストリ設定値を、ご利用の環境でどの程度ジョブ履歴を重要視されるかに応じて設定します。<br>また、本レジストリ値の設定値に関わらず、一度のジョブ履歴削除処理で削除されるジョブ数は最大で 50000 件となります。<br>そのため、各処理間で 50000 件以上のジョブ履歴が保存される場合、ジョブ履歴は傾向として増加される状況となります。<br>ご利用の環境に合わせて、もう一つのレジストリである “DBGCUpdateInterval” のレジストリ値を構成します。</p>
+<p>レジストリ値:<br>ジョブの保持日数を整数値で指定します。<br>例えば、本レジストリ値が 7 に設定された場合、ジョブ履歴削除処理が行われた日付時刻から 7 日以内のジョブは保持され、それ以外はすべて削除対象となります。<br>レジストリが未作成の状態である場合、本レジストリ値は 90 に設定されたものとして動作が行われます。<br>こちらのレジストリ設定値を、ご利用の環境でどの程度ジョブ履歴を重要視されるかに応じて設定します。<br>また、本レジストリ値の設定値に関わらず、一度のジョブ履歴削除処理で削除されるジョブ数は最大で 25000 件となります。<br>そのため、各処理間で 25000 件以上のジョブ履歴が保存される場合、ジョブ履歴は傾向として増加される状況となります。<br>ご利用の環境に合わせて、もう一つのレジストリである “DBGCUpdateInterval” のレジストリ値を構成します。</p>
 </blockquote>
 <blockquote>
 <p>レジストリキー:<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Settings</p>
@@ -145,7 +145,12 @@
 <li>ウィンドウ右側に表示された [10 進数] を選択し、レジストリで指定いただく値を入力します。</li>
 <li>レジストリ追加完了後、SCVMM サーバーに関するサービスである “System Center Virtual Machine Manager” サービスを再起動します。</li>
 </ol>
-<h3 id="ご参考"><a href="#ご参考" class="headerlink" title="[ご参考]"></a>[ご参考]</h3><p>既に弊社にて公開がされていないサイトとなりますので、こちらのブログにて併せてそちらのサイトの内容をご紹介いたします。<br>その公開終了されたサイトでは、SCVMM のジョブについて要約すると以下の内容が書かれておりました。</p>
+<h3 id="厳密な処理内容"><a href="#厳密な処理内容" class="headerlink" title="厳密な処理内容"></a>厳密な処理内容</h3><p>ジョブ履歴削除処理は、SCVMM データベースに作成された “dbo.prc_TR_GarbageCollect” ストアド プロシージャが呼び出されて実行されます。<br>最大25000 行のデータ削除処理は、ストアド プロシージャ内に下記の通り “SELECT TOP 25000…” と、実装が明示的に行われております。</p>
+<blockquote>
+<p>(途中略)<br>-- do at most 25,000 every time to handle extreme backlog cases<br>-- get the list of IDs to delete<br>SELECT TOP 25000 TaskID, ResultObjectID<br>INTO #TasksToDelete<br>FROM dbo.tbl_TR_TaskTrail<br>WITH (ROWLOCK, UPDLOCK, HOLDLOCK)<br>WHERE EndDateTime IS NOT NULL AND EndDateTime &lt; @CutoffDateTime<br>(途中略)</p>
+<p>(こちらの実装は SCVMM 2016、2019 および 2022 で同一です。)</p>
+</blockquote>
+<h3 id="ご参考"><a href="#ご参考" class="headerlink" title="ご参考"></a>ご参考</h3><p>既に弊社にて公開がされていないサイトとなりますので、こちらのブログにて併せてそちらのサイトの内容をご紹介いたします。<br>その公開終了されたサイトでは、SCVMM のジョブについて要約すると以下の内容が書かれておりました。</p>
 <ul>
 <li>SCVMM の仕様として、目安ではあるものの 10000 の同時並行実施ジョブが処理可能であること。</li>
 <li>10000 以上のジョブが同時並行で実施されている場合、SCVMM サーバーのパフォーマンスに多大な影響を及ぼす可能性があること。</li>
@@ -163,6 +168,9 @@
 <p>The number of retained Jobs count refers to the number of running tasks tracked in the TaskTrail database table in SQL.<br>The size of this database can have as much of an impact on performance as the actual running jobs.<br>If the number of running jobs nowhere reaches 10,000 then it may be that the tombstone limit on entries tracked in the TaskTrail database is too conservative</p>
 </blockquote>
 </li>
+</ul>
+<h3 id="アップデート履歴"><a href="#アップデート履歴" class="headerlink" title="アップデート履歴"></a>アップデート履歴</h3><ul>
+<li>2023/11/13 更新:<br>一度のジョブ履歴削除処理が行われる際に削除されるデータの件を 50000 件から 25000 件に変更しました。<br>従前の記述である 50000 件は、SCVMM 2008 における仕様でございました。<br>また、データ削除処理の詳細も記載いたしました。</li>
 </ul>
 
       
