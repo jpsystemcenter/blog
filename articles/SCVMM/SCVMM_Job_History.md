@@ -82,6 +82,7 @@ SCVMM で実行される処理の多くは、ジョブという形で実行さ�
 ジョブ履歴削除処理は、SCVMM データベースに作成された "dbo.prc_TR_GarbageCollect" ストアド プロシージャが呼び出されて実行されます。
 最大25000 行のデータ削除処理は、ストアド プロシージャ内に下記の通り "SELECT TOP 25000..." と、実装が明示的に行われております。
 > (途中略)
+> 
 > \-\- do at most 25,000 every time to handle extreme backlog cases
 > \-\- get the list of IDs to delete
 > SELECT TOP 25000 TaskID, ResultObjectID
@@ -89,6 +90,7 @@ SCVMM で実行される処理の多くは、ジョブという形で実行さ�
 > FROM dbo.tbl_TR_TaskTrail
 > WITH (ROWLOCK, UPDLOCK, HOLDLOCK)
 > WHERE EndDateTime IS NOT NULL AND EndDateTime \< @CutoffDateTime
+>
 > (途中略)
 >
 > (こちらの実装は SCVMM 2016、2019 および 2022 で同一です。)
@@ -113,6 +115,6 @@ SCVMM で実行される処理の多くは、ジョブという形で実行さ�
 
 ### アップデート履歴
 - 2023/11/13 更新:
-一度のジョブ履歴削除処理が行われる際に削除されるデータの件を 50000 件から 25000 件に変更しました。
+一度のジョブ履歴削除処理が行われる際に削除されるデータ件数の記述を 50000 件から 25000 件に変更しました。
 従前の記述である 50000 件は、SCVMM 2008 における仕様でございました。
 また、データ削除処理の詳細も記載いたしました。
