@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SCVMM の 更新プログラムのロールアップの適用手順 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、SCVMM に更新プログラムのロールアップ (UR：Update Rollup) を適用する手順について説明します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCVMM の 更新プログラムのロールアップの適用手順">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、SCVMM に更新プログラムのロールアップ (UR：Update Rollup) を適用する手順について説明します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/014.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/012.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/013.png">
+<meta property="article:published_time" content="2023-11-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-18T15:55:26.371Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="更新プログラム ロールアップ">
+<meta property="article:tag" content="HowTo">
+<meta property="article:tag" content="インストール">
+<meta property="article:tag" content="アップグレード">
+<meta property="article:tag" content="SCVMM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCVMM/SCVMM_Update_Rollup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SCVMM の 更新プログラムのロールアップの適用手順
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-11-20T04:00:00.000Z" itemprop="datePublished">2023-11-20</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c5010dd0-c2c9-5005-8ae3-b4aca0ec4984%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%81%AE+%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97%E3%81%AE%E9%81%A9%E7%94%A8%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Update_Rollup%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Update_Rollup.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Update_Rollup.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/" data-id="clp48dedc00100omd73xi397r" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM に更新プログラムのロールアップ (UR：Update Rollup) を適用する手順について説明します。<br><br></p>
+<span id="more"></span>
+<h2 id="更新プログラムのロールアップ-UR：Update-Rollup-について"><a href="#更新プログラムのロールアップ-UR：Update-Rollup-について" class="headerlink" title="更新プログラムのロールアップ (UR：Update Rollup) について"></a>更新プログラムのロールアップ (UR：Update Rollup) について</h2><p>本記事の公開日時点 (2023/11/20) でサポートが有効な System Center Virtual Machine Manager（以後 SCVMM）には SCVMM 2016, SCVMM 2019, SCVMM 2022 の 3つのバージョンがあります。<br>各々のバージョンの初期公開時のモジュールを一般公開版 (GA：General Availability) と呼びます。一般公開版のリリース後、機能追加や不具合修正、セキュリティ対策等の更新プログラムは、更新プログラムのロールアップ (UR：Update Rollup) として提供されます。そのため、SCVMM を最新の状態に維持するためには、更新プログラムのロールアップを適用いただく必要があります。</p>
+<p>各々のバージョンの 更新プログラムのロールアップのリリース状況は以下サイトをご参照ください。<br>　・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2022">SCVMM 2022： System Center Virtual Machine Managerのビルド バージョンをリリースする | Microsoft Learn</a><br>　・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2019">SCVMM 2019： System Center Virtual Machine Managerのビルド バージョンをリリースする | Microsoft Learn</a><br>　・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2016">SCVMM 2016： System Center Virtual Machine Managerのビルド バージョンをリリースする | Microsoft Learn</a></p>
+<p>なお、セキュリティ対策以外の更新プログラム (機能追加や不具合修正) は、原則、メインストリーム サポート期間中 (SCVMM 2022, SCVMM 2019 <span style="color: red; ">※2023/11/20 時点</span>) の製品に対して提供されます。延長サポート期間中 (SCVMM 2016 <span style="color: red; ">※2023/11/20 時点</span>) の製品には、セキュリティ対策の更新プログラムのみが提供されます。</p>
+<p>各バージョンのサポート状況につきましては以下のサイトをご参照ください。<br>　・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2022-virtual-machine-manager">System Center 2022 Virtual Machine Manager - Microsoft Lifecycle | Microsoft Learn</a><br>　・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2019-virtual-machine-manager">System Center 2019 Virtual Machine Manager - Microsoft Lifecycle | Microsoft Learn</a><br>　・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2016-virtual-machine-manager">System Center 2016 Virtual Machine Manager - Microsoft Lifecycle | Microsoft Learn</a><br>また、メインストリーム サポート期間や延長サポート期間の説明につきましては、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/lifecycle/policies/fixed">固定ライフサイクル ポリシーのサイト</a>をご参照ください。</p>
+<h2 id="更新プログラムのロールアップ-UR：Update-Rollup-の適用手順"><a href="#更新プログラムのロールアップ-UR：Update-Rollup-の適用手順" class="headerlink" title="更新プログラムのロールアップ (UR：Update Rollup) の適用手順"></a>更新プログラムのロールアップ (UR：Update Rollup) の適用手順</h2><p>今回は、<b>SCVMM 2022 に本記事の公開日時点で最新の UR2 を適用する手順</b>をご紹介します。<br>SCVMM の更新プログラムのロールアップは累積型のため、順番に適用する必要はありません。常に最新の更新プログラムを適用できます。一般公開版の SCVMM 2022 を導入し、更新プログラムのロールアップを適用したことがない場合でも、利用可能な最新の更新プログラム (今回の場合は UR2) を適用することができます。</p>
+<p>UR の適用の際には、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2022#virtual-machine-manager-2022-build-versions">Virtual Machine Manager 2022 ビルド バージョン</a> の表の KB 列のリンクをクリックして、最新の更新プログラム ロールアップのサイトに進みます。<br><img src="001.png"></p>
+<p><a target="_blank" rel="noopener" href="https://support.microsoft.com/kb/5032369">更新プログラム ロールアップのサイト(SCVMM 2022 UR2)</a> には、更新プログラムの内容（機能追加、不具合修正、セキュリティ対策）とモジュールのダウンロード方法、インストール手順が記載されています。</p>
+<hr>
+<p><b>● ステップ１：モジュールをダウンロードする</b><br>① ～ ③の 3つのモジュールをダウンロードします。<br><img src="002.png"></p>
+<p>① Virtual Machine Manager サーバー更新プログラム パッケージ (<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Search.aspx?q=5032369">kb5032369_vmmserver_amd64_***.cab</a>) をダウンロードします。<br>ダウンロードファイルしたファイルを展開します。※展開後のファイル：kb5032369_vmmserver_amd64.msp<br><img src="003.png"></p>
+<p>② 管理者コンソールの更新プログラム パッケージ (<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Search.aspx?q=5032370">kb5032370_adminconsole_amd64_***.cab</a>) をダウンロードします。<br>ダウンロードファイルしたファイルを展開します。※展開後のファイル：kb5032370_AdminConsole_amd64.msp<br><img src="004.png"></p>
+<p>③ ゲスト エージェントの更新プログラム パッケージ (<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Search.aspx?q=5032371">kb5032371_vmmguestagent_amd64_***.cab</a>) をダウンロードします。<br>ダウンロードファイルしたファイルを展開します。※展開後のファイル：kb5032371_vmmGuestAgent_amd64.msp<br><img src="005.png"></p>
+<p><b>● ステップ２：コマンドプロンプトを管理者で起動して、以下の順でモジュールを実行します。</b><br>　※ コマンドプロンプトを管理者として起動 <img src="014.png"></p>
+<p>【実行の順番】</p>
+<ol>
+<li>SCVMM 管理サーバー用モジュール kb5032369_vmmserver_amd64.msp</li>
+<li>SCVMM コンソール用モジュール 　kb5032370_AdminConsole_amd64.msp</li>
+<li>SCVMM エージェント用モジュール kb5032371_vmmGuestAgent_amd64.msp</li>
+</ol>
+<p>実行コマンド結果の画面ショットは以下の通りです。</p>
+<ol>
+<li><p>SCVMM 管理サーバー用モジュール (kb5032369_vmmserver_amd64.msp)<br>　＞ msiexec.exe /update kb5032369_vmmserver_amd64.msp <img src="006.png"></p>
+</li>
+<li><p>SCVMM コンソール用モジュール (kb5032370_AdminConsole_amd64.msp)<br>　<span style="color: red; ">※ SCVMM 管理サーバーのほか、SCVMM コンソールを導入した全てのサーバーで実行します。</span><br>　＞ msiexec.exe /update kb5032370_AdminConsole_amd64.msp <img src="007.png"></p>
+</li>
+<li><p>SCVMM エージェント用モジュール (kb5032371_vmmGuestAgent_amd64.msp)<br>　<span style="color: red; ">※ エージェントサーバーで実行します。</span><br>　＞ msiexec.exe /update kb5032371_vmmGuestAgent_amd64.msp <img src="008.png"></p>
+</li>
+</ol>
+<p>　※ SCVMM エージェントの更新は、モジュールを実行する代わりにSCVMM コンソールから UR2 へ更新することも可能です。 <img src="009.png"></p>
+<p><b>● ステップ３：適用状況を確認します。</b><br>SCVMM コンソールから各コンポーネントのバージョンを確認することができます。<br>SCVMM 2022 UR2 のバージョンは<span style="color: red; "> [10.22.1711.0] </span>です。</p>
+<p>■ SCVMM コンソール <img src="010.png"></p>
+<p>■ SCVMM 管理サーバー <img src="011.png"></p>
+<p>■ SCVMM エージェント <img src="012.png"></p>
+<hr>
+<h2 id="高可用性-VMM-管理サーバーを構成している場合"><a href="#高可用性-VMM-管理サーバーを構成している場合" class="headerlink" title="高可用性 VMM 管理サーバーを構成している場合"></a>高可用性 VMM 管理サーバーを構成している場合</h2><p>複数台の SCVMM 管理サーバーで高可用性 VMM 管理サーバーを構成している場合、全ての SCVMM 管理サーバーで SCVMM 管理サーバー用モジュール と SCVMM コンソール用モジュールを適用する必要があります。適用の順番は、待機系の SCVMM サーバーから適用します。</p>
+<p>【実行の順番】</p>
+<ol>
+<li>待機系の SCVMM 管理サーバーにて SCVMM 管理サーバー用モジュール と SCVMM コンソール用モジュールを適用</li>
+<li>フェールオーバー クラスターマネージャーで稼働系を待機系に切り替え （<span style="color: red; ">※1</span>）</li>
+<li>待機系に切り替わった元稼働系サーバーに SCVMM 管理サーバー用モジュール と SCVMM コンソール用モジュールを適用</li>
+</ol>
+<p><span style="color: red; font-weight: bold;">※1 SCVMM の稼働系の切り替え方法</span><br>SCVMM の稼働系はフェールオーバー クラスターマネージャーの役割画面で移動することで切り替えることができます。<br><img src="013.png"><br><br></p>
+<h2 id="UR-適用時の-OS-再起動の可能性について"><a href="#UR-適用時の-OS-再起動の可能性について" class="headerlink" title="UR 適用時の OS 再起動の可能性について"></a>UR 適用時の OS 再起動の可能性について</h2><p>UR の適用では、基本的には SCVMM 管理サーバーや管理対象のホストサーバーの再起動は発生いたしません。ユーザー様からの事例報告でも OS 再起動はほとんど確認しておりません。<br>ただし、仕組み上は OS 再起動が発生する可能性があります。</p>
+<p>UR のモジュールは、Windows インストーラ形式のファイル ( msp/msi ファイル) にて提供されます。msp/msi インストーラを使用したインストール/アンインストールの挙動として、実行時に置き換えが必要なファイル等が他プロセスによりハンドルを保持されていて置き換えできない場合、一度 OS 再起動を試行してファイルの置き換えを実施します。 そのため、この仕様にあたる状況となった場合に OS 再起動が発生する可能性があります。<br>下記公開情報に記載の通り、基本的にはアプリケーション単位でシャットダウンして、システム全体 (OS) のシャットダウンにつながらないような考慮になっておりますが、可能性という意味では発生し得る点をご認識ください。<br>　参考：再起動マネージャーでの Windows インストーラーの使用<br>　<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows/win32/msi/using-windows-installer-with-restart-manager">https://learn.microsoft.com/ja-jp/windows/win32/msi/using-windows-installer-with-restart-manager</a></p>
+<hr>
+<p>SCVMM の UR 適用手順は以上の通りです。<br>本手順を参考に SCVMM を常に最新の状態にてご利用いただけますと幸いです</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">更新プログラム ロールアップ</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCVMM/SCVMM_Update_Rollup.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../SCOM/SCOM_Update_Rollup/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          SCOM の 更新プログラムのロールアップの適用手順
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../SCOM/SCOM_ManagementPacks/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">管理パック (MP) のインポートについて</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../../SCOM/SCOM_Update_Rollup/">SCOM の 更新プログラムのロールアップの適用手順</a>
+          </li>
+        
+          <li>
+            <a href="">SCVMM の 更新プログラムのロールアップの適用手順</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_ManagementPacks/">管理パック (MP) のインポートについて</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_CacheClear/">SCOM の各種キャッシュクリアの手順</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">更新プログラム ロールアップ</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">18</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Database">Database</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManagerDW">OperationsManagerDW</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Trouble">Trouble</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96">ログ監視</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">4</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97">更新プログラム ロールアップ</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 12.5px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/Database/" style="font-size: 10px;">Database</a> <a href="../../tags/General/" style="font-size: 11.25px;">General</a> <a href="../../tags/HowTo/" style="font-size: 18.75px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Operations-Manager/" style="font-size: 17.5px;">Operations Manager</a> <a href="../../tags/OperationsManagerDW/" style="font-size: 10px;">OperationsManagerDW</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 11.25px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 13.75px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Trouble/" style="font-size: 11.25px;">Trouble</a> <a href="../../tags/Troubleshoot/" style="font-size: 16.25px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 15px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 13.75px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 11.25px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 11.25px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 11.25px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 11.25px;">トラブルシューティング</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 11.25px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12.5px;">新環境への移行</a> <a href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" style="font-size: 11.25px;">更新プログラム ロールアップ</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
