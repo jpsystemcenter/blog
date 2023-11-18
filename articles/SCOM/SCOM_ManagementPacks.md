@@ -4,7 +4,7 @@ date: 2023-09-22 18:00:00
 tags:
   - SCOM
   - Operations Manager
-  - How To
+  - HowTo
   - インストール
 ---
 
