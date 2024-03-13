@@ -6,15 +6,15 @@
   
   <title>MonitoringHost.exe が仮想メモリを異常に消費する | Japan System Center Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。 仮想メモリを異常に消費事象突然、SCOM の管理サーバーやエージェントが導入されているマシンにて">
+  <meta name="description" content="[[TOC]]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MonitoringHost.exe が仮想メモリを異常に消費する">
 <meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/index.html">
 <meta property="og:site_name" content="Japan System Center Support Blog">
-<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。 仮想メモリを異常に消費事象突然、SCOM の管理サーバーやエージェントが導入されているマシンにて">
+<meta property="og:description" content="[[TOC]]">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2024-03-13T12:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-13T12:28:40.093Z">
+<meta property="article:modified_time" content="2024-03-13T12:32:33.363Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Troubleshoot">
@@ -104,12 +104,13 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+0fd35334-1ef8-57ca-9ddd-f6908f4ed826%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMonitoringHost.exe+%E3%81%8C%E4%BB%AE%E6%83%B3%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%92%E7%95%B0%E5%B8%B8%E3%81%AB%E6%B6%88%E8%B2%BB%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_highmemory_MonitoringHost%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_highmemory_MonitoringHost.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_highmemory_MonitoringHost.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/" data-id="cltps2b8v000g0npf4m3f41s7" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/" data-id="cltps7ax8000g0nqf3ynff9e5" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
+        <p>[[<em>TOC</em>]]</p>
+<span id="more"></span>
 <p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p>
 <p>本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。</p>
 <h2 id="仮想メモリを異常に消費"><a href="#仮想メモリを異常に消費" class="headerlink" title="仮想メモリを異常に消費"></a>仮想メモリを異常に消費</h2><h3 id="事象"><a href="#事象" class="headerlink" title="事象"></a>事象</h3><p>突然、SCOM の管理サーバーやエージェントが導入されているマシンにてプロセスが異常にメモリを消費し、マシンがダウンするといった事象が発生することがあります。<br>その場合、イベント ログ [System] に以下が記録されることを確認しています。</p>
@@ -140,7 +141,7 @@
 <p>SCOM の場合ですとアクション アカウントに ローカル システム アカウントを利用することが可能ですので、アカウントを基本的にローカル システム アカウントへと変更していただく、という運用が一番シンプルです。</p>
 <p>しかし、ローカル システム アカウントの場合ですと権限が Administrator と同等ですので、SCOM のプロセスが悪用されるリスクを懸念されるお客様もいらっしゃるかと存じます。<br>それを考慮した場合、ドメインのアカウントを指定するほうがリスクは小さくなります。<br>どのアカウントを利用するかはお客様の運用ポリシーに依存する部分でもありますので検討の上、アカウントを決定してください。</p>
 <p>SCOM のアクション アカウントにご利用いただくための権限については以下に公開情報があるのでご覧ください。</p>
-<p>• 公開情報<br>サービス、ユーザー、およびセキュリティ アカウント<br>サービス、ユーザー、およびセキュリティ アカウント | Microsoft Learn<br>※SCOM 2022 の情報ですが、SCOM 2019、SCOM 2016 でも同様です。</p>
+<p>• 公開情報<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-security-accounts?view=sc-om-2022">サービス、ユーザー、およびセキュリティ アカウント</a><br>※SCOM 2022 の情報ですが、SCOM 2019、SCOM 2016 でも同様です。</p>
 <p>今の環境でこの Blog で案内している事象が発生する可能性があるか、というのは以下の手順で SCOM のアクション アカウントを確認してください。<br>以下の手順ではアクション アカウントに指定されているアカウントを確認していただき、そのアカウントがログオン/ログオフを実施するアカウントであるか確認できます。</p>
 <p>&lt;&lt;確認手順&gt;&gt;<br>以下の手順にてエージェントのアクション アカウントをご確認が可能です。</p>
 <ol>
