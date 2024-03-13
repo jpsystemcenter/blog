@@ -7,6 +7,9 @@ tags:
   - MonitoringHost.exe
 ---
 
+[[_TOC_]]
+
+
 <!-- more -->
 皆様こんにちは、System Center サポートチームの 佐藤 です。
 
@@ -115,8 +118,7 @@ SCOM の場合ですとアクション アカウントに ローカル システ
 SCOM のアクション アカウントにご利用いただくための権限については以下に公開情報があるのでご覧ください。
 
 • 公開情報
-サービス、ユーザー、およびセキュリティ アカウント
-サービス、ユーザー、およびセキュリティ アカウント | Microsoft Learn
+[サービス、ユーザー、およびセキュリティ アカウント](https://learn.microsoft.com/ja-jp/system-center/scom/plan-security-accounts?view=sc-om-2022)
 ※SCOM 2022 の情報ですが、SCOM 2019、SCOM 2016 でも同様です。
 
 
