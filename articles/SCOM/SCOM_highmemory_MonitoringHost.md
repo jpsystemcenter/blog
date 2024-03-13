@@ -145,7 +145,8 @@ SCOM のアクション アカウントにご利用いただくための権限�
 下図構成となるため、ログオフした際に MonitoringHost.exe が動作するために必要な情報（例えばレジストリキーに設定している値）などもログオフとともに参照できなくなり、linux コンピューターが監視不能状態となりグレーアウト状態になる場合があります。
 
 [Operations Manager エージェント](https://learn.microsoft.com/ja-jp/system-center/scom/plan-planning-agent-deployment?view=sc-om-2022&tabs=Windows#linuxunix-agent)
-![](SCOM_highmemory_MonitoringHost/0101.png)![image](https://github.com/jpsystemcenter/blog/assets/102792193/e34cc6c1-4230-4d3f-9cc6-40e1894a479f)
+
+![](SCOM_highmemory_MonitoringHost/0101.png)
 
 上記事例もございますため、アクション アカウントとログオン/ログオフに使用しているアカウントが同じ場合はどちらかのアカウントを変更してくださいするようお願いいたします。
 
