@@ -35,7 +35,7 @@ tags:
 このイベントが記録されるタイミングでまた、SCOM に関するイベント ログ [Operations Manager] には同時にイベント ID：26008 がかなりの頻度で記録されていることも確認しています。
 過去お問い合わせを頂いたお客様では、具体的な頻度の度合いは数秒で2000～3000件というかなりの頻度もございました。
 
-※ 3003106107520 B / 1024 (KB 換算) 1024 （MB 換算）/ 1024 GB （GB 換算）
+※ 3003106107520 B / 1024 (KB 換算) 1024 （MB 換算）/ 1024  （GB 換算） ≒ 280 GB
 
 #### イベントの例 (イベントID：26008)
 
@@ -145,6 +145,7 @@ SCOM のアクション アカウントにご利用いただくための権限�
 下図構成となるため、ログオフした際に MonitoringHost.exe が動作するために必要な情報（例えばレジストリキーに設定している値）などもログオフとともに参照できなくなり、linux コンピューターが監視不能状態となりグレーアウト状態になる場合があります。
 
 [Operations Manager エージェント](https://learn.microsoft.com/ja-jp/system-center/scom/plan-planning-agent-deployment?view=sc-om-2022&tabs=Windows#linuxunix-agent)
+
 
 ![](SCOM_highmemory_MonitoringHost/0101.png)
 
