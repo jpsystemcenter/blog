@@ -6,16 +6,16 @@
   
   <title>MonitoringHost.exe が仮想メモリを異常に消費する | Japan System Center Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。  仮想メモリを異常に消費  事象 1.1 イベントの例 (イベント ID：2004) 1.2 イ">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。 仮想メモリを異常に消費事象突然、SCOM の管理サーバーやエージェントが導入されているマシンにて">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MonitoringHost.exe が仮想メモリを異常に消費する">
 <meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/index.html">
 <meta property="og:site_name" content="Japan System Center Support Blog">
-<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。  仮想メモリを異常に消費  事象 1.1 イベントの例 (イベント ID：2004) 1.2 イ">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 佐藤 です。 本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。 仮想メモリを異常に消費事象突然、SCOM の管理サーバーやエージェントが導入されているマシンにて">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/0101.png">
 <meta property="article:published_time" content="2024-03-13T12:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-13T12:45:53.155Z">
+<meta property="article:modified_time" content="2024-03-13T12:49:02.329Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Troubleshoot">
@@ -106,7 +106,7 @@
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+0fd35334-1ef8-57ca-9ddd-f6908f4ed826%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMonitoringHost.exe+%E3%81%8C%E4%BB%AE%E6%83%B3%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%92%E7%95%B0%E5%B8%B8%E3%81%AB%E6%B6%88%E8%B2%BB%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_highmemory_MonitoringHost%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_highmemory_MonitoringHost.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_highmemory_MonitoringHost.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/" data-id="cltpsog2c000g0nr65u5x0i1l" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/" data-id="cltpsshzd000g0np40t3q2i9p" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -114,21 +114,6 @@
         <span id="more"></span>
 <p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p>
 <p>本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。</p>
-<ol>
-<li><a href="#%E4%BB%AE%E6%83%B3%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%92%E7%95%B0%E5%B8%B8%E3%81%AB%E6%B6%88%E8%B2%BB">仮想メモリを異常に消費</a></li>
-<li><ol>
-<li><a href="#%E4%BA%8B%E8%B1%A1">事象</a></li>
-<li>1.1 <a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E4%BE%8B" title="イベント ID：2004">イベントの例 (イベント ID：2004)</a></li>
-<li>1.2 <a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E4%BE%8B" title="イベントID：26008">イベントの例 (イベントID：26008)</a></li>
-<li>1.3 <a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E4%BE%8B" title="イベントID：1530">イベントの例 (イベントID：1530)</a></li>
-</ol>
-</li>
-<li><ol start="2">
-<li><a href="#%E8%A6%81%E5%9B%A0">要因</a></li>
-</ol>
-</li>
-<li>[アクション アカウントとログオン/ログオフに使用しているアカウントが同じであることによる他の問題事例](#アクション アカウントとログオン/ログオフに使用しているアカウントが同じであることによる他の問題事例)</li>
-</ol>
 <h2 id="仮想メモリを異常に消費"><a href="#仮想メモリを異常に消費" class="headerlink" title="仮想メモリを異常に消費"></a>仮想メモリを異常に消費</h2><h3 id="事象"><a href="#事象" class="headerlink" title="事象"></a>事象</h3><p>突然、SCOM の管理サーバーやエージェントが導入されているマシンにてプロセスが異常にメモリを消費し、マシンがダウンするといった事象が発生することがあります。<br>その場合、イベント ログ [System] に以下が記録されることを確認しています。</p>
 <h4 id="イベントの例-イベント-ID：2004"><a href="#イベントの例-イベント-ID：2004" class="headerlink" title="イベントの例 (イベント ID：2004)"></a>イベントの例 (イベント ID：2004)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ログの名前：System</span><br><span class="line">日時：yyyy/mm/dd hh:mm:ss </span><br><span class="line">ソース：Resource-Exhaustion-Detector</span><br><span class="line">レベル：警告</span><br><span class="line">タスクのカテゴリ：リソース消費診断イベント</span><br><span class="line">イベント ID：2004</span><br><span class="line">ユーザー：NT AUTHORITY\SYSTEM</span><br><span class="line">コンピュータ：hyperv01.contoso.com</span><br><span class="line">説明：Windows は仮想メモリの不足状態を診断しました。仮想メモリを多く消費したのは次のプログラムです:</span><br><span class="line">*MonitoringHost.exe (4904) は 3003106107520 バイトを消費し* 、WmiPrvSE.exe (2122) は 2003314000 バイトを消費し、svchost.exe (1134) は 192024218 バイトを消費しました。</span><br></pre></td></tr></table></figure>
 
