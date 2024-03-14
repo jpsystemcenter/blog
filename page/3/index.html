@@ -83,6 +83,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SCVMM/SCVMM_Job_History" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="../../SCVMM/SCVMM_Job_History/" class="article-date">
+  <time datetime="2022-07-07T03:00:00.000Z" itemprop="datePublished">2022-07-07</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../SCVMM/SCVMM_Job_History/">SCVMM ジョブ保存設定変更方法</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+皆さんこんにちは、System Center サポートチームの 保科と申します。
+今回は、System Center Virtual Machine Manager (SCVMM) で保存されるジョブ履歴の保存設定についてご紹介いたします。
+本ページが対象とする SCVMM バージョンSCVMM 2016SCVMM 2019SCVMM 2022
+概要SCVMM で実行される処理の多くは、ジョブという形で実行されます。このジョブが実行されると、実行可否に関わらず、履歴としてすべて SCVMM データベースに存在する [dbo].[tbl_TR_TaskTrail] というテーブルに保存されます。ジョブ履歴ですが、バッチ処理を組まれる等して大量のジョブが短期間で実行される環境においては、このテーブルが肥大化する要因となります。テーブルが肥大化することで、SCVMM 観点においては下記の影響が...
+        <p class="article-readmore">
+          <a href="../../SCVMM/SCVMM_Job_History/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/" data-id="cltr9q1tg000v0oo35kxqe5fb" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-general/JapanSCEM_000_NewBlogOpened" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -120,62 +172,10 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/general/JapanSCEM_000_NewBlogOpened/" data-id="cltr9o1mt00170npq61f2flpj" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/general/JapanSCEM_000_NewBlogOpened/" data-id="cltr9q1tk00170oo39cog69qk" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SCVMM/SCVMM_error_makeVMfromtemplete" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    <!-- post date -->
-    <div class="article-meta">
-      <a href="../../SCVMM/SCVMM_error_makeVMfromtemplete/" class="article-date">
-  <time datetime="2022-03-14T13:00:00.000Z" itemprop="datePublished">2022-03-14</time>
-</a>
-      
-    </div>
-
-    
-    <!-- post title -->
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../SCVMM/SCVMM_error_makeVMfromtemplete/">VM テンプレートから仮想マシン (Linux 系) を作成が完了しない</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- post caption -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-皆様こんにちは、System Center サポートチームの 佐藤 です。
-本日は System Center Virtual Machine Manager で Linux VM をテンプレートから作成する際に下図のようにタスク進捗率が 99 % で止まり作成が完了しない問題についてご紹介します。
-事象ライブラリサーバーに配置している RHEL もしくは CentOS  の VM テンプレート（vhdx）ファイルを用いて、VM を作成しようとした場合に下図のようにタスク進捗率が 99 % で止まってしまい、60 分ほどでタイムアウトし作成が失敗する事例があります。
-この問題の際に以下特徴がある場合は後述する回避策で改善できる可能性がございます。　・ステップ 1.7 ”バーチャル マシンのカスタマイズ” の進捗率が 99 %で同様に止まっており、他ステップは完了している　・Hyper-V...
-        <p class="article-readmore">
-          <a href="../../SCVMM/SCVMM_error_makeVMfromtemplete/">Read more</a>
-        </p>
-      
-    </div>
-
-    <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/" data-id="cltr9o1ms00140npqh4vz9bzj" class="article-share-link">共有</a-->
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/VM-templete/" rel="tag">VM templete</a></li></ul>
 
     </footer>
   </div>
@@ -224,7 +224,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/" data-id="cltr9o1mt00190npq9s1h2i8z" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/" data-id="cltr9q1tl00190oo3eh904obx" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li></ul>
@@ -276,7 +276,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/" data-id="cltr9o1m300010npq0o6u41w4" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/" data-id="cltr9q1su00010oo3c3gq6qfj" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li></ul>
@@ -327,7 +327,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/" data-id="cltr9o1mc000c0npqdh3ohd8o" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/" data-id="cltr9q1t3000c0oo3bs679kcp" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li></ul>
@@ -379,7 +379,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/" data-id="cltr9o1mp000x0npq6kl5ezqj" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/" data-id="cltr9q1th000x0oo3g0f4beak" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li></ul>
@@ -430,7 +430,7 @@ ACS は WQL（WMI Provider for Server Events と WQL の使用 - SQL Server | Mi
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/" data-id="cltr9o1m500030npqeidy71ab" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/" data-id="cltr9q1sw00030oo39ve4hy66" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li></ul>
@@ -459,6 +459,10 @@ ACS は WQL（WMI Provider for Server Events と WQL の使用 - SQL Server | Mi
       <ul>
         
           <li>
+            <a href="../../SCVMM/SCVMM_error_makeVMfromtemplete/">VM テンプレートから仮想マシン (Linux 系) を作成が完了しない</a>
+          </li>
+        
+          <li>
             <a href="../../SCOM/SCOM_highmemory_MonitoringHost/">MonitoringHost.exe が仮想メモリを異常に消費する</a>
           </li>
         
@@ -472,10 +476,6 @@ ACS は WQL（WMI Provider for Server Events と WQL の使用 - SQL Server | Mi
         
           <li>
             <a href="../../SCOM/SCOM_ManagementPacks/">管理パック (MP) のインポートについて</a>
-          </li>
-        
-          <li>
-            <a href="../../SCOM/SCOM_CacheClear/">SCOM の各種キャッシュクリアの手順</a>
           </li>
         
       </ul>
