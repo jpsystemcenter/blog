@@ -25,7 +25,7 @@ tags:
 ## 原因
 上記事象の場合、scvmmguestagent を起動できておらず、scvmmguestagent.bin が、SCVMMで仮想マシンを作成する際に設定した OS のプロファイル情報を反映させることができず処理が止まっている原因と考えられます。
 
-##改善方法
+## 改善方法
 まず OS にログインして以下コマンドを実行してみてください。
 ```
 /opt/microsoft/scvmmguestagent/bin/scvmmguestagent.bin
