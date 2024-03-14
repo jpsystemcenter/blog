@@ -2,20 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/general/JapanSCEM_000_NewBlogOpened/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/googlef661e4bda983601a.html</loc>
     
     <lastmod>2024-03-14</lastmod>
@@ -31,6 +17,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
+    
+    <lastmod>2024-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/general/JapanSCEM_000_NewBlogOpened/</loc>
+    
+    <lastmod>2024-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -79,20 +79,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_unix_script_monitor/</loc>
     
     <lastmod>2024-03-14</lastmod>
@@ -115,6 +101,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    
+    <lastmod>2024-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
+    
+    <lastmod>2024-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
