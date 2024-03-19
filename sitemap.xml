@@ -107,13 +107,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
-    
-    <lastmod>2024-03-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
     
     <lastmod>2024-03-19</lastmod>
@@ -129,6 +122,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    
+    <lastmod>2024-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
     
     <lastmod>2024-03-19</lastmod>
     
