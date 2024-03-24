@@ -83,6 +83,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SCVMM/SCVMM_reregisterVM" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="SCVMM/SCVMM_reregisterVM/" class="article-date">
+  <time datetime="2024-03-24T13:00:00.000Z" itemprop="datePublished">2024-03-24</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="SCVMM/SCVMM_reregisterVM/">VM の強制削除および再登録</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+皆様こんにちは、System Center サポートチームの 佐藤 です。
+本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除して、再登録する方法をご紹介いたします。
+SCVMM の DB で保持している情報が不整合になってしまうシナリオ下図は SCVMM の構成イメージとなりますが、SCVMM では管理している VM や Hyper-V ホストの情報を DB （SQL Server）で保持しております。
+発生シナリオは幾つかございますが、例えば  SCVMM で管理している VM を WSFC マネージャーで別ホストにマイグレーションした場合やHyper-V マネージャーから VM を削除した場合、SCVMM がその VM を見失ってしまい SCVMM のコンソールで見た場合に VM のステータスが ...
+        <p class="article-readmore">
+          <a href="SCVMM/SCVMM_reregisterVM/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/" data-id="clu565a18001b0nqh72b53vd9" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/" rel="tag">VM の強制削除および再登録</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-SCOM/SCOM_howto_getPerformanceData_fromDB" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -123,7 +175,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/" data-id="clu562pwd000l0nqp5771ehen" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/" data-id="clu565a0t000l0nqh48auaz4x" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/howto/" rel="tag">howto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/" rel="tag">パフォーマンス カウンター</a></li></ul>
@@ -177,7 +229,7 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/" data-id="clu562pwc000i0nqp27umhvhu" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/" data-id="clu565a0s000i0nqh98dae4wf" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/howto/" rel="tag">howto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%83%93%E3%83%A5%E3%83%BC/" rel="tag">パフォーマンス ビュー</a></li></ul>
@@ -229,7 +281,7 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/" data-id="clu562pwq00190nqp70cs4iha" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/" data-id="clu565a1600190nqhgdecdwdk" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/VM-templete/" rel="tag">VM templete</a></li></ul>
@@ -281,7 +333,7 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/" data-id="clu562pwa000g0nqp786y5eoy" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/" data-id="clu565a0q000g0nqh1ucb6pc2" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/MonitoringHost-exe/" rel="tag">MonitoringHost.exe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Troubleshoot/" rel="tag">Troubleshoot</a></li></ul>
@@ -331,7 +383,7 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Update_Rollup/" data-id="clu562pw7000a0nqpegl7175k" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Update_Rollup/" data-id="clu565a0n000a0nqh9ky1dedr" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">更新プログラム ロールアップ</a></li></ul>
@@ -381,7 +433,7 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/" data-id="clu562pwp00170nqp8hdifwmm" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/" data-id="clu565a1500170nqh6j5749jx" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">更新プログラム ロールアップ</a></li></ul>
@@ -432,7 +484,7 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/" data-id="clu562pxp004z0nqpe1lb4vmr" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/" data-id="clu565a22004z0nqh0jup7vxj" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li></ul>
@@ -482,7 +534,7 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/" data-id="clu562pw300050nqpakhve667" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/" data-id="clu565a0j00050nqh9f5776z5" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Trouble/" rel="tag">Trouble</a></li></ul>
@@ -533,61 +585,10 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/" data-id="clu562pw600090nqpflx8ax12" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/" data-id="clu565a0m00090nqh1b6ddke8" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Database/" rel="tag">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Trouble/" rel="tag">Trouble</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SCOM/SCOM_Workgroup" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    <!-- post date -->
-    <div class="article-meta">
-      <a href="SCOM/SCOM_Workgroup/" class="article-date">
-  <time datetime="2023-07-21T08:00:00.000Z" itemprop="datePublished">2023-07-21</time>
-</a>
-      
-    </div>
-
-    
-    <!-- post title -->
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="SCOM/SCOM_Workgroup/">WORKGROUP コンピューターの管理方法について</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- post caption -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>皆様こんにちは、System Center サポートチームの 石原 です。</p>
-<p>今回は、SCOM 管理サーバーと同じ信頼境界内に存在しない Windows サーバー  ( ※ 信頼関係を結んでいない別ドメイン内のサーバーや WORKGROUP コンピューター) に導入した SCOM エージェントを、証明書認証を用いて管理する方法について説明します。<br><br></p>
-        
-          <p class="article-more-link">
-            <a href="SCOM/SCOM_Workgroup/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      <!--a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Workgroup/" data-id="clu562pxu00530nqp9zi2gibx" class="article-share-link">共有</a-->
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li></ul>
 
     </footer>
   </div>
@@ -613,6 +614,10 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
       <ul>
         
           <li>
+            <a href="SCVMM/SCVMM_reregisterVM/">VM の強制削除および再登録</a>
+          </li>
+        
+          <li>
             <a href="SCOM/SCOM_howto_getPerformanceData_fromDB/">パフォーマンス データを DB から取得する方法</a>
           </li>
         
@@ -626,10 +631,6 @@ SCOM では採取したパフォーマンス カウンターを下図のよう�
         
           <li>
             <a href="SCOM/SCOM_highmemory_MonitoringHost/">MonitoringHost.exe が仮想メモリを異常に消費する</a>
-          </li>
-        
-          <li>
-            <a href="SCOM/SCOM_Update_Rollup/">SCOM の 更新プログラムのロールアップの適用手順</a>
           </li>
         
       </ul>

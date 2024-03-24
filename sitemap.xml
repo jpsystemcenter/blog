@@ -30,14 +30,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
     
     <lastmod>2024-03-24</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/</loc>
     
     <lastmod>2024-03-24</lastmod>
     
@@ -86,20 +86,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
-    
-    <lastmod>2024-03-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
-    
-    <lastmod>2024-03-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_unix_script_monitor/</loc>
     
     <lastmod>2024-03-24</lastmod>
@@ -114,14 +100,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_migration/</loc>
     
     <lastmod>2024-03-24</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_service_logon_access/</loc>
     
     <lastmod>2024-03-24</lastmod>
     
@@ -136,6 +122,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    
+    <lastmod>2024-03-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    
+    <lastmod>2024-03-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
     
     <lastmod>2024-03-24</lastmod>
     
