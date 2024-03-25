@@ -30,13 +30,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
-    
-    <lastmod>2024-03-25</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/</loc>
     
     <lastmod>2024-03-25</lastmod>
@@ -44,21 +37,14 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
+    
+    <lastmod>2024-03-25</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/</loc>
-    
-    <lastmod>2024-03-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
-    
-    <lastmod>2024-03-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/</loc>
     
     <lastmod>2024-03-25</lastmod>
     
@@ -73,6 +59,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
+    
+    <lastmod>2024-03-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
+    
+    <lastmod>2024-03-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/</loc>
     
     <lastmod>2024-03-25</lastmod>
     
@@ -114,20 +114,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
-    
-    <lastmod>2024-03-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
-    
-    <lastmod>2024-03-25</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
     
     <lastmod>2024-03-25</lastmod>
@@ -136,6 +122,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
+    
+    <lastmod>2024-03-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
+    
+    <lastmod>2024-03-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
     
     <lastmod>2024-03-25</lastmod>
     
@@ -170,14 +170,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
     
     <lastmod>2024-03-25</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
     
     <lastmod>2024-03-25</lastmod>
     
@@ -199,6 +199,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/</loc>
+    
+    <lastmod>2024-03-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
     
     <lastmod>2024-03-25</lastmod>
     

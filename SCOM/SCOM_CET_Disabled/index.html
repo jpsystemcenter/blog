@@ -4,22 +4,25 @@
   <meta charset="utf-8">
   
   
-  <title>アーカイブ: 2023 | Japan System Center Support Blog</title>
+  <title>SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について | Japan System Center Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="日本マイクロソフトの System Center に関するサポート情報のブログです。お客様より多くお問い合わせいただく内容について掲載を予定しております。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Japan System Center Support Blog">
-<meta property="og:url" content="https://jpsystemcenter.github.io/blog/archives/2023/index.html">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/index.html">
 <meta property="og:site_name" content="Japan System Center Support Blog">
-<meta property="og:description" content="日本マイクロソフトの System Center に関するサポート情報のブログです。お客様より多くお問い合わせいただく内容について掲載を予定しております。">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。">
 <meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/003.png">
+<meta property="article:published_time" content="2024-03-26T08:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-25T09:23:22.181Z">
 <meta property="article:author" content="Japan System Center Support">
-<meta property="article:tag" content="System Center">
-<meta property="article:tag" content="Operations Manager">
-<meta property="article:tag" content="Virtual Machine Manager">
-<meta property="article:tag" content="Orchestrator">
-<meta property="article:tag" content="Service Manager">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="Trouble">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/001.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
   
@@ -81,161 +84,87 @@
 </header>
 
       <div class="outer">
-        <section id="main"><section class="archives-wrap">
-    <h2 class='widget-title'>全記事一覧</h2>
+        <section id="main"><article id="post-SCOM/SCOM_CET_Disabled" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
   
-    <div class="archives">
+    <h1 class="article-title" itemprop="name">
+      SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-03-26T08:00:00.000Z" itemprop="datePublished">2024-03-26</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+a85f9324-ff5e-5399-8a3d-8a5f9e5a0c7f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88+%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE+CET+%28Control-flow+Enforcement+Technology%29+%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_CET_Disabled%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_CET_Disabled.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_CET_Disabled.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/" data-id="clu6qq91g00050ooz52x36zpp" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
       
-        
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCOM/SCOM_Update_Rollup/" class="archive-article-date">
-  <time datetime="2023-11-20T05:00:00.000Z" itemprop="datePublished">2023/ 11 / 20</time>
-</a>
-        
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCOM/SCOM_Update_Rollup/">SCOM の 更新プログラムのロールアップの適用手順</a>
-    </h1>
-  
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。<br><br></p>
+<span id="more"></span>
+<h2 id="CET-Control-flow-Enforcement-Technology-が有効な場合の-SCOM-エージェントの既知の問題について"><a href="#CET-Control-flow-Enforcement-Technology-が有効な場合の-SCOM-エージェントの既知の問題について" class="headerlink" title="CET (Control-flow Enforcement Technology) が有効な場合の SCOM エージェントの既知の問題について"></a>CET (Control-flow Enforcement Technology) が有効な場合の SCOM エージェントの既知の問題について</h2><p>CET (Control-flow Enforcement Technology) をサポートするプロセッサを搭載したハードウェアにインストールした Windows は、<b>ハードウェア強制されたスタック保護機能 (Hardware-enforced Stack Protection) </b>を有効にすることができます。<br>※ 注意：ハードウェア強制されたスタック保護機能は、新しい OS ビルドで有効な機能になります。<br>　 Windows 10 では、20H1 (19041) and 20H2 (19042) 以降の OS ビルドでサポートされるようになっています。<br>　 ご参考：<a target="_blank" rel="noopener" href="https://support.microsoft.com/ja-jp/help/4586853/windows-10-update-kb4586853">2020 年 11 月 30 日 — KB4586853 (OS ビルド 19041.662 および 19042.662)</a><br>　 <img src="001.png" width="80%"></p>
+<p>ハードウェア強制されたスタック保護機能 (以降、本機能) は新しいセキュリティ機能であり、本記事の公開日時点の SCOM エージェントは、<b>いずれのバージョンも本機能を使用しません。</b><br>そのため、SCOM エージェント用には本機能は無効で良いですが、SCOM 2022 UR2 までは、明示的に本機能を無効にする設定が SCOM エージェントに組み込まれていません。本機能をサポートする環境に SCOM 2022 UR2 より前の SCOM エージェントをインストールした場合、SCOM エージェントは本機能が有効なプロセスとして起動します。</p>
+<p>■ 参考：SCOM エージェントのプロセス (※ SCOM エージェントのプロセスは HealthService.exe ) が<br>　　　　 ハードウェア強制されたスタック保護機能を有効な状態で起動した際の画面ショット <img src="002.png"></p>
+<p><b>SCOM エージェントが、ハードウェア強制されたスタック保護機能を有効な状態で起動すると、短時間でプロセスがクラッシュして、該当サーバーが SCOM で管理できない状態になる既知の事例があります。</b></p>
+<hr>
+<h2 id="対処方法-①-更新プログラムのロールアップを適用"><a href="#対処方法-①-更新プログラムのロールアップを適用" class="headerlink" title="対処方法 ① 更新プログラムのロールアップを適用"></a>対処方法 ① 更新プログラムのロールアップを適用</h2><p>SCOM 2022 をご利用の場合、<b>更新プログラムロールアップ 2</b>にて修正されていますので、更新プログラムロールアップ 2を適用してください。更新プログラムロールアップ 2 を適用することで、ハードウェア強制されたスタック保護機能が無効化された SCOM エージェントにアップデートすることができます。</p>
+<p>・<a target="_blank" rel="noopener" href="https://support.microsoft.com/kb/5031649">SCOM 2022 更新プログラムのロールアップ 2 のダウンロードと適用手順</a>　<img src="003.png" width="80%"></p>
+<p>※ 更新プログラムのロールアップの適用手順につきましては、以下のサポートブログもご参照ください。<br>　<a href="../SCOM_Update_Rollup/">SCOM の 更新プログラムのロールアップの適用手順</a></p>
+<h2 id="対処方法-②-PowerShell-コマンドによる対処"><a href="#対処方法-②-PowerShell-コマンドによる対処" class="headerlink" title="対処方法 ② PowerShell コマンドによる対処"></a>対処方法 ② PowerShell コマンドによる対処</h2><p>すぐには更新プログラムのロールアップを適用できない場合や SCOM 2019 をご利用の場合、PowerShell コマンドにて SCOM エージェント プロセスのハードウェア強制されたスタック保護機能を無効化することで回避できます。<br>実行手順は以下の通りです。</p>
+<ol>
+<li>SCOM エージェントをインストールしたサーバーにログインします。</li>
+<li>PowerShell を管理者で起動します。</li>
+<li>以下のコマンドで SCOM エージェント プロセスのハードウェア強制されたスタック保護機能を無効化します。<br><code>Set-ProcessMitigation -Name MonitoringHost.exe -Disable UserShadowStack</code></li>
+<li>以下のコマンドで SCOM エージェント プロセス (HealthService.exe) を再起動します。<br><code>Restart-Service -Name HealthService</code></li>
+</ol>
+<hr>
+<h2 id="ご参考-英語サイト"><a href="#ご参考-英語サイト" class="headerlink" title="ご参考 (英語サイト)"></a>ご参考 (英語サイト)</h2><p>ハードウェア強制されたスタック保護機能について<br>・<a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/windows-os-platform-blog/understanding-hardware-enforced-stack-protection/ba-p/1247815">Understanding Hardware-enforced Stack Protection</a><br>・<a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/windows-os-platform-blog/developer-guidance-for-hardware-enforced-stack-protection/ba-p/2163340">Developer Guidance for Hardware-enforced Stack Protection</a></p>
 
-      </header>
-    </div>
-</article>
-
+      
+      
+        <div class="article-disclaimer">
         
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCVMM/SCVMM_Update_Rollup/" class="archive-article-date">
-  <time datetime="2023-11-20T04:00:00.000Z" itemprop="datePublished">2023/ 11 / 20</time>
-</a>
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCVMM/SCVMM_Update_Rollup/">SCVMM の 更新プログラムのロールアップの適用手順</a>
-    </h1>
-  
-
-      </header>
-    </div>
-</article>
-
-        
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCOM/SCOM_ManagementPacks/" class="archive-article-date">
-  <time datetime="2023-09-22T09:00:00.000Z" itemprop="datePublished">2023/ 9 / 22</time>
-</a>
-        
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCOM/SCOM_ManagementPacks/">管理パック (MP) のインポートについて</a>
-    </h1>
-  
-
-      </header>
-    </div>
-</article>
-
-        
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCOM/SCOM_CacheClear/" class="archive-article-date">
-  <time datetime="2023-08-02T08:00:00.000Z" itemprop="datePublished">2023/ 8 / 2</time>
-</a>
-        
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCOM/SCOM_CacheClear/">SCOM の各種キャッシュクリアの手順</a>
-    </h1>
-  
-
-      </header>
-    </div>
-</article>
-
-        
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCOM/SCOM_OpsDW_deletedata/" class="archive-article-date">
-  <time datetime="2023-07-31T03:00:00.000Z" itemprop="datePublished">2023/ 7 / 31</time>
-</a>
-        
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCOM/SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
-    </h1>
-  
-
-      </header>
-    </div>
-</article>
-
-        
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCOM/SCOM_Workgroup/" class="archive-article-date">
-  <time datetime="2023-07-21T08:00:00.000Z" itemprop="datePublished">2023/ 7 / 21</time>
-</a>
-        
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCOM/SCOM_Workgroup/">WORKGROUP コンピューターの管理方法について</a>
-    </h1>
-  
-
-      </header>
-    </div>
-</article>
-
-        
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCVMM/SCVMM_Troubleshooting_log/" class="archive-article-date">
-  <time datetime="2023-03-29T04:00:00.000Z" itemprop="datePublished">2023/ 3 / 29</time>
-</a>
-        
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a>
-    </h1>
-  
-
-      </header>
-    </div>
-</article>
-
-        
-          <article class="archive-article">
-    <div class="archive-article-inner">
-      <header class="archive-article-header">
-        <a href="../../SCOM/SCOM_Install_Manual/" class="archive-article-date">
-  <time datetime="2023-01-25T01:00:00.000Z" itemprop="datePublished">2023/ 1 / 25</time>
-</a>
-        
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../SCOM/SCOM_Install_Manual/">SCOM 管理サーバー構築手順 ～ 全画面ショット付き</a>
-    </h1>
-  
-
-      </header>
-    </div>
-</article>
-
-        
+        </div>
       
     </div>
-  </section>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_CET_Disabled.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../SCVMM/SCVMM_reregisterVM/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">VM の強制削除および再登録</div>
+    </a>
+  
+</nav>
 
   
+</article>
 
 </section>
         
@@ -248,7 +177,7 @@
       <ul>
         
           <li>
-            <a href="../../SCOM/SCOM_CET_Disabled/">SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</a>
+            <a href="">SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</a>
           </li>
         
           <li>
@@ -256,11 +185,11 @@
           </li>
         
           <li>
-            <a href="../../SCOM/SCOM_howto_getPerformanceData_fromDB/">パフォーマンス データを DB から取得する方法</a>
+            <a href="../SCOM_howto_getPerformanceData_fromDB/">パフォーマンス データを DB から取得する方法</a>
           </li>
         
           <li>
-            <a href="../../SCOM/SCOM_howto_getData_performanceView/">パフォーマンス ビューに表示されているデータを取得する方法</a>
+            <a href="../SCOM_howto_getData_performanceView/">パフォーマンス ビューに表示されているデータを取得する方法</a>
           </li>
         
           <li>
@@ -287,7 +216,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../2024/03/">2024 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../2022/01/">2022 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/03/">2024 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
     </div>
   </div>
 
@@ -319,7 +248,7 @@
   
     <a href="../../index.html" class="mobile-nav-link">Home</a>
   
-    <a href=".." class="mobile-nav-link">Archives</a>
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
   
 </nav>
     
