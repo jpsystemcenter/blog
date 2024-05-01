@@ -40,6 +40,7 @@ github:
 
 skip_render:
   - '_data/*.png'
+  - 'googleb115e71ebb92e4ec.html'
   # Bing Webmaster
   #- 'BingSiteAuth.xml'
   # Search Console
