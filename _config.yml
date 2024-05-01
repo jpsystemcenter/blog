@@ -42,7 +42,7 @@ skip_render:
   - '_data/*.png'
   - 'googleb115e71ebb92e4ec.html'
   # Bing Webmaster
-  #- 'BingSiteAuth.xml'
+  - 'BingSiteAuth.xml'
   # Search Console
   #- 'googlec1234567890abcde.html'
 
