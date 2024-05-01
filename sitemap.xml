@@ -23,13 +23,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/</loc>
     
     <lastmod>2024-05-01</lastmod>
@@ -37,21 +30,14 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
+    
+    <lastmod>2024-05-01</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/</loc>
     
     <lastmod>2024-05-01</lastmod>
     
@@ -73,6 +59,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</loc>
+    
+    <lastmod>2024-05-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
+    
+    <lastmod>2024-05-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/</loc>
     
     <lastmod>2024-05-01</lastmod>
     
@@ -149,13 +149,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Update_Rollup/</loc>
     
     <lastmod>2024-05-01</lastmod>
@@ -164,6 +157,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/</loc>
+    
+    <lastmod>2024-05-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
     
     <lastmod>2024-05-01</lastmod>
     
