@@ -14,6 +14,8 @@ disableDisclaimer: false
 
 今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、仮想マシンのライブ マイグレーションやエラーへの対処方法についてご説明いたします。
 
+<!-- more -->
+
 ### 本ページが対象とする SCVMM バージョン
 SCVMM 2016
 SCVMM 2019
