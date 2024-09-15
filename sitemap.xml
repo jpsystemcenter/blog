@@ -23,14 +23,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
     
     <lastmod>2024-09-15</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/</loc>
     
     <lastmod>2024-09-15</lastmod>
     
@@ -121,20 +121,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
-    
-    <lastmod>2024-09-15</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
-    
-    <lastmod>2024-09-15</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
     
     <lastmod>2024-09-15</lastmod>
@@ -143,6 +129,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    
+    <lastmod>2024-09-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    
+    <lastmod>2024-09-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
     
     <lastmod>2024-09-15</lastmod>
     
@@ -198,27 +198,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
-    
-    <lastmod>2024-09-15</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/</loc>
-    
-    <lastmod>2024-09-15</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
-    
-    <lastmod>2024-09-15</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
     
     <lastmod>2024-09-15</lastmod>
@@ -234,6 +213,27 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Install_Manual/</loc>
+    
+    <lastmod>2024-09-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
+    
+    <lastmod>2024-09-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/</loc>
+    
+    <lastmod>2024-09-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
     
     <lastmod>2024-09-15</lastmod>
     
