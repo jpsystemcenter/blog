@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SCVMM 管理サーバー構築手順 ～ 全画面ショット付き | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。 System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCVMM 管理サーバー構築手順 ～ 全画面ショット付き">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。 System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/011-2.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/012.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/013.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/014.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/015.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/016.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/017.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/018.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/019.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/020.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/021.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/022.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/023.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/024.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/025.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre012.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre013.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre014.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre016.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/pre015.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/026.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/027.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/028.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/029.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/030.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/031.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/032.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/033.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/034.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/035.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/036.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/037.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/037-2.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/038.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/039.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/040.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/041.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/042.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/043.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/044.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/045.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/046.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/047.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/048.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/049.png">
+<meta property="article:published_time" content="2024-09-16T01:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-15T12:50:00.155Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="インストール">
+<meta property="article:tag" content="SCVMM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCVMM/SCVMM_Install_Manual" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SCVMM 管理サーバー構築手順 ～ 全画面ショット付き
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-09-16T01:00:00.000Z" itemprop="datePublished">2024-09-16</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+5ffbd75c-b9ad-5d40-bfe3-f923c03c07fe%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86+%EF%BD%9E+%E5%85%A8%E7%94%BB%E9%9D%A2%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%E4%BB%98%E3%81%8D%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Install_Manual%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Install_Manual.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Install_Manual.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/" data-id="cm13kq6qk005f0nobhu5w7o3k" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。</p>
+<p>System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ サーバー) の構築、類似の仮想スイッチの設定を簡易的に反映できる設定 (論理スイッチ) などが利用できます。また、VMWare vCenter と連携することで VMWare VM を Hyper-V VM に移行することができます。<br><br>SCVMM の構成は、IT インフラ環境の規模や運用要件に応じて変わりますが、検証等の目的で簡易的に最短で SCVMM を構築されたいケースがあります。そういったケースに備えて、本記事では、1 台の Windows Server に SCVMM の主コンポーネントの SCVMM 管理サーバーと SCVMM コンソールをインストールして、SCVMM コンソールにサインインできるまでの手順を画面ショット付きで紹介します。</p>
+<span id="more"></span>
+
+
+<h1 id="SCVMM-導入の流れ"><a href="#SCVMM-導入の流れ" class="headerlink" title="SCVMM 導入の流れ"></a>SCVMM 導入の流れ</h1><p>SCVMM 導入の大まかな流れは下図の通りです。<br><img src="001.png"><br>最初に SCVMM 管理サーバーと SVMMM コンソールをインストールして SCVMM 環境を構築します。<br>その後、SCVMM で管理する Windows Server フェールオーバー クラスターを管理対象として追加します。<br>クラスターのメンバーではない独立した Hyper-V ホストを管理対象に追加することも可能です。<br>また、VMWare vCenter と連係することで、VMWare 環境を管理することもできます。</p>
+<p>※ 構築フェーズの計画ガイドについては、以下のマニュアル サイトをご参照ください。<br>　<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/plan-install?view=sc-vmm-2022">VMM のインストールを計画する</a></p>
+<p>本記事では、1 台の Windows Server にデータベース、SCVMM 管理サーバー、SCVM コンソールをインストールする手順 (上の図の赤枠で囲った部分の作業) を画面ショット付きで紹介します。<br><span style="color: red; "><strong>ドメインに参加した Windows Server 2022  (メモリ 16 GB 以上)  を予め 1 台ご準備ください。</strong></span></p>
+<h1 id="データーベース-Microsoft-SQL-Server-2022-の導入"><a href="#データーベース-Microsoft-SQL-Server-2022-の導入" class="headerlink" title="データーベース (Microsoft SQL Server 2022) の導入"></a>データーベース (Microsoft SQL Server 2022) の導入</h1><p>SCVMM では、SCVMM のシステム情報、管理対象のホストの情報、ジョブ履歴などの保管にデーターベースを用います。<br>SCVMM 管理サーバーをインストールする前に最初にデーターベースの準備が必要です。<br>SCVMM 2022 は Microsoft SQL Server 2016/2019/2022をサポートします。(<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/system-requirements?view=sc-vmm-2022#sql-server">SQL Server の要件</a>)<br><br>※ SQL Server 2022 は SCVMM 2022 UR1 以降でサポート対象になりました。そのため、SCVMM 2022 を構築後、すぐに最新の UR (更新プログラム のロールアップ) を適用してください。UR の適用は、サポートブログ <a href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/">UR (更新プログラム のロールアップ) を適用</a> を参考にしてください。</p>
+<p>SCVMM 用の SQL Server のインストール手順は以下の通りです。</p>
+<h2 id="1-SQL-Server-2022-のインストール-モジュールを準備"><a href="#1-SQL-Server-2022-のインストール-モジュールを準備" class="headerlink" title="1. SQL Server 2022 のインストール モジュールを準備"></a>1. SQL Server 2022 のインストール モジュールを準備</h2><p><em>① SQL Server 2022 のインストーラー</em>と <em>② 最新の累積的な更新プログラム(CU)</em> をダウンロードして、SCVMM をインストールする Windows Server 内にコピーします。<br><img src="004.png"></p>
+<p><em>① SQL Server 2022 のインストーラー (評価版)</em> は <a target="_blank" rel="noopener" href="https://www.microsoft.com/ja-jp/sql-server/sql-server-downloads">SQL Server のダウンロード</a> よりダウンロードできます。<br><img src="002.png"></p>
+<p>ダウンロードした EXE ファイル (SQL2022-SSEI-Eval.exe) を管理者で実行すると以下の画面が表示されます。<br>メディアのダウンロードをクリックすることで、ISO ファイル形式のインストーラーをダウンロードできます。<br><img src="003.png"></p>
+<p><em>② SQL Server 2022 の累積的な更新プログラム</em>は <a target="_blank" rel="noopener" href="https://www.microsoft.com/ja-JP/download/details.aspx?id=105013">Download SQL Server® 2022 for Microsoft® Windows の最新の累積的な更新プログラム</a> よりダウンロードできます。( ※ 本記事では、掲載日時点で最新の CU 14 を使用します。)</p>
+<h2 id="2-SQL-Server-2022-のインストール"><a href="#2-SQL-Server-2022-のインストール" class="headerlink" title="2. SQL Server 2022 のインストール"></a>2. SQL Server 2022 のインストール</h2><p>インストールファイルの準備ができましたら、実際にインストールを実行します。</p>
+<ol>
+<li><p>SCVMM をインストールする Windows Server にドメイン管理者でサインインします。</p>
+</li>
+<li><p>SQL Server 2022 のインストーラーを選択して、右クリック メニューでマウントします。<br><img src="005.png"></p>
+</li>
+<li><p>マウント先のドライブで setup.exe を選択して、右クリック メニューの [管理者として実行] をクリックします。<br><img src="006.png"></p>
+</li>
+<li><p>インストール画面を表示して、[SQL Server の新規スタンドアロン インストールを実行するか、既存のインストールに機能を追加] をクリックします。<br><img src="007.png"></p>
+</li>
+<li><p>本記事では Evaluation のまま [次へ] ボタンをクリックします。<br><img src="008.png"></p>
+</li>
+<li><p>ライセンス条項を確認して、 [次へ] ボタンをクリックします。<br><img src="009.png"></p>
+</li>
+<li><p>本記事では [Microsoft Update を使用して更新プログラムを確認する] は未チェックのまま [次へ] ボタンをクリックします。<br><img src="010.png"></p>
+</li>
+<li><p>事前検証でエラーが無いことを確認します。<br>[Windows ファイアウォール] の警告が出ていますが、本記事では SCVMM 管理サーバーを同一サーバーにインストールするため SQL Server へのリモート接続は必須ではないことから、このまま [次へ] ボタンをクリックします。<br><img src="011.png"></p>
+</li>
+<li><p>本記事では [SQL Server 用 Azure 拡張機能] はチェックを外して [次へ] ボタンをクリックします。<br><img src="011-2.png"></p>
+</li>
+<li><p>[データーベース エンジン サービス] にチェックを入れて [次へ] ボタンをクリックします。<br><img src="012.png"></p>
+</li>
+<li><p>本記事では [既定のインスタンス] のまま [次へ] ボタンをクリックします。<br><img src="013.png"></p>
+</li>
+<li><p>[サーバーの構成] の [サービス アカウント] タブ画面で [SQL Server エージェント] と [SQL Server Browser] のスタートアップの種類を [自動] にします。<br>また、[SQL Server データベース エンジン サービスにボリューム メンテナンス タスクを実行する特権を付与する] にチェックします。<br><img src="014.png"></p>
+</li>
+<li><p>[サーバーの構成] の [照合順序] タブ画面で<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2022#windows-collation">サポートされた日本語の照合順序</a>  ( Japanese_CI_AS、もしくは Japanese_XJIS_100_CI_AS ) が指定されていることを確認して  [次へ] ボタンをクリックします。<br><img src="015.png"></p>
+</li>
+<li><p>本記事では認証モードは [Windows 認証モード] を選択し、SQL Server 管理者には [現在のユーザーの追加] ボタンをクリックして、インストール作業を実行しているユーザーを設定します。<br>その他の設定はそのまま   [次へ] ボタンをクリックします。<br><img src="016.png"></p>
+</li>
+<li><p>[インストール] ボタンをクリックして、インストールを実行します。<br><img src="017.png"></p>
+</li>
+<li><p>完了画面に表示された [状態] がすべて [成功] になっていることを確認して [閉じる] ボタンをクリックします。<br>以上で SQL Server 2022 インスタンスの準備は完了です。<br><img src="018.png"></p>
+</li>
+</ol>
+<h2 id="3-SQL-Server-2022-の累積的な更新プログラム-CU-14-を適用する。"><a href="#3-SQL-Server-2022-の累積的な更新プログラム-CU-14-を適用する。" class="headerlink" title="3. SQL Server 2022 の累積的な更新プログラム ( CU 14 ) を適用する。"></a>3. SQL Server 2022 の累積的な更新プログラム ( CU 14 ) を適用する。</h2><ol>
+<li><p>更新プログラムのインストーラーを選択して、右クリック メニューの [管理者として実行] をクリックします。<br><img src="019.png"></p>
+</li>
+<li><p>ライセンス条項を確認して、 [次へ] ボタンをクリックします。<br><img src="020.png"></p>
+</li>
+<li><p>MSSQLSERVER にチェックが付いていることを確認して、 [次へ] ボタンをクリックします。<br><img src="021.png"></p>
+</li>
+<li><p>ファイルの確認が完了したら、 [次へ] ボタンをクリックして進みます。<br><img src="022.png"></p>
+</li>
+<li><p>[更新] ボタンをクリックして、更新プログラムのインストールを実行します。<br><img src="023.png"></p>
+</li>
+<li><p>完了画面に表示された [状態] がすべて [成功] になっていることを確認して [閉じる] ボタンをクリックします。<br>以上で SCVMM 用の データーベースの準備は完了です。<br><img src="024.png"></p>
+</li>
+</ol>
+<p>※ 以下の警告が表示された場合は、更新プログラムのインストール完了後、一度 Windows Server を再起動します。<br><img src="025.png"></p>
+<p>==================<span style="font-size: 80%;"><br>【補足】<br>検証用の SCVMM の最短構築に際しては必須ではありませんが、SQL Server の管理に有用な <strong>SQL Server Management Studio (SSMS)</strong> はインストールされることを推奨します。SSMS は、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms?redirectedfrom=MSDN&view=sql-server-ver16#download-ssms">SQL Server Management Studio (SSMS) のダウンロード</a> からダウンロードできます。<br></span>==================</p>
+<h1 id="SCVMM-管理サーバーと-SCVMM-コンソールのインストール"><a href="#SCVMM-管理サーバーと-SCVMM-コンソールのインストール" class="headerlink" title="SCVMM 管理サーバーと SCVMM コンソールのインストール"></a>SCVMM 管理サーバーと SCVMM コンソールのインストール</h1><p>データーベースの準備が完了したら、いよいよ SCVMM 管理サーバーと SCVMM コンソールのインストールになりますが、その前に前提条件のソフトウェアをインストールします。<br>詳細な手順については、以下のマニュアル サイトをご参照ください。<br>・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/install?view=sc-vmm-2022">SCVMM 管理サーバーをインストールする方法</a><br>・<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/install-console?view=sc-vmm-2022">SCVMM コンソールをインストールする方法</a></p>
+<p>前提条件のソフトウェア、SCVMM 管理サーバー、SCVMM コンソールのインストール手順は以下の通りです。</p>
+<h2 id="1-SCVMM-2022-の前提条件のソフトウェアのインストール"><a href="#1-SCVMM-2022-の前提条件のソフトウェアのインストール" class="headerlink" title="1. SCVMM 2022 の前提条件のソフトウェアのインストール"></a>1. SCVMM 2022 の前提条件のソフトウェアのインストール</h2><p>SCVMM 管理サーバーと SCVMM コンソールのインストール サーバーは、以下の前提条件を満たしている必要があります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/system-center/vmm/system-requirements?view=sc-vmm-2022#installation-components">インストール コンポーネント</a><br><img src="pre001.png"></p>
+<p>Windows Server 2022 の場合、PowerShell や .Net については最初から条件を満たしていると思いますので、<em>Windows ADK</em> をインストールします。Windows ADK のインストーラーは <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-hardware/get-started/adk-install">ココ</a> からダウンロードできます。adksetup.exe と adkwinpesetup.exe をダウンロードします。<br><img src="pre002.png"></p>
+<ol>
+<li><p>Windows ADK (adksetup.exe) を選択して、右クリック メニューの [管理者として実行] をクリックします。<br><img src="pre003.png"></p>
+</li>
+<li><p>インストール先を指定して、 [次へ] ボタンをクリックします。<br><img src="pre004.png"></p>
+</li>
+<li><p>Windows キット プライバシーを選択して、 [次へ] ボタンをクリックします。<br><img src="pre005.png"></p>
+</li>
+<li><p>使用許諾契約の内容を確認して、 [同意する] ボタンをクリックします。<br><img src="pre006.png"></p>
+</li>
+<li><p>SCVMM で必須の機能 [Deployment Tools] を残して [インストール] ボタンをクリックします。<br><img src="pre007.png"></p>
+</li>
+<li><p>[閉じる] ボタンをクリックします。<br><img src="pre008.png"></p>
+</li>
+<li><p>次に Windows ADK PE アドオン (adkwinpesetup.exe) を選択して、右クリック メニューの [管理者として実行] をクリックします。<br><img src="pre009.png"></p>
+</li>
+<li><p>Windows ADK 本体のインストール先がインストール パスにセットされていることを確認して、 [次へ] ボタンをクリックします。<br><img src="pre010.png"></p>
+</li>
+<li><p>Windows キット プライバシーを選択して、 [次へ] ボタンをクリックします。<br><img src="pre011.png"></p>
+</li>
+<li><p>使用許諾契約の内容を確認して、 [同意する] ボタンをクリックします。<br><img src="pre012.png"></p>
+</li>
+<li><p>Windows ADK 本体でインストールした [Deployment Tools] にチェックが入っていることを確認して [インストール] ボタンをクリックします。<br><img src="pre013.png"></p>
+</li>
+<li><p>[閉じる] ボタンをクリックします。<br><img src="pre014.png"></p>
+</li>
+</ol>
+<p><b><strong>注意</strong></b><br><img src="pre016.png"><br>新しい Windows ADK ではフォルダー構成が変更されているため、以下のコピー元フォルダー内の全ファイルをコピー先フォルダー内にコピーしてください。(※ 移動ではなくコピーしてください。)<br>　コピー元：C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\WSIM\amd64<br>　コピー先：C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\WSIM<br><img src="pre015.png"></p>
+<h2 id="2-SCVMM-2022-のインストール-モジュールを準備"><a href="#2-SCVMM-2022-のインストール-モジュールを準備" class="headerlink" title="2. SCVMM 2022 のインストール モジュールを準備"></a>2. SCVMM 2022 のインストール モジュールを準備</h2><ol>
+<li><p>Microsoft Evaluation Center の <a target="_blank" rel="noopener" href="https://www.microsoft.com/ja-JP/evalcenter/download-system-center-2022">System Center 2022 | Microsoft Evaluation Center</a> からインストール ファイル [SCVMM_2022.exe] をダウンロードします。<br><img src="026.png"></p>
+</li>
+<li><p>ダウンロードしたファイルを SCVMM をインストールする Windows Server 内にコピーします。<br><img src="027.png"></p>
+</li>
+</ol>
+<h2 id="3-インストール-ファイルを解凍する"><a href="#3-インストール-ファイルを解凍する" class="headerlink" title="3. インストール ファイルを解凍する"></a>3. インストール ファイルを解凍する</h2><ol>
+<li><p>SCVMM をインストールする Windows Server にドメイン管理者でサインインします。</p>
+</li>
+<li><p>SCVMM 2022 のインストーラーを選択して、右クリック メニューの [管理者として実行] をクリックします。<br><img src="028.png"></p>
+</li>
+<li><p>インストール ファイル解凍ウィザードが開きますので、[Next] ボタンをクリックします。<br><img src="029.png"></p>
+</li>
+<li><p>ライセンス条項を確認して、 [Next] ボタンをクリックします。<br><img src="030.png"></p>
+</li>
+<li><p>インストール ファイルの解凍先を確認して、 [Next] ボタンをクリックします。<br><img src="031.png"></p>
+</li>
+<li><p>[Extract] ボタンをクリックして解凍を実行します。<br><img src="032.png"></p>
+</li>
+<li><p>[Finish] ボタンをクリックして、ウィザードを閉じます。<br><img src="033.png"><br>[C:\System Center Virtual Machine Manager] フォルダ配下にインストール用ファイルが展開されていることが確認できます。<br><img src="034.png"></p>
+</li>
+</ol>
+<h2 id="4-SCVMM-管理サーバーと-SCVMM-コンソールのインストール"><a href="#4-SCVMM-管理サーバーと-SCVMM-コンソールのインストール" class="headerlink" title="4. SCVMM 管理サーバーと SCVMM コンソールのインストール"></a>4. SCVMM 管理サーバーと SCVMM コンソールのインストール</h2><ol>
+<li><p>SCVMM をインストールする Windows Server にドメイン管理者でサインインします。</p>
+</li>
+<li><p>[C:\System Center Virtual Machine Manager] フォルダ配下の [Setup.exe] を選択して、右クリック メニューの [管理者として実行] をクリックします。<br><img src="035.png"></p>
+</li>
+<li><p>インストール ウィザードが起動するので、[インストール] をクリックします。<br>※ 「再起動が必要です」と表示されている場合は、一度、Windows を再起動してください。ただし、再起動直後でも表示される場合がありますので、その場合はこのまま進めてください。<br><img src="036.png"></p>
+</li>
+<li><p>インストールする機能の選択画面で [VMM 管理サーバー] にチェックを入れて、[次へ] ボタンをクリックして進みます。<br>SCVMM 管理サーバーには SCVMM コンソールが必ずインストールされますので、[VMM 管理サーバー] にチェックを入れると自動的に [VMM コンソール] にもチェックが入ります。<br><img src="037.png"></p>
+</li>
+<li><p>[プロダクトキー] をお持ちの場合は入力します。評価版として構築する場合は空のまま [次へ] ボタンをクリックします。<br>※ 後述の手順で 180日以内にプロダクトキーを適用することで、評価版環境からライセンス適用環境に切り替えることができます。<br><img src="037-2.png"></p>
+</li>
+<li><p>ライセンス条項を確認して、 [次へ] ボタンをクリックします。<br><img src="038.png"></p>
+</li>
+<li><p>[診断と使用状況のデータ] を確認して、 [次へ] ボタンをクリックします。<br><img src="039.png"></p>
+</li>
+<li><p>本記事では [Microsoft Update] は [オフ] を選択して [次へ] ボタンをクリックします。<br><img src="040.png"></p>
+</li>
+<li><p>インストール先フォルダを指定して、[次へ] ボタンをクリックします。<br>標準のインストール先は [C:\Program Files\Microsoft System Center\Virtual Machine Manager] です。<br><img src="041.png"></p>
+</li>
+<li><p>データベースの構成画面で、SCVMM で使用するデータベース [VirtualManagerDB] を作成します。<br>[次の資格情報を使用する] にチェックを入れて、SQL Server インストール時に SQL Server 管理者として登録した AD アカウント情報を入力します。<br><img src="042.png"></p>
+</li>
+<li><p>サービス アカウントおよび分散キー管理の構成画面に AD アカウント情報を入力して、 [次へ] ボタンをクリックします。<br><img src="043.png"></p>
+</li>
+<li><p>ポートの構成画面の設定を確認して、 [次へ] ボタンをクリックします。<br><img src="044.png"></p>
+</li>
+<li><p>ライブラリの構成画面の設定を確認して、 [次へ] ボタンをクリックします。<br>既定の設定では SCVMM 管理サーバーがライブラリ サーバーを兼ねて、SCVMM 管理サーバー内にライブラリ共有が作成されます。<br><img src="045.png"></p>
+</li>
+<li><p>インストールの概要画面を確認して、 [インストール] ボタンをクリックして、インストールを実行します。<br><img src="046.png"></p>
+</li>
+<li><p>完了画面でエラーが出ていないことを確認して、[閉じる] ボタンをクリックしてウィザードを閉じます。<br><img src="047.png"></p>
+</li>
+</ol>
+<p>SCVMM コンソールのログイン画面が立ち上がりますので、接続をクリックすることでログインできます。<br><img src="048.png"></p>
+<h1 id="プロダクトキーの適用"><a href="#プロダクトキーの適用" class="headerlink" title="プロダクトキーの適用"></a>プロダクトキーの適用</h1><p>SCVMM コンソールの左上のメニューバーで [バージョン情報] をクリックして、[アクティブ化] ボタンからプロダクトキーを入力することができます。<br><img src="049.png"></p>
+<hr>
+<p>以上で、SCVMM 管理サーバーを導入して、SCVMM コンソールにログイン可能になりました。<br>このあと、[ファブリック] 画面で管理対象の フェールオーバー クラスターや Hyper-V ホストを追加したり、VMWare vCenter と連係することで、仮想化サーバー基盤の統合管理ができるようになります。<br>これらの手順についても、今後ブログで紹介したいと考えております。</p>
+<p><strong>更新プログラム のロールアップ</strong><br>各種設定を進める前に最新の更新プログラムのロールアップを適用してください。<br><a href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Update_Rollup/">UR (更新プログラム のロールアップ) を適用</a> を適用してください。</p>
+<p><a href="#SCVMM-%E5%B0%8E%E5%85%A5%E3%81%AE%E6%B5%81%E3%82%8C">SCVMM 導入の流れ</a> で記載しました通り、インフラ環境や要件によって SCVMM 環境の各コンポーネントの構成や台数が変わります。メンテナンス時の可用性や耐障害性を考慮して、複数台の SCVMM 管理サーバーを導入して高可用性環境を構成することや、データーベースを SQL Server AlwaysOn 可用性グループで構成することも可能です。SCVMM 環境の構成については、要件定義や初期の設計フェーズにおいて検討いただければと存じます。</p>
+<p>本番環境の構築においては多数の考慮事項がございますが、まずは今回の手順を進めていただくことで SCVMM コンソールにログインすることができたと思います。実際に SCVMM コンソールにログインして、SCVMM の画面構成、機能、操作性など検証いただければ幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCVMM/SCVMM_Install_Manual.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../SCVMM_LiveMigration_and_Errors/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</a>
+          </li>
+        
+          <li>
+            <a href="../SCVMM_LiveMigration_and_Errors/">SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_CET_Disabled/">SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</a>
+          </li>
+        
+          <li>
+            <a href="../SCVMM_reregisterVM/">VM の強制削除および再登録</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_howto_getPerformanceData_fromDB/">パフォーマンス データを DB から取得する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Migration/" rel="tag">Migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MonitoringHost-exe/" rel="tag">MonitoringHost.exe</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VM-templete/" rel="tag">VM templete</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/" rel="tag">VM の強制削除および再登録</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/howto/" rel="tag">howto</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/" rel="tag">パフォーマンス カウンター</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%83%93%E3%83%A5%E3%83%BC/" rel="tag">パフォーマンス ビュー</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">更新プログラム ロールアップ</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">22</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Database">Database</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/MonitoringHost-exe">MonitoringHost.exe</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManagerDW">OperationsManagerDW</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Trouble">Trouble</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">6</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/howto">howto</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">8</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">4</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Migration">Migration</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/VM-templete">VM templete</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2">VM の強制削除および再登録</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97">更新プログラム ロールアップ</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/03/">2024 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 12.86px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/Database/" style="font-size: 10px;">Database</a> <a href="../../tags/General/" style="font-size: 11.43px;">General</a> <a href="../../tags/HowTo/" style="font-size: 18.57px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Migration/" style="font-size: 10px;">Migration</a> <a href="../../tags/MonitoringHost-exe/" style="font-size: 10px;">MonitoringHost.exe</a> <a href="../../tags/Operations-Manager/" style="font-size: 15.71px;">Operations Manager</a> <a href="../../tags/OperationsManagerDW/" style="font-size: 10px;">OperationsManagerDW</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 11.43px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 17.14px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Trouble/" style="font-size: 12.86px;">Trouble</a> <a href="../../tags/Troubleshoot/" style="font-size: 18.57px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/VM-templete/" style="font-size: 10px;">VM templete</a> <a href="../../tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/" style="font-size: 10px;">VM の強制削除および再登録</a> <a href="../../tags/howto/" style="font-size: 11.43px;">howto</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 14.29px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 14.29px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 11.43px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 11.43px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 11.43px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 11.43px;">トラブルシューティング</a> <a href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/" style="font-size: 10px;">パフォーマンス カウンター</a> <a href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%83%93%E3%83%A5%E3%83%BC/" style="font-size: 10px;">パフォーマンス ビュー</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 11.43px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12.86px;">新環境への移行</a> <a href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" style="font-size: 11.43px;">更新プログラム ロールアップ</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
