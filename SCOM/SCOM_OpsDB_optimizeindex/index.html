@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SCOM OperationsManager データベースの unused 領域開放手順 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCOM OperationsManager データベースの unused 領域開放手順">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/001.png">
+<meta property="article:published_time" content="2024-11-01T03:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-01T05:11:03.437Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="SCOM">
+<meta property="article:tag" content="Trouble">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="OperationsManager">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCOM/SCOM_OpsDB_optimizeindex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SCOM OperationsManager データベースの unused 領域開放手順
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-11-01T03:00:00.000Z" itemprop="datePublished">2024-11-01</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+b95f0b35-c41c-55e8-a749-242777735a6d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+OperationsManager+%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE+unused+%E9%A0%98%E5%9F%9F%E9%96%8B%E6%94%BE%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_OpsDB_optimizeindex%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_OpsDB_optimizeindex.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_OpsDB_optimizeindex.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/" data-id="cm2ya10z6005g0nq6ghs9360v" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p>
+<p>今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。</p>
+<span id="more"></span>
+
+<p>SCOM 2016<br>SCOM 2019<br>SCOM 2022</p>
+<h1 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h1><p>SCOM を最小限の構成でインストールすると、以下 2 種類のデータベースが作成されます。</p>
+<ul>
+<li>OperationsManager:<br>SCOM の監視構成やインポートされた管理パック、監視対象の情報、監視データやアラート情報等 SCOM に関するあらゆる情報が保存されるデータベースです。<br>このデータベースが動作不備になったり、容量がいっぱいになると、SCOM 自体を使用することが出来なくなります。</li>
+<li>OperationsManagerDW<br>SCOM のレポート機能で使用するための監視データや監視対象の情報等が保存されるデータベースです。<br>保存されるデータは、SCOM の監視動作に準ずるものとなります。<br>例えば、パフォーマンスカウンターの収集を実施されている場合、まずは “OperationsManager” データベースにその監視内容が保存されます。<br>その後、その監視内容が “OperationsManagerDW” 側でも保存され、更にレポート用のデータとしてその保存されたデータが加工されます。<br>“OperationsManager” データベースと異なり、本データベースが極端の場合存在しない場合でも、SCOM の機能を使用することが出来ます。<br>(データベースの削除自体を推奨しているものではございません。)<br>一方で、本データベースに不備が発生すると、レポートに関するデータが取得できない、つまりレポートを閲覧することが出来なくなります。</li>
+</ul>
+<p>今回ご紹介とするのは、”OperationsManager” のデータベースに関してです。<br>こちらのデータベースが長期的に運用されることで、”unused” 領域が増加する事象が確認されます。<br>データベースの空き容量は “unallocated” 領域に該当し、”unused” 領域は未使用領域ではあるものの、厳密には空き容量として計上されません。<br>そのため、空き容量に該当しない未使用領域が長期運用に伴い増加することで、データベースの空き容量を圧迫する要因となります。<br>今回は、この “unused” 領域を解放する手順と、その操作を定期的に実行するための設定手順をご紹介いたします。</p>
+<h1 id="参考情報"><a href="#参考情報" class="headerlink" title="参考情報"></a>参考情報</h1><p>本格的なご説明の前に、今回の記事の大元となる弊社エンジニアのブログをご紹介いたします。<br><a target="_blank" rel="noopener" href="https://kevinholman.com/2017/08/03/what-sql-maintenance-should-i-perform-on-my-scom-2016-databases/">What SQL maintenance should I perform on my SCOM databases?</a><br>今回ご紹介とします操作に加え、SCOM 関連データベースおよび SQL Server で必要なメンテナンスや設計思想が数多く掲載された、有用なブログ記事です。</p>
+<h1 id="事象発生要因"><a href="#事象発生要因" class="headerlink" title="事象発生要因"></a>事象発生要因</h1><p>結論を先に述べると、”unused” 領域の拡大は、インデックス最適化が行われていない場合に発生する可能性がございます。<br>SCOM データベースである “OperationsManager” データベースの設計と SQL Server 2016 以降の仕様によって、一部テーブルに対してインデックス最適化処理が行われない可能性がございます。<br>比較的多い事例として、”dbo.PerformanceData_xx” テーブルが “unused” の領域の大半を消費することがございます。<br>(“xx” にはテーブル番号を示す数値が入力されます。)<br>“dbo.PerformanceData_xx” は SCOM の処理上、現在のテーブル内データに応じてインデックスを最適化する処理が行われません。<br>これによって、下記の影響が発生する場合がございます。</p>
+<ul>
+<li>実データ総数に対して、テーブルが実際に使用する容量が必要以上に消費される。</li>
+<li>データベース自体のパフォーマンスへの影響。</li>
+<li>テーブル内の未使用領域 (= “unused” 領域) の未開放</li>
+</ul>
+<p>こちらの事象対処のため、後述の手順で対象テーブルのインデックス最適化を行います。<br>下記にご紹介します手順を弊社検証環境でも実施しました結果、テーブル内のレコード数が減ることなく “OperationsManager” データベースの “unused” 領域の割合が下記の遷移となりましたことを確認しております。</p>
+<ul>
+<li>手順実施前: 10.95%</li>
+<li>手順実施後: 3.76%</li>
+</ul>
+<p>上記で減少した “unused” 領域の割合だけ、”unallocated” 領域の割合も増加します。<br>また、手順実施後も SCOM 上でのデータ欠損等は見られず、動作も正常に行われ続けることも確認しております。<br>そのため、事象対処にあたっては、下記にご案内します手順の実施は有用と判断しております。</p>
+<h1 id="“unused”-領域占有状況の確認方法"><a href="#“unused”-領域占有状況の確認方法" class="headerlink" title="“unused” 領域占有状況の確認方法"></a>“unused” 領域占有状況の確認方法</h1><p>“unused” 領域はユーザーでも簡単に確認いただけます。<br>確認点としてはデータべーズ全体の “unused” 領域の割合を確認する方法と、テーブル毎に “unused” 領域の総容量を確認する方法がございます。<br>以下確認では SQL Server データベースのレポートを表示します。<br>各レポート表示後、レポートの画面上で右クリックし、[エクスポート] から以下形式でレポートをエクスポートいただけます。</p>
+<ul>
+<li>Excel</li>
+<li>PDF</li>
+<li>Word</li>
+</ul>
+<p>状況に応じてレポートをエクスポートいただき、データ分析のお役に立ててください。</p>
+<h2 id="データべーズ全体の-“unused”-領域割合の確認方法"><a href="#データべーズ全体の-“unused”-領域割合の確認方法" class="headerlink" title="データべーズ全体の “unused” 領域割合の確認方法"></a>データべーズ全体の “unused” 領域割合の確認方法</h2><ol>
+<li>“OperationsManager” データベースが存在するサーバーに管理者権限でログインします。</li>
+<li>SQL Server Management Studio (SSMS) を開きます。</li>
+<li>目的のデータべースが存在するサーバーに、管理者権限でログインします。</li>
+<li>左ペインより “OperationsManager” を右クリックし、[レポート] -&gt; [標準レポート] -&gt; [ディスク使用量] をクリックします。</li>
+<li>ディスク使用量のレポートが表示されますので、表示された左側の円グラフの “unused” 領域の割合を確認します。<br>この割合が、現在 “OperationsManager” データベースで占有されている “unused” 領域の割合となります。</li>
+</ol>
+<h2 id="テーブル毎の-“unused”-領域使用量の確認方法"><a href="#テーブル毎の-“unused”-領域使用量の確認方法" class="headerlink" title="テーブル毎の “unused” 領域使用量の確認方法"></a>テーブル毎の “unused” 領域使用量の確認方法</h2><ol>
+<li>“OperationsManager” データベースが存在するサーバーに管理者権限でログインします。</li>
+<li>SQL Server Management Studio (SSMS) を開きます。</li>
+<li>目的のデータべースが存在するサーバーに、管理者権限でログインします。</li>
+<li>左ペインより “OperationsManager” を右クリックし、[レポート] -&gt; [標準レポート] -&gt; [テーブルごとのディスク使用量] をクリックします。</li>
+<li>表示されたレポートの [未使用 (KB)] 列の値を確認します。<br>こちらの値が、各テーブルで “unused” 領域に該当する使用容量を表示します。</li>
+</ol>
+<h1 id="“unused”-領域の開放"><a href="#“unused”-領域の開放" class="headerlink" title="“unused” 領域の開放"></a>“unused” 領域の開放</h1><p>それでは本題の、”OperationsManager” データベースより “unused” 領域を解放する手順をご紹介します。</p>
+<h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>本手順は “OperationsManager” データベースに対してインデックス最適化を行う処理を実施いただきます。<br>念のため、手順を実施いただく前に、”OperationsManager” データベースのバックアップを取得いただくことを推奨致します。<br>バックアップ方法は、下記の弊社サイトをご確認ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server?view=sql-server-ver22">データベースの完全バックアップの作成</a><br>万が一インデックス最適化後に SCOM 動作が不安定になったり、機能不全に陥った場合、データベースの復元を行います。</p>
+<p>復元をいただく場合、ご利用の SCOM サーバー全台で、本ブログ別記事の [② SCOM 管理サーバーのキャッシュクリア手順] 項の手順を実施いただきます。<br><a href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/#%E2%91%A1-SCOM-%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%82%AF%E3%83%AA%E3%82%A2%E6%89%8B%E9%A0%86">SCOM の各種キャッシュクリアの手順 - ② SCOM 管理サーバーのキャッシュクリア手順</a><br>その際、2. の手順実施後から 5. の手順実施前の任意の間で、データベースを復元いただきます。<br>なお、復元の際は、必ずすべての SCOM サーバーで 2. の手順が実施された状態としていただきます。</p>
+<p>復元手順は下記の弊社サイトに沿って行います。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sql/relational-databases/backup-restore/restore-a-database-backup-using-ssms?view=sql-server-ver16&viewFallbackFrom=sql-server-ver22">データベースの完全バックアップの作成</a><br>復元後、停止された SCOM サービス一式を起動します。</p>
+<h2 id="手順で使用するクエリの入手"><a href="#手順で使用するクエリの入手" class="headerlink" title="手順で使用するクエリの入手"></a>手順で使用するクエリの入手</h2><p>今回ご紹介としますインデックス最適化は、別途環境内に作成いただくストアド プロシージャを実行することで行われます。<br>こちらのストアド プロシージャを作成するクエリを提供しておりますサイトをご紹介します。<br><a target="_blank" rel="noopener" href="https://ola.hallengren.com/sql-server-index-and-statistics-maintenance.html">SQL Server Maintenance Solution - SQL Server Index and Statistics Maintenance</a><br>以下図の箇所を参考とし、手順内で使用するクエリをダウンロードします。<br><img src="001.png"></p>
+<h2 id="本手順"><a href="#本手順" class="headerlink" title="本手順"></a>本手順</h2><ol>
+<li>“OperationsManager” データベースを運用する SQL Server が動作するサーバーに管理者権限でログインします。</li>
+<li>ダウンロードされた “MaintenanceSolution.sql” を、1. でログインされたサーバーにコピーします。</li>
+<li>1. でログインされたサーバー上で SQL Server Management Studio (SSMS) を開きます。</li>
+<li>“OperationsManager” データベースが存在するサーバーに、管理者権限でログインします。</li>
+<li>画面左ペインより、ログインされたサーバー名を右クリックし、[新しいクエリ] をクリックします。</li>
+<li>クエリ入力欄に、2. でコピーされた “MaintenanceSolution.sql” ファイルをドラッグ &amp; ドロップします。</li>
+<li>クエリ入力欄にクエリが表示されましたら、F5 キーを押下してクエリを実行します。<br>対象サーバーのシステムデータベースである “master” データベースに、”dbo.IndexOptimize” ストアドプロシージャが新規に作成されます。</li>
+<li>続けて、画面左ペインより、ログインされたサーバー名を右クリックし、[新しいクエリ] をクリックします。</li>
+<li>下記のクエリをクエリ入力欄に貼り付け、F5 キーを押下してクエリを実行します。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">use [master]</span><br><span class="line">EXECUTE dbo.IndexOptimize</span><br><span class="line">@Databases = &#x27;OperationsManager&#x27;,</span><br><span class="line">@FragmentationLow = NULL,</span><br><span class="line">@FragmentationMedium = &#x27;INDEX_REORGANIZE,INDEX_REBUILD_ONLINE,INDEX_REBUILD_OFFLINE&#x27;,</span><br><span class="line">@FragmentationHigh = &#x27;INDEX_REBUILD_ONLINE,INDEX_REBUILD_OFFLINE&#x27;,</span><br><span class="line">@FragmentationLevel1 = 5,</span><br><span class="line">@FragmentationLevel2 = 30</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>手順は以上となります。<br>こちらのクエリによって、インデックス最適化が必要なテーブルのみに対してインデックス最適化を行う “dbo.IndexOptimize” ストアドプロシージャを実行します。<br>弊社検証環境では、”dbo.PerformanceData_xx”、”dbo.Event_xx”、”dbo.StateChangeEvent” テーブルに対してのみインデックス最適化が行われたことを確認しております。<br>なお、テーブルのインデックス最適化という処理の関係上、サーバーの性能や最適化対象となるテーブル数やその大小によってクエリ実行時間が大きく変動いたします。<br>クエリを実行いただく際は、可能であれば業務影響の小さい時間帯に実施いただくことを推奨いたします。</p>
+<p>クエリ実行後、”OperationsManager” データベースに占める “unused” 領域が縮小し “unallocated” 領域が拡大したことを確認します。<br>仕様上、すべての “unused” 領域が “unallocated” 領域になることはありません。</p>
+<h2 id="事象再発抑止のための定期的なクエリ実行スケジュールの設定"><a href="#事象再発抑止のための定期的なクエリ実行スケジュールの設定" class="headerlink" title="事象再発抑止のための定期的なクエリ実行スケジュールの設定"></a>事象再発抑止のための定期的なクエリ実行スケジュールの設定</h2><p>[対処手順] 項で記載しました手順を実施いただくことで、テーブルのインデックス最適化が実施されます。<br>これにより、”OperationsManager” データベース内の “unused” 領域を開放いただけます。<br>一方で、時間経過によってインデックス情報が陳腐化され、再度 “unused” 領域が拡大する場合がございます。<br>そのため、本日ご案内しましたクエリについては、1 日に一度実行いただくことを推奨いたします。<br>SQL Server には特定のクエリをスケジュールする機能がございますので、そちらで設定いただいてクエリを自動化いただくのが有用と判断しております。<br>下記にスケジュール設定手順をご案内いたします。</p>
+<ol>
+<li>[対処手順] でクエリを実行されたサーバーに管理者権限でログインします。</li>
+<li>SQL Server Management Studio (SSMS) を開き、サーバーに管理者権限でログインします。</li>
+<li>画面左ペインの [&lt;サーバー名&gt;] -&gt; [SQL Server エージェント] -&gt; [ジョブ] を右クリックし、[新しいジョブ] をクリックします。</li>
+<li>新しいウィンドウが表示されますので、まず [全般] 項にてジョブの任意の名称を [名前] 入力欄に入力します。</li>
+<li>[ステップ] 項をクリックし、ウィンドウ下部の [新規作成] をクリックします。</li>
+<li>以下の設定を行います。<br>特に明記していない項については、既定値の状態で設定いただくものとします。<br>設定完了後、[OK] をクリックしてステップを保存します。<blockquote>
+<p>① [全般] 項の設定:<br>・ステップ名:<br>作成するステップの任意の名称を指定します。</p>
+<p>・種類:<br>“Transact-SQL スクリプト (T-SQL)” を選択します。</p>
+<p>・データベース:<br>“master” を選択します。</p>
+<p>・コマンド:<br>[対処手順] の 9. の手順でご案内しましたクエリを貼り付けます。</p>
+<p>② [詳細設定] 項の設定:<br>・実行時のユーザー:<br>SQL Server に管理者権限を持つアカウントを指定します。</p>
+</blockquote>
+</li>
+<li>[スケジュール] 項をクリックし、ウィンドウ下部の [新規作成] をクリックします。</li>
+<li>以下の設定を行います。<br>特に明記していない項については、既定値の状態で設定いただくものとします。<br>設定完了後、[OK] をクリックしてスケジュールを保存します。<blockquote>
+<p>・名前:<br>作成するスケジュールの任意の名称を指定します。</p>
+<p>・スケジュールの種類:<br>“定期的” を指定します。</p>
+<p>・実行:<br>“毎日” を指定します。</p>
+<p>・間隔:<br>既定状態の “1” となることを確認します。</p>
+<p>・一日のうちの頻度:<br>“1 回” を指定します。<br>その後、指定する時間については 3:00 から4:00 の間で指定いただくことを推奨いたします。<br>これは、その付近で実行される SCOM データベースのメンテナンス時間との重複を避け、かつ業務時間への影響が小さい時間にクエリを実行することを目的としております。<br>SCOM データベースで実行されるメンテナンスおよびその実行時間は、下記の弊社サイトに纏めて掲載されております。<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-scheduled-maintenance-in-operations-manager?view=sc-om-2022">Operations Manager のスケジュールされたメンテナンス</a></p>
+</blockquote>
+</li>
+<li>[OK] をクリックし、設定された内容でジョブを保存します。</li>
+</ol>
+<h1 id="おわりに"><a href="#おわりに" class="headerlink" title="おわりに"></a>おわりに</h1><p>今回は、SCOM データベースの未使用領域を解放する手順をご紹介としました。<br>SCOM データベースの容量は SCOM 自体でも監視されており、空き容量が少なくなるとアラートが発生します。<br>このアラートが発生した場合、まずは未使用領域が増加していないかご確認の上、増加が認められた場合は上記手順に沿って領域開放を行います。<br>お客様の SCOM データベース運用が、本記事でより円滑なものとなれば幸いでした。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/OperationsManager/" rel="tag">OperationsManager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_OpsDB_optimizeindex.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../SCOM_RAMPercentMonitor/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCOM でメモリ使用率を監視する方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SCOM OperationsManager データベースの unused 領域開放手順</a>
+          </li>
+        
+          <li>
+            <a href="../SCOM_RAMPercentMonitor/">SCOM でメモリ使用率を監視する方法</a>
+          </li>
+        
+          <li>
+            <a href="../../SCVMM/SCVMM_vTPM/">SCVMM で TPM が有効な仮想マシンを管理する方法</a>
+          </li>
+        
+          <li>
+            <a href="../../SCVMM/SCVMM_Install_Manual/">SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</a>
+          </li>
+        
+          <li>
+            <a href="../../SCVMM/SCVMM_LiveMigration_and_Errors/">SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Migration/" rel="tag">Migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MonitoringHost-exe/" rel="tag">MonitoringHost.exe</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManager/" rel="tag">OperationsManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VM-templete/" rel="tag">VM templete</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/" rel="tag">VM の強制削除および再登録</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/howto/" rel="tag">howto</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/" rel="tag">パフォーマンス カウンター</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%83%93%E3%83%A5%E3%83%BC/" rel="tag">パフォーマンス ビュー</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">更新プログラム ロールアップ</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">24</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Database">Database</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/MonitoringHost-exe">MonitoringHost.exe</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManager">OperationsManager</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManagerDW">OperationsManagerDW</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Trouble">Trouble</a><span class="tag-list-count">4</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">6</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/howto">howto</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">3</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">9</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">5</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Migration">Migration</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/VM-templete">VM templete</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2">VM の強制削除および再登録</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97">更新プログラム ロールアップ</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/03/">2024 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 12.5px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/Database/" style="font-size: 11.25px;">Database</a> <a href="../../tags/General/" style="font-size: 11.25px;">General</a> <a href="../../tags/HowTo/" style="font-size: 18.75px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Migration/" style="font-size: 10px;">Migration</a> <a href="../../tags/MonitoringHost-exe/" style="font-size: 10px;">MonitoringHost.exe</a> <a href="../../tags/Operations-Manager/" style="font-size: 16.25px;">Operations Manager</a> <a href="../../tags/OperationsManager/" style="font-size: 10px;">OperationsManager</a> <a href="../../tags/OperationsManagerDW/" style="font-size: 10px;">OperationsManagerDW</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 11.25px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 17.5px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Trouble/" style="font-size: 13.75px;">Trouble</a> <a href="../../tags/Troubleshoot/" style="font-size: 17.5px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/VM-templete/" style="font-size: 10px;">VM templete</a> <a href="../../tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/" style="font-size: 10px;">VM の強制削除および再登録</a> <a href="../../tags/howto/" style="font-size: 12.5px;">howto</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 15px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 15px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 11.25px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 11.25px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 12.5px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 11.25px;">トラブルシューティング</a> <a href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/" style="font-size: 10px;">パフォーマンス カウンター</a> <a href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%83%93%E3%83%A5%E3%83%BC/" style="font-size: 10px;">パフォーマンス ビュー</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 11.25px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12.5px;">新環境への移行</a> <a href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" style="font-size: 11.25px;">更新プログラム ロールアップ</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
