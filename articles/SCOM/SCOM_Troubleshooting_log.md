@@ -1,6 +1,6 @@
 ﻿---
 title: SCOM で使用する一般的なログ収集方法
-date: 2022-11-25 14:11:00
+date: 2025-01-03 17:00:00
 tags:
   - SCOM
   - Operations Manager
@@ -71,6 +71,29 @@ SCOM 観点のイベントログは、以下 3 種類のイベントログを採
 Get-SCOMAlert | export-csv -path "c:/temp/Alert.csv" -encoding UTF8
 ```
 5. 出力された "Alert.csv" を弊社までお寄せください。
+
+
+## アラート情報 (※ 例外 : 過去に解決済みのアラート情報)
+SCOM のトラブルシューティングは多くの場合、現在発生中のアラートや直近で発生したアラートが対象になりますので、基本的には上記の <b>Get-SCOMAlert</b> コマンドの手順により必要なアラート情報を取得できます。
+稀に、すでに解決済みで過去に発生していたアラートの調査が必要になる場合があります。解決済みのアラートは指定の期間 (既定の設定では 7日間) 経過後に直近データを保管する Opemarions Manager データベースから削除され、長期データを保管する Opemarions Manager DW データベースにのみデータが保管されます。このアラート情報は <b>Get-SCOMAlert</b> コマンドでは取得できないため、データベースから取得する必要があります。
+
+1. SCOM データベースサーバーにて SSMS (SQL Server Management Studio) を立ち上げて、SCOM データベースに接続します。
+2. [OperationsManagerDW] データベースの [テーブル] を開き、[Alert].[Alert_xxxx] のテーブル名をメモします。
+3. [新しいクエリ] ボタンをクリックして、クエリ画面に以下の SQL を入力して [実行] ボタンをクリックして SQL を実行します。
+```
+SELECT *
+FROM [OperationsManagerDW].[Alert].[Alert_xxxx]
+where [Alert].Alert_xxxx.RaisedDateTime > '2025-01-01 00:00:00.000'
+order by [Alert].Alert_xxxx.RaisedDateTime desc
+```
+※ Alert_xxxx の部分は 2 でメモしたテーブル名に置き換えてください。
+※ 2025/01/01 以降に発生したアラートを抽出する SQL です。
+● ご参考 (テーブル名を [Alert_xxxx] -> [Alert_92C3917ECB5741DF9AEDDA1DDB06527E] に置き換えて実行しています。)
+![](001.png)
+4. 画面下部に結果が出力されますので、結果表のタイトル行の最初の列 (赤枠の空白部分) を右クリックして、[結果に名前を付けて保存] をクリックします。
+![](002.png)
+5. CSV 形式で出力したファイルを弊社までお寄せください。
+
 
 ## インストールログ
 インストールログの調査は、SCOM のインストールやエージェントのプッシュインストール等インストールに関する操作が正常に行えない場合に調査する資料となります。
@@ -186,3 +209,33 @@ FormatTracing.cmd R
 参考:
 [診断トレースを使用する - Operations Manager | Microsoft Learn](https://docs.microsoft.com/ja-jp/system-center/scom/manage-overview-management-pack?view=sc-om-2022)
 (SCOM 診断ログについて記載された弊社ドキュメントです。)
+
+
+## SCOM 環境情報
+SCOM のトラブルシューティングでは、SCOM 管理サーバー・SCOM エージェントのバージョン、更新プログラム ロールアップのバージョン、起動状態などを正確に把握する必要があります。
+これらの情報は Operations Manager Shell を利用して、CSV 形式で一覧として取得します。
+1. SCOM 管理サーバー、SCOM 管理者権限を持つアカウントでログインします。
+2. 事前に、C ドライブの直下に “temp” という名前のフォルダを作成します。
+3. [スタート] メニューより [Operations Manager Shell] を実行します。
+4. 以下のコマンドを実行します。
+```
+Get-SCOMManagementServer | export-csv -path "c:/temp/SCOMManagementServer.csv" -encoding UTF8
+Get-SCOMAgent | export-csv -path "c:/temp/SCOMAgent.csv" -encoding UTF8
+Get-SCXAgent | export-csv -path "c:/temp/SCXAgent.csv" -encoding UTF8
+```
+5. 出力された SCOMManagementServer.csv, SCOMAgent.csv, SCXAgent.csv を弊社までお寄せください。
+
+
+## システム情報
+SCOM のトラブルシューティングでは、サーバー自身の情報 (Windows Server のバージョン、インストールされたソフトウェア、サービス一覧など) が必要になることがあります。
+これらの情報はシステム情報ツールを用いて取得します。
+1. 対象サーバーにサインインします。
+2. 事前に、C ドライブの直下に “temp” という名前のフォルダを作成します。
+3. コマンドプロンプトを管理者権限で起動し、 msinfo32 とエンターを投入して MSInfo32 を起動します。
+4. [ファイル]-[上書き保存]より情報を保存します。(コンピューター名.NFO)
+5. 続けて以下のコマンドを入力し、実行します。
+```
+　msinfo32 /report C:\temp\msinfo32.txt
+```
+
+4 と 5 で出力したファイルを弊社までお寄せください。
