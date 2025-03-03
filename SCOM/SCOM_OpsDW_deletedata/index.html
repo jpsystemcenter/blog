@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="Japan System Center Support Blog">
 <meta property="og:description" content="皆さんこんにちは、System Center サポートチームの 保科と申します。 今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2023-07-31T03:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-03T11:38:01.430Z">
+<meta property="article:published_time" content="2025-03-03T09:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-03T09:34:21.791Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Trouble">
@@ -99,13 +99,13 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2023-07-31T03:00:00.000Z" itemprop="datePublished">2023-07-31</time>
+  <time datetime="2025-03-03T09:00:00.000Z" itemprop="datePublished">2025-03-03</time>
 </a>
         
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+df87704f-dbe6-5884-a35f-c158c907b9be%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCOM+OperationsManagerDW+%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E5%AE%B9%E9%87%8F%E5%89%8A%E6%B8%9B%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_OpsDW_deletedata%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_OpsDW_deletedata.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_OpsDW_deletedata.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/" data-id="cm5golclf00090nnuci3gck3d" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/" data-id="cm7sv5kst00090nowd0rp1i4c" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -117,7 +117,7 @@
 <h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>SCOM を最小限の構成でインストールすると、以下 2 種類のデータベースが作成されます。</p>
 <ul>
 <li>OperationsManager:<br>SCOM の監視構成やインポートされた管理パック、監視対象の情報、監視データやアラート情報等 SCOM に関するあらゆる情報が保存されるデータベースです。<br>このデータベースが動作不備になったり、容量がいっぱいになると、SCOM 自体を使用することが出来なくなります。</li>
-<li>OperationsManagerDW<br>SCOM のレポート機能で使用するための監視データや監視対象の情報等が保存されるデータベースです。<br>保存されるデータは、SCOM の監視動作に準ずるものとなります。<br>例えば、パフォーマンスカウンターの収集を実施されている場合、まずは “OperationsManager” データベースにその監視内容が保存されます。<br>その後、その監視内容が “OperationsManagerDW” 側でも保存され、更にレポート用のデータとしてその保存されたデータが加工されます。<br>“OperationsManager” データベースと異なり、本データベースが極端の場合存在しない場合でも、SCOM の機能を使用することが出来ます。<br>(データベースの削除自体を推奨しているものではございません。)<br>一方で、本データベースに不備が発生すると、レポートに関するデータが取得できない、つまりレポートを閲覧することが出来なくなります。</li>
+<li>OperationsManagerDW<br>SCOM のレポート機能で使用するための監視データや監視対象の情報等が保存されるデータベースです。<br>保存されるデータは、SCOM の監視動作に準ずるものとなります。<br>例えば、パフォーマンスカウンターの収集を実施されている場合、まずは “OperationsManager” データベースにその監視内容が保存されます。<br>その後、その監視内容が “OperationsManagerDW” 側でも保存され、更にレポート用のデータとしてその保存されたデータが加工されます。本データベースに不備が発生すると、レポートに関するデータが取得できない、つまりレポートを閲覧することが出来なくなります。<br>※ 補足<br>本データベースの主要用途はレポート機能ですので、本データベースに接続できない場合でも SCOM コンソールにログインして利用する各種機能 (パフォーマンス ビューの参照など) は一見、利用できているように見えます。それらの機能は主に “OperationsManager” データベースを利用するためです。しかしながら、SCOM では “OperationsManager”, “OperationsManagerDW” の両方のデータベースが必須です。レポート機能を利用されない場合でも “OperationsManagerDW” は必要なデータベースです。</li>
 </ul>
 <p>詳細は割愛しますが、”OperationsManagerDW” では監視データの全データ、時間単位で纏められたデータ、日単位でまとめられたデータが保存されます。<br>収集されるデータによってはデータ数が膨大となることがあり、これが要因でデータベースの容量が非常に大きくなる場合がございます。<br>上記に記載した “OperationsManagerDW” に対するデータ保存の仕組みから、一般的に SCOM の監視内容が多いほどデータベースが肥大化しやすい傾向となります。<br>本記事では、肥大化した “OperationsManagerDW” データベースのデータ削除方法と、具体的に削除するデータの選定方法を説明いたします。</p>
 <h3 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h3><p>以降のご説明では、”OperationsManagerDW” データベースの名称を “OpsDW” と略称いたします。<br>SCOM インストール時に “OperationsManagerDW” データベースの名称を変更されている場合、適宜そのデータベース名に “OpsDW” を読み替えてください。</p>
@@ -174,19 +174,10 @@
     
 <nav id="article-nav">
   
-    <a href="../SCOM_CacheClear/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          SCOM の各種キャッシュクリアの手順
-        
-      </div>
-    </a>
   
-  
-    <a href="../SCOM_Workgroup/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../SCOM_Troubleshooting_log/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">WORKGROUP コンピューターの管理方法について</div>
+      <div class="article-nav-title">SCOM で使用する一般的なログ収集方法</div>
     </a>
   
 </nav>
@@ -205,6 +196,10 @@
       <ul>
         
           <li>
+            <a href="">SCOM OperationsManagerDW データベースの容量削減手順</a>
+          </li>
+        
+          <li>
             <a href="../SCOM_Troubleshooting_log/">SCOM で使用する一般的なログ収集方法</a>
           </li>
         
@@ -218,10 +213,6 @@
         
           <li>
             <a href="../../SCVMM/SCVMM_vTPM/">SCVMM で TPM が有効な仮想マシンを管理する方法</a>
-          </li>
-        
-          <li>
-            <a href="../../SCVMM/SCVMM_Install_Manual/">SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</a>
           </li>
         
       </ul>
@@ -244,7 +235,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/03/">2024 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/03/">2025 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/03/">2024 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
     </div>
   </div>
 
