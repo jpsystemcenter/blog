@@ -1,6 +1,6 @@
 ﻿---
 title: Azure Arc SCVMM の紹介
-date: 2025-09-27 17:00:00
+date: 2025-09-29 09:00:00
 tags:
   - SCVMM
   - HowTo
