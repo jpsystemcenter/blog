@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Arc SCVMM の紹介 | Japan System Center Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする 「Azure Arc SCVMM」 についてご紹介します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Arc SCVMM の紹介">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/index.html">
+<meta property="og:site_name" content="Japan System Center Support Blog">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする 「Azure Arc SCVMM」 についてご紹介します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/001.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/002.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/003.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/004.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/008.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/009.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/010.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/011.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/012.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/013.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/014.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/015.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/016.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/017.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/018.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/019.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/020.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/021.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/022.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/023.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/024.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/025.png">
+<meta property="article:published_time" content="2025-09-29T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-27T14:10:34.854Z">
+<meta property="article:author" content="Japan System Center Support">
+<meta property="article:tag" content="HowTo">
+<meta property="article:tag" content="SCVMM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpsystemcenter.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan System Center Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの System Center に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SCVMM/SCVMM_Azure_ARC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Arc SCVMM の紹介
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2025-09-29T00:00:00.000Z" itemprop="datePublished">2025-09-29</time>
+</a>
+        
+        
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+45e4ddcc-310a-541f-885c-8df64a7206a0%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Arc+SCVMM+%E3%81%AE%E7%B4%B9%E4%BB%8B%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Azure_ARC%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Azure_ARC.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Azure_ARC.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/" data-id="cmg2clz0a00100nmv8npih87o" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする <strong>「Azure Arc SCVMM」</strong> についてご紹介します。<br><br></p>
+<span id="more"></span>
+<h2 id="Azure-Arc-SCVMM-とは"><a href="#Azure-Arc-SCVMM-とは" class="headerlink" title="Azure Arc SCVMM とは"></a>Azure Arc SCVMM とは</h2><p>Azure Arc SCVMM を利用すると、SCVMM で管理するオンプレミスの Hyper-V 上で稼働する仮想マシンを Azure ポータルから管理できるようになります。具体的には次のような操作が可能です：</p>
+<ul>
+<li>仮想マシンの起動・停止・削除</li>
+<li>新規仮想マシンの作成</li>
+<li>仮想マシンに Azure の拡張機能（例：Azure Monitor エージェント）をインストールし、Azure VM と同じように管理・監視</li>
+</ul>
+<p>本記事では以下について説明します。<br><b><a href="#%EF%BC%91%EF%BC%8ESCVMM-%E3%82%92-Azure-%E3%81%AB%E7%99%BB%E9%8C%B2%E3%81%99%E3%82%8B">１．SCVMM を Azure に登録する方法</a></b><br><b><a href="#%EF%BC%92%EF%BC%8E%E4%BB%AE%E6%83%B3%E3%83%9E%E3%82%B7%E3%83%B3%E3%82%92%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B">２．仮想マシンを管理する方法</a></b></p>
+<h2 id="１．SCVMM-を-Azure-に登録する"><a href="#１．SCVMM-を-Azure-に登録する" class="headerlink" title="１．SCVMM を Azure に登録する"></a>１．SCVMM を Azure に登録する</h2><p>SCVMM を Azure に登録する際には、以下のリソースが必要です。<br><b>Azure 側</b><br>● リソースブリッジ①<br>● カスタムの場所<br><b>SCVMM 側</b><br>● リソースブリッジ② (※ Hyper-V 上の仮想アプライアンス)</p>
+<p>これらのリソースは、Azure ポータルからダウンロードできるスクリプトを実行することで一度に作成されます。</p>
+<h3 id="工程１：登録用スクリプトのダウンロード"><a href="#工程１：登録用スクリプトのダウンロード" class="headerlink" title="工程１：登録用スクリプトのダウンロード"></a>工程１：登録用スクリプトのダウンロード</h3><p>登録先の Azure 環境にログインし、Azure Arc 画面を開きます。 <strong>[リソースの追加]</strong> をクリックします。<br><img src="001.png"></p>
+<p><strong>[System Center VMM]</strong> の <strong>[追加]</strong> をクリックします。<br><img src="002.png"></p>
+<p><strong>[リソース ブリッジの新規作成]</strong> を選択し、 <strong>[次へ：基本]</strong> をクリックします。<br><img src="003.png"></p>
+<p>以下の情報を入力し、 <strong>[次へ：タグ]</strong> をクリックします。<br>① リソースブリッジ名<br>② カスタムの場所名<br>③ SCVMM 管理サーバー名<br><img src="004.png"></p>
+<p>必要に応じてタグを設定し、 <strong>[次へ：スクリプトのダウンロードと実行]</strong> をクリックします。<br><strong>[スクリプトをダウンロードする]</strong> をクリックして、スクリプトのダウンロードが完了したら <strong>[閉じる]</strong> をクリックします。<br><img src="005.png"></p>
+<h3 id="工程２：スクリプトの実行"><a href="#工程２：スクリプトの実行" class="headerlink" title="工程２：スクリプトの実行"></a>工程２：スクリプトの実行</h3><p>ダウンロードした PowerShell スクリプト <code>resource-bridge-onboarding-script.ps1</code> を SCVMM 管理サーバー内の任意の場所にコピーします。<br>※ スクリプトは任意のサーバーで実行可能ですが、接続の問題を避けるため、 <strong>Azure ポータルにログイン可能な SCVMM 管理サーバーでの実行を推奨</strong> します。<br><img src="006.png"></p>
+<p>PowerShell を管理者として起動し、スクリプトを実行します。<br><img src="007.png"></p>
+<p><b>① Step 1/5： Setting up thecurrent workstation</b><br>初期構成に関する質問に回答します。<br>また、スクリプトの実行に必要なモジュールが自動的にインストールされるため、完了するまで待機します。<br><img src="008.png"></p>
+<p><b>② Step 2/5： Creating the Arc Resource bridge</b><br>リソース ブリッジ作成のメイン処理です。<br>SCVMM サーバー接続情報やリソース ブリッジの設定を入力しながら進めます。<br><img src="009.png"></p>
+<p><strong>状態が「Connected → Running」になれば作成完了</strong> です。<br><img src="010.png"></p>
+<p>この時点で Hyper-V 上にリソース ブリッジの仮想アプライアンスが展開され、Azure ポータル上のリソース ブリッジも [Running] と表示されます。<br><img src="011.png"></p>
+<p><b>③ Step 3/5： Installing cluster extension</b><br>クラスター拡張機能のインストール処理です。<br>通常は短時間で完了します。<br><img src="012.png"></p>
+<p><b>④ Step 4/5： Creating custom location</b><br>Azure 上に「カスタムの場所」を作成する処理です。<br><img src="013.png"><br>正常に終了すると、Azure ポータルに新しいカスタムの場所が作成されていることを確認できます。<br><img src="014.png"></p>
+<p><b>⑤ Step 5/5： Connectiong to VMMServer</b><br>最終ステップです。登録対象となる <strong>SCVMM の接続情報を再入力</strong> します。<br><img src="015.png"></p>
+<h3 id="工程３：登録確認"><a href="#工程３：登録確認" class="headerlink" title="工程３：登録確認"></a>工程３：登録確認</h3><p>登録処理が正常に完了したら、Azure ポータルで以下を確認します。</p>
+<ol>
+<li><p><strong>[Azure Arc] &gt; [SCVMM 管理サーバー]</strong> を開き、SCVMM 管理サーバーが登録され、状態が <strong>Connected</strong> になっていることを確認します。<br><img src="016.png"></p>
+</li>
+<li><p><strong>[設定] &gt; [SCVMM インベントリ]</strong> を開き、SCVMM 環境のリソースが Azure 上に連携されていることを確認します。<br>以下は [仮想マシン] 画面の例です。（SCVMM 環境の仮想マシン一覧が表示されます）<br><img src="017.png"></p>
+</li>
+</ol>
+<hr>
+<h3 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h3><p>登録スクリプトの中では多数の処理が動作します。主な処理は次の通りです。</p>
+<ul>
+<li>SCVMM 環境への接続</li>
+<li>ライブラリ サーバーへの仮想ディスクコピー</li>
+<li>Hyper-V 上へのリソース ブリッジ仮想アプライアンス配置</li>
+<li>Azure リソースの作成（リソース ブリッジ、カスタムの場所、SCVMM 管理サーバーなど）</li>
+</ul>
+<p>これらの処理には、<strong>20～30 分程度かかる場合があります</strong>。</p>
+<p>実行中に突発的な通信断などが発生すると、スクリプトが失敗することがあります。<br>その場合は、以下のように <strong><code>-Force</code> オプション</strong>を付けて再実行してください。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./resource-bridge-onboarding-script.ps1 -Force</span><br></pre></td></tr></table></figure>
+<p>-Force を付けることで、失敗時に途中まで作成されたリソースが自動的にクリーンアップされ、再実行が可能になります。</p>
+<p><b>● 参考情報</b><br>Azure Arc SCVMM の詳細および登録手順につきましては、以下の公開情報をご参照ください。<br>● <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-arc/system-center-virtual-machine-manager/">Azure Arc SCVMM について</a><br>● <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-arc/system-center-virtual-machine-manager/quickstart-connect-system-center-virtual-machine-manager-to-arc">Azure Arc SCVMM の登録手順</a></p>
+<h2 id="２．仮想マシンを管理する"><a href="#２．仮想マシンを管理する" class="headerlink" title="２．仮想マシンを管理する"></a>２．仮想マシンを管理する</h2><h3 id="仮想マシンの管理"><a href="#仮想マシンの管理" class="headerlink" title="仮想マシンの管理"></a>仮想マシンの管理</h3><p>SCVMM が Azure に登録されると、SCVMM で管理している仮想マシンが Azure 上のリソースとして表示されます。<br>ただし、初期状態では <strong>参照のみ</strong> で操作はできません。</p>
+<p>操作を有効にするには、Azure ポータルにて <strong>[Azure で有効にする]</strong> を実行します。<br>さらに、 <strong>[ゲスト管理を有効にする]</strong> にチェックを入れると、該当仮想マシンに <strong>Azure Connected Agent</strong> がインストールされ、Azure Monitor エージェントなどの拡張機能も利用できるようになります。<br><img src="018.png"></p>
+<p>「Azure で有効にする」と「ゲスト管理を有効にする」を有効にした画面ショットです。<br><img src="019.png"></p>
+<p>Azure で有効にした仮想マシンは、Azure VM と同じような管理画面が作成されます。</p>
+<ul>
+<li>状態の確認</li>
+<li>起動／停止／削除<br>などの操作が可能です。<br><img src="020.png"></li>
+</ul>
+<p>また、<strong>ゲスト管理を有効にした仮想マシン</strong> では Azure Monitor エージェントなどの拡張機能のインストールが可能です。<br><img src="021.png"></p>
+<p>拡張機能をインストールすることで以下の機能が利用可能になります。</p>
+<ul>
+<li>Azure Monitor エージェントを用いた監視データの収集</li>
+<li>分析情報や変更分析の有効化</li>
+<li>Azure VM と同様の拡張機能のインストールと監視<br><img src="022.png"></li>
+</ul>
+<p>ゲスト管理を有効にした仮想マシンは Azure Connected Agent がインストールされることで、Azure Arc リソースの「マシン」画面からも管理可能です。<br><img src="023.png"></p>
+<h3 id="仮想マシンの作成"><a href="#仮想マシンの作成" class="headerlink" title="仮想マシンの作成"></a>仮想マシンの作成</h3><p>Azure ポータルから、オンプレミスの Hyper-V 上に <strong>新規仮想マシンを作成</strong>することも可能です。</p>
+<p>作成できる仮想マシンは <strong>SCVMM 上のテンプレートに準拠</strong>している必要があります。<br><img src="024.png"></p>
+<p>作成後は、SCVMM 管理下の Hyper-V 環境に VM が展開されます。<br><img src="025.png"></p>
+<p>Azure ポータルから SCVMM で管理する Hyper-V 環境に対して行える操作の紹介は以上です。</p>
+<hr>
+<p>Azure ポータルからオンプレミスの Hyper-V 環境の管理を検討中の場合、本記事が参考になれば幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li></ul>
+
+        
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCVMM/SCVMM_Azure_ARC.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../SCVMM_Conversion/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Azure Arc SCVMM の紹介</a>
+          </li>
+        
+          <li>
+            <a href="../SCVMM_Conversion/">SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_Troubleshooting_log/">SCOM で使用する一般的なログ収集方法</a>
+          </li>
+        
+          <li>
+            <a href="../../SCOM/SCOM_OpsDB_optimizeindex/">SCOM OperationsManager データベースの unused 領域開放手順</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Audit-Collection-Service-ACS/" rel="tag">Audit Collection Service (ACS)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/CVE-2021-26414/" rel="tag">CVE-2021-26414</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Job/" rel="tag">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Library-Server/" rel="tag">Library Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Migration/" rel="tag">Migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MonitoringHost-exe/" rel="tag">MonitoringHost.exe</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManager/" rel="tag">OperationsManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/OperationsManagerDW/" rel="tag">OperationsManagerDW</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" rel="tag">SCOM サーバーの構成</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM-Server/" rel="tag">SCVMM Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCXAgent/" rel="tag">SCXAgent</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SQL-Server/" rel="tag">SQL Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshoot/" rel="tag">Troubleshoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VM-templete/" rel="tag">VM templete</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/" rel="tag">VM の強制削除および再登録</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/howto/" rel="tag">howto</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" rel="tag">アップグレード</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" rel="tag">インストール</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" rel="tag">トラブルシューティング</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/" rel="tag">パフォーマンス カウンター</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%83%93%E3%83%A5%E3%83%BC/" rel="tag">パフォーマンス ビュー</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" rel="tag">ログ収集</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" rel="tag">ログ監視</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" rel="tag">新環境への移行</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">更新プログラム ロールアップ</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCOM/">SCOM</a><span class="tag-list-count">24</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Agent">Agent</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Audit-Collection-Service-ACS">Audit Collection Service (ACS)</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/CVE-2021-26414">CVE-2021-26414</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Database">Database</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/HowTo">HowTo</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/MonitoringHost-exe">MonitoringHost.exe</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Operations-Manager">Operations Manager</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManager">OperationsManager</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/OperationsManagerDW">OperationsManagerDW</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90">SCOM サーバーの構成</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/SCXAgent">SCXAgent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Trouble">Trouble</a><span class="tag-list-count">4</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">6</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/VBS">VBS</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/howto">howto</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">スクリプト</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C">スクリプト実行</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCOM/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96">スクリプト監視</a><span class="tag-list-count">3</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SCVMM/">SCVMM</a><span class="tag-list-count">11</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Agent">Agent</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/HowTo">HowTo</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Job">Job</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Library-Server">Library Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Migration">Migration</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/SCVMM-Server">SCVMM Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/Troubleshoot">Troubleshoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/VM-templete">VM templete</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2">VM の強制削除および再登録</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89">アップグレード</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86">ログ収集</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/SCVMM/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97">更新プログラム ロールアップ</a><span class="tag-list-count">1</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/">General</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/HowTo">HowTo</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/Information">Information</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/General/SQL-Server">SQL Server</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/09/">2025 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/08/">2025 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/03/">2025 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/03/">2024 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Agent/" style="font-size: 12.22px;">Agent</a> <a href="../../tags/Audit-Collection-Service-ACS/" style="font-size: 10px;">Audit Collection Service (ACS)</a> <a href="../../tags/CVE-2021-26414/" style="font-size: 10px;">CVE-2021-26414</a> <a href="../../tags/Database/" style="font-size: 11.11px;">Database</a> <a href="../../tags/General/" style="font-size: 11.11px;">General</a> <a href="../../tags/HowTo/" style="font-size: 18.89px;">HowTo</a> <a href="../../tags/Information/" style="font-size: 10px;">Information</a> <a href="../../tags/Job/" style="font-size: 10px;">Job</a> <a href="../../tags/Library-Server/" style="font-size: 10px;">Library Server</a> <a href="../../tags/Migration/" style="font-size: 10px;">Migration</a> <a href="../../tags/MonitoringHost-exe/" style="font-size: 10px;">MonitoringHost.exe</a> <a href="../../tags/Operations-Manager/" style="font-size: 15.56px;">Operations Manager</a> <a href="../../tags/OperationsManager/" style="font-size: 10px;">OperationsManager</a> <a href="../../tags/OperationsManagerDW/" style="font-size: 10px;">OperationsManagerDW</a> <a href="../../tags/SCOM/" style="font-size: 20px;">SCOM</a> <a href="../../tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/" style="font-size: 11.11px;">SCOM サーバーの構成</a> <a href="../../tags/SCVMM/" style="font-size: 17.78px;">SCVMM</a> <a href="../../tags/SCVMM-Server/" style="font-size: 10px;">SCVMM Server</a> <a href="../../tags/SCXAgent/" style="font-size: 10px;">SCXAgent</a> <a href="../../tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="../../tags/Trouble/" style="font-size: 13.33px;">Trouble</a> <a href="../../tags/Troubleshoot/" style="font-size: 16.67px;">Troubleshoot</a> <a href="../../tags/VBS/" style="font-size: 10px;">VBS</a> <a href="../../tags/VM-templete/" style="font-size: 10px;">VM templete</a> <a href="../../tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/" style="font-size: 10px;">VM の強制削除および再登録</a> <a href="../../tags/howto/" style="font-size: 12.22px;">howto</a> <a href="../../tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/" style="font-size: 14.44px;">アップグレード</a> <a href="../../tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" style="font-size: 14.44px;">インストール</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" style="font-size: 11.11px;">スクリプト</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" style="font-size: 11.11px;">スクリプト実行</a> <a href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" style="font-size: 12.22px;">スクリプト監視</a> <a href="../../tags/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" style="font-size: 11.11px;">トラブルシューティング</a> <a href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/" style="font-size: 10px;">パフォーマンス カウンター</a> <a href="../../tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%83%93%E3%83%A5%E3%83%BC/" style="font-size: 10px;">パフォーマンス ビュー</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86/" style="font-size: 11.11px;">ログ収集</a> <a href="../../tags/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/" style="font-size: 10px;">ログ監視</a> <a href="../../tags/%E6%96%B0%E7%92%B0%E5%A2%83%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C/" style="font-size: 12.22px;">新環境への移行</a> <a href="../../tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/" style="font-size: 11.11px;">更新プログラム ロールアップ</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Japan System Center Support<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
