@@ -4,49 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>スクリプト監視の設定手順 - Windows 編 | Japan System Center Support Blog</title>
+  <title>SCVMM の機能紹介 | Japan System Center Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皆様こんにちは、System Center サポートチームの 石原 です。本日は System Center Operations Manager（以後 SCOM） で監視対象の Windows サーバーにて任意のスクリプトを実行する手順を紹介いたします。">
+  <meta name="description" content="皆様こんにちは、System Center サポートチームの 保科 です。今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="スクリプト監視の設定手順 - Windows 編">
-<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/index.html">
+<meta property="og:title" content="SCVMM の機能紹介">
+<meta property="og:url" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/index.html">
 <meta property="og:site_name" content="Japan System Center Support Blog">
-<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。本日は System Center Operations Manager（以後 SCOM） で監視対象の Windows サーバーにて任意のスクリプトを実行する手順を紹介いたします。">
+<meta property="og:description" content="皆様こんにちは、System Center サポートチームの 保科 です。今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/001.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/002.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/003.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/004.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/005.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/006.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/007.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/008.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/009.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/010.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/013.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/014.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/015.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/016.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/017.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/006.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/018.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/019.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/020.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/021.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/022.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/011.png">
-<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/012.png">
-<meta property="article:published_time" content="2022-10-31T09:10:00.000Z">
-<meta property="article:modified_time" content="2025-11-04T05:00:07.484Z">
+<meta property="article:published_time" content="2025-11-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-04T05:00:07.492Z">
 <meta property="article:author" content="Japan System Center Support">
-<meta property="article:tag" content="SCOM">
-<meta property="article:tag" content="Operations Manager">
-<meta property="article:tag" content="スクリプト">
-<meta property="article:tag" content="スクリプト監視">
-<meta property="article:tag" content="スクリプト実行">
-<meta property="article:tag" content="VBS">
+<meta property="article:tag" content="HowTo">
+<meta property="article:tag" content="SCVMM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/001.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
   
@@ -108,7 +80,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-SCOM/SCOM_windows_script_monitor" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SCVMM/SCVMM_About" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -117,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      スクリプト監視の設定手順 - Windows 編
+      SCVMM の機能紹介
     </h1>
   
 
@@ -125,112 +97,83 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-10-31T09:10:00.000Z" itemprop="datePublished">2022-10-31</time>
+  <time datetime="2025-11-04T00:00:00.000Z" itemprop="datePublished">2025-11-04</time>
 </a>
         
         
-        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c381d80b-7b41-5553-9ad7-dd5e584e6128%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96%E3%81%AE%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86+-+Windows+%E7%B7%A8%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_windows_script_monitor%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_windows_script_monitor.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_windows_script_monitor.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c5f7836c-a07b-5d65-a750-89d60f3fb58e%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%81%AE%E6%A9%9F%E8%83%BD%E7%B4%B9%E4%BB%8B%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_About%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_About.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_About.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_windows_script_monitor/" data-id="cmhk3oghe000v0npga2tcc12m" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/" data-id="cmhk3ogiw005z0npgc7hpafp5" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>皆様こんにちは、System Center サポートチームの 石原 です。<br>本日は System Center Operations Manager（以後 SCOM） で監視対象の Windows サーバーにて任意のスクリプトを実行する手順を紹介いたします。 </p>
+        <p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。<br><br></p>
 <span id="more"></span>
-<p>SCOM では監視対象のサーバーで任意のスクリプトを実行し、その返り値を収集することや、しきい値を設定してアラートを生成することができます。<br>SCOM には各種 OS や ソフトウェアの監視を行うための管理パックがたくさん存在しますが、それらの管理パックを用いた監視だけでは不足する監視項目が存在した場合、それらの情報を取得するスクリプトを用いて補うことができますので、スクリプト監視はとても有効です。<br>※ UNIX/Linux サーバーの手順は、<a href="/blog/SCOM/SCOM_unix_script_monitor/">スクリプト監視の設定手順 - UNIX/Linux 編</a> にて手順を紹介していますので、こちらも合わせてご参照ください。</p>
-<h2 id="目的ごとの設定手順について"><a href="#目的ごとの設定手順について" class="headerlink" title="目的ごとの設定手順について"></a>目的ごとの設定手順について</h2><p>以下の目的ごとに、設定の手順が異なります。<br>　① スクリプトの返り値をパフォーマンス データとして収集すること<br>　② スクリプトの返り値に対してしきい値を設定してアラートを生成すること</p>
-<p>①のデータ収集が目的の場合は、まず、データ収集の [収集ルール] を作成し、収集したデータを参照するための [パフォーマンスビュー] を作成します。<br>②のアラート生成が目的の場合は、[モニター] を作成します。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>昨今の VMWare ライセンス費用の実質的な高騰に伴い、多くのお客様が Hyper-V への移行をご検討いただいているものと思います。<br>Hyper-V における VMWare vCenter の役割を果たすのが SCVMM となります。<br>また、Microsoft 公式として、VMWare 環境から Hyper-V 環境へ仮想マシンを変換することをサポートするアプリケーションは、現在 SCVMM のみとなります。<br>この移行を行うために、大変ありがたいことに多くのお客様に SCVMM をご利用いただいております。<br>しかし、SCVMM を導入したとして、そもそも SCVMM では何ができるのか？どんな機能があるのか？vCenter の代替になりえるのか？といったご質問を多くいただいております。<br>本記事では、現在移行をご検討いただいている方に向けて、SCVMM の機能概要を説明するものとなります。<br>概要の紹介にとどまりますが、今後移行を予定されている方も、移行が完了された後にどんな機能があるか知りたい方も、ぜひこちらの内容をご参考としてください。</p>
+<h2 id="SCVMM-で実現可能な機能"><a href="#SCVMM-で実現可能な機能" class="headerlink" title="SCVMM で実現可能な機能"></a>SCVMM で実現可能な機能</h2><p>SCVMM をご利用いただくことで、以下の利用が可能です。<br>まず SCVMM の概要を紹介している弊社公開情報をご案内いたします。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/overview?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115746627%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=TE+mmNN7Gz+4Qu92qMHfjYrKrkds44UdwsBVUSP17X0=&reserved=0">Virtual Machine Manager とは | Microsoft Learn</a><br>こちらの内容を、以下の通りに要約いたします。</p>
+<ul>
+<li>各種 Hyper-V ホストやクラスター、VMWare ESXi ホストやクラスターの管理、およびそれらの上で動作する仮想マシンの管理:<br>SCVMM では、ご利用の環境内に存在するホストやクラスター、およびそれらの上で動作する仮想マシンを、単一の SCVMM ファブリック内で一元管理可能です。<br>Hyper-V に関しては、基本的に Hyper-V マネージャーで設定可能な項目は SCVMM 内でも設定可能です。<br>もちろん、仮想マシンの展開も SCVMM より実施いただけます。</li>
+<li>ネットワーク設定の管理:<br>ホストや仮想マシンに必要なネットワーク設定を管理することが可能です。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/manage-networks?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115755432%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=batbjHxt57YTLZkbySzDH2HU8QDBfq08ct7efOirfUA=&reserved=0">VMM ネットワーク ファブリックのセットアップ | Microsoft Learn</a><br>代表的な機能をご紹介します。<ul>
+<li>論理ネットワークとその上に IP アドレス プールを設定することで、その IP アドレス プール範囲内から、展開される仮想マシンに IP アドレスを自動付与</li>
+<li>論理スイッチを作成することで、指定した設定に沿ってホストの NIC チーミングを SCVMM 経由で設定</li>
+<li>ストレージ機器の管理:<br>SCVMM 上でストレージ機器を管理することが可能です。<br>管理対象のストレージ機器に共有フォルダを作成したり、ストレージ機器上の LUN をホストに割り当てすることが可能です。<br>これらのストレージ機器で作成された各種設定事項は、ホスト上で仮想マシンの配置に使用することが可能です。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/manage-storage?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115767042%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=Mv9xRkDWnxndxKqf8DtJ2DRnflCxJ6Ius/6bZHl5X60=&reserved=0">VMM 記憶域ファブリックを設定する | Microsoft Learn</a></li>
+</ul>
+</li>
+<li>プライベート クラウドの設定:<br>SCVMM サーバー上にプライベート クラウドの設定を行うことで、各種物理リソースをクラウドに割り当てることが可能です。<br>割り当てられた物理リソースが利用可能な限り、ユーザーや仮想マシンが配置される物理リソースの設定を行うことなく、仮想マシンの管理運用が可能となります。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/deploy-cloud?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115775739%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=kS4/lC0G7cygkejvyhfB6v6MG8rMgSdANGSu1tmlkwE=&reserved=0">プライベート VMM クラウドを展開する | Microsoft Learn</a></li>
+<li>インフラストラクチャ サーバーの管理:<br>SCVMM では、仮想マシンで使用する ISO ファイルや vhdx ファイル等を配置するために使用可能なライブラリ サーバーという機能がございます。<br>これらに各種仮想マシンで使用するファイルを配置いただくことで、例えばライブラリ サーバーに配置された ISO ファイルを、管理対象の仮想マシンすべてに割り当てることが可能となります。<br>その他にも PXE サーバー、IPAM サーバー、WSUS 等を管理対象とすることができ、それらのサーバー毎に提供される機能をホストや仮想マシンの管理に役立てることが可能です。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/infrastructure-server?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115782734%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=DifC7BvzG2drcXDEKVKUE/EH6Qc9AKP993VshFkX4v4=&reserved=0">VMM コンピューティング ファブリックでインフラストラクチャ サーバーを設定する | Microsoft Learn</a><br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/update-server?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115789456%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=3hX6uvRbS6v6LUnhi5sQH73bXAlrT9fAtt+StcDozkc=&reserved=0">VMM コンピューティング ファブリックで更新サーバーを設定する | Microsoft Learn</a></li>
+<li>仮想化ホストの追加、プロビジョニング、管理:<br>SCVMM を使用することで、ベアメタル コンピューターより Hyper-V ホストやクラスターを展開することが可能です。<br>また、管理対象のスタンドアロン Hyper-V ホストを使用し、SCVMM よりそれらのホストでクラスターを新規に構成することも可能です。<br>クラスターの OS をアップグレードいただく場合、SCVMM を使用することで、ベアメタル展開の仕様に準拠してローリング アップグレードが可能となります。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/hyper-v-bare-metal?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115797346%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=DGzxiC2IYhzkwYy7nMQvaqle+/bZYVSdhinY/BprHYk=&reserved=0">ベア メタル コンピューターから Hyper-V ホストまたはクラスターをプロビジョニングする | Microsoft Learn</a><br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/hyper-v-standalone?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115804669%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=jFpP4KKxVSAEgJX0EZLMr/cd3hVjuZbsDKZJ/y5j+Uw=&reserved=0">VMM ファブリックの Hyper-V スタンドアロン ホストからクラスターをプロビジョニングする | Microsoft Learn</a><br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/hyper-v-rolling-upgrade?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115811448%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=XLhAatob/iWgIuGnnOH0+HGoRcQiy58ZAjBps7zDBfI=&reserved=0">VMM で Hyper-V ホスト クラスターの Windows Server へのローリング アップグレードを実行する | Microsoft Learn</a></li>
+<li>VM テンプレートの利用:<br>既存の仮想マシンを VM テンプレート化することで、テンプレート化された時点の OS 設定で仮想マシンを複数デプロイすることが可能です。<br>テンプレートはライブラリに保存いただく必要がございます。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/library-vm-templates?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115818033%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=i8KJgOIGtAKgR5q+PhDffzeEZzfGlUjXR+mISq08nEA=&reserved=0">VM テンプレートを VMM ライブラリに追加する | Microsoft Learn</a><br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/library-service-templates?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115825118%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=IzogSQgeIvXzzJyNLpCkWw1o5D315e5f47tPqYWnZZk=&reserved=0">VMM ライブラリにサービス テンプレートを追加する | Microsoft Learn</a></li>
+<li>Azure 管理:<br>SCVMM は、Azure Arc 対応 SCVMM として Azure に登録いただけます。<br>登録を行うことで、SCVMM 上に存在する各種リソースを Azure で管理いただけるようになります。<br>また、テンプレートを使用して SCVMM プライベート クラウド上に仮想マシンを展開いただけるようにもなります。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/azure/azure-arc/system-center-virtual-machine-manager/overview%23how-does-it-work&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115834558%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=0mUGNAK4MlLir4dZTCM7J0fRMfm0SuADj9G0R0vF+jQ=&reserved=0">Azure Arc 対応 System Center Virtual Machine Manager の概要 - Azure Arc | Microsoft Learn</a></li>
+<li>VMWare 仮想マシンを Hyper-V 仮想マシンに変換:<br>SCVMM では、VMWare ESXi ホストの管理だけでなく、その上で動作する仮想マシンを Hyper-V 仮想マシンに変換いただけます。<br>現状弊社公式より提供されているアプリケーションにおいて、この変換が実施可能なアプリケーションは SCVMM のみとなります。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/vm-convert-vmware?view=sc-vmm-2022&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115841828%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=3NH7zgOS+apQ7j/8izl/3xtZRnN5RnHfAJGsfB3/avg=&reserved=0">VMM ファブリックで VMware VM を Hyper-V に変換する | Microsoft Learn</a></li>
+<li>クラスター間ライブ マイグレーション:<br>SCVMM では、クラスター間で仮想マシンをライブ マイグレーションすることがサポートされております。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://learn.microsoft.com/ja-jp/system-center/vmm/migrate-live?view=sc-vmm-2025&tabs=SharedStorage&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115848558%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=+JP5E56qGXcKwpkxz3Z0mxKv8cKyC2CLua6+Zb0O5R0=&reserved=0">VMM ファブリックでライブ マイグレーションを実行する | Microsoft Learn</a><br>操作自体は SCVMM を使用することなく実施いただけますが、必要な操作が SCVMM を使用した場合は簡略化されているのが特徴です。<br><a target="_blank" rel="noopener" href="https://nam06.safelinks.protection.outlook.com/?url=https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/&data=05%7C02%7CAtsushi.Hoshina@microsoft.com%7Cdd62472f8425493f517a08dd62bc113a%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638775282115855145%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ==%7C0%7C%7C%7C&sdata=YAX/21LO5qJlttcDNjqt4Nl0/gwd6zTueBTOi5RFP9Q=&reserved=0">SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法 | Japan System Center Support Blog</a></li>
+</ul>
+<p>Hyper-V マネージャーや WAC を使用することで、Hyper-V の各種操作が可能となります。<br>具体的には以下が該当いたします。</p>
+<ul>
+<li>仮想マシンの作成</li>
+<li>仮想ディスクの作成</li>
+<li>仮想マシンのインポート/エクスポート</li>
+<li>チェックポイントの作成</li>
+<li>仮想マシンの開始/停止</li>
+<li>仮想ディスクの拡張/縮小</li>
+<li>仮想スイッチの作成/削除<br>これらの設定は SCVMM でも行うことが可能です。</li>
+</ul>
+<p>なお、WAC は厳密には Hyper-V に限らず、Windows に関する各種設定事項や Azure との機能連携も可能となります。<br>本件は SCVMM の観点からの機能紹介となりますので、Hyper-V に関連しない WAC の操作事項に関して詳細は割愛できればと思います。<br>WAC で利用可能な Hyper-V 以外の機能のご紹介に留められればと存じますが、具体的には下記操作を WAC によって実現可能です。</p>
+<ul>
+<li>Azure Backup</li>
+<li>Azure Kubernetes サービス</li>
+<li>Azure Monitor</li>
+<li>クラスターの管理 (クラスター マネージャー相当)</li>
+<li>PowerShel の実行</li>
+<li>イベント ログの確認</li>
+<li>サービスの状態の確認</li>
+<li>タスク実行状況 (タスク スケジューラ相当) の確認</li>
+<li>デバイス状態 (デバイス マネージャ相当) の確認</li>
+<li>パケット キャプチャの採取</li>
+<li>パフォーマンス (パフォーマンス モニター相当) の確認</li>
+<li>役割と機能の追加/削除</li>
+<li>リモート デスクトップ</li>
+<li>記憶域レプリカの管理</li>
+<li>レジストリの操作</li>
+<li>ユーザーの追加/削除</li>
+<li>Windows Update の適用</li>
+</ul>
+<h1 id="SCVMM-でのみ利用可能な機能"><a href="#SCVMM-でのみ利用可能な機能" class="headerlink" title="SCVMM でのみ利用可能な機能"></a>SCVMM でのみ利用可能な機能</h1><p>Hyper-V や WAC では実現できず、SCVMM を使用することで実現可能な機能としては下記が挙げられます。</p>
+<ul>
+<li>各種 Hyper-V ホストやクラスター、VMWare ESXi ホストやクラスターの管理、およびそれらの上で動作する仮想マシンの一元管理</li>
+<li>仮想化ホストや仮想マシンに関するネットワーク設定の一元管理</li>
+<li>ストレージ機器の一元管理と仮想化ホスト / 仮想マシンへのストレージ機器の割り当て</li>
+<li>プライベート クラウドの運用</li>
+<li>インフラストラクチャ サーバーの管理による、より SCVMM による一元管理を実現できる仮想化ホスト / 仮想マシン管理</li>
+<li>SCVMM を経由した仮想化ホストの追加、プロビジョニング、管理</li>
+<li>VM テンプレートの利用することによる同一設定仮想マシンのデプロイの容易化</li>
+<li>SCVMM と登録仮想化ホスト / 仮想マシンのAzure 管理</li>
+<li>VMWare 仮想マシンを Hyper-V 仮想マシンに変換</li>
+<li>クラスター間ライブ マイグレーションの容易化</li>
+</ul>
+<p>Hyper-V マネージャーや WAC が提供する仮想マシンの管理操作に対して、SCVMM はそれを大きく拡張することが可能なアプリケーションとしてご認識いただければ問題ございません。</p>
 <hr>
-<p>各々の手順について以下記述いたします。</p>
-<h2 id="①-スクリプトの返り値をパフォーマンス-データとして収集する手順"><a href="#①-スクリプトの返り値をパフォーマンス-データとして収集する手順" class="headerlink" title="① スクリプトの返り値をパフォーマンス データとして収集する手順"></a>① スクリプトの返り値をパフォーマンス データとして収集する手順</h2><ol>
-<li>SCOM コンソールにログインして、画面左下ペインの [作成] をクリックして、[作成] 画面を開きます。</li>
-<li>[作成] -&gt; [管理パック オブジェクト] -&gt; [ルール] をクリックして、画面右ペインから [新しいルールの作成] をクリックします。<br><img src="001.png"></li>
-</ol>
-<ol start="3">
-<li>[ルールの作成ウィザード] の [作成するルールの種類を選択] で [スクリプト (パフォーマンス) ] を選択して [次へ] をクリックします。<br><img src="002.png"></li>
-</ol>
-<ol start="4">
-<li>[全般] 画面で [ルールのターゲット] に Windows に関する任意のターゲットを指定し、[次へ] をクリックします。<br>例えば、今回作成するルールの対象を Windows Server 2016 以降の OS を対象とする場合、ターゲットは [Windows Server 2016 以降のコンピューター] を選択します。<br>インポートしている管理パックのバージョンにより [Windows Server 2016 以降のコンピューター] が存在しない場合は、下位のバージョンの [Windows Server XXXX のコンピューター] を選択してください。<br><img src="003.png"></li>
-</ol>
-<ol start="5">
-<li>スクリプトを実行してデータ収集する間隔を設定します。<br><img src="004.png"></li>
-</ol>
-<ol start="6">
-<li>スクリプト情報の入力画面にスクリプトをセットします。<br>※スクリプト画面には固定で 「10」 を返すひな形かセットされています。<br><img src="005.png"></li>
-</ol>
-<p>重要なメソッドは以下の値をセットしている箇所です。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-
-<p>ここに皆さまの方で用意されたスクリプトが取得した値をセットするようにしてください。<br>サンプルとして 0 ～ 1000 までのランダムな数値をセットするスクリプトは以下の通りです。<br><img src="006.png"></p>
-<p>スクリプトは以下の通りです。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x27; オブジェクト準備</span><br><span class="line">Dim oAPI, oBag</span><br><span class="line"><span class="built_in">Set</span> oAPI = CreateObject(&quot;MOM.ScriptAPI&quot;)</span><br><span class="line"><span class="built_in">Set</span> oBag = oAPI.CreatePropertyBag()</span><br><span class="line">&#x27; 属性値をセット</span><br><span class="line">Randomize</span><br><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;,Rnd * <span class="number">1000</span>)</span><br><span class="line">&#x27; オブジェクトを返す</span><br><span class="line"><span class="keyword">Call</span> oAPI.Return(oBag)</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>パフォーマンス マッピング画面を確認して [作成] をクリックします。<br>この設定内容が、後続の手順のパフォーマンスビューでパフォーマンスデータを表示した際に表示されるパフォーマンスデータに関する情報となります。<br>“オブジェクト”、”カウンター” および “インスタンス” は表示されるパフォーマンスデータの情報に関する内容を指定するものですので、必要に応じてデータを識別しやすい名称にします。<br><img src="007.png"></li>
-</ol>
-<p>以上で、任意のスクリプトの値を指定間隔で収集する [ルール] の作成は完了です。<br>次に、この情報を表示する [パフォーマンス ビュー] を作成します。</p>
-<ol>
-<li>SCOM コンソールの画面左下ペインの [監視] をクリックして、[監視] 画面を開きます。</li>
-<li>右クリックメニュー の [新規] -&gt; [パフォーマンス ビュー] をクリックします。<br><img src="008.png"></li>
-</ol>
-<ol start="3">
-<li>[特定のルールによって収集された] にチェックを入れて、画面下部の [条件の説明] で、上で作成したルールを選択して [OK] をクリックします。<br><img src="009.png"></li>
-</ol>
-<p>以下の通り、ランダムな値を取得する VBS を実行して収集した値が表示されます。<br><img src="010.png"></p>
-<p>以上で、スクリプトの返り値をパフォーマンスデータとして収集する [ルール] と収集データを表示する [ビュー] の作成が完了です。</p>
-<hr>
-<h2 id="②-スクリプトの返り値に対してしきい値を設定してアラートを生成する手順"><a href="#②-スクリプトの返り値に対してしきい値を設定してアラートを生成する手順" class="headerlink" title="② スクリプトの返り値に対してしきい値を設定してアラートを生成する手順"></a>② スクリプトの返り値に対してしきい値を設定してアラートを生成する手順</h2><ol>
-<li>SCOM コンソールにログインして、画面左下ペインの [作成] をクリックして、[作成] 画面を開きます。</li>
-<li>[作成] -&gt; [管理パックオブジェクト] -&gt; [モニター] をクリックして、画面中央の一覧から対象の OS 種類を選択します。<br><img src="013.png"></li>
-</ol>
-<ol start="3">
-<li>画面右ペインで [モニター] -&gt; [モニターの作成] をクリックして [ユニットモニター] を選択します。</li>
-<li>[モニターの種類] で [スクリプト機能] -&gt; [一般] の中から該当するモニター種類を選択して、[次へ] をクリックします。<br>※今回の例では [タイマー スクリプト - 2 つの状態の監視] を選択しました。<br><img src="014.png"></li>
-</ol>
-<ol start="6">
-<li> [全般] 画面で [モニターのターゲット] に Windows に関する任意のターゲット (以下図は例として [Windows Server 2016 以降のコンピューター] を指定) を選択して [次へ] をクリックします。<br><img src="015.png"></li>
-</ol>
-<ol start="7">
-<li>任意のスケジュールを設定して [次へ] をクリックします。<br><img src="016.png"></li>
-</ol>
-<ol start="8">
-<li>スクリプト情報の入力画面にスクリプトをセットします。<br>※スクリプト画面には固定で 「OK」 という文字列を返すひな形かセットされています。<br><img src="017.png"></li>
-</ol>
-<p>上の [ルール] の時と同様に、サンプルとして 0 ～ 1000 までのランダムな数値を返すように修正します。<br><img src="006.png"></p>
-<p>スクリプトは以下の通りです。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x27; オブジェクト準備</span><br><span class="line">Dim oAPI, oBag</span><br><span class="line"><span class="built_in">Set</span> oAPI = CreateObject(&quot;MOM.ScriptAPI&quot;)</span><br><span class="line"><span class="built_in">Set</span> oBag = oAPI.CreatePropertyBag()</span><br><span class="line">&#x27; 属性値をセット</span><br><span class="line">Randomize</span><br><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;,Rnd * <span class="number">1000</span>)</span><br><span class="line">&#x27; オブジェクトを返す</span><br><span class="line"><span class="keyword">Call</span> oAPI.Return(oBag)</span><br></pre></td></tr></table></figure>
-
-<p>ファイル名に拡張子を追加すると [次へ] ボタンが有効になりますので、[次へ] をクリックします。<br><img src="018.png"></p>
-<ol start="9">
-<li>[異常な式] にエラーとなる返り値を設定して [次へ] をクリックします。<br>※下の画面ショットは返り値が 700より大きい場合にエラーとする設定です。<br>　パラーメーター名にはスクリプト内で用いたパラメーター PerfValue を用いて <em>Property[@Name=’PerfValue’]</em> を設定します。<br><img src="019.png"></li>
-</ol>
-<ol start="10">
-<li>[正常な式] にエラーが回復する返り値を設定して [次へ] をクリックします。<br>※下の画面ショットは返り値が 700以下になった場合に正常に回復する設定です。<br>　パラーメーター名にはスクリプト内で用いたパラメーター PerfValue を用いて <em>Property[@Name=’PerfValue’]</em> を設定します。<br><img src="020.png"></li>
-</ol>
-<ol start="11">
-<li>[ヘルスの構成] を設定して [次へ] をクリックします。<br><img src="021.png"></li>
-</ol>
-<ol start="12">
-<li>ヘルス状態の変化でアラートを生成する場合は [このモニターにアラートを生成する] にチェックを入れて [作成] をクリックします。<br>※アラートの重大度は任意に指定可能です。<br><img src="022.png"></li>
-</ol>
-<p>これにより、スクリプトの返り値に応じてアラートを生成する [モニター] の作成が完了です。</p>
-<hr>
-<p>いかがでしょうか。</p>
-<p>まとめますと、スクリプトの返り値をパフォーマンス データとして収集する場合は [ルール] を作成して参照用の [パフォーマンス ビュー] を用意します。<br>しきい値を設定してアラートを生成する場合は [モニター] を作成します。<br>ルールもモニターも [スクリプト] 画面で、Windows サーバーで実行するスクリプトを記述します。</p>
-<p>最後にスクリプトの記述方法について少しだけ補足します。</p>
-<p>【 スクリプトの記述方法の補足 】<br>スクリプト画面で入力するスクリプトは、以下のメソッドで値をセットすることで SCOM にデータを送ることができます。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-
-<p>C ドライブの残容量を取得するサンプルを下に貼りましたので、参考にしていただければと存じます。<br>赤枠で囲った個所は [C ドライブの残容量を取得する処理] です。<br>SCOM に依存しないスクリプトです。<br>取得した値を <em>Call oBag.AddValue()</em> にセットしています。 </p>
-<p>この例の通り、まずは単独で動作する情報収集スクリプトを実装します。<br>それをスクリプト内に挿入し、取得した値を <em>Call oBag.AddValue()</em> にセットするというのが作法になります。<br><img src="011.png"></p>
-<p>スクリプトは以下の通りです。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x27; オブジェクト準備</span><br><span class="line">Dim oAPI, oBag</span><br><span class="line"><span class="built_in">Set</span> oAPI = CreateObject(&quot;MOM.ScriptAPI&quot;)</span><br><span class="line"><span class="built_in">Set</span> oBag = oAPI.CreatePropertyBag()</span><br><span class="line"></span><br><span class="line">&#x27; 情報取得</span><br><span class="line">Dim objWMIService, objSWbemObjectCollection, objSWbemObject</span><br><span class="line"><span class="built_in">Set</span> objWMIService = GetObject(&quot;winmgmts:&#123;impersonationLevel=impersonate&#125;!\\.\root\cimv2&quot;)</span><br><span class="line"><span class="built_in">Set</span> objSWbemObjectCollection = objWMIService.ExecQuery(&quot;Select * from Win32_LogicalDisk Where DriveType = <span class="number">3</span>&quot;)</span><br><span class="line"></span><br><span class="line">&#x27; 取得情報を解析</span><br><span class="line"><span class="keyword">For</span> Each objSWbemObject <span class="keyword">in</span> objSWbemObjectCollection</span><br><span class="line">    &#x27; C ドライブの場合</span><br><span class="line">    <span class="keyword">If</span> InStr(objSWbemObject.DeviceID, &quot;C&quot;) &gt; <span class="number">0</span> Then</span><br><span class="line">        &#x27; 残容量 （MB） をセット</span><br><span class="line">        <span class="keyword">Call</span> oBag.AddValue(&quot;PerfValue&quot;,objSWbemObject.FreeSpace/<span class="number">1000</span>/<span class="number">1000</span>)</span><br><span class="line">    End <span class="keyword">If</span></span><br><span class="line">Next</span><br><span class="line"></span><br><span class="line">&#x27; オブジェクトを返す</span><br><span class="line"><span class="keyword">Call</span> oAPI.Return(oBag)</span><br></pre></td></tr></table></figure>
-
-<p>収集したデータはパフォーマンス ビューにて確認できます。<br><img src="012.png"></p>
-<p>本記事を参考にご要件に応じたスクリプト監視を設定いただければ幸いです。 </p>
+<p>SCVMM の概要紹介は以上となります。<br>これらの内容をレビューいただき、お客様の要件上 SCVMM の運用が適切かご判断いただく材料としてお役立てください。<br>最後までご覧いただきありがとうございました。</p>
 
       
       
@@ -244,10 +187,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Operations-Manager/" rel="tag">Operations Manager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCOM/" rel="tag">SCOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/VBS/" rel="tag">VBS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" rel="tag">スクリプト</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%AE%9F%E8%A1%8C/" rel="tag">スクリプト実行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%9B%A3%E8%A6%96/" rel="tag">スクリプト監視</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HowTo/" rel="tag">HowTo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SCVMM/" rel="tag">SCVMM</a></li></ul>
 
         
-        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCOM/SCOM_windows_script_monitor.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpsystemcenter/edit/main/articles/SCVMM/SCVMM_About.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -255,19 +198,10 @@
     
 <nav id="article-nav">
   
-    <a href="../SCOM_Log_Monitor/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          UNIX/Linuxログファイルの監視をカスタマイズして、個別のアラートとして全件検知する方法
-        
-      </div>
-    </a>
   
-  
-    <a href="../SCOM_unix_script_monitor/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../SCVMM_Azure_ARC/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">スクリプト監視の設定手順 - UNIX/Linux 編</div>
+      <div class="article-nav-title">Azure Arc SCVMM の紹介</div>
     </a>
   
 </nav>
@@ -286,23 +220,23 @@
       <ul>
         
           <li>
-            <a href="../../SCVMM/SCVMM_About/">SCVMM の機能紹介</a>
+            <a href="">SCVMM の機能紹介</a>
           </li>
         
           <li>
-            <a href="../../SCVMM/SCVMM_Azure_ARC/">Azure Arc SCVMM の紹介</a>
+            <a href="../SCVMM_Azure_ARC/">Azure Arc SCVMM の紹介</a>
           </li>
         
           <li>
-            <a href="../../SCVMM/SCVMM_Conversion/">SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</a>
+            <a href="../SCVMM_Conversion/">SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</a>
           </li>
         
           <li>
-            <a href="../SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
+            <a href="../../SCOM/SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a>
           </li>
         
           <li>
-            <a href="../SCOM_Troubleshooting_log/">SCOM で使用する一般的なログ収集方法</a>
+            <a href="../../SCOM/SCOM_Troubleshooting_log/">SCOM で使用する一般的なログ収集方法</a>
           </li>
         
       </ul>
