@@ -37,6 +37,8 @@ github:
   url: https://github.com/jpsystemcenter/blog
   posts_dir: articles
   default_branch: main
+  show_additional_info: true
+  icon_mode: false
 
 skip_render:
   - '_data/*.png'
