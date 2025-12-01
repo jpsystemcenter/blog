@@ -13,19 +13,22 @@
 <meta property="og:site_name" content="Japan System Center Support Blog">
 <meta property="og:description" content="皆様こんにちは、System Center サポートチームの 石原 です。本記事は、System Center Virtual Machine Manager （以後、SCVMM） で発生したトラブルの調査を行う際に採取いただく機会が多いログ等の取得方法について解説します。">
 <meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/005.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/006.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/007.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/001.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/002.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/003.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/004.png">
 <meta property="article:published_time" content="2023-03-29T04:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-26T03:15:56.784Z">
+<meta property="article:modified_time" content="2025-12-01T05:30:29.656Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="Troubleshoot">
 <meta property="article:tag" content="SCVMM">
 <meta property="article:tag" content="トラブルシューティング">
 <meta property="article:tag" content="ログ収集">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/001.png">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/005.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
   
@@ -176,7 +179,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+eb45ec22-8b2f-59c9-af8d-da5646ee0fff%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Troubleshooting_log%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/" data-id="cmiffn79e001f0no2eiwv1dr4" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/" data-id="cmimpniex00650nl65lob4xu6" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -195,7 +198,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
   <tbody>
     <tr>
       <td style="text-align:center">1</td>
-      <td><a href="#No-1-トレースログ">トレースログ</a></td>
+      <td><a href="#No-1-トレースログ">トレースログとエラー情報</a></td>
       <td>再現可能な不具合動作が発生した場合、事象再現中のトレースログを取得することで、処理の流れを追いかけて原因調査します。</td>
     </tr>
     <tr>
@@ -226,8 +229,8 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
   </tbody>
 </table>
 
-<h2 id="No-1-トレースログ"><a href="#No-1-トレースログ" class="headerlink" title="[No.1 トレースログ]"></a>[No.1 トレースログ]</h2><p>想定外の事象が発生した際に、事象を再現して、その間の動作を記録するトレースログは、原因調査で最も有益な情報になります。<br>トレースログの取得方法は下記の通りです。</p>
-<p><b>■ 取得手順</b><br>SCVMM サーバーと問題が発生している仮想マシンの展開先仮想化ホストサーバー ( Hyper-V サーバー) において、以下の手順で並行して情報を採取してください。</p>
+<h2 id="No-1-トレースログとエラー情報"><a href="#No-1-トレースログとエラー情報" class="headerlink" title="[No.1 トレースログとエラー情報]"></a>[No.1 トレースログとエラー情報]</h2><p>想定外の事象が発生した際に、事象を再現して、その間の動作を記録するトレースログは、原因調査で最も有益な情報になります。<br>トレース ログの調査においては、エラーが発生した日時や正確なエラー文章の特定も重要となります。<br>トレースログと、エラー文章の情報取得方法をご紹介します。</p>
+<p><b>■ トレース ログ取得手順</b><br>SCVMM サーバーと問題が発生している仮想マシンの展開先仮想化ホストサーバー ( Hyper-V サーバー) において、以下の手順で並行して情報を採取してください。</p>
 <ol>
 <li>コマンド プロンプトを管理者として実行します。</li>
 <li>VMM フォルダー（C:\VMMlogs）を作成します。</li>
@@ -251,6 +254,22 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
 (※) &lt;各 ETL ファイル&gt; には、WMI、WinRM、VMMLog と3種類ございます。</li>
 <li>C:\VMMLogs フォルダを圧縮して、弊社までお寄せください。<br><br></li>
 </ol>
+<p><b>■ エラー情報取得手順</b><br>エラーの発生状況によって、以下のいずれかの情報を取得します。</p>
+<p><b>① ジョブ結果でエラーが発生する事象の場合</b><br>各種操作設定や設定変更を行い、それを実行したところ、ジョブでエラーが発生することが、SCVMM で発生する一般的なエラー発生状況となります。<br>この場合は、以下の手順に沿った情報を取得します。</p>
+<ol>
+<li>SCVMM サーバーに管理者権限でログインし、SCVMM コンソールを開きます。</li>
+<li>コンソール上部の [ホーム] タブを選択し、タブ内の [ジョブ] をクリックします。<br><img src="005.png"></li>
+<li>表示されたジョブの一覧より、今回実施されたジョブの実行結果が確認いただけるスクリーンショットを採取し、弊社までお寄せください。<br>採取を行う画面としては、一例として以下のような画面が確認いただけるように採取を行ってください。<br><img src="006.png"></li>
+<li><ol start="3">
+<li>でスクリーンショットを採取されたジョブに対して、エラー内容下部に表示された [エラーのコピー] をクリックし、そのコピーされたエラー内容をテキストエディタにペーストした上で .txt ファイルとして保存します。<br><img src="007.png"></li>
+</ol>
+</li>
+<li><ol start="3">
+<li>および 4. のファイルを 1 つのフォルダに纏めて圧縮いただき、弊社までお寄せください。</li>
+</ol>
+</li>
+</ol>
+<p><b>② ジョブ実行前にポップアップ等でエラーが表示され、ジョブが記録されない場合</b><br>設定保存時にポップアップが発生して設定を保存できないなどして、ジョブを実行する前にエラーが発生する場合があります。<br>この場合、ジョブも実行できていない状態となるので、ジョブからエラー内容や実行時間を特定してトレース調査、とすることができません。<br>この状態の場合は、ポップアップ等エラー内容が表示されている項目と、エラー発生時の OS 日時が確認できるようにスクリーンショットを取得し、そちらをお寄せいただきます。</p>
 <h2 id="No-2-ジョブ一覧"><a href="#No-2-ジョブ一覧" class="headerlink" title="[No.2 ジョブ一覧]"></a>[No.2 ジョブ一覧]</h2><p>SCVMM で実行したジョブが正常終了しなかった場合、ジョブ一覧を確認することで、実行したジョブと発生したエラー、エラーメッセージが確認できます。<br>ジョブ一覧の取得方法は下記の通りです。</p>
 <p><b>■ 取得手順</b></p>
 <ol>
