@@ -51,20 +51,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
-    
-    <lastmod>2025-12-10</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</loc>
-    
-    <lastmod>2025-12-10</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
     
     <lastmod>2025-12-10</lastmod>
@@ -73,6 +59,20 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/</loc>
+    
+    <lastmod>2025-12-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
+    
+    <lastmod>2025-12-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</loc>
     
     <lastmod>2025-12-10</lastmod>
     
@@ -100,14 +100,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
     
     <lastmod>2025-12-10</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Azure_ARC/</loc>
     
     <lastmod>2025-12-10</lastmod>
     
@@ -156,6 +156,13 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    
+    <lastmod>2025-12-10</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
     
     <lastmod>2025-12-10</lastmod>
@@ -171,13 +178,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
-    
-    <lastmod>2025-12-10</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
     
     <lastmod>2025-12-10</lastmod>
     
@@ -212,14 +212,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
     
     <lastmod>2025-12-10</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
     
     <lastmod>2025-12-10</lastmod>
     
