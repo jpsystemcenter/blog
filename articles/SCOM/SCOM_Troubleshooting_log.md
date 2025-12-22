@@ -94,6 +94,22 @@ order by [Alert].Alert_xxxx.RaisedDateTime desc
 ![](002.png)
 5. CSV 形式で出力したファイルを弊社までお寄せください。
 
+## 環境情報
+SCOM に登録されている管理サーバーや監視対象サーバーの情報を一覧で取得できます。
+各種問題調査を行う際に、これらのコマンドで出力される結果の情報が、調査の早期解決に至る場合がございます。
+
+1. SCOM 管理サーバーに、SCOM 管理者権限を持つアカウントでログインします。
+2. 事前に、C ドライブの直下に “temp” という名前のフォルダを作成します。
+3. [スタート] メニューより [Operations Manager Shell] を実行します。
+4. 以下のコマンドを実行します。
+```
+Get-SCOMManagementServer | export-csv -path "c:/temp/SCOMMS.csv" -encoding UTF8
+Get-SCOMGatewayManagementServer | export-csv -path "c:/temp/Gateway.csv" -encoding UTF8
+Get-scomagent | export-csv -path "c:/temp/agents.csv" -encoding UTF8
+Get-scxagent | export-csv -path "C:\temp\SCXAgent.csv" -encoding utf8
+Get-SCOMAgentlessManagedComputer | export-csv -path "C:\temp\Agentless.csv" -encoding utf8
+```
+5. 出力された "Alert.csv" を弊社までお寄せください。
 
 ## インストールログ
 インストールログの調査は、SCOM のインストールやエージェントのプッシュインストール等インストールに関する操作が正常に行えない場合に調査する資料となります。
