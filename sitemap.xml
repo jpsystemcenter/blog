@@ -9,14 +9,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/general/JapanSCEM_000_NewBlogOpened/</loc>
     
     <lastmod>2026-01-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/general/JapanSCEM_000_NewBlogOpened/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/general/Prerequisites_SQL2019/</loc>
     
     <lastmod>2026-01-05</lastmod>
     
@@ -51,13 +51,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
-    
-    <lastmod>2026-01-05</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</loc>
     
     <lastmod>2026-01-05</lastmod>
@@ -73,6 +66,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/</loc>
+    
+    <lastmod>2026-01-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
     
     <lastmod>2026-01-05</lastmod>
     
@@ -156,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
     
     <lastmod>2026-01-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getData_performanceView/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
     
     <lastmod>2026-01-05</lastmod>
     
@@ -212,14 +212,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
     
     <lastmod>2026-01-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
     
     <lastmod>2026-01-05</lastmod>
     
