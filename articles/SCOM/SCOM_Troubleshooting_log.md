@@ -109,7 +109,7 @@ Get-scomagent | export-csv -path "c:/temp/agents.csv" -encoding UTF8
 Get-scxagent | export-csv -path "C:\temp\SCXAgent.csv" -encoding utf8
 Get-SCOMAgentlessManagedComputer | export-csv -path "C:\temp\Agentless.csv" -encoding utf8
 ```
-5. 出力された "Alert.csv" を弊社までお寄せください。
+5. temp フォルダに出力された各種 CSV を個別に、もしくは temp フォルダの圧縮ファイルを弊社までお寄せください。
 
 ## インストールログ
 インストールログの調査は、SCOM のインストールやエージェントのプッシュインストール等インストールに関する操作が正常に行えない場合に調査する資料となります。
