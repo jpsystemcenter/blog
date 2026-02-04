@@ -79,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
     
     <lastmod>2026-02-04</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
     
     <lastmod>2026-02-04</lastmod>
     
@@ -163,6 +163,13 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    
+    <lastmod>2026-02-04</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
     
     <lastmod>2026-02-04</lastmod>
@@ -171,13 +178,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
-    
-    <lastmod>2026-02-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
     
     <lastmod>2026-02-04</lastmod>
     
@@ -212,14 +212,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
     
     <lastmod>2026-02-04</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
     
     <lastmod>2026-02-04</lastmod>
     
@@ -254,21 +254,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
-    
-    <lastmod>2026-02-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
-    
-    <lastmod>2026-02-04</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
+    
+    <lastmod>2026-02-04</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
     
     <lastmod>2026-02-04</lastmod>
     
@@ -283,6 +276,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/</loc>
+    
+    <lastmod>2026-02-04</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
     
     <lastmod>2026-02-04</lastmod>
     
