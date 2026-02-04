@@ -166,8 +166,7 @@ SCOM 管理サーバーや SCOM エージェントのインストール先を既
 | トレースログ採取対象コンピューター | cd コマンドで移動するディレクトリの既定値 |
 | --- | --- |
 | SCOM 2016 管理サーバー | C:\Program Files\Microsoft System Center 2016\Operations Manager\Server\Tools |
-| SCOM 2019 管理サーバー | C:\Program Files\Microsoft System Center\Operations Manager\Server\Tools| 
-| SCOM 2022 管理サーバー | C:\Program Files\Microsoft System Center\Operations Manager\Server\Tools |
+| SCOM 2019 以降の管理サーバー | C:\Program Files\Microsoft System Center\Operations Manager\Server\Tools| 
 | SCOM エージェント | C:\Program Files\Microsoft Monitoring Agent\Agent\Tools |
 4. 以下コマンドを実行し、すでに実行中のトレースログ採取を停止します。
    ```
