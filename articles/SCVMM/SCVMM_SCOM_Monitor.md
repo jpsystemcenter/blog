@@ -1,6 +1,6 @@
 ﻿---
 title: SCOM を用いた SCVMM 環境の監視
-date: 2026-05-07 09:00:00
+date: 2026-05-06 09:00:00
 tags:
   - 監視
   - HowTo
