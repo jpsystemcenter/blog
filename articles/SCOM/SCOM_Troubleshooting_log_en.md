@@ -20,7 +20,7 @@ In general, investigating the reported issue requires collecting data including 
 In this article, we explain the logs we commonly request from customers when troubleshooting from an SCOM perspective, and how to collect them.
 
 This article was translated from the below article.
-[SCOM で使用する一般的なログ収集方法](https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/)
+https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/
 
 ## Event Logs
 Event log analysis is the most common type of log analysis in SCOM troubleshooting.
