@@ -13,7 +13,7 @@ tags:
 
 <!-- more -->
 国外の方向けに、本項の内容を英訳したものもご用意しております。
-[Common Log Collection Methods Used in SCVMM](https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en_/)
+[Common Log Collection Methods Used in SCVMM](https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/)
 
 ## [トラブルシューティングに必要な情報]
 SCVMM のトラブルシューティングの際には、お客様環境と SCVMM の動作を把握するために以下の情報をお送りいただいております。
