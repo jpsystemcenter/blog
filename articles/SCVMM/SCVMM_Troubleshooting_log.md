@@ -12,6 +12,9 @@ tags:
 本記事は、System Center Virtual Machine Manager （以後、SCVMM） で発生したトラブルの調査を行う際に採取いただく機会が多いログ等の取得方法について解説します。
 
 <!-- more -->
+国外の方向けに、本項の内容を英訳したものもご用意しております。
+[Common Log Collection Methods Used in SCVMM](https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en_/)
+
 ## [トラブルシューティングに必要な情報]
 SCVMM のトラブルシューティングの際には、お客様環境と SCVMM の動作を把握するために以下の情報をお送りいただいております。
 本記事では、各々の取得目的と取得手順について解説します。
