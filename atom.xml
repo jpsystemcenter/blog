@@ -10,7 +10,27 @@
   <rights>All rights reserved 2026, Japan System Center Support</rights>
   <subtitle>日本マイクロソフトの System Center に関するサポート情報のブログです。</subtitle>
   <title>Japan System Center Support Blog</title>
-  <updated>2026-05-15T04:06:47.113Z</updated>
+  <updated>2026-05-25T02:27:31.336Z</updated>
+  <entry>
+    <author>
+      <name>Japan System Center Support</name>
+    </author>
+    <category term="Troubleshoot" scheme="https://jpsystemcenter.github.io/blog/tags/Troubleshoot/"/>
+    <category term="Troubleshooting" scheme="https://jpsystemcenter.github.io/blog/tags/Troubleshooting/"/>
+    <category term="Log Collection" scheme="https://jpsystemcenter.github.io/blog/tags/Log-Collection/"/>
+    <category term="SCVMM" scheme="https://jpsystemcenter.github.io/blog/tags/SCVMM/"/>
+    <content>
+      <![CDATA[<p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p><span id="more"></span><p>This page is based on the below blog entry.<br><a href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a></p><h2 id="Information-Required-for-Troubleshooting"><a href="#Information-Required-for-Troubleshooting" class="headerlink" title="Information Required for Troubleshooting"></a>Information Required for Troubleshooting</h2><p>When troubleshooting SCVMM, we request the following information from customers to understand their environment and SCVMM operations.<br>This article explains the purpose of each collection and the procedures for collection.</p><table>  <thead>    <tr>      <th style="text-align:center">No.</th>      <th style="text-align:center">Item</th>      <th style="text-align:center">Collection Purpose</th>    </tr>  </thead>  <tbody>    <tr>      <td style="text-align:center">1</td>      <td><a href="#No-1-Trace-Logs-and-Error-Information">Trace Logs and Error Information</a></td>      <td>When reproducible malfunction behavior occurs, we collect trace logs during issue reproduction to trace the flow of processing and investigate the cause.</td>    </tr>    <tr>      <td style="text-align:center">2</td>      <td><a href="#No-2-Job-List">Job List</a></td>      <td>When a SCVMM job does not terminate normally, we confirm the name, execution time, errors that occurred, and other details of running jobs in the job list.</td>    </tr>    <tr>      <td style="text-align:center">3</td>      <td><a href="#No-3-SCVMM-Environment-Information-SCVMM-Server-Information-Host-Information-Virtual-Machine-Information">SCVMM Environment Information</a></td>      <td>This is information to understand the customer environment. Collection targets are three types: SCVMM server information, host information, and virtual machine information.</td>    </tr>    <tr>      <td style="text-align:center">4</td>      <td><a href="#No-4-Cluster-Host-Virtual-Machine-Property-Screens">Cluster/Host/Virtual Machine Property Screens</a></td>      <td>This is information to understand the customer environment. Collection targets are the property screens of [Cluster/Host/Virtual Machine] where the issue occurred.</td>    </tr>    <tr>      <td style="text-align:center">5</td>      <td><a href="#No-5-SCVMM-Error-Log">SCVMM Error Log</a></td>      <td>Used for investigation when errors occur in SCVMM or when the SCVMM console abnormally terminates due to an error.</td>    </tr>    <tr>      <td style="text-align:center">6</td>      <td><a href="#No-6-Event-Log">Event Log</a></td>      <td>Confirm the event log during the time when the malfunction behavior occurred to verify the status of the OS and SCVMM at that time.</td>    </tr>  </tbody></table><h2 id="No-1-Trace-Logs-and-Error-Information"><a href="#No-1-Trace-Logs-and-Error-Information" class="headerlink" title="No.1 Trace Logs and Error Information"></a>No.1 Trace Logs and Error Information</h2><p>Trace logs, which record operations during an issue reproduction when unexpected events occur, are the most valuable information for root cause investigation.<br>In trace log investigation, identifying the date&#x2F;time when the error occurred and the exact error message is also important.<br>Below, we introduce methods for acquiring trace log and error message information.</p><p><b>■ Trace Log Collection Procedure</b><br>On the SCVMM server and the virtualization host server (Hyper-V server) where the problem occurred, collect information in parallel following the steps below.</p><ol><li>Run Command Prompt as administrator.</li><li>Create a VMM folder (C:\VMMlogs).</li><li>Execute the following commands in order to start VMM trace collection:</li></ol><ul><li>Preparation (1)<br> [Target for Execution] SCVMM Server:</li></ul> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman delete VMM</span><br></pre></td></tr></table></figure><p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br></pre></td></tr></table></figure><br> (*) When executing the above commands, you may see a message “Data Collector Set was not found.” This is not a problem and you may just ignore it.</p><ul><li>Preparation (2)<br> [Target for Execution] SCVMM Server:</li></ul> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman create trace VMM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_VMMLog.ETL -p Microsoft-VirtualMachineManager-Debug -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br></pre></td></tr></table></figure><p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman create trace WinRM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WinRM.ETL -p Microsoft-Windows-WinRM 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br><span class="line">logman create trace WMI -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WMI.ETL -p WMI_Tracing 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br></pre></td></tr></table></figure><br> (*) Trace files up to a maximum of 2GB each will be collected under “C:\VMMlogs” using the -max option. Before executing, please confirm the free space on the C drive in advance, or specify a drive with larger capacity.</p><ul><li>Start Collection (ETL files will be created under the C:\VMMlogs folder)<br> [Target for Execution] SCVMM Server:</li></ul> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman start VMM</span><br></pre></td></tr></table></figure><p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman start WinRM</span><br><span class="line">logman start WMI</span><br></pre></td></tr></table></figure></p><ol start="4"><li><p>Execute the issue reproduction steps. <b><font color="red">* The trace logs during this process will be used for analysis.</font></b><br></p></li><li><p>Execute the following commands in order to stop trace collection:<br> [Target for Execution] SCVMM Server:</p></li></ol>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman stop VMM</span><br><span class="line">logman delete VMM</span><br></pre></td></tr></table></figure><p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logman stop WinRM</span><br><span class="line">logman stop WMI</span><br><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br></pre></td></tr></table></figure><br>6. Execute the following command on each etl file to convert the trace file (a .txt file will be generated):<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh trace convert C:\VMMlogs\&lt;Computer Name&gt;_&lt;Each ETL File&gt;.etl</span><br></pre></td></tr></table></figure><br> (*) <Each ETL File> includes three types: WMI, WinRM, and VMMLog.<br>7. Compress the C:\VMMlogs folder and send it to us.<br><br></p><p><b>■ Error Information Collection Procedure</b><br>Depending on the error occurrence situation, collect one of the following pieces of information:</p><p><b>(1) When errors occur in job results</b><br>A typical error occurrence situation in SCVMM is when operations or configuration changes are made and errors occur in jobs during execution.<br>In this case, collect information following these steps:</p><ol><li>Log in to the SCVMM server with administrator privileges and open the SCVMM console.</li><li>Select the [Home] tab at the top of the console and click [Jobs] within the tab.<br> <img src="005.png"></li><li>From the displayed job list, capture a screenshot showing the execution result of the job you performed.<br>Capture screenshots of both the [Overview] tab and the [Details] tab.<br>Capture screens that show the following as an example:<br> <img src="006.png"><br> <img src="008.png"></li><li>For the job where you captured the screenshot in step 3, click [Copy Error] displayed below the error content, paste the copied error content into a text editor, and save it as a .txt file.<br> <img src="007.png"></li><li>Collect the files from steps 3 and 4 into one folder, compress them, and send them to us.</li></ol><p><b>(2) When errors are displayed in pop-ups before job execution and the job is not recorded</b><br>There are cases where errors occur before job execution, such as when pop-ups appear during configuration saving and prevent the configuration from being saved.<br>In this case, since the job has not been executed, it is not possible to identify error content and execution time from the job for trace investigation.<br>In this situation, capture a screenshot showing the error content displayed in pop-ups and the OS date&#x2F;time when the error occurred, and send it to us.</p><h2 id="No-2-Job-List"><a href="#No-2-Job-List" class="headerlink" title="No.2 Job List"></a>No.2 Job List</h2><p>When a job executed in SCVMM does not terminate normally, you can confirm the job executed, errors that occurred, and error messages by checking the job list.<br>The method for obtaining the job list is as follows:</p><p><b>■ Collection Procedure</b></p><ol><li>Log in to the SCVMM management server with administrator privileges.</li><li>Create a folder named “temp” directly under the C drive in advance.</li><li>From the Start menu, execute [Virtual Machine Manager Command Shell].</li><li>Execute the following command:</li></ol> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCJOB -All -Full | export-csv -path &quot;C:\temp\scjob.csv&quot; -encoding UTF8</span><br></pre></td></tr></table></figure><ol start="5"><li>Send the “scjob.csv” file output to the “temp” folder to us.<br><br></li></ol><h2 id="No-3-SCVMM-Environment-Information-SCVMM-Server-Information-Host-Information-Virtual-Machine-Information"><a href="#No-3-SCVMM-Environment-Information-SCVMM-Server-Information-Host-Information-Virtual-Machine-Information" class="headerlink" title="No.3 SCVMM Environment Information (SCVMM Server Information, Host Information, Virtual Machine Information)"></a>No.3 SCVMM Environment Information (SCVMM Server Information, Host Information, Virtual Machine Information)</h2><p>When we need to understand the environment where the problem occurred and usage status, we request SCVMM version information, information on hosts managed by SCVMM, and virtual machine information.<br>The methods for acquiring each piece of information are as follows:</p><p><b>■ Collection Procedure</b></p><ol><li>Log in to the SCVMM management server with administrator privileges.</li><li>Create a folder named “temp” directly under the C drive in advance.</li><li>From the Start menu, execute [Virtual Machine Manager Command Shell].</li><li>Execute the following command to obtain SCVMM server information:</li></ol> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVMMServer -ComputerName &quot;*** FQDN of VMM Server ***&quot; | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8</span><br></pre></td></tr></table></figure><p> Example) Get-SCVMMServer -ComputerName “VMMServer01.Contoso.com” | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8<br>5. Execute the following commands to obtain information on hosts managed by SCVMM:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVMHost | export-csv -path C:\temp\Hostlist.csv -encoding UTF8</span><br><span class="line">Get-SCVMHostCluster | export-csv -path C:\temp\Clusterlist.csv -encoding UTF8</span><br><span class="line">Get-SCVMMManagedComputer | export-csv -path C:\temp\ManagedComputer.csv -encoding UTF8</span><br></pre></td></tr></table></figure><br>6. Execute the following command to obtain information on virtual machines managed by SCVMM:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVirtualMachine | export-csv -path C:\temp\VirtualMachine.csv -encoding UTF8</span><br></pre></td></tr></table></figure><br>7. Send the “VMMinfo.csv”, “Hostlist.csv”, “Clusterlist.csv”, “ManagedComputer.csv”, and “VirtualMachine.csv” files output to the “temp” folder to us.<br><br></p><h2 id="No-4-Cluster-Host-Virtual-Machine-Property-Screens"><a href="#No-4-Cluster-Host-Virtual-Machine-Property-Screens" class="headerlink" title="No.4 Cluster&#x2F;Host&#x2F;Virtual Machine Property Screens"></a>No.4 Cluster&#x2F;Host&#x2F;Virtual Machine Property Screens</h2><p>When warnings such as status abnormalities occur on clusters, hosts, or virtual machines managed by SCVMM, we request screenshots of the corresponding property screens to confirm the occurring warnings and configuration details.<br>The methods for acquiring each piece of information are as follows.<br><br><b>■ Collection Procedure</b></p><ol><li>Log in to the SCVMM console.</li><li>Open the [VMs and Services] screen.</li><li>Select the target where the warning occurred and click Properties from the right-click menu.<br> <img src="001.png"></li><li>On the Properties screen, open the [General] screen and [Status] screen, and capture screenshots.<br> (1) <b>Cluster</b> [General] screen and [Status] screen<br> <img src="002.png"><br> (2) <b>Host</b> [General] screen and [Status] screen<br> When warnings are displayed on the Status screen, capture screenshots in a way that identifies the target.<br> Also, copy the error message by clicking the [Copy Error] button and save it as error.txt.<br> <img src="003.png"><br> (3) <b>Virtual Machine</b> [General] screen and [Status] screen<br> When warnings are displayed on the Status screen, capture screenshots in a way that identifies the target.<br> Also, copy the error message by clicking the [Copy Error] button and save it as error.txt.<br> <img src="004.png"></li><li>Send the captured screenshots and error.txt to us. <br><br></li></ol><h2 id="No-5-SCVMM-Error-Log"><a href="#No-5-SCVMM-Error-Log" class="headerlink" title="No.5 SCVMM Error Log"></a>No.5 SCVMM Error Log</h2><p>When errors occur in SCVMM or the SCVMM console abnormally terminates due to errors, information about the cause may be recorded in the error log.<br>The method for obtaining the error log is as follows:</p><p><b>■ Collection Procedure</b><br>Perform this procedure on the following servers:</p><ul><li>SCVMM Server</li><li>Server where SCVMM console abnormally terminated</li></ul><ul><li>If the SCVMM console was open on the SCVMM server, collect this log only from the SCVMM server.</li></ul><ol><li>Log in to the target server with administrator privileges.</li><li>Open Explorer and access the following folder:<br> C:\ProgramData<br> By default, the <b>“ProgramData” folder</b> is set as a hidden folder.<br> To access this folder, enable the setting to display hidden folders in Explorer.</li><li>Compress the <b>“VMMLogs” folder</b> existing in the folder accessed in step 2, and send it to us.<br>If there are multiple collection targets, rename the compressed file of “VMMLogs” so that the collection target can be identified.<br>For example, if collected from the management server, rename it to “MS_VMMLogs”, or if collected from a virtualization host, rename it to “Host_VMMLogs”.<br><br></li></ol><h2 id="No-6-Event-Log"><a href="#No-6-Event-Log" class="headerlink" title="No.6 Event Log"></a>No.6 Event Log</h2><p>Part of SCVMM processing is recorded in the event log, so we request the event log to be sent for problem analysis.<br>The method for obtaining the event log is as follows:</p><p><b>■ Collection Procedure</b><br>Perform this procedure on the following computers:<br>・SCVMM Server<br>・Virtualization host server (Hyper-V server) where the problem occurred</p><ol><li><p>Open Event Viewer on the target computer.<br>A reliable way to open it is to press [win] + [R], directly specify “eventvwr.msc”, and run it.</p></li><li><p>In the console tree on the left, click the event log to save.<br>From an SCVMM perspective, collect the following three event logs.</p><ul><li>Application</li><li>System</li><li>Security</li><li>WinRM-Operational (SCVMM server only) (*1)</li><li>WMIActivity-Operational (*1)</li><li>Admin (*2)</li><li>Operational (*2)</li></ul><p>The logs marked with (*1) are displayed when expanding [Applications and Services Logs] -&gt; [Microsoft] -&gt; [Windows].<br>If the event logs marked with (*1) are not displayed, collection of (*1) event logs from that server is not necessary.<br>The logs marked with (*2) are displayed when expanding [Applications and Services Logs] -&gt; [Microsoft] -&gt; [VirtualMachineManager] -&gt; [Server].<br>If the event logs marked with (*2) are not displayed, collection of (*2) event logs from that server is not necessary.</p></li><li><p>In the right pane, click [Save All Events As…].</p></li><li><p>Specify any name for the event log to save.<br>For file types, collect both “Event Files (<em>.evtx)” and “CSV (Comma Separated) (</em>.csv)”.</p></li></ol>]]>
+    </content>
+    <id>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/</id>
+    <link href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/"/>
+    <published>2026-05-25T04:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p>]]>
+    </summary>
+    <title>Common Log Collection Methods Used in SCVMM</title>
+    <updated>2026-05-25T02:27:31.336Z</updated>
+  </entry>
   <entry>
     <author>
       <name>Japan System Center Support</name>
@@ -30,7 +50,7 @@
       <![CDATA[<p>This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCOM</title>
-    <updated>2026-05-15T04:06:47.113Z</updated>
+    <updated>2026-05-25T02:27:31.246Z</updated>
   </entry>
   <entry>
     <author>
@@ -48,7 +68,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM を使用して SCVMM 環境を監視する構成手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM を用いた SCVMM 環境の監視</title>
-    <updated>2026-05-15T04:06:47.186Z</updated>
+    <updated>2026-05-25T02:27:31.319Z</updated>
   </entry>
   <entry>
     <author>
@@ -68,7 +88,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、SCVMM の運用上オブジェクトに write ロックが発生したことによって、仮想マシンの操作が行えなくなった場合の対処方法をご案内します。<br><br></p>]]>
     </summary>
     <title>write ロックによってジョブの実行が行えなくなる事象の対処方法</title>
-    <updated>2026-05-15T04:06:47.162Z</updated>
+    <updated>2026-05-25T02:27:31.295Z</updated>
   </entry>
   <entry>
     <author>
@@ -86,7 +106,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM の機能紹介</title>
-    <updated>2026-05-15T04:06:47.141Z</updated>
+    <updated>2026-05-25T02:27:31.274Z</updated>
   </entry>
   <entry>
     <author>
@@ -104,7 +124,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする <strong>「Azure Arc SCVMM」</strong> についてご紹介します。<br><br></p>]]>
     </summary>
     <title>Azure Arc SCVMM の紹介</title>
-    <updated>2026-05-15T04:06:47.141Z</updated>
+    <updated>2026-05-25T02:27:31.275Z</updated>
   </entry>
   <entry>
     <author>
@@ -122,7 +142,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</title>
-    <updated>2026-05-15T04:06:47.153Z</updated>
+    <updated>2026-05-25T02:27:31.286Z</updated>
   </entry>
   <entry>
     <author>
@@ -143,7 +163,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。</p>]]>
     </summary>
     <title>SCOM OperationsManagerDW データベースの容量削減手順</title>
-    <updated>2026-05-15T04:06:47.111Z</updated>
+    <updated>2026-05-25T02:27:31.244Z</updated>
   </entry>
   <entry>
     <author>
@@ -164,7 +184,7 @@
       <![CDATA[<p>本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。</p>]]>
     </summary>
     <title>SCOM で使用する一般的なログ収集方法</title>
-    <updated>2026-05-15T04:06:47.112Z</updated>
+    <updated>2026-05-25T02:27:31.245Z</updated>
   </entry>
   <entry>
     <author>
@@ -185,7 +205,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。</p>]]>
     </summary>
     <title>SCOM OperationsManager データベースの unused 領域開放手順</title>
-    <updated>2026-05-15T04:06:47.111Z</updated>
+    <updated>2026-05-25T02:27:31.244Z</updated>
   </entry>
   <entry>
     <author>
@@ -204,7 +224,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの保科です。<br>本日は、System Center Operations Manager (以後 SCOM と表記します) で、Windows OS のメモリ使用率を監視する方法をご紹介いたします。</p>]]>
     </summary>
     <title>SCOM でメモリ使用率を監視する方法</title>
-    <updated>2026-05-15T04:06:47.111Z</updated>
+    <updated>2026-05-25T02:27:31.244Z</updated>
   </entry>
   <entry>
     <author>
@@ -222,7 +242,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で トラステッド プラットフォーム モジュール (TPM) が有効な仮想マシンを管理する方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM で TPM が有効な仮想マシンを管理する方法</title>
-    <updated>2026-05-15T04:06:47.213Z</updated>
+    <updated>2026-05-25T02:27:31.380Z</updated>
   </entry>
   <entry>
     <author>
@@ -241,7 +261,7 @@
 <p>System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ サーバー) の構築、類似の仮想スイッチの設定を簡易的に反映できる設定 (論理スイッチ) などが利用できます。また、VMWare vCenter と連携することで VMWare VM を Hyper-V VM に移行することができます。<br><br>SCVMM の構成は、IT インフラ環境の規模や運用要件に応じて変わりますが、検証等の目的で簡易的に最短で SCVMM を構築されたいケースがあります。そういったケースに備えて、本記事では、1 台の Windows Server に SCVMM の主コンポーネントの SCVMM 管理サーバーと SCVMM コンソールをインストールして、SCVMM コンソールにサインインできるまでの手順を画面ショット付きで紹介します。</p>]]>
     </summary>
     <title>SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</title>
-    <updated>2026-05-15T04:06:47.162Z</updated>
+    <updated>2026-05-25T02:27:31.295Z</updated>
   </entry>
   <entry>
     <author>
@@ -262,7 +282,7 @@
 <p>今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、]]>
     </summary>
     <title>SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</title>
-    <updated>2026-05-15T04:06:47.186Z</updated>
+    <updated>2026-05-25T02:27:31.319Z</updated>
   </entry>
   <entry>
     <author>
@@ -280,7 +300,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</title>
-    <updated>2026-05-15T04:06:47.089Z</updated>
+    <updated>2026-05-25T02:27:31.222Z</updated>
   </entry>
   <entry>
     <author>
@@ -301,7 +321,7 @@
 <p>本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除]]>
     </summary>
     <title>VM の強制削除および再登録</title>
-    <updated>2026-05-15T04:06:47.209Z</updated>
+    <updated>2026-05-25T02:27:31.376Z</updated>
   </entry>
   <entry>
     <author>
@@ -322,7 +342,7 @@
 <p>本日は System Center Operations Manager（以下、SCOM） に採取されたパフォーマンス カウンターの情報]]>
     </summary>
     <title>パフォーマンス データを DB から取得する方法</title>
-    <updated>2026-05-15T04:06:47.127Z</updated>
+    <updated>2026-05-25T02:27:31.260Z</updated>
   </entry>
   <entry>
     <author>
@@ -343,7 +363,7 @@
 <p>本日は System Center Operations Manager（以下、SCOM） のパフォーマンス ビューに表示されているデー]]>
     </summary>
     <title>パフォーマンス ビューに表示されているデータを取得する方法</title>
-    <updated>2026-05-15T04:06:47.122Z</updated>
+    <updated>2026-05-25T02:27:31.256Z</updated>
   </entry>
   <entry>
     <author>
@@ -364,7 +384,7 @@
 <p>本日は System Center Virtual Machine Manager で Linux VM をテンプレートから作成する際に]]>
     </summary>
     <title>VM テンプレートから仮想マシン (Linux 系) を作成が完了しない</title>
-    <updated>2026-05-15T04:06:47.207Z</updated>
+    <updated>2026-05-25T02:27:31.374Z</updated>
   </entry>
   <entry>
     <author>
@@ -385,27 +405,6 @@
 <p>本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである Mon]]>
     </summary>
     <title>MonitoringHost.exe が仮想メモリを異常に消費する</title>
-    <updated>2026-05-15T04:06:47.122Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Japan System Center Support</name>
-    </author>
-    <category term="インストール" scheme="https://jpsystemcenter.github.io/blog/tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/"/>
-    <category term="アップグレード" scheme="https://jpsystemcenter.github.io/blog/tags/%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89/"/>
-    <category term="HowTo" scheme="https://jpsystemcenter.github.io/blog/tags/HowTo/"/>
-    <category term="SCOM サーバーの構成" scheme="https://jpsystemcenter.github.io/blog/tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/"/>
-    <category term="更新プログラム ロールアップ" scheme="https://jpsystemcenter.github.io/blog/tags/%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97/"/>
-    <content>
-      <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM に更新プログラムのロールアップ (UR：Update Rollup) を適用する手順について説明します。<br><br></p><span id="more"></span><h2 id="更新プログラムのロールアップ-UR：Update-Rollup-について"><a href="#更新プログラムのロールアップ-UR：Update-Rollup-について" class="headerlink" title="更新プログラムのロールアップ (UR：Update Rollup) について"></a>更新プログラムのロールアップ (UR：Update Rollup) について</h2><p>本記事の公開日時点 (2023&#x2F;11&#x2F;20) でサポートが有効な System Center Operations Manager（以後 SCOM）には SCOM 2016, SCOM 2019, SCOM 2022 の 3つのバージョンがあります。<br>各々のバージョンの初期公開時のモジュールを一般公開版 (GA：General Availability) と呼びます。一般公開版のリリース後、機能追加や不具合修正、セキュリティ対策等の更新プログラムは、更新プログラムのロールアップ (UR：Update Rollup) として提供されます。そのため、SCOM を最新の状態に維持するためには、更新プログラムのロールアップを適用いただく必要があります。</p><p>各々のバージョンの 更新プログラムのロールアップのリリース状況は以下サイトをご参照ください。<br>　・<a href="https://learn.microsoft.com/ja-jp/system-center/scom/release-build-versions?view=sc-om-2022">SCOM 2022： System Center Operations Manager のリリース ビルドのバージョン | Microsoft Learn</a><br>　・<a href="https://learn.microsoft.com/ja-jp/system-center/scom/release-build-versions?view=sc-om-2019">SCOM 2019： System Center Operations Manager のリリース ビルドのバージョン | Microsoft Learn</a><br>　・<a href="https://learn.microsoft.com/ja-jp/system-center/scom/release-build-versions?view=sc-om-2016">SCOM 2016： System Center Operations Manager のリリース ビルドのバージョン | Microsoft Learn</a></p><p>なお、セキュリティ対策以外の更新プログラム (機能追加や不具合修正) は、原則、メインストリーム サポート期間中 (SCOM 2022, SCOM 2019 <span style="color: red; ">※2023&#x2F;11&#x2F;20 時点</span>) の製品に対して提供されます。延長サポート期間中 (SCOM 2016 <span style="color: red; ">※2023&#x2F;11&#x2F;20 時点</span>) の製品には、セキュリティ対策の更新プログラムのみが提供されます。</p><p>各バージョンのサポート状況につきましては以下のサイトをご参照ください。<br>　・<a href="https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2022-operations-manager">System Center 2022 Operations Manager - Microsoft Lifecycle | Microsoft Learn</a><br>　・<a href="https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2019-operations-manager">System Center 2019 Operations Manager - Microsoft Lifecycle | Microsoft Learn</a><br>　・<a href="https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2016-operations-manager">System Center 2016 Operations Manager - Microsoft Lifecycle | Microsoft Learn</a><br>また、メインストリーム サポート期間や延長サポート期間の説明につきましては、<a href="https://learn.microsoft.com/ja-jp/lifecycle/policies/fixed">固定ライフサイクル ポリシーのサイト</a>をご参照ください。</p><h2 id="更新プログラムのロールアップ-UR：Update-Rollup-の適用手順"><a href="#更新プログラムのロールアップ-UR：Update-Rollup-の適用手順" class="headerlink" title="更新プログラムのロールアップ (UR：Update Rollup) の適用手順"></a>更新プログラムのロールアップ (UR：Update Rollup) の適用手順</h2><p>今回は、<b>SCOM 2022 に本記事の公開日時点で最新の UR2 を適用する手順</b>をご紹介します。<br>SCOM の更新プログラムのロールアップは累積型のため、順番に適用する必要はありません。常に最新の更新プログラムを適用できます。一般公開版の SCOM 2022 を導入し、更新プログラムのロールアップを適用したことがない場合でも、利用可能な最新の更新プログラム (今回の場合は UR2) を適用することができます。</p><p>UR の適用の際には、<a href="https://learn.microsoft.com/ja-jp/system-center/scom/release-build-versions?view=sc-om-2022#management-server-and-other-components">System Center Operations Manager のビルド バージョン</a> の表の KB 列のリンクをクリックして、最新の更新プログラム ロールアップのサイトに進みます。<br><img src="000.png"></p><p><a href="https://support.microsoft.com/kb/5031649">更新プログラム ロールアップのサイト(SCOM 2022 UR2)</a> には、更新プログラムの内容（機能追加、不具合修正、セキュリティ対策）とモジュールのダウンロード方法、インストール手順が記載されています。</p><hr><p><b>● ステップ１：モジュールをダウンロードする</b><br>① ～ ②のリンクからモジュールをダウンロードします。<br><img src="001.png"></p><p>① Operations Manager 更新プログラム パッケージを<a href="https://www.catalog.update.microsoft.com/Search.aspx?q=5031649">ダウンロード</a>します。<br><img src="002.png"></p><p>ダウンロードファイルしたファイルを展開します。</p><table border="1">    <tr>        <th style="background-color: royalblue; text-align: center; color: black;">対象</th>        <th style="background-color: royalblue; text-align: center; color: black;">ダウンロードファイル</th>        <th style="background-color: royalblue; text-align: center; color: black;">cab ファイル展開後のファイル</th>        <th style="background-color: royalblue; text-align: center; color: black;">備考</th>    </tr>    <tr style="font-size: 12px;">        <td>SCOM 管理サーバー</td>        <td>kb5031649-amd64-server_***.cab</td>        <td>KB5031649-amd64-Server.msp</td>        <td>簡略化された SCOM 管理サーバーの修正プログラムを<br>実行する場合は不要です。</td>    </tr>    <tr style="font-size: 12px;">        <td>SCOM 監査コレクション (ACS)</td>        <td>kb5031649-amd64-acs_***.cab</td>        <td>KB5031649-amd64-ACS.msp</td>        <td></td>    </tr>    <tr style="font-size: 12px;">        <td>Web コンソール</td>        <td>kb5031649-amd64-webconsole_***.cab</td>        <td>KB5031649-amd64-WebConsole.msp</td>        <td></td>    </tr>    <tr style="font-size: 12px;">        <td>SCOM ゲートウェイサーバー</td>        <td>kb5031649-amd64-gateway_***.cab</td>        <td>KB5031649-amd64-Gateway.msp</td>        <td></td>    </tr>    <tr style="font-size: 12px;">        <td>SCOM 管理コンソール</td>        <td>kb5031649-amd64-console_***.cab</td>        <td>KB5031649-amd64-Console.msp</td>        <td></td>    </tr>    <tr style="font-size: 12px;">        <td>レポート</td>        <td>kb5031649-amd64-reporting_***.cab</td>        <td>KB5031649-amd64-Reporting.msp</td>        <td></td>    </tr>    <tr style="font-size: 12px;">        <td>SCOM エージェント</td>        <td>kb5031649-amd64-agent_***.cab</td>        <td>KB5031649-amd64-Agent.msp</td>        <td>SCOM コンソールからアップデートも可能です。</td>    </tr></table><p>② 簡略化された SCOM 管理サーバーの修正プログラム (KB5031649-amd64-Server.exe) を<a href="https://download.microsoft.com/download/d/d/2/dd29ad67-a37e-42f8-9e02-50dd7dac7ec0/KB5031649-amd64-Server.exe">ダウンロード</a>します。</p><p><b>● ステップ２：コマンドプロンプトを管理者で起動して、以下の順でモジュールを実行します。</b><br>　※ コマンドプロンプトを管理者として起動 <img src="003.png"></p><p>【実行の順番】</p><ol><li>簡略化された SCOM 管理サーバーの修正プログラム KB5031649-amd64-Server.exe</li><li>監査コレクション用モジュール　　 KB5031649-amd64-ACS.msp</li><li>Web コンソール用モジュール　　　 KB5031649-amd64-WebConsole.msp</li><li>ゲートウェイサーバー用モジュール KB5031649-amd64-Gateway.msp</li><li>SCOM 管理コンソール用モジュール  KB5031649-amd64-Console.msp</li><li>レポート用モジュール　　　　　　 KB5031649-amd64-Reporting.msp</li><li>エージェント用モジュール　　　　 KB5031649-amd64-Agent.msp</li></ol><p>実行コマンド結果の画面ショットは以下の通りです。</p><ol><li><p>簡略化された SCOM 管理サーバーの修正プログラム (KB5031649-amd64-Server.exe)<br>※ 簡略化された SCOM 管理サーバーの修正プログラムが存在する場合は、本プログラムの使用を推奨します。SCOM 管理サーバー用モジュール (KB5031649-amd64-Server.msp) を用いてアップデートする場合、追加でデータベースの更新と管理パックの更新が必要になります。簡略化された SCOM 管理サーバーの修正プログラムは、これらの更新を一括で行うプログラムです。 <img src="004.png"><br>[Install] を実行します。　<img src="005.png"><br>  <img src="005_2.png"></p></li><li><p>監査コレクション用モジュール (KB5031649-amd64-ACS.mspe)</p></li></ol><p><span style="color: red; ">※ 監査コレクションを導入していない SCOM 環境では不要です。</span> <img src="006.png">　<img src="007.png"></p><ol start="3"><li>Web コンソール用モジュール (KB5031649-amd64-WebConsole.msp)</li></ol><p><span style="color: red; ">※ Web コンソールを導入していない SCOM 環境では不要です。</span> <img src="008.png"></p><ol start="4"><li>ゲートウェイサーバー用モジュール (KB5031649-amd64-Gateway.msp)</li></ol><p><span style="color: red; ">※ SCOM ゲートウェイ サーバーで実行します。SCOM ゲートウェイ サーバーを導入していない SCOM 環境では不要です。</span> <img src="009.png"></p><ol start="5"><li>SCOM 管理コンソール用モジュール (KB5031649-amd64-Console.msp)</li></ol><p><span style="color: red; ">※ SCOM 管理サーバーと SCOM コンソールを導入した全てのサーバーで実行します。</span> <img src="010.png"></p><ol start="6"><li>レポート用モジュール (KB5031649-amd64-Reporting.msp)</li></ol><p><span style="color: red; ">※ レポート機能を導入していない SCOM 環境では不要です。</span> <img src="016.png"></p><ol start="7"><li>エージェント用モジュール (KB5031649-amd64-Agent.msp)</li></ol><p><span style="color: red; ">※ エージェントサーバーで実行します。</span> <img src="011.png"></p><p>※ SCOM コンソールからプッシュインストールしていた場合は、SCOM コンソールから UR2 への更新が可能です。 <img src="012.png"></p><ol start="8"><li>UNIX および Linux 管理パックの更新<br>以下のサイトよりUNIX および Linux 管理パックをダウンロードして、SCOM にインポートします。<br><a href="https://www.microsoft.com/en-us/download/details.aspx?id=104213">Download System Center 2022 Management Pack for UNIX and Linux Operating Systems from Official Microsoft Download Center</a><br><br>管理パックのインポート方法については以下のサポートブログもご参照ください。<br><a href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/">管理パック (MP) のインポートについて | Japan System Center Support Blog (jpsystemcenter.github.io)</a></li></ol><p><b>● ステップ３：適用状況を確認します。</b><br>SCOM 管理コンソールの管理画面の [Operations Manager 製品] 配下のメニューにて各モジュールのバージョンを確認できます。<br>SCOM 2022 UR2 のバージョンは<span style="color: red; "> [10.22.10610.0] </span>です。</p><p>■ SCOM 管理サーバー<br><img src="015.png"></p><p>■ SCOM 管理コンソール<br><img src="017.png"></p><p>■ Web コンソール<br><img src="013.png"></p><p>■ 監査コレクション<br><img src="014.png"> </p><p>■ レポート<br><img src="018.png"></p><hr><h2 id="UR-適用時の-OS-再起動の可能性について"><a href="#UR-適用時の-OS-再起動の可能性について" class="headerlink" title="UR 適用時の OS 再起動の可能性について"></a>UR 適用時の OS 再起動の可能性について</h2><p>UR の適用では、基本的には SCOM 管理サーバーや管理対象のサーバーの再起動は発生いたしません。ユーザー様からの事例報告でも OS 再起動はほとんど確認しておりません。<br>ただし、仕組み上は OS 再起動が発生する可能性があります。</p><p>UR のモジュールは、Windows インストーラ形式のファイル ( msp&#x2F;msi ファイル) にて提供されます。msp&#x2F;msi インストーラを使用したインストール&#x2F;アンインストールの挙動として、実行時に置き換えが必要なファイル等が他プロセスによりハンドルを保持されていて置き換えできない場合、一度 OS 再起動を試行してファイルの置き換えを実施します。 そのため、この仕様にあたる状況となった場合に OS 再起動が発生する可能性があります。<br>下記公開情報に記載の通り、基本的にはアプリケーション単位でシャットダウンして、システム全体 (OS) のシャットダウンにつながらないような考慮になっておりますが、可能性という意味では発生し得る点をご認識ください。<br>　参考：再起動マネージャーでの Windows インストーラーの使用<br>　<a href="https://learn.microsoft.com/ja-jp/windows/win32/msi/using-windows-installer-with-restart-manager">https://learn.microsoft.com/ja-jp/windows/win32/msi/using-windows-installer-with-restart-manager</a></p><hr><p>SCOM の UR 適用手順は以上の通りです。<br>本手順を参考に SCOM を常に最新の状態にてご利用いただけますと幸いです</p>]]>
-    </content>
-    <id>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Update_Rollup/</id>
-    <link href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Update_Rollup/"/>
-    <published>2023-11-20T05:00:00.000Z</published>
-    <summary>
-      <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM に更新プログラムのロールアップ (UR：Update Rollup) を適用する手順について説明します。<br><br></p>]]>
-    </summary>
-    <title>SCOM の 更新プログラムのロールアップの適用手順</title>
-    <updated>2026-05-15T04:06:47.113Z</updated>
+    <updated>2026-05-25T02:27:31.255Z</updated>
   </entry>
 </feed>
