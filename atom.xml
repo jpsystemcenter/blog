@@ -10,7 +10,27 @@
   <rights>All rights reserved 2026, Japan System Center Support</rights>
   <subtitle>日本マイクロソフトの System Center に関するサポート情報のブログです。</subtitle>
   <title>Japan System Center Support Blog</title>
-  <updated>2026-06-09T02:30:52.674Z</updated>
+  <updated>2026-06-09T04:55:30.984Z</updated>
+  <entry>
+    <author>
+      <name>Japan System Center Support</name>
+    </author>
+    <category term="Troubleshoot" scheme="https://jpsystemcenter.github.io/blog/tags/Troubleshoot/"/>
+    <category term="General" scheme="https://jpsystemcenter.github.io/blog/tags/General/"/>
+    <category term="SQL Server" scheme="https://jpsystemcenter.github.io/blog/tags/SQL-Server/"/>
+    <category term="ネットワーク" scheme="https://jpsystemcenter.github.io/blog/tags/%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF/"/>
+    <content>
+      <![CDATA[<p>本記事では、System Center 製品全般で利用可能なトラブルシューティング用のログ採取手順をまとめています。</p><span id="more"></span><p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p><p>各 System Center 製品では、その製品に特化したログが利用可能で、そのログ採取手順はすでに本ブログでまとめています。</p><ul><li>SCOM 用: <a href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log/">SCOM で使用する一般的なログ収集方法</a></li><li>SCVMM 用: <a href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a></li></ul><p>一部シナリオではこれらの特化型のログに加え、汎用的に利用可能なログ採取手順が設けられております。<br>本記事では、System Center 製品のトラブルシューティングで比較的利用する可能性がある、汎用的なログ採取手順を纏めます。</p><table>  <thead>    <tr>      <th style="text-align:center">項目</th>      <th style="text-align:center">取得目的</th>    </tr>  </thead>  <tbody>    <tr>      <td><a href="##ネットワーク-キャプチャ">ネットワーク キャプチャ</a></td>      <td>ネットワーク疎通や認証のワークフローを確認することが可能です。</td>    </tr>    <tr>      <td><a href="#SQL-Server-データベース容量レポート">SQL Server データベース容量レポート</a></td>      <td>SQL Server 内データベースと各テーブルの容量状態を把握できます。</td>    </tr>    <tr>      <td><a href="#プロセス-モニター">プロセス モニター</a></td>      <td>各プロセスの動向を把握するために使用します。プロセスが予期せぬ動作を引き起こしていないか特定することができます。</td>    </tr>  </tbody></table><h2 id="ネットワーク-キャプチャ"><a href="#ネットワーク-キャプチャ" class="headerlink" title="ネットワーク キャプチャ"></a>ネットワーク キャプチャ</h2><p>ネットワーク キャプチャを採取することで、以下のような情報が分かります。</p><ul><li>サーバー・クライアント間で命令送受信は成功しているか？</li><li>どのような認証が行われており、その認証の結果は？</li></ul><p>例えば以下のようなシナリオの調査において、ネットワーク キャプチャの採取が役立ちます。</p><ul><li>設定変更を行っていないのに SCOM のハートビート エラーが発生するようになった</li><li>リモート サーバーから SCVMM コンソールを起動しているが、SCVMM サーバーへの接続が上手くいかないことが増えた</li></ul><p>ネットワーク キャプチャは、下記の手順を行うことで、ツールのインストールなどは行わずとも採取が可能です。</p><p><b><strong>採取手順</strong></b></p><ol><li>ネットワークキャプチャを取得するコンピューターに管理者権限でログインします。</li><li>ネットワークキャプチャを保存するため、C ドライブ直下に “temp” という名称のフォルダを作成します。</li><li>管理者権限でコマンド プロンプトを起動し、以下のコマンドを実行して “temp” フォルダに移動します。</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd C:\temp</span><br></pre></td></tr></table></figure><ol start="4"><li>下記コマンドをコマンド プロンプトで管理者権限において実行します。</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Netsh trace start capture=yes tracefile=C:\temp\netsh_&lt;資料採取コンピューター名&gt;.etl</span><br></pre></td></tr></table></figure><ol start="5"><li>事象を再現します。その間、4. のコマンドを実行したプロンプトは閉じていただいても問題ございません。</li><li>事象再現後、下記コマンドをコマンド プロンプトにて入力し、ファイルが作成されたことを確認します。</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Netsh trace stop</span><br></pre></td></tr></table></figure><ol start="7"><li>“temp” フォルダに出力された “netsh_&lt;資料採取コンピューター名&gt;.etl” と “netsh_&lt;資料採取コンピューター名&gt;.cab” を 1 つのフォルダに纏めて圧縮の上、弊社までお寄せください。</li></ol><h2 id="SQL-Server-データベース容量レポート"><a href="#SQL-Server-データベース容量レポート" class="headerlink" title="SQL Server データベース容量レポート"></a>SQL Server データベース容量レポート</h2><p>SCOM や SCVMM サーバー上に不審なログが記録されていない、でも以下の現象が発生して業務影響が発生するという場面が発生しえます。</p><ul><li>サーバー機能の動作が思い</li><li>サーバー機能が正常に機能しなくなった</li><li>サーバー機能に関わるサービスが起動できなくなった</li><li>コンソールでサーバーに接続できなくなった</li></ul><p>この場合、データベースの容量に問題が生じている場合が想定されます。<br>容量に対する問題を言及した記事は、既に何点か本ブログに公開しています。</p><ul><li><a href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/">SCOM OperationsManager データベースの unused 領域開放手順</a></li><li><a href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/">SCOM OperationsManagerDW データベースの容量削減手順</a></li><li><a href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/">SCVMM ジョブ保存設定変更方法</a></li></ul><p>では実際にデータベースの容量はどのように確認すればよいか？というのがこれらの記事では多く書かれていませんでした。<br>以下の手順で資料を採取いただくことで、データベースの容量状態が確認できます。<br><b><strong>採取手順</strong></b></p><ol><li>目的のデータベースが存在するサーバーに管理者権限でログインします。</li><li>SQL Server Management Studio (SSMS) を開きます。</li><li>目的のデータべースが存在するサーバーに、管理者権限でログインします。</li><li>左ペインより当該データベースを右クリックし、[レポート] -&gt; [標準レポート] -&gt; [ディスク使用量] をクリックします。</li><li>ディスク使用量のレポートが表示されますので、レポート上で右クリックし、[エクスポート] -&gt; [Excel] をクリックします。</li><li>再度当該データベースを右クリックし、[レポート] -&gt; [標準レポート] -&gt; [上位のデーブルによるディスク使用量] をクリックします。</li><li>テーブル毎のデータの状況が出力されたレポートが表示されますので、レポート上で右クリックし、[エクスポート] -&gt; [Excel] をクリックします。</li><li>エクスポートされた Excel データを、弊社までお寄せください。<br>(複数のレポートが存在する場合、1 つのフォルダに纏めて圧縮の上お寄せください。)</li></ol><p>例えば SCOM では、以下の通りにレポートを採取することができます。</p><ol><li>SQL Server Management Studio (SSMS) を開きます。</li><li>SCOM データべース (既定では “OperationsManager” という名称です) が存在するサーバーに、管理者権限でログインします。</li><li>SCOM データベース (既定では “OperationsManager” という名称です) を右クリックし、[レポート] -&gt; [標準レポート] -&gt; [ディスク使用量] をクリックします。</li><li>ディスク使用量のレポートが表示されますので、レポート上で右クリックし、[エクスポート] -&gt; [Excel] をクリックします。</li><li>再度当該データベースを右クリックし、[レポート] -&gt; [標準レポート] -&gt; [上位のデーブルによるディスク使用量] をクリックします。<br>こちらも 4. と同じようにレポートを Excel 形式で保存します。</li><li>SSMS 上より、追加でSCOM データウェアハウスデータベース (既定では “OperationsManagerDW” という名称です) が存在するサーバーに管理者権限でログインします。<br>SCOM データウェアハウスデータベースと SCOM データベースが存在するサーバーが同一である場合、こちらの手順は不要となります。</li><li><ol start="3"><li>から 5. の手順を、SCOM データウェアハウスデータベース (既定では “OperationsManagerDW” という名称です) に対しても同様に実施いただきます。</li></ol></li><li>エクスポートされた Excel データを 1 つのフォルダに纏めて圧縮の上、弊社までお寄せください。</li></ol><h2 id="プロセス-モニター"><a href="#プロセス-モニター" class="headerlink" title="プロセス モニター"></a>プロセス モニター</h2><p>イベント ログなどからは事象に関わる情報が確認できない、でも実際に現象が発生している、という状況においてプロセス モニターが役立つ場合があります。</p><p><b><strong>注意事項</strong></b><br>プロセス モニターは現在も更新が行われ続けているツールです。<br>下記で紹介します画面はバージョンによって都度変化する場合がございますので、あらかじめご了承ください。</p><p><b><strong>採取手順</strong></b></p><ol><li>以下弊社サイトにアクセスします。<br><a href="https://learn.microsoft.com/ja-jp/sysinternals/downloads/procmon">プロセス モニター</a></li><li>サイト内の “プロセス モニター” の個所をクリックし、ファイルをダウンロードします。<br><img src="001.png"></li><li>ダウンロードしたファイルを、プロセスモニターを実行するサーバー上にコピーし、展開します。</li><li>展開されたフォルダ内に存在する “Procmon.exe” を実行します。<br>プロセスモニターはサーバーにインストールせず、展開されたフォルダ内に存在する “Procmon.exe” が実行ファイルとなります。<br>初回起動時に下記図のように eula に関する内容が表示される場合がございますので、この場合 [Agree] をクリックします。<br><img src="002.png"></li><li>プロセスモニターの採取が開始されます。<br>この状態で、事象再現手順を実行します。</li><li>イベントログの記録を確認いただけましたら、下記図の ①、② の順番に沿ってアイコンをクリックいただきます。<br>① でプロセスモニターの採取を停止し、② で採取された内容をファイルとして保存いただきます。<br><img src="003.png"></li><li>ファイル保存設定が表示されますので、”Events to save” および “Format” を以下の通り設定いただきます。<br><img src="004.png"><br>対象のファイルの保存先を “Path” 欄にフルパスで指定いただき、ファイルを保存します。</li><li>保存されたファイルを、下記弊社アップロードサイトまでお寄せください。</li></ol>]]>
+    </content>
+    <id>https://jpsystemcenter.github.io/blog/general/GenericLogs/</id>
+    <link href="https://jpsystemcenter.github.io/blog/general/GenericLogs/"/>
+    <published>2026-06-09T03:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>本記事では、System Center 製品全般で利用可能なトラブルシューティング用のログ採取手順をまとめています。</p>]]>
+    </summary>
+    <title>System Center 製品で使用される汎用的なログ採取手順</title>
+    <updated>2026-06-09T04:55:30.984Z</updated>
+  </entry>
   <entry>
     <author>
       <name>Japan System Center Support</name>
@@ -29,7 +49,7 @@
       <![CDATA[<p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCVMM</title>
-    <updated>2026-06-09T02:30:52.674Z</updated>
+    <updated>2026-06-09T04:55:30.927Z</updated>
   </entry>
   <entry>
     <author>
@@ -50,7 +70,7 @@
       <![CDATA[<p>This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCOM</title>
-    <updated>2026-06-09T02:30:52.577Z</updated>
+    <updated>2026-06-09T04:55:30.827Z</updated>
   </entry>
   <entry>
     <author>
@@ -68,7 +88,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM を使用して SCVMM 環境を監視する構成手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM を用いた SCVMM 環境の監視</title>
-    <updated>2026-06-09T02:30:52.655Z</updated>
+    <updated>2026-06-09T04:55:30.908Z</updated>
   </entry>
   <entry>
     <author>
@@ -88,7 +108,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、SCVMM の運用上オブジェクトに write ロックが発生したことによって、仮想マシンの操作が行えなくなった場合の対処方法をご案内します。<br><br></p>]]>
     </summary>
     <title>write ロックによってジョブの実行が行えなくなる事象の対処方法</title>
-    <updated>2026-06-09T02:30:52.629Z</updated>
+    <updated>2026-06-09T04:55:30.882Z</updated>
   </entry>
   <entry>
     <author>
@@ -106,7 +126,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM の機能紹介</title>
-    <updated>2026-06-09T02:30:52.606Z</updated>
+    <updated>2026-06-09T04:55:30.858Z</updated>
   </entry>
   <entry>
     <author>
@@ -124,7 +144,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする <strong>「Azure Arc SCVMM」</strong> についてご紹介します。<br><br></p>]]>
     </summary>
     <title>Azure Arc SCVMM の紹介</title>
-    <updated>2026-06-09T02:30:52.607Z</updated>
+    <updated>2026-06-09T04:55:30.859Z</updated>
   </entry>
   <entry>
     <author>
@@ -142,7 +162,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</title>
-    <updated>2026-06-09T02:30:52.619Z</updated>
+    <updated>2026-06-09T04:55:30.872Z</updated>
   </entry>
   <entry>
     <author>
@@ -163,7 +183,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。</p>]]>
     </summary>
     <title>SCOM OperationsManagerDW データベースの容量削減手順</title>
-    <updated>2026-06-09T02:30:52.573Z</updated>
+    <updated>2026-06-09T04:55:30.825Z</updated>
   </entry>
   <entry>
     <author>
@@ -184,7 +204,7 @@
       <![CDATA[<p>本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。</p>]]>
     </summary>
     <title>SCOM で使用する一般的なログ収集方法</title>
-    <updated>2026-06-09T02:30:52.575Z</updated>
+    <updated>2026-06-09T04:55:30.826Z</updated>
   </entry>
   <entry>
     <author>
@@ -205,7 +225,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。</p>]]>
     </summary>
     <title>SCOM OperationsManager データベースの unused 領域開放手順</title>
-    <updated>2026-06-09T02:30:52.573Z</updated>
+    <updated>2026-06-09T04:55:30.825Z</updated>
   </entry>
   <entry>
     <author>
@@ -224,7 +244,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの保科です。<br>本日は、System Center Operations Manager (以後 SCOM と表記します) で、Windows OS のメモリ使用率を監視する方法をご紹介いたします。</p>]]>
     </summary>
     <title>SCOM でメモリ使用率を監視する方法</title>
-    <updated>2026-06-09T02:30:52.574Z</updated>
+    <updated>2026-06-09T04:55:30.825Z</updated>
   </entry>
   <entry>
     <author>
@@ -242,7 +262,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で トラステッド プラットフォーム モジュール (TPM) が有効な仮想マシンを管理する方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM で TPM が有効な仮想マシンを管理する方法</title>
-    <updated>2026-06-09T02:30:52.722Z</updated>
+    <updated>2026-06-09T04:55:30.976Z</updated>
   </entry>
   <entry>
     <author>
@@ -261,7 +281,7 @@
 <p>System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ サーバー) の構築、類似の仮想スイッチの設定を簡易的に反映できる設定 (論理スイッチ) などが利用できます。また、VMWare vCenter と連携することで VMWare VM を Hyper-V VM に移行することができます。<br><br>SCVMM の構成は、IT インフラ環境の規模や運用要件に応じて変わりますが、検証等の目的で簡易的に最短で SCVMM を構築されたいケースがあります。そういったケースに備えて、本記事では、1 台の Windows Server に SCVMM の主コンポーネントの SCVMM 管理サーバーと SCVMM コンソールをインストールして、SCVMM コンソールにサインインできるまでの手順を画面ショット付きで紹介します。</p>]]>
     </summary>
     <title>SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</title>
-    <updated>2026-06-09T02:30:52.629Z</updated>
+    <updated>2026-06-09T04:55:30.882Z</updated>
   </entry>
   <entry>
     <author>
@@ -282,7 +302,7 @@
 <p>今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、]]>
     </summary>
     <title>SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</title>
-    <updated>2026-06-09T02:30:52.655Z</updated>
+    <updated>2026-06-09T04:55:30.908Z</updated>
   </entry>
   <entry>
     <author>
@@ -300,7 +320,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</title>
-    <updated>2026-06-09T02:30:52.550Z</updated>
+    <updated>2026-06-09T04:55:30.801Z</updated>
   </entry>
   <entry>
     <author>
@@ -321,7 +341,7 @@
 <p>本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除]]>
     </summary>
     <title>VM の強制削除および再登録</title>
-    <updated>2026-06-09T02:30:52.718Z</updated>
+    <updated>2026-06-09T04:55:30.972Z</updated>
   </entry>
   <entry>
     <author>
@@ -342,7 +362,7 @@
 <p>本日は System Center Operations Manager（以下、SCOM） に採取されたパフォーマンス カウンターの情報]]>
     </summary>
     <title>パフォーマンス データを DB から取得する方法</title>
-    <updated>2026-06-09T02:30:52.590Z</updated>
+    <updated>2026-06-09T04:55:30.842Z</updated>
   </entry>
   <entry>
     <author>
@@ -363,7 +383,7 @@
 <p>本日は System Center Operations Manager（以下、SCOM） のパフォーマンス ビューに表示されているデー]]>
     </summary>
     <title>パフォーマンス ビューに表示されているデータを取得する方法</title>
-    <updated>2026-06-09T02:30:52.586Z</updated>
+    <updated>2026-06-09T04:55:30.837Z</updated>
   </entry>
   <entry>
     <author>
@@ -384,27 +404,6 @@
 <p>本日は System Center Virtual Machine Manager で Linux VM をテンプレートから作成する際に]]>
     </summary>
     <title>VM テンプレートから仮想マシン (Linux 系) を作成が完了しない</title>
-    <updated>2026-06-09T02:30:52.716Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Japan System Center Support</name>
-    </author>
-    <category term="SCOM" scheme="https://jpsystemcenter.github.io/blog/tags/SCOM/"/>
-    <category term="Troubleshoot" scheme="https://jpsystemcenter.github.io/blog/tags/Troubleshoot/"/>
-    <category term="MonitoringHost.exe" scheme="https://jpsystemcenter.github.io/blog/tags/MonitoringHost-exe/"/>
-    <content>
-      <![CDATA[<span id="more"></span><p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p><p>本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである MonitoringHost.exe が消費する仮想メモリ量が増大する話についてお伝えします。</p><h2 id="仮想メモリを異常に消費"><a href="#仮想メモリを異常に消費" class="headerlink" title="仮想メモリを異常に消費"></a>仮想メモリを異常に消費</h2><h3 id="事象"><a href="#事象" class="headerlink" title="事象"></a>事象</h3><p>突然、SCOM の管理サーバーやエージェントが導入されているマシンにてプロセスが異常にメモリを消費し、マシンがダウンするといった事象が発生することがあります。<br>その場合、イベント ログ [System] に以下が記録されることを確認しています。</p><h4 id="イベントの例-イベント-ID：2004"><a href="#イベントの例-イベント-ID：2004" class="headerlink" title="イベントの例 (イベント ID：2004)"></a>イベントの例 (イベント ID：2004)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ログの名前：System</span><br><span class="line">日時：yyyy/mm/dd hh:mm:ss </span><br><span class="line">ソース：Resource-Exhaustion-Detector</span><br><span class="line">レベル：警告</span><br><span class="line">タスクのカテゴリ：リソース消費診断イベント</span><br><span class="line">イベント ID：2004</span><br><span class="line">ユーザー：NT AUTHORITY\SYSTEM</span><br><span class="line">コンピュータ：hyperv01.contoso.com</span><br><span class="line">説明：Windows は仮想メモリの不足状態を診断しました。仮想メモリを多く消費したのは次のプログラムです:</span><br><span class="line">*MonitoringHost.exe (4904) は 3003106107520 バイトを消費し* 、WmiPrvSE.exe (2122) は 2003314000 バイトを消費し、svchost.exe (1134) は 192024218 バイトを消費しました。</span><br></pre></td></tr></table></figure><p>上記のイベントではプロセス MonitoringHost.exe が 約280GB （※）の仮想メモリを使用していることを示しています。<br>このイベントが記録されるタイミングでまた、SCOM に関するイベント ログ [Operations Manager] には同時にイベント ID：26008 がかなりの頻度で記録されていることも確認しています。<br>過去お問い合わせを頂いたお客様では、具体的な頻度の度合いは数秒で2000～3000件というかなりの頻度もございました。</p><p>※ 3003106107520 B &#x2F; 1024 (KB 換算) &#x2F; 1024 （MB 換算）&#x2F; 1024  （GB 換算） ≒ 280 GB</p><h4 id="イベントの例-イベントID：26008"><a href="#イベントの例-イベントID：26008" class="headerlink" title="イベントの例 (イベントID：26008)"></a>イベントの例 (イベントID：26008)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ソース：Health Service Modules</span><br><span class="line">日時：yyyy/mm/dd hh:mm:ss</span><br><span class="line">イベントID：26008</span><br><span class="line">Level：エラー</span><br><span class="line">コンピュータ名：hyperv01.contoso.com</span><br><span class="line">説明：コンピューター &#x27;hyperv01.contoso.com&#x27; の Operations Manager イベント ログは壊れた状態のままです。イベント ログ プロバイダーが、問題があると思われるレコードをスキップすることによって回復を試みます。</span><br><span class="line">最大 2 つのレコードがスキップされる可能性があります。</span><br><span class="line">1 つ以上のワークフローがこの影響を受けました。</span><br><span class="line"></span><br><span class="line">ワークフロー名: Microsoft.SystemCenter.Apm.Infrastructure.Monitoring.ApmAgent.APMConfigurationConflict.Monitor</span><br><span class="line">      インスタンス名: hyperv01.contoso.com</span><br><span class="line">      インスタンス ID: &#123;8E315A0A-DFFD-8341-6461-A4A561E0F2D&#125;</span><br><span class="line">      管理グループ: SCOM</span><br></pre></td></tr></table></figure><p>上記のイベントが記録されている状態はプロセス MonitoringHost.exe が仮想メモリを異常に消費してしまう状況が発生しており、OS 上の仮想メモリを枯渇させてしまい再起動するしか対処方法がありません。<br>併せて、この問題が発生致しますと Application のイベント ログにイベント ID：1530 が記録されます。</p><h4 id="イベントの例-イベントID：1530"><a href="#イベントの例-イベントID：1530" class="headerlink" title="イベントの例 (イベントID：1530)"></a>イベントの例 (イベントID：1530)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ソース：User Profile Service</span><br><span class="line">日時：yyyy/mm/dd hh:mm:ss</span><br><span class="line">イベントID：1530</span><br><span class="line">ユーザー：NT AUTHORITY\SYSTEM</span><br><span class="line">Level：警告</span><br><span class="line">コンピュータ名：hyperv01.contoso.com</span><br><span class="line">説明：レジストリ ファイルは他のアプリケーションまたはサービスで使用されています。ファイルはすぐにアンロードされます。レジストリ ファイルを保持しているアプリケーションまたはサービスはこれ以降正しく機能しない可能性があります</span><br><span class="line"></span><br><span class="line">詳細 -</span><br><span class="line">32 user registry handles leaked from \Registry\User\S-1-5-21-1614895754-1085031214-725345543-289007:</span><br><span class="line">Process 4904 (\Device\HarddiskVolume1\Program Files\Microsoft System Center 2016\Operations Manager\Server\MonitoringHost.exe) has opened key \REGISTRY\USER\S-1-5-21-1614895754-1085031214-725345543-289007</span><br><span class="line">&lt;・・・以下、同様の内容が記録されるため割愛しています・・・&gt;</span><br></pre></td></tr></table></figure><p>こちらのイベント ID の説明の中で MonitoringHost.exe  のプロセスの記載があれば本事象に該当いたします。<br>そのため、こちらのイベント ログが記録されているかをまずご確認いただく方法も有効です。</p><h3 id="要因"><a href="#要因" class="headerlink" title="要因"></a>要因</h3><p>この事象の問題や要因を説明します。<br>こちらの問題は SCOM の管理サーバーやエージェントが利用するアクション アカウントが関連します。</p><p>SCOM は管理サーバーやエージェント上で監視を行う際に実行される処理はこのアクション アカウントによって実行される仕組みを取っておりますが、このアクション アカウントと同じアカウントを利用して OS 上で操作を行いログオフを実施すると今回の事象が発生することを確認しています。<br>これは OS 上でアクション アカウントと同じアカウントの操作によってログオフが実施されると User Profile がアンロードされるために発生します。</p><p>アクション アカウントでの監視はユーザーによるログオフ操作が実施されたあとも継続するため、User Profile をロードしようとします。<br>しかし、すでにログオフ操作のためアンロードされてしまっているためアクション アカウントは User Profile のロードを正常に行うことができず、エラーとなります。<br>このエラーが繰り返し発生し、エラー時に増加するヒープ領域が仮想メモリの領域を圧迫します。<br>仮想メモリの領域が圧迫されますと、上記のイベント ID：2004 が記録されます。</p><p>発生までの流れは以下です。</p><p>～～発生のプロセス～～</p><ol><li>SCOM 管理サーバーやエージェントで利用するアカウントがアンロードされた User Profile に含まれていたレジストリ キーにアクセスしようとする。</li><li>アクセスが失敗し、エラーに関連する情報がヒープ領域に格納される。</li><li>SCOM 管理サーバーやエージェントで利用するアカウントが繰り返しレジストリ キーへのアクセスを実行し、エラーの情報がヒープに格納され続ける。</li><li>ヒープ領域が肥大化する。</li><li>仮想メモリが枯渇する。</li></ol><p>この挙動は SCOM 含めた COM+ アプリケーションの実装では想定されている動作でもありますため、お客様環境にてこういった状況とならないよう事前にご利用いただくアカウントについてご確認いただく必要がございます。</p><p>この事象を回避いただくための対処方法は至って単純です。<br>それは SCOM の管理サーバーやアクション アカウントに使用しているアカウントと OS 上へとログオン&#x2F;ログオフするアカウントを異なるものに変更するだけです。</p><p>SCOM の場合ですとアクション アカウントに ローカル システム アカウントを利用することが可能ですので、アカウントを基本的にローカル システム アカウントへと変更していただく、という運用が一番シンプルです。</p><p>しかし、ローカル システム アカウントの場合ですと権限が Administrator と同等ですので、SCOM のプロセスが悪用されるリスクを懸念されるお客様もいらっしゃるかと存じます。<br>それを考慮した場合、ドメインのアカウントを指定するほうがリスクは小さくなります。<br>どのアカウントを利用するかはお客様の運用ポリシーに依存する部分でもありますので検討の上、アカウントを決定してください。</p><p>SCOM のアクション アカウントにご利用いただくための権限については以下に公開情報があるのでご覧ください。</p><p>• 公開情報<br><a href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-security-accounts?view=sc-om-2022">サービス、ユーザー、およびセキュリティ アカウント</a><br>※SCOM 2022 の情報ですが、SCOM 2019、SCOM 2016 でも同様です。</p><p>今の環境でこの Blog で案内している事象が発生する可能性があるか、というのは以下の手順で SCOM のアクション アカウントを確認してください。<br>以下の手順ではアクション アカウントに指定されているアカウントを確認していただき、そのアカウントがログオン&#x2F;ログオフを実施するアカウントであるか確認できます。</p><p>&lt;&lt;確認手順&gt;&gt;<br>以下の手順にてエージェントのアクション アカウントをご確認が可能です。</p><ol><li>SCOM 管理コンソールを起動し、[管理] ペインを開きます。</li><li>左ペインの [プロファイル] をクリックします。</li><li>一覧から [既定のアクション アカウント] をダブルクリックします。</li><li>ウィザード画面上で、[次へ] をクリックします。</li><li>全般プロパティ画面にて [次へ] をクリックします。</li><li>実行アカウント画面に一覧から、問題が発生している SCOM 管理サーバー や SCOM エージェントに設定されているアカウント名を確認します。</li></ol><p>手順は以上です。</p><h2 id="他の問題事例"><a href="#他の問題事例" class="headerlink" title="他の問題事例"></a>他の問題事例</h2><p>アクション アカウントとログオン&#x2F;ログオフに使用しているアカウントが同じであることによる他の問題事例を紹介します。</p><p>事例：以下アカウントで指定しているユーザーが同じである場合<br>　・SCOM 管理サーバーの  MonitoringHost.exe のアクションアカウント<br>　・SCOM 管理サーバーにログインするアカウント</p><p>この場合、SCOM 管理サーバーの OS からログオフした際に SCOM 管理サーバーの  MonitoringHost.exe で監視している linux コンピューターがグレーアウトする事例がございます。<br>下図構成となるため、ログオフした際に MonitoringHost.exe が動作するために必要な情報（例えばレジストリキーに設定している値）などもログオフとともに参照できなくなり、linux コンピューターが監視不能状態となりグレーアウト状態になる場合があります。</p><p><a href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-planning-agent-deployment?view=sc-om-2022&tabs=Windows#linuxunix-agent">Operations Manager エージェント</a></p><p><img src="/blog/SCOM/SCOM_highmemory_MonitoringHost/0101.png"></p><p>上記事例もございますため、アクション アカウントとログオン&#x2F;ログオフに使用しているアカウントが同じ場合はどちらかのアカウントを変更してくださいするようお願いいたします。</p>]]>
-    </content>
-    <id>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</id>
-    <link href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/"/>
-    <published>2024-03-13T12:00:00.000Z</published>
-    <summary>
-      <![CDATA[<span id="more"></span>
-<p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p>
-<p>本日は System Center Operations Manager（以下、SCOM） が監視のために利用するプロセスである Mon]]>
-    </summary>
-    <title>MonitoringHost.exe が仮想メモリを異常に消費する</title>
-    <updated>2026-06-09T02:30:52.585Z</updated>
+    <updated>2026-06-09T04:55:30.970Z</updated>
   </entry>
 </feed>
