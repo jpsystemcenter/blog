@@ -14,7 +14,7 @@
 <meta property="og:description" content="This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2026-05-14T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-08T06:45:35.486Z">
+<meta property="article:modified_time" content="2026-06-09T02:30:52.577Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="Log Collection">
 <meta property="article:tag" content="Operations Manager">
@@ -172,7 +172,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+9d83987f-c4a4-5ed8-94bb-6a384250b940%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BCommon+Log+Collection+Methods+Used+in+SCOM%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_Troubleshooting_log_en%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_Troubleshooting_log_en.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_Troubleshooting_log_en.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log_en/" data-id="cuidX7n6ncizte_fgsPeR6otL" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log_en/" data-id="cuidxmsnAcTJd1DNAGWhSHoFc" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -333,17 +333,6 @@ For SCOM trace logs, when the “Microsoft Monitoring Agent” service transitio
 <p>(*2)<br>When collecting SCOM diagnostic logs in step 7, we have confirmed that no significant performance impact occurs in particular.</p>
 <p>(*3)<br>If operations that stop the SCOM agent service (such as server restart) are performed after setting up trace logging, trace collection settings are reset, and error-level trace collection at OS startup begins.<br>Therefore, if you perform operations that stop the SCOM agent service during trace collection, you need to repeat steps 1 through 8 again.</p>
 <p>Reference:<br><a href="https://docs.microsoft.com/ja-jp/system-center/scom/manage-overview-management-pack?view=sc-om-2022">Use diagnostic tracing - Operations Manager | Microsoft Learn</a><br>(This is our documentation describing SCOM diagnostic logs.)</p>
-<h2 id="SCOM-Environment-Information"><a href="#SCOM-Environment-Information" class="headerlink" title="SCOM Environment Information"></a>SCOM Environment Information</h2><p>In SCOM troubleshooting, it is necessary to accurately understand versions and running status of SCOM Management Servers and SCOM agents, update rollup versions, and so on.<br>This information is obtained as a CSV list using Operations Manager Shell.</p>
-<ol>
-<li>Sign in to an SCOM Management Server with an account that has SCOM administrator privileges.</li>
-<li>Create a folder named “temp” directly under the C drive in advance.</li>
-<li>Run [Operations Manager Shell] from the [Start] menu.</li>
-<li>Run the following commands.</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Get-SCOMManagementServer | export-csv -path &quot;c:/temp/SCOMManagementServer.csv&quot; -encoding UTF8</span><br><span class="line">Get-SCOMAgent | export-csv -path &quot;c:/temp/SCOMAgent.csv&quot; -encoding UTF8</span><br><span class="line">Get-SCXAgent | export-csv -path &quot;c:/temp/SCXAgent.csv&quot; -encoding UTF8</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>Send the output files SCOMManagementServer.csv, SCOMAgent.csv, and SCXAgent.csv to us.</li>
-</ol>
 <h2 id="System-Information"><a href="#System-Information" class="headerlink" title="System Information"></a>System Information</h2><p>In SCOM troubleshooting, information about the server itself (Windows Server version, installed software, list of services, etc.) may be required.<br>This information is collected using the System Information tool.</p>
 <ol>
 <li>Sign in to the target server.</li>
