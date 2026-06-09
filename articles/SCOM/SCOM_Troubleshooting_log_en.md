@@ -223,22 +223,6 @@ Reference:
 [Use diagnostic tracing - Operations Manager | Microsoft Learn](https://docs.microsoft.com/ja-jp/system-center/scom/manage-overview-management-pack?view=sc-om-2022)
 (This is our documentation describing SCOM diagnostic logs.)
 
-
-## SCOM Environment Information
-In SCOM troubleshooting, it is necessary to accurately understand versions and running status of SCOM Management Servers and SCOM agents, update rollup versions, and so on.
-This information is obtained as a CSV list using Operations Manager Shell.
-1. Sign in to an SCOM Management Server with an account that has SCOM administrator privileges.
-2. Create a folder named "temp" directly under the C drive in advance.
-3. Run [Operations Manager Shell] from the [Start] menu.
-4. Run the following commands.
-```
-Get-SCOMManagementServer | export-csv -path "c:/temp/SCOMManagementServer.csv" -encoding UTF8
-Get-SCOMAgent | export-csv -path "c:/temp/SCOMAgent.csv" -encoding UTF8
-Get-SCXAgent | export-csv -path "c:/temp/SCXAgent.csv" -encoding UTF8
-```
-5. Send the output files SCOMManagementServer.csv, SCOMAgent.csv, and SCXAgent.csv to us.
-
-
 ## System Information
 In SCOM troubleshooting, information about the server itself (Windows Server version, installed software, list of services, etc.) may be required.
 This information is collected using the System Information tool.
