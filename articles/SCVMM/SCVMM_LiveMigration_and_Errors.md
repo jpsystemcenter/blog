@@ -101,7 +101,7 @@ Hyper-V 上に作成された仮想マシンは、いずれも例外なく構成
 この際展開される仮想マシンは構成バージョンが 9.0 となります。
 この仮想マシンを Windows Server 2016 Hyper-V に移行しようとすると、移行先がサポートしない構成バージョンであるとして、移行に失敗します。
 例えば SCVMM コンソール上でこの移行操作を実施すると、以下エラーが発生して操作が失敗します。
-![](SCVMM_LiveMigration_and_Errors/SCVMM_VMVersion_MigrationError.png)
+![](SCVMM_VMVersion_MigrationError.png)
 
 逆のパターンとして、Windows Server 2016 で作成された仮想マシンを Windows Server 2019 に移行するシナリオを考えます。
 Windows Server 2016 Hyper-V で作成される仮想マシンは、既定で構成バージョンが 8.0 となります。

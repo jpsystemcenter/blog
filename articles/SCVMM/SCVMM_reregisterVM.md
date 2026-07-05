@@ -14,12 +14,12 @@ tags:
 
 ## SCVMM の DB で保持している情報が不整合になってしまうシナリオ
 下図は SCVMM の構成イメージとなりますが、SCVMM では管理している VM や Hyper-V ホストの情報を DB （SQL Server）で保持しております。
-![](SCVMM_reregisterVM/0101.png)
+![](0101.png)
 
 
 
 発生シナリオは幾つかございますが、例えば  SCVMM で管理している VM を WSFC マネージャーで別ホストにマイグレーションした場合やHyper-V マネージャーから VM を削除した場合、SCVMM がその VM を見失ってしまい SCVMM のコンソールで見た場合に VM のステータスが ` ”不足” （英語表記： missing）` となってしまう場合があります
-![](SCVMM_reregisterVM/0102.png)
+![](0102.png)
 
 
 参考：[不足している状態の仮想マシンを削除する](https://learn.microsoft.com/ja-jp/troubleshoot/system-center/vmm/remove-missing-virtual-machines)
@@ -48,7 +48,7 @@ tags:
 **VM の再登録が不要であれば、手順は 5 は実施いただく必要ございません。**
 
 ■コマンド実行時の画面
-![](SCVMM_reregisterVM/0201.png)
+![](0201.png)
 
 *作業の影響範囲*
 上記コマンドの影響範囲につきまして、上述している通り、 SCVMM が持つデータベース内の情報のみ削除するため、**仮想マシンへの動作影響はありません**。
