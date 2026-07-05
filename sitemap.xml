@@ -380,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -416,7 +416,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -455,14 +455,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/Trouble/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/Audit-Collection-Service-ACS/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/Audit-Collection-Service-ACS/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/Trouble/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
