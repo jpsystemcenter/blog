@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Japan System Center Support</rights>
   <subtitle>日本マイクロソフトの System Center に関するサポート情報のブログです。</subtitle>
   <title>Japan System Center Support Blog</title>
-  <updated>2026-07-05T08:12:55.130Z</updated>
+  <updated>2026-07-05T08:50:49.118Z</updated>
   <entry>
     <author>
       <name>Japan System Center Support</name>
@@ -27,7 +27,7 @@
       <![CDATA[<p>SCVMM における WORKGROUP クラスターのサポート状況をまとめた記事になります。<br><br></p>]]>
     </summary>
     <title>SCVMM でライブ マイグレーションをサポートする WORKGROUP クラスターを管理することができない既知事象のご説明</title>
-    <updated>2026-07-05T08:12:55.130Z</updated>
+    <updated>2026-07-05T08:50:49.118Z</updated>
   </entry>
   <entry>
     <author>
@@ -45,7 +45,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポート チームです。<br>今回は、System Center Operations Manager (SCOM) で Windows Server 2022 または Windows Server 2025 から ESENT イベント ログを収集した際に、SCOM コンソール上でイベントの説明が文字化けして表示される事象についてご紹介します。</p>]]>
     </summary>
     <title>SCOM で収集した ESENT イベント ログの説明が文字化けする事象について</title>
-    <updated>2026-07-05T08:12:54.976Z</updated>
+    <updated>2026-07-05T08:50:48.966Z</updated>
   </entry>
   <entry>
     <author>
@@ -65,7 +65,7 @@
       <![CDATA[<p>本記事では、System Center 製品全般で利用可能なトラブルシューティング用のログ採取手順をまとめています。</p>]]>
     </summary>
     <title>System Center 製品で使用される汎用的なログ採取手順</title>
-    <updated>2026-07-05T08:12:55.143Z</updated>
+    <updated>2026-07-05T08:50:49.131Z</updated>
   </entry>
   <entry>
     <author>
@@ -85,7 +85,7 @@
       <![CDATA[<p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCVMM</title>
-    <updated>2026-07-05T08:12:55.090Z</updated>
+    <updated>2026-07-05T08:50:49.080Z</updated>
   </entry>
   <entry>
     <author>
@@ -106,7 +106,7 @@
       <![CDATA[<p>This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCOM</title>
-    <updated>2026-07-05T08:12:54.999Z</updated>
+    <updated>2026-07-05T08:50:48.989Z</updated>
   </entry>
   <entry>
     <author>
@@ -124,7 +124,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM を使用して SCVMM 環境を監視する構成手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM を用いた SCVMM 環境の監視</title>
-    <updated>2026-07-05T08:12:55.073Z</updated>
+    <updated>2026-07-05T08:50:49.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -144,7 +144,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、SCVMM の運用上オブジェクトに write ロックが発生したことによって、仮想マシンの操作が行えなくなった場合の対処方法をご案内します。<br><br></p>]]>
     </summary>
     <title>write ロックによってジョブの実行が行えなくなる事象の対処方法</title>
-    <updated>2026-07-05T08:12:55.049Z</updated>
+    <updated>2026-07-05T08:50:49.038Z</updated>
   </entry>
   <entry>
     <author>
@@ -162,7 +162,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM の機能紹介</title>
-    <updated>2026-07-05T08:12:55.027Z</updated>
+    <updated>2026-07-05T08:50:49.017Z</updated>
   </entry>
   <entry>
     <author>
@@ -180,7 +180,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする <strong>「Azure Arc SCVMM」</strong> についてご紹介します。<br><br></p>]]>
     </summary>
     <title>Azure Arc SCVMM の紹介</title>
-    <updated>2026-07-05T08:12:55.029Z</updated>
+    <updated>2026-07-05T08:50:49.017Z</updated>
   </entry>
   <entry>
     <author>
@@ -189,7 +189,7 @@
     <category term="HowTo" scheme="https://jpsystemcenter.github.io/blog/tags/HowTo/"/>
     <category term="SCVMM" scheme="https://jpsystemcenter.github.io/blog/tags/SCVMM/"/>
     <content>
-      <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p><span id="more"></span><h2 id="仮想マシンへの変換について"><a href="#仮想マシンへの変換について" class="headerlink" title="仮想マシンへの変換について"></a>仮想マシンへの変換について</h2><p>Microsoft が提供する仮想マシンの変換・移行ツールには、以下のようなものがあります：<br><b>１．SCVMM（System Center Virtual Machine Manager）</b><br>　VMware ESXi ホスト上で稼働している VMware 仮想マシンを、Hyper-V 仮想マシンへ変換するためのツールです。<br><b>２．Azure Migrate</b> <a href="https://learn.microsoft.com/ja-jp/azure/migrate/migrate-services-overview?view=migrate-classic">参考</a><br>　オンプレミス環境にある物理・仮想マシンを、Azure 上に移行する際に使用するツールです。評価、準備、移行までを一貫してサポートします。<br><b>３．Disk2vhd</b> <a href="https://learn.microsoft.com/ja-jp/sysinternals/downloads/disk2vhd">参考</a><br>　稼働中の Windows マシンのボリューム（ディスク）を、Hyper-V 環境で使用可能な VHD または VHDX ファイルとして保存するツールです。シンプルな物理→仮想（P2V）変換に利用されます。</p><p>本記事では、１の SCVMM を用いた変換について説明します。<br><br>変換処理は、以下の3つのステップで実施します：<br><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%91%EF%BC%8E%E5%A4%89%E6%8F%9B-VM-%E3%82%92%E9%85%8D%E7%BD%AE%E3%81%99%E3%82%8B-Hyper-V-%E3%83%9B%E3%82%B9%E3%83%88%E3%82%92-SCVMM-%E3%81%AB%E7%AE%A1%E7%90%86%E5%AF%BE%E8%B1%A1%E3%81%A8%E3%81%97%E3%81%A6%E7%99%BB%E9%8C%B2">ステップ１．</a>変換先の VM を配置する Hyper-V ホストを SCVMM に管理対象として登録します。<br><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%92%EF%BC%8E%E5%A4%89%E6%8F%9B%E5%85%83%E3%81%AE-VMWare-VM-%E3%81%AB-SCVMM-%E3%81%8C%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%8F%AF%E8%83%BD%E3%81%AB%E3%81%99%E3%82%8B">ステップ２．</a>変換元の VMWare VM に SCVMM がアクセス可能にします。<br><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%93%EF%BC%8ESCVMM-%E3%81%8B%E3%82%89%E5%A4%89%E6%8F%9B%E5%87%A6%E7%90%86%E3%82%92%E5%AE%9F%E8%A1%8C">ステップ３．</a>SCVMM から変換処理を実行します。</p><h2 id="ステップ１．変換-VM-を配置する-Hyper-V-ホストを-SCVMM-に管理対象として登録"><a href="#ステップ１．変換-VM-を配置する-Hyper-V-ホストを-SCVMM-に管理対象として登録" class="headerlink" title="ステップ１．変換 VM を配置する Hyper-V ホストを SCVMM に管理対象として登録"></a>ステップ１．変換 VM を配置する Hyper-V ホストを SCVMM に管理対象として登録</h2><p>[ファブリック] 画面から Hyper-V ホストやクラスターをリソースとして追加することで、SCVMM の管理対象に登録できます。<br>■ リソースの追加画面<br><img src="001.png"></p><p>本記事では、リソース追加の具体的な手順については割愛しております。詳細な手順については、以下の公開ドキュメントをご参照ください。<br>※ 公開ドキュメント：<a href="https://learn.microsoft.com/ja-jp/system-center/vmm/hyper-v-existing?view=sc-vmm-2025">VMM コンピューティング ファブリックで Hyper-V ホストまたはクラスターとして Windows サーバーを追加する</a></p><p>リソース追加の過程で、対象の Hyper-V ホストには自動的に SCVMM エージェントがインストールされ、SCVMM による管理が可能な状態になります。</p><h2 id="ステップ２．変換元の-VMWare-VM-に-SCVMM-がアクセス可能にする"><a href="#ステップ２．変換元の-VMWare-VM-に-SCVMM-がアクセス可能にする" class="headerlink" title="ステップ２．変換元の VMWare VM に SCVMM がアクセス可能にする"></a>ステップ２．変換元の VMWare VM に SCVMM がアクセス可能にする</h2><p>変換元の VMware VM に SCVMM がアクセスできるようにする方法としては、次の2通りがあります。<br><b>方法1：vCenter 経由で ESXi ホストを SCVMM に登録する方法</b><br>SCVMM に vCenter を追加し、そこから管理対象の VMware ESXi ホストを登録することで、VMware VM へのアクセスが可能になります。</p><p><b>方法2：VM ファイルを SCVMM ライブラリに手動でコピーする方法</b><br>変換対象の VMware 仮想マシンのファイル（.vmdk など）を、SCVMM のライブラリ サーバー上にあるライブラリ共有へコピーすることで、SCVMM からファイルベースで変換処理を行うことができます。</p><hr><p>■ 方法1「vCenter 経由で ESXi ホストを SCVMM に登録する方法」の構成イメージは、以下の図の通りです。<br><img src="002.png"></p><p>まず、[ファブリック] 画面から SCVMM に vCenter サーバーをリソースとして追加します。<br>次に、vCenter 経由で ESXi ホストをリソースとして登録します。<br><img src="003.png"></p><p>vCenter サーバーと ESXi ホストの具体的な登録手順については、以下の公開ドキュメント内の [vCenter サーバーとソース ESXi ホストを SCVMM 管理下に置きます] 章をご参照ください。<br>※ 公開ドキュメント：<a href="https://learn.microsoft.com/ja-jp/system-center/vmm/vm-convert-vmware?view=sc-vmm-2025">vCenter サーバーとソース ESXi ホストを SCVMM 管理下に置きます</a></p><p>■ 方法2「VM ファイルを SCVMM ライブラリに手動でコピーする方法」の構成イメージは、以下の図の通りです。<br><img src="004.png" width="80%"><br>SCVMM のライブラリ サーバーにある ライブラリ共有フォルダーへ、変換対象の VMware 仮想マシンのファイル一式をコピーします。<br>※1：VM の整合性を保つため、コピー前に変換対象の VMware 上の仮想マシンは OS をシャットダウンしてください。<br>※2：仮想ディスク ファイル（.vmdk）だけでなく、構成ファイル（.nvram、.vmx など）もすべてコピーする必要があります。<br><img src="005.png"></p><p>ファイルのコピーが完了すると、SCVMM のライブラリ画面上で、該当の VMware 仮想マシンが [バーチャル マシン] として認識されるようになります。<br><img src="006.png"></p><h2 id="ステップ３．SCVMM-から変換処理を実行"><a href="#ステップ３．SCVMM-から変換処理を実行" class="headerlink" title="ステップ３．SCVMM から変換処理を実行"></a>ステップ３．SCVMM から変換処理を実行</h2><p>変換処理は、[VM とサービス] 画面から実行することができます。<br>詳細な手順については、以下の公開ドキュメント内の [VMware VM を Hyper-V に変換する] 章をご参照ください。<br>※ 公開ドキュメント：<a href="https://learn.microsoft.com/ja-jp/system-center/vmm/vm-convert-vmware?view=sc-vmm-2025#convert-your-vmware-vms-to-hyper-v">VMware VM を Hyper-V に変換する</a></p><p>以下に、バーチャル マシン変換ウィザードの手順を掲載しましたので、ご参考になれば幸いです。<br>■ [VM とサービス] 画面から、バーチャル マシン変換ウィザードを起動します。<br><img src="007.png"></p><p>■ [ソースの選択] 画面にて、変換対象の VMWare VM を選択して [次へ] をクリックします。<br><img src="008.png"></p><p>■ [バーチャル マシン ID の指定] 画面にて、SCVMM や Hyper-V マネージャー上で表示される変換後の仮想マシン名を入力し、[次へ] をクリックします。<br><img src="009.png"></p><p>■ [VM 構成] 画面にて、プロセッサ数、メモリ、世代を設定し、[次へ] をクリックします。<br><img src="010.png"></p><p>■ [ホストの選択] 画面にて、配置先の Hyper-V ホストを選択し、[次へ] をクリックします。<br>※「選択された VM ネットワークに使用できる接続が見つかりません。」というエラーが表示される場合は、**後述の「<a href="#note1">注意①</a>」**の内容をご確認ください。<br><img src="011.png"></p><p>■ [パスの選択] 画面にて、Hyper-V VM の VM ファイル (仮想ディスク ファイルや構成ファイルなど) を配置するストレージのパスを選択し、[次へ] をクリックします。<br><img src="012.png"></p><p>■ [ネットワークの選択] 画面にて、変換後の VM のネットワーク アダプターが接続するネットワークを選択し、[次へ] をクリックします。<br>※ ネットワーク アダプターは、新規のデバイスとして Hyper-V 仮想マシンに作成されます。本件に関する補足説明は、後述の <a href="#note2"><strong>注意③</strong></a> に記載しておりますので、あわせてご確認ください。<br><img src="013.png"></p><p>■ [プロパティの追加] 画面にて、起動時と停止時の操作を選択し、[次へ] をクリックします。<br><img src="014.png"></p><p>■ [サマリー] 画面にて、設定内容を確認し、[作成] をクリックすると変換処理が開始されます。<br><img src="015.png"></p><p>変換処理が完了すると、SCVMM コンソールや Hyper-V マネージャーで管理可能になります。<br><img src="016.png" width="80%"></p><h1 id="注意①：ホストの選択時に「選択された-VM-ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合"><a href="#注意①：ホストの選択時に「選択された-VM-ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合" class="headerlink" title="&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;注意①：ホストの選択時に「選択された VM ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合"></a>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><b><a id="note1"></a>注意①：ホストの選択時に「選択された VM ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合</b></h1><p>変換対象の VMware 仮想マシンが接続している VM ネットワークに対して、配置先の Hyper-V ホストが対応するネットワーク アダプターを保持していない場合、そのホストに仮想マシンを配置すると ネットワークの不整合が発生する可能性があります。<br>このエラーは、そうした状況を事前に検出して変換を抑止するための警告です。</p><p>■ 回避方法<br>変換元の仮想マシンについて、[プロパティ] &gt; [ハードウェア構成] &gt; [ネットワーク アダプター] を開き、接続されている VM ネットワーク を確認します。<br>次に、配置先となる Hyper-V ホストに対して、[プロパティ] &gt; [ハードウェア構成] &gt; [ネットワーク アダプター] を開き、[論理ネットワーク] に、先ほど確認した VM ネットワークへの接続を追加することで、エラーを回避できます。</p><p>以下の例では、変換元の VM が VMNetwork という VM ネットワークに接続しているため、配置先の Hyper-V ホストも VMNetwork への接続を追加しています。<br><img src="017.png"></p><p>■ 補足説明<br>SCVMM には、[設定] &gt; [全般] &gt; [ネットワーク設定] に [論理ネットワークの自動作成] という設定項目があります。<br>この設定は、既定で有効になっています。</p><p>この設定が有効な場合、Hyper-V や ESXi ホストを SCVMM に登録すると、SCVMM はホスト上の仮想スイッチに基づいて、vSwitch0 や vSwitch1 といった論理ネットワークを自動的に作成します。<br>その結果、変換元の ESXi 側で自動作成された vSwitch0 や vSwitch1 に対して、配置先の Hyper-V ホストが接続されていない（紐づいていない）場合、ネットワークの整合性が取れず、**「選択された VM ネットワークに使用できる接続が見つかりません」**というエラーが表示されることがあります。</p><h1 id="注意②：変換処理がエラー-2944-で失敗した場合"><a href="#注意②：変換処理がエラー-2944-で失敗した場合" class="headerlink" title="&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;注意②：変換処理がエラー 2944 で失敗した場合"></a>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><b>注意②：変換処理がエラー 2944 で失敗した場合</b></h1><p>変換処理が開始された後、処理が 33% まで進んだ段階で「エラー 2944」により失敗するケースがあります。<br>その際に表示されるエラーメッセージは以下の通りです：</p><p>■ エラー (2944) のエラーメッセージ<br>～～～～～～～～～～～～<span style="font-size: 80%;"><br>エラー <b>(2944)</b><br>サーバー名 <i>[ESXi ホストサーバーの FQDN]</i> を解決できないため、VMM は要求された操作を完了できません。</span></p><p><span style="font-size: 80%;">推奨される操作<br>操作を再試行してください。問題が解決しない場合は、ネットワーク管理者に問い合わせてください。<br></span>～～～～～～～～～～～～</p><p>■ 回避方法<br>変換処理では、仮想マシンを配置する Hyper-V ホストから、元の VMware 仮想マシンが存在する ESXi ホストに対して、直接通信が行われます。<br>この際、**ESXi ホストの FQDN（完全修飾ドメイン名）**を使用して接続が行われます。</p><p>そのため、Hyper-V ホストが対象の ESXi ホストの FQDN を名前解決できるようにする必要があります。<br>以下のいずれかの方法で、名前解決が可能な状態にしてください：<br>・Active Directory の DNS サーバーに該当の ESXi ホストのレコードを登録する<br>・Hyper-V ホストの hosts ファイルに ESXi ホストの名前と IP アドレスを追記する</p><h1 id="注意③：変換前後のネットワークについて"><a href="#注意③：変換前後のネットワークについて" class="headerlink" title="&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;注意③：変換前後のネットワークについて"></a>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><b><a id="note2"></a>注意③：変換前後のネットワークについて</b></h1><p>変換処理では、仮想ディスクが VMware 形式（VMDK）から Hyper-V 形式（VHDX）へ変換されるとともに、仮想マシンの構成情報も Hyper-V に適した形式へ変換されます。<br>ただし、ネットワーク アダプターについては VMware の設定を引き継ぐことはできず、Hyper-V 用の新しいネットワーク アダプターが作成・割り当てられます。</p><p>そのため、変換完了後には、Hyper-V ホスト環境に応じたネットワーク構成を手動で設定する必要があります。<br>具体的には以下のような設定を行ってください：<br>・IP アドレスの再割り当て<br>・デフォルトゲートウェイの設定<br>・DNS サーバーの指定</p><p>なお、VMware 仮想マシンで設定されていたネットワーク構成は自動的には移行されません。<br>この点をご留意のうえ、変換処理の計画および実施をご検討ください。</p><hr><p>SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順に関する説明は以上の通りです。<br>Hyper-V 環境への仮想マシンの以降を検討されている場合に参考にしていただけますと幸いです。</p>]]>
+      <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p><span id="more"></span><h2 id="仮想マシンへの変換について"><a href="#仮想マシンへの変換について" class="headerlink" title="仮想マシンへの変換について"></a>仮想マシンへの変換について</h2><p>Microsoft が提供する仮想マシンの変換・移行ツールには、以下のようなものがあります：<br><b>１．SCVMM（System Center Virtual Machine Manager）</b><br>　VMware ESXi ホスト上で稼働している VMware 仮想マシンを、Hyper-V 仮想マシンへ変換するためのツールです。<br><b>２．Azure Migrate</b> <a href="https://learn.microsoft.com/ja-jp/azure/migrate/migrate-services-overview?view=migrate-classic">参考</a><br>　オンプレミス環境にある物理・仮想マシンを、Azure 上に移行する際に使用するツールです。評価、準備、移行までを一貫してサポートします。<br><b>３．Disk2vhd</b> <a href="https://learn.microsoft.com/ja-jp/sysinternals/downloads/disk2vhd">参考</a><br>　稼働中の Windows マシンのボリューム（ディスク）を、Hyper-V 環境で使用可能な VHD または VHDX ファイルとして保存するツールです。シンプルな物理→仮想（P2V）変換に利用されます。<br><b>４．Windows Admin Center (※プレビュー)</b> <a href="https://learn.microsoft.com/ja-jp/windows-server/manage/windows-admin-center/use/vm-conversion-extension-overview">参考</a><br>　Windows Admin Center の VM Conversion 拡張機能を使用して、VMware 仮想マシンを Hyper-V 仮想マシンへ変換するためのツールです。ブラウザー ベースの管理画面から変換操作を実施でき、現在はプレビューとして提供されています。</p><p>本記事では、１の SCVMM を用いた変換について説明します。<br><br>変換処理は、以下の3つのステップで実施します：<br><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%91%EF%BC%8E%E5%A4%89%E6%8F%9B-VM-%E3%82%92%E9%85%8D%E7%BD%AE%E3%81%99%E3%82%8B-Hyper-V-%E3%83%9B%E3%82%B9%E3%83%88%E3%82%92-SCVMM-%E3%81%AB%E7%AE%A1%E7%90%86%E5%AF%BE%E8%B1%A1%E3%81%A8%E3%81%97%E3%81%A6%E7%99%BB%E9%8C%B2">ステップ１．</a>変換先の VM を配置する Hyper-V ホストを SCVMM に管理対象として登録します。<br><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%92%EF%BC%8E%E5%A4%89%E6%8F%9B%E5%85%83%E3%81%AE-VMWare-VM-%E3%81%AB-SCVMM-%E3%81%8C%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%8F%AF%E8%83%BD%E3%81%AB%E3%81%99%E3%82%8B">ステップ２．</a>変換元の VMWare VM に SCVMM がアクセス可能にします。<br><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%93%EF%BC%8ESCVMM-%E3%81%8B%E3%82%89%E5%A4%89%E6%8F%9B%E5%87%A6%E7%90%86%E3%82%92%E5%AE%9F%E8%A1%8C">ステップ３．</a>SCVMM から変換処理を実行します。</p><h2 id="ステップ１．変換-VM-を配置する-Hyper-V-ホストを-SCVMM-に管理対象として登録"><a href="#ステップ１．変換-VM-を配置する-Hyper-V-ホストを-SCVMM-に管理対象として登録" class="headerlink" title="ステップ１．変換 VM を配置する Hyper-V ホストを SCVMM に管理対象として登録"></a>ステップ１．変換 VM を配置する Hyper-V ホストを SCVMM に管理対象として登録</h2><p>[ファブリック] 画面から Hyper-V ホストやクラスターをリソースとして追加することで、SCVMM の管理対象に登録できます。<br>■ リソースの追加画面<br><img src="001.png"></p><p>本記事では、リソース追加の具体的な手順については割愛しております。詳細な手順については、以下の公開ドキュメントをご参照ください。<br>※ 公開ドキュメント：<a href="https://learn.microsoft.com/ja-jp/system-center/vmm/hyper-v-existing?view=sc-vmm-2025">VMM コンピューティング ファブリックで Hyper-V ホストまたはクラスターとして Windows サーバーを追加する</a></p><p>リソース追加の過程で、対象の Hyper-V ホストには自動的に SCVMM エージェントがインストールされ、SCVMM による管理が可能な状態になります。</p><h2 id="ステップ２．変換元の-VMWare-VM-に-SCVMM-がアクセス可能にする"><a href="#ステップ２．変換元の-VMWare-VM-に-SCVMM-がアクセス可能にする" class="headerlink" title="ステップ２．変換元の VMWare VM に SCVMM がアクセス可能にする"></a>ステップ２．変換元の VMWare VM に SCVMM がアクセス可能にする</h2><p>変換元の VMware VM に SCVMM がアクセスできるようにする方法としては、次の2通りがあります。<br><b>方法1：vCenter 経由で ESXi ホストを SCVMM に登録する方法</b><br>SCVMM に vCenter を追加し、そこから管理対象の VMware ESXi ホストを登録することで、VMware VM へのアクセスが可能になります。</p><p><b>方法2：VM ファイルを SCVMM ライブラリに手動でコピーする方法</b><br>変換対象の VMware 仮想マシンのファイル（.vmdk など）を、SCVMM のライブラリ サーバー上にあるライブラリ共有へコピーすることで、SCVMM からファイルベースで変換処理を行うことができます。</p><hr><p>■ 方法1「vCenter 経由で ESXi ホストを SCVMM に登録する方法」の構成イメージは、以下の図の通りです。<br><img src="002.png"></p><p>まず、[ファブリック] 画面から SCVMM に vCenter サーバーをリソースとして追加します。<br>次に、vCenter 経由で ESXi ホストをリソースとして登録します。<br><img src="003.png"></p><p>vCenter サーバーと ESXi ホストの具体的な登録手順については、以下の公開ドキュメント内の [vCenter サーバーとソース ESXi ホストを SCVMM 管理下に置きます] 章をご参照ください。<br>※ 公開ドキュメント：<a href="https://learn.microsoft.com/ja-jp/system-center/vmm/vm-convert-vmware?view=sc-vmm-2025">vCenter サーバーとソース ESXi ホストを SCVMM 管理下に置きます</a></p><p>■ 方法2「VM ファイルを SCVMM ライブラリに手動でコピーする方法」の構成イメージは、以下の図の通りです。<br><img src="004.png" width="80%"><br>SCVMM のライブラリ サーバーにある ライブラリ共有フォルダーへ、変換対象の VMware 仮想マシンのファイル一式をコピーします。<br>※1：VM の整合性を保つため、コピー前に変換対象の VMware 上の仮想マシンは OS をシャットダウンしてください。<br>※2：仮想ディスク ファイル（.vmdk）だけでなく、構成ファイル（.nvram、.vmx など）もすべてコピーする必要があります。<br><img src="005.png"></p><p>ファイルのコピーが完了すると、SCVMM のライブラリ画面上で、該当の VMware 仮想マシンが [バーチャル マシン] として認識されるようになります。<br><img src="006.png"></p><h2 id="ステップ３．SCVMM-から変換処理を実行"><a href="#ステップ３．SCVMM-から変換処理を実行" class="headerlink" title="ステップ３．SCVMM から変換処理を実行"></a>ステップ３．SCVMM から変換処理を実行</h2><p>変換処理は、[VM とサービス] 画面から実行することができます。<br>詳細な手順については、以下の公開ドキュメント内の [VMware VM を Hyper-V に変換する] 章をご参照ください。<br>※ 公開ドキュメント：<a href="https://learn.microsoft.com/ja-jp/system-center/vmm/vm-convert-vmware?view=sc-vmm-2025#convert-your-vmware-vms-to-hyper-v">VMware VM を Hyper-V に変換する</a></p><p>以下に、バーチャル マシン変換ウィザードの手順を掲載しましたので、ご参考になれば幸いです。<br>■ [VM とサービス] 画面から、バーチャル マシン変換ウィザードを起動します。<br><img src="007.png"></p><p>■ [ソースの選択] 画面にて、変換対象の VMWare VM を選択して [次へ] をクリックします。<br><img src="008.png"></p><p>■ [バーチャル マシン ID の指定] 画面にて、SCVMM や Hyper-V マネージャー上で表示される変換後の仮想マシン名を入力し、[次へ] をクリックします。<br><img src="009.png"></p><p>■ [VM 構成] 画面にて、プロセッサ数、メモリ、世代を設定し、[次へ] をクリックします。<br><img src="010.png"></p><p>■ [ホストの選択] 画面にて、配置先の Hyper-V ホストを選択し、[次へ] をクリックします。<br>※「選択された VM ネットワークに使用できる接続が見つかりません。」というエラーが表示される場合は、**後述の「<a href="#note1">注意①</a>」**の内容をご確認ください。<br><img src="011.png"></p><p>■ [パスの選択] 画面にて、Hyper-V VM の VM ファイル (仮想ディスク ファイルや構成ファイルなど) を配置するストレージのパスを選択し、[次へ] をクリックします。<br><img src="012.png"></p><p>■ [ネットワークの選択] 画面にて、変換後の VM のネットワーク アダプターが接続するネットワークを選択し、[次へ] をクリックします。<br>※ ネットワーク アダプターは、新規のデバイスとして Hyper-V 仮想マシンに作成されます。本件に関する補足説明は、後述の <a href="#note2"><strong>注意③</strong></a> に記載しておりますので、あわせてご確認ください。<br><img src="013.png"></p><p>■ [プロパティの追加] 画面にて、起動時と停止時の操作を選択し、[次へ] をクリックします。<br><img src="014.png"></p><p>■ [サマリー] 画面にて、設定内容を確認し、[作成] をクリックすると変換処理が開始されます。<br><img src="015.png"></p><p>変換処理が完了すると、SCVMM コンソールや Hyper-V マネージャーで管理可能になります。<br><img src="016.png" width="80%"></p><h1 id="注意①：ホストの選択時に「選択された-VM-ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合"><a href="#注意①：ホストの選択時に「選択された-VM-ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合" class="headerlink" title="&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;注意①：ホストの選択時に「選択された VM ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合"></a>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><b><a id="note1"></a>注意①：ホストの選択時に「選択された VM ネットワークに使用できる接続が見つかりません。」というエラーが表示された場合</b></h1><p>変換対象の VMware 仮想マシンが接続している VM ネットワークに対して、配置先の Hyper-V ホストが対応するネットワーク アダプターを保持していない場合、そのホストに仮想マシンを配置すると ネットワークの不整合が発生する可能性があります。<br>このエラーは、そうした状況を事前に検出して変換を抑止するための警告です。</p><p>■ 回避方法<br>変換元の仮想マシンについて、[プロパティ] &gt; [ハードウェア構成] &gt; [ネットワーク アダプター] を開き、接続されている VM ネットワーク を確認します。<br>次に、配置先となる Hyper-V ホストに対して、[プロパティ] &gt; [ハードウェア構成] &gt; [ネットワーク アダプター] を開き、[論理ネットワーク] に、先ほど確認した VM ネットワークへの接続を追加することで、エラーを回避できます。</p><p>以下の例では、変換元の VM が VMNetwork という VM ネットワークに接続しているため、配置先の Hyper-V ホストも VMNetwork への接続を追加しています。<br><img src="017.png"></p><p>■ 補足説明<br>SCVMM には、[設定] &gt; [全般] &gt; [ネットワーク設定] に [論理ネットワークの自動作成] という設定項目があります。<br>この設定は、既定で有効になっています。</p><p>この設定が有効な場合、Hyper-V や ESXi ホストを SCVMM に登録すると、SCVMM はホスト上の仮想スイッチに基づいて、vSwitch0 や vSwitch1 といった論理ネットワークを自動的に作成します。<br>その結果、変換元の ESXi 側で自動作成された vSwitch0 や vSwitch1 に対して、配置先の Hyper-V ホストが接続されていない（紐づいていない）場合、ネットワークの整合性が取れず、**「選択された VM ネットワークに使用できる接続が見つかりません」**というエラーが表示されることがあります。</p><h1 id="注意②：変換処理がエラー-2944-で失敗した場合"><a href="#注意②：変換処理がエラー-2944-で失敗した場合" class="headerlink" title="&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;注意②：変換処理がエラー 2944 で失敗した場合"></a>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><b>注意②：変換処理がエラー 2944 で失敗した場合</b></h1><p>変換処理が開始された後、処理が 33% まで進んだ段階で「エラー 2944」により失敗するケースがあります。<br>その際に表示されるエラーメッセージは以下の通りです：</p><p>■ エラー (2944) のエラーメッセージ<br>～～～～～～～～～～～～<span style="font-size: 80%;"><br>エラー <b>(2944)</b><br>サーバー名 <i>[ESXi ホストサーバーの FQDN]</i> を解決できないため、VMM は要求された操作を完了できません。</span></p><p><span style="font-size: 80%;">推奨される操作<br>操作を再試行してください。問題が解決しない場合は、ネットワーク管理者に問い合わせてください。<br></span>～～～～～～～～～～～～</p><p>■ 回避方法<br>変換処理では、仮想マシンを配置する Hyper-V ホストから、元の VMware 仮想マシンが存在する ESXi ホストに対して、直接通信が行われます。<br>この際、**ESXi ホストの FQDN（完全修飾ドメイン名）**を使用して接続が行われます。</p><p>そのため、Hyper-V ホストが対象の ESXi ホストの FQDN を名前解決できるようにする必要があります。<br>以下のいずれかの方法で、名前解決が可能な状態にしてください：<br>・Active Directory の DNS サーバーに該当の ESXi ホストのレコードを登録する<br>・Hyper-V ホストの hosts ファイルに ESXi ホストの名前と IP アドレスを追記する</p><h1 id="注意③：変換前後のネットワークについて"><a href="#注意③：変換前後のネットワークについて" class="headerlink" title="&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;注意③：変換前後のネットワークについて"></a>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><b><a id="note2"></a>注意③：変換前後のネットワークについて</b></h1><p>変換処理では、仮想ディスクが VMware 形式（VMDK）から Hyper-V 形式（VHDX）へ変換されるとともに、仮想マシンの構成情報も Hyper-V に適した形式へ変換されます。<br>ただし、ネットワーク アダプターについては VMware の設定を引き継ぐことはできず、Hyper-V 用の新しいネットワーク アダプターが作成・割り当てられます。</p><p>そのため、変換完了後には、Hyper-V ホスト環境に応じたネットワーク構成を手動で設定する必要があります。<br>具体的には以下のような設定を行ってください：<br>・IP アドレスの再割り当て<br>・デフォルトゲートウェイの設定<br>・DNS サーバーの指定</p><p>なお、VMware 仮想マシンで設定されていたネットワーク構成は自動的には移行されません。<br>この点をご留意のうえ、変換処理の計画および実施をご検討ください。</p><hr><p>SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順に関する説明は以上の通りです。<br>Hyper-V 環境への仮想マシンの以降を検討されている場合に参考にしていただけますと幸いです。</p>]]>
     </content>
     <id>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Conversion/</id>
     <link href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Conversion/"/>
@@ -198,7 +198,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</title>
-    <updated>2026-07-05T08:12:55.040Z</updated>
+    <updated>2026-07-05T08:50:49.029Z</updated>
   </entry>
   <entry>
     <author>
@@ -219,7 +219,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。</p>]]>
     </summary>
     <title>SCOM OperationsManagerDW データベースの容量削減手順</title>
-    <updated>2026-07-05T08:12:54.997Z</updated>
+    <updated>2026-07-05T08:50:48.987Z</updated>
   </entry>
   <entry>
     <author>
@@ -240,7 +240,7 @@
       <![CDATA[<p>本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。</p>]]>
     </summary>
     <title>SCOM で使用する一般的なログ収集方法</title>
-    <updated>2026-07-05T08:12:54.998Z</updated>
+    <updated>2026-07-05T08:50:48.988Z</updated>
   </entry>
   <entry>
     <author>
@@ -261,7 +261,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。</p>]]>
     </summary>
     <title>SCOM OperationsManager データベースの unused 領域開放手順</title>
-    <updated>2026-07-05T08:12:54.997Z</updated>
+    <updated>2026-07-05T08:50:48.986Z</updated>
   </entry>
   <entry>
     <author>
@@ -280,7 +280,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの保科です。<br>本日は、System Center Operations Manager (以後 SCOM と表記します) で、Windows OS のメモリ使用率を監視する方法をご紹介いたします。</p>]]>
     </summary>
     <title>SCOM でメモリ使用率を監視する方法</title>
-    <updated>2026-07-05T08:12:54.997Z</updated>
+    <updated>2026-07-05T08:50:48.987Z</updated>
   </entry>
   <entry>
     <author>
@@ -298,7 +298,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で トラステッド プラットフォーム モジュール (TPM) が有効な仮想マシンを管理する方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM で TPM が有効な仮想マシンを管理する方法</title>
-    <updated>2026-07-05T08:12:55.135Z</updated>
+    <updated>2026-07-05T08:50:49.123Z</updated>
   </entry>
   <entry>
     <author>
@@ -317,7 +317,7 @@
 <p>System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ サーバー) の構築、類似の仮想スイッチの設定を簡易的に反映できる設定 (論理スイッチ) などが利用できます。また、VMWare vCenter と連携することで VMWare VM を Hyper-V VM に移行することができます。<br><br>SCVMM の構成は、IT インフラ環境の規模や運用要件に応じて変わりますが、検証等の目的で簡易的に最短で SCVMM を構築されたいケースがあります。そういったケースに備えて、本記事では、1 台の Windows Server に SCVMM の主コンポーネントの SCVMM 管理サーバーと SCVMM コンソールをインストールして、SCVMM コンソールにサインインできるまでの手順を画面ショット付きで紹介します。</p>]]>
     </summary>
     <title>SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</title>
-    <updated>2026-07-05T08:12:55.049Z</updated>
+    <updated>2026-07-05T08:50:49.038Z</updated>
   </entry>
   <entry>
     <author>
@@ -338,7 +338,7 @@
 <p>今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、]]>
     </summary>
     <title>SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</title>
-    <updated>2026-07-05T08:12:55.073Z</updated>
+    <updated>2026-07-05T08:50:49.062Z</updated>
   </entry>
   <entry>
     <author>
@@ -356,7 +356,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</title>
-    <updated>2026-07-05T08:12:54.975Z</updated>
+    <updated>2026-07-05T08:50:48.964Z</updated>
   </entry>
   <entry>
     <author>
@@ -377,7 +377,7 @@
 <p>本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除]]>
     </summary>
     <title>VM の強制削除および再登録</title>
-    <updated>2026-07-05T08:12:55.132Z</updated>
+    <updated>2026-07-05T08:50:49.120Z</updated>
   </entry>
   <entry>
     <author>
@@ -398,6 +398,6 @@
 <p>本日は System Center Operations Manager（以下、SCOM） に採取されたパフォーマンス カウンターの情報]]>
     </summary>
     <title>パフォーマンス データを DB から取得する方法</title>
-    <updated>2026-07-05T08:12:55.013Z</updated>
+    <updated>2026-07-05T08:50:49.002Z</updated>
   </entry>
 </feed>
