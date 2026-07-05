@@ -43,7 +43,7 @@ tags:
 
 ### OS が 1 台の場合
 1 台のサーバー管理グループに展開するのは、評価やテスト、管理パックの開発など、通常、ラボ、開発、または実稼働以外の環境にインストールする場合を想定しております。
-![](SCOM_construction/0101.png)
+![](0101.png)
 
 構築方法については下記参考ページをご参照ください。　　
 
@@ -56,7 +56,7 @@ tags:
 [SQL Server の設計に関する考慮事項](https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2019)に記載しているように中規模から大規模の分散型展開では、SQL Server インスタンスを専用スタンドアロン サーバーまたは SQL Server 高可用性構成に配置する必要があります。
 
 OS が 2 台の場合、具体的には下図のように DB 機能とサーバー機能を分散させます。
-![](SCOM_construction/0201.png)
+![](0201.png)
 
 
 > [!WARNING]
@@ -80,7 +80,7 @@ DB 機能を [always-on 構成](https://docs.microsoft.com/ja-jp/system-center/s
 が考えられます。
 
 #### パターン 1
-![](SCOM_construction/0301.png)
+![](0301.png)
 
 この場合にレポートサーバー向けデータベース構成については、always-on の可用性グループには登録できない点ご留意ください。
 レポートサーバー向けデータベースをホストする OS が故障した際には [Reporting Server の役割を移動する方法](https://docs.microsoft.com/ja-jp/system-center/scom/manage-move-reporting-services-role?view=sc-om-2019)
@@ -91,7 +91,7 @@ DB 機能を [always-on 構成](https://docs.microsoft.com/ja-jp/system-center/s
 [レポーティングサーバーの取り得る構成](https://techcommunity.microsoft.com/t5/system-center-blog/operations-manager-reporting-8211-supported-ssrs-configurations/ba-p/340385)
 
 #### パターン 2
-![](SCOM_construction/0302.png)
+![](0302.png)
 
 当構成に関する情報は[Operations Manager データ ウェアハウス データベース](https://docs.microsoft.com/ja-jp/system-center/scom/plan-sqlserver-design?view=sc-om-2019#operations-manager-data-warehouse-database)
 に以下のように記載しております。
