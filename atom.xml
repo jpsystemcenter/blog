@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Japan System Center Support</rights>
   <subtitle>日本マイクロソフトの System Center に関するサポート情報のブログです。</subtitle>
   <title>Japan System Center Support Blog</title>
-  <updated>2026-07-05T07:50:11.541Z</updated>
+  <updated>2026-07-05T08:12:55.130Z</updated>
   <entry>
     <author>
       <name>Japan System Center Support</name>
@@ -27,7 +27,7 @@
       <![CDATA[<p>SCVMM における WORKGROUP クラスターのサポート状況をまとめた記事になります。<br><br></p>]]>
     </summary>
     <title>SCVMM でライブ マイグレーションをサポートする WORKGROUP クラスターを管理することができない既知事象のご説明</title>
-    <updated>2026-07-05T07:50:11.541Z</updated>
+    <updated>2026-07-05T08:12:55.130Z</updated>
   </entry>
   <entry>
     <author>
@@ -45,7 +45,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポート チームです。<br>今回は、System Center Operations Manager (SCOM) で Windows Server 2022 または Windows Server 2025 から ESENT イベント ログを収集した際に、SCOM コンソール上でイベントの説明が文字化けして表示される事象についてご紹介します。</p>]]>
     </summary>
     <title>SCOM で収集した ESENT イベント ログの説明が文字化けする事象について</title>
-    <updated>2026-07-05T07:50:11.389Z</updated>
+    <updated>2026-07-05T08:12:54.976Z</updated>
   </entry>
   <entry>
     <author>
@@ -65,7 +65,7 @@
       <![CDATA[<p>本記事では、System Center 製品全般で利用可能なトラブルシューティング用のログ採取手順をまとめています。</p>]]>
     </summary>
     <title>System Center 製品で使用される汎用的なログ採取手順</title>
-    <updated>2026-07-05T07:50:11.554Z</updated>
+    <updated>2026-07-05T08:12:55.143Z</updated>
   </entry>
   <entry>
     <author>
@@ -85,7 +85,7 @@
       <![CDATA[<p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCVMM</title>
-    <updated>2026-07-05T07:50:11.503Z</updated>
+    <updated>2026-07-05T08:12:55.090Z</updated>
   </entry>
   <entry>
     <author>
@@ -106,7 +106,7 @@
       <![CDATA[<p>This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCOM</title>
-    <updated>2026-07-05T07:50:11.412Z</updated>
+    <updated>2026-07-05T08:12:54.999Z</updated>
   </entry>
   <entry>
     <author>
@@ -124,7 +124,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM を使用して SCVMM 環境を監視する構成手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM を用いた SCVMM 環境の監視</title>
-    <updated>2026-07-05T07:50:11.486Z</updated>
+    <updated>2026-07-05T08:12:55.073Z</updated>
   </entry>
   <entry>
     <author>
@@ -144,7 +144,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、SCVMM の運用上オブジェクトに write ロックが発生したことによって、仮想マシンの操作が行えなくなった場合の対処方法をご案内します。<br><br></p>]]>
     </summary>
     <title>write ロックによってジョブの実行が行えなくなる事象の対処方法</title>
-    <updated>2026-07-05T07:50:11.461Z</updated>
+    <updated>2026-07-05T08:12:55.049Z</updated>
   </entry>
   <entry>
     <author>
@@ -162,7 +162,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM の機能紹介</title>
-    <updated>2026-07-05T07:50:11.440Z</updated>
+    <updated>2026-07-05T08:12:55.027Z</updated>
   </entry>
   <entry>
     <author>
@@ -180,7 +180,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする <strong>「Azure Arc SCVMM」</strong> についてご紹介します。<br><br></p>]]>
     </summary>
     <title>Azure Arc SCVMM の紹介</title>
-    <updated>2026-07-05T07:50:11.440Z</updated>
+    <updated>2026-07-05T08:12:55.029Z</updated>
   </entry>
   <entry>
     <author>
@@ -198,7 +198,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</title>
-    <updated>2026-07-05T07:50:11.452Z</updated>
+    <updated>2026-07-05T08:12:55.040Z</updated>
   </entry>
   <entry>
     <author>
@@ -219,7 +219,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。</p>]]>
     </summary>
     <title>SCOM OperationsManagerDW データベースの容量削減手順</title>
-    <updated>2026-07-05T07:50:11.410Z</updated>
+    <updated>2026-07-05T08:12:54.997Z</updated>
   </entry>
   <entry>
     <author>
@@ -240,7 +240,7 @@
       <![CDATA[<p>本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。</p>]]>
     </summary>
     <title>SCOM で使用する一般的なログ収集方法</title>
-    <updated>2026-07-05T07:50:11.411Z</updated>
+    <updated>2026-07-05T08:12:54.998Z</updated>
   </entry>
   <entry>
     <author>
@@ -261,7 +261,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。</p>]]>
     </summary>
     <title>SCOM OperationsManager データベースの unused 領域開放手順</title>
-    <updated>2026-07-05T07:50:11.410Z</updated>
+    <updated>2026-07-05T08:12:54.997Z</updated>
   </entry>
   <entry>
     <author>
@@ -280,7 +280,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの保科です。<br>本日は、System Center Operations Manager (以後 SCOM と表記します) で、Windows OS のメモリ使用率を監視する方法をご紹介いたします。</p>]]>
     </summary>
     <title>SCOM でメモリ使用率を監視する方法</title>
-    <updated>2026-07-05T07:50:11.410Z</updated>
+    <updated>2026-07-05T08:12:54.997Z</updated>
   </entry>
   <entry>
     <author>
@@ -298,7 +298,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で トラステッド プラットフォーム モジュール (TPM) が有効な仮想マシンを管理する方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM で TPM が有効な仮想マシンを管理する方法</title>
-    <updated>2026-07-05T07:50:11.547Z</updated>
+    <updated>2026-07-05T08:12:55.135Z</updated>
   </entry>
   <entry>
     <author>
@@ -317,7 +317,7 @@
 <p>System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ サーバー) の構築、類似の仮想スイッチの設定を簡易的に反映できる設定 (論理スイッチ) などが利用できます。また、VMWare vCenter と連携することで VMWare VM を Hyper-V VM に移行することができます。<br><br>SCVMM の構成は、IT インフラ環境の規模や運用要件に応じて変わりますが、検証等の目的で簡易的に最短で SCVMM を構築されたいケースがあります。そういったケースに備えて、本記事では、1 台の Windows Server に SCVMM の主コンポーネントの SCVMM 管理サーバーと SCVMM コンソールをインストールして、SCVMM コンソールにサインインできるまでの手順を画面ショット付きで紹介します。</p>]]>
     </summary>
     <title>SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</title>
-    <updated>2026-07-05T07:50:11.461Z</updated>
+    <updated>2026-07-05T08:12:55.049Z</updated>
   </entry>
   <entry>
     <author>
@@ -327,7 +327,7 @@
     <category term="SCVMM" scheme="https://jpsystemcenter.github.io/blog/tags/SCVMM/"/>
     <category term="Migration" scheme="https://jpsystemcenter.github.io/blog/tags/Migration/"/>
     <content>
-      <![CDATA[<span id="more"></span><p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p><p>今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、仮想マシンのライブ マイグレーションやエラーへの対処方法についてご説明いたします。</p><!-- more --><h3 id="本ページが対象とする-SCVMM-バージョン"><a href="#本ページが対象とする-SCVMM-バージョン" class="headerlink" title="本ページが対象とする SCVMM バージョン"></a>本ページが対象とする SCVMM バージョン</h3><p>SCVMM 2016<br>SCVMM 2019<br>SCVMM 2022</p><h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>SCVMM をご利用いただくメリットとして、多くの方が、クラスター間で仮想マシンを移動することが出来る点を挙げるかと思います。<br>少なくともフェールオーバー クラスター単体だと、SCVMM のように簡単に仮想マシンを移動 &#x2F; ライブ マイグレーションすることが出来ません。<br>しかし、クラスター間の仮想マシン移動は、実はフェールオーバー クラスターや Hyper-V 単体においても実施いただけることをご存じでしょうか。<br>SCVMM でのクラスター間の仮想マシン移動は、この際必要となる一連の動作を 1 つの操作に纏めて実施しているにすぎません。<br>本日は、この機能がどのように実行されるかについてご紹介いたします。</p><p>また、仮想マシン移動時にエラーが発生した場合において、対処に際して見落としがちな設定等をご紹介いたします。<br>こちらは、今後弊社内にて確認した情報の増加に従って、本ブログの内容をアップデートとする予定です。</p><h3 id="SCVMM-におけるクラスター間の仮想マシン移動やライブ-マイグレーションの動作仕様"><a href="#SCVMM-におけるクラスター間の仮想マシン移動やライブ-マイグレーションの動作仕様" class="headerlink" title="SCVMM におけるクラスター間の仮想マシン移動やライブ マイグレーションの動作仕様"></a>SCVMM におけるクラスター間の仮想マシン移動やライブ マイグレーションの動作仕様</h3><p>早速ですが、SCVMM において、仮想マシンはどうやってクラスター間で移動しているのか？<br>この動作の流れをご紹介いたします。</p><ol><li>フェールオーバー クラスターに登録された、移動対象の仮想マシンの役割の削除</li><li>移行先として指定された Hyper-V ホストに、移動対象の仮想マシンを移動、もしくはライブ マイグレーション</li><li>仮想マシン移動先の Hyper-V ホストが所属するクラスターに、移動された仮想マシンの役割を登録</li></ol><p>このような流れで、内部上処理が行われています。<br>フェールオーバー クラスター上で動作する仮想マシンは、クラスターの役割を登録するという形で、高可用性構成を行うことが可能です。<br>クラスター上に役割が登録された仮想マシンは、SCVMM 外においては、クラスター内のノード間でしか仮想マシンを移動することが出来ません。<br>そのため、SCVMM 外でクラスター間の仮想マシン移動を実施する場合、仮想マシンの役割をクラスターから一度削除する必要があります。<br>これを実施することで初めて別のクラスター内ノードに仮想マシンを移動することができます。<br>最後に仮想マシン移行先の Hyper-V ホストが所属するクラスターに、移動された仮想マシンの役割を登録することで、そのクラスター内においても高可用性構成を実現いただけます。<br>なお、仮想マシンの電源がオンの状態で移動操作を実施すると、電源がオンの状態で移動 (ライブ マイグレーション) が行われます。<br>こちらの動作のしくみや、Hyper-V マネージャーを使用した手順は、下記の弊社公開情報に記載されております。<br><a href="https://learn.microsoft.com/ja-jp/windows-server/virtualization/hyper-v/manage/use-live-migration-without-failover-clustering-to-move-a-virtual-machine">フェールオーバー クラスタ リングのないライブ マイグレーションを使用して仮想マシンを移動するには | Microsoft Learn</a></p><p>SCVMM を使わない場合、上記の流れを手動で実施することで、クラスター間での仮想マシン移動が実現できます。<br>SCVMM は、この流れを 1 つの操作に纏めることで、ユーザー負担の軽減が実現できます。<br>逆に言えば、万が一 SCVMM をご利用いただけなくなった状況において、クラスター間の仮想マシン移動の実施が必要となった場合、上記手順を手動で実施いただくことで、SCVMM で実施するクラスター間仮想マシン移動と同じ操作が実現できます。</p><h3 id="仮想マシンの移動に失敗するシナリオ"><a href="#仮想マシンの移動に失敗するシナリオ" class="headerlink" title="仮想マシンの移動に失敗するシナリオ"></a>仮想マシンの移動に失敗するシナリオ</h3><p>こちらは、弊社で情報が確認でき次第、随時内容をアップデートする予定です。</p><h4 id="仮想マシン移動失敗シナリオその-1-Hyper-V-ホストの-Credential-Guard-が有効になっている"><a href="#仮想マシン移動失敗シナリオその-1-Hyper-V-ホストの-Credential-Guard-が有効になっている" class="headerlink" title="仮想マシン移動失敗シナリオその 1: Hyper-V ホストの Credential Guard が有効になっている"></a>仮想マシン移動失敗シナリオその 1: Hyper-V ホストの Credential Guard が有効になっている</h4><p>Windows OS には Credential Guard という機能が存在します。<br>こちらの詳細は、下記の弊社公開情報に記載されております。<br><a href="https://learn.microsoft.com/ja-jp/windows/security/identity-protection/credential-guard/how-it-works">Credential Guard のしくみ - Windows Security | Microsoft Learn</a><br>お客様の環境によってはこちらの機能が有効化されている可能性がありますが、仮想マシン移動時においては問題となる場合がございます。<br>その理由として、この機能が有効化されていると、仮想マシン移動時に使用される認証方式の 1 つである CredSSP が利用できなくなるように制限がかかるためです。<br>Kerberos 認証に対しては制限がかからないため、こちらの設定をご利用のお客様においては、以下のいずれかの実施が必要となります。</p><ul><li>Credential Guard を無効化する。</li><li>仮想マシン移動時の認証方式を CredSSP から Kerberos に変更する。</li></ul><p>Credential Guard の有効化状況は、下記弊社公開情報の “Credential Guard が有効になっているかどうかを確認する” 項以下に記載された手順から確認いただけます。<br><a href="https://learn.microsoft.com/ja-jp/windows/security/identity-protection/credential-guard/configure?tabs=intune">Credential Guard の構成 - Windows Security | Microsoft Learn</a><br>まずはこちらの手順で、Credential Guard が有効化されているかを確認いただく必要がございます。</p><p>お客様によっては、Credential Guard は、目的があって有効化されている状況が多いかと思います。<br>その場合は無効化が難しいと思うので、仮想マシン移動のシナリオがどうしても必要という状況であれば、認証方式を Kerberos に切り替える以外に対処方法はございません。<br>幸いこの操作は SCVMM 側において簡単に実施いただけますので、手順をご紹介いたします。</p><ol><li>SCVMM サーバーに管理者権限でログインし、SCVMM コンソールを開きます。</li><li>SCVMM コンソール画面左下ペインの [ファブリック] をクリックします。</li><li>画面左ペインの [サーバー] -&gt; [すべてのホスト] をクリックします。</li><li>ライブマイグレーション移行元、および移行先のホストを右クリックし、[プロパティ] を開きます。<br>(クラスター間で仮想マシンのライブマイグレーションを実施される場合、各種クラスターに配置されたノード全台に対して設定を実施いただくことを推奨いたします。)</li><li>表示されたプロパティ ウィンドウ左の [移行の設定] をクリックします。</li><li>[認証プロトコル] 項内の “Kerberos を使用する” チェックを入力し、[OK] をクリックして設定を保存します。</li></ol><p>手順は以上となります。<br>同一ドメイン環境の仮想マシン移動であれば Kerberos 認証をご利用いただけますので、Kerberos 認証をご利用いただく設定が一般的となります。</p><h4 id="仮想マシン移動失敗シナリオその-2-構成バージョンのサポート"><a href="#仮想マシン移動失敗シナリオその-2-構成バージョンのサポート" class="headerlink" title="仮想マシン移動失敗シナリオその 2: 構成バージョンのサポート"></a>仮想マシン移動失敗シナリオその 2: 構成バージョンのサポート</h4><p>Hyper-V 上に作成された仮想マシンは、いずれも例外なく構成バージョンという内容が構成されます。<br>この構成バージョンは OS 毎に既定で仮想マシン作成時に展開されるバージョンが決められております。<br>既定で展開される構成バージョンとは異なるバージョンで仮想マシンを展開いただく場合、コマンド経由で仮想マシンを作成いただく必要がございます。</p><p>今回の問題としては、仮想マシンの構成バージョンによっては、その構成バージョンが移行先ではサポートされていないバージョンに該当し、結果移行が失敗する可能性があるということです。<br>例えば以下の Hyper-V サーバーの構成を考えます。</p><ul><li>Windows Server 2016:<br>サポートされる最も新しい構成バージョンは 8.0 で、仮想マシン展開時の既定のバージョンもこちらになります。<br>構成バージョン 9.0 はサポートされません。</li><li>Windows Server 2019:<br>サポートされる最も新しい構成バージョンは 9.0 で、仮想マシン展開時の既定のバージョンもこちらになります。<br>構成バージョン 8.0 はサポートされます。</li></ul><p>この際、いずれも既定の構成バージョンの設定で、Windows Server 2019 Hyper-V 上で仮想マシンを作成したとします。<br>この際展開される仮想マシンは構成バージョンが 9.0 となります。<br>この仮想マシンを Windows Server 2016 Hyper-V に移行しようとすると、移行先がサポートしない構成バージョンであるとして、移行に失敗します。<br>例えば SCVMM コンソール上でこの移行操作を実施すると、以下エラーが発生して操作が失敗します。<br><img src="/blog/SCVMM/SCVMM_LiveMigration_and_Errors/SCVMM_VMVersion_MigrationError.png"></p><p>逆のパターンとして、Windows Server 2016 で作成された仮想マシンを Windows Server 2019 に移行するシナリオを考えます。<br>Windows Server 2016 Hyper-V で作成される仮想マシンは、既定で構成バージョンが 8.0 となります。<br>Windows Server 2019 Hyper-V では構成バージョン 8.0 の仮想マシンはサポートされております。<br>そのため、構成バージョンが 8.0 で動作している Windows Server 2016 Hyper-V の仮想マシンは、問題なく Windows Server 2019 Hyper-V へ移行できます。</p><p>構成バージョンのアップグレードは可能ですが、ダウングレードは実施出来ません。<br>そのため、構成バージョン 9.0 の仮想マシンを Windows Server 2016 Hyper-V に移行することは出来ません。<br>移行の際は、構成バージョンについても十分にご留意いただいた上で操作を実施いただく必要があるとご認識をいただけると幸いです。</p><p>仮想マシンの構成バージョンに関する情報は、以下の弊社公開情報に詳細が纏められております。<br><a href="https://learn.microsoft.com/ja-jp/windows-server/virtualization/hyper-v/deploy/upgrade-virtual-machine-version-in-hyper-v-on-windows-or-windows-server">Hyper-V の仮想マシンのバージョンをアップグレードする (Windows または Windows Server) | Microsoft Learn</a><br>OS による構成バージョンのサポートや、各構成バージョンで利用可能な機能といった、大変有用な情報が纏められております。</p>]]>
+      <![CDATA[<span id="more"></span><p>皆さんこんにちは、System Center サポートチームの 保科と申します。</p><p>今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、仮想マシンのライブ マイグレーションやエラーへの対処方法についてご説明いたします。</p><!-- more --><h3 id="本ページが対象とする-SCVMM-バージョン"><a href="#本ページが対象とする-SCVMM-バージョン" class="headerlink" title="本ページが対象とする SCVMM バージョン"></a>本ページが対象とする SCVMM バージョン</h3><p>SCVMM 2016<br>SCVMM 2019<br>SCVMM 2022</p><h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>SCVMM をご利用いただくメリットとして、多くの方が、クラスター間で仮想マシンを移動することが出来る点を挙げるかと思います。<br>少なくともフェールオーバー クラスター単体だと、SCVMM のように簡単に仮想マシンを移動 &#x2F; ライブ マイグレーションすることが出来ません。<br>しかし、クラスター間の仮想マシン移動は、実はフェールオーバー クラスターや Hyper-V 単体においても実施いただけることをご存じでしょうか。<br>SCVMM でのクラスター間の仮想マシン移動は、この際必要となる一連の動作を 1 つの操作に纏めて実施しているにすぎません。<br>本日は、この機能がどのように実行されるかについてご紹介いたします。</p><p>また、仮想マシン移動時にエラーが発生した場合において、対処に際して見落としがちな設定等をご紹介いたします。<br>こちらは、今後弊社内にて確認した情報の増加に従って、本ブログの内容をアップデートとする予定です。</p><h3 id="SCVMM-におけるクラスター間の仮想マシン移動やライブ-マイグレーションの動作仕様"><a href="#SCVMM-におけるクラスター間の仮想マシン移動やライブ-マイグレーションの動作仕様" class="headerlink" title="SCVMM におけるクラスター間の仮想マシン移動やライブ マイグレーションの動作仕様"></a>SCVMM におけるクラスター間の仮想マシン移動やライブ マイグレーションの動作仕様</h3><p>早速ですが、SCVMM において、仮想マシンはどうやってクラスター間で移動しているのか？<br>この動作の流れをご紹介いたします。</p><ol><li>フェールオーバー クラスターに登録された、移動対象の仮想マシンの役割の削除</li><li>移行先として指定された Hyper-V ホストに、移動対象の仮想マシンを移動、もしくはライブ マイグレーション</li><li>仮想マシン移動先の Hyper-V ホストが所属するクラスターに、移動された仮想マシンの役割を登録</li></ol><p>このような流れで、内部上処理が行われています。<br>フェールオーバー クラスター上で動作する仮想マシンは、クラスターの役割を登録するという形で、高可用性構成を行うことが可能です。<br>クラスター上に役割が登録された仮想マシンは、SCVMM 外においては、クラスター内のノード間でしか仮想マシンを移動することが出来ません。<br>そのため、SCVMM 外でクラスター間の仮想マシン移動を実施する場合、仮想マシンの役割をクラスターから一度削除する必要があります。<br>これを実施することで初めて別のクラスター内ノードに仮想マシンを移動することができます。<br>最後に仮想マシン移行先の Hyper-V ホストが所属するクラスターに、移動された仮想マシンの役割を登録することで、そのクラスター内においても高可用性構成を実現いただけます。<br>なお、仮想マシンの電源がオンの状態で移動操作を実施すると、電源がオンの状態で移動 (ライブ マイグレーション) が行われます。<br>こちらの動作のしくみや、Hyper-V マネージャーを使用した手順は、下記の弊社公開情報に記載されております。<br><a href="https://learn.microsoft.com/ja-jp/windows-server/virtualization/hyper-v/manage/use-live-migration-without-failover-clustering-to-move-a-virtual-machine">フェールオーバー クラスタ リングのないライブ マイグレーションを使用して仮想マシンを移動するには | Microsoft Learn</a></p><p>SCVMM を使わない場合、上記の流れを手動で実施することで、クラスター間での仮想マシン移動が実現できます。<br>SCVMM は、この流れを 1 つの操作に纏めることで、ユーザー負担の軽減が実現できます。<br>逆に言えば、万が一 SCVMM をご利用いただけなくなった状況において、クラスター間の仮想マシン移動の実施が必要となった場合、上記手順を手動で実施いただくことで、SCVMM で実施するクラスター間仮想マシン移動と同じ操作が実現できます。</p><h3 id="仮想マシンの移動に失敗するシナリオ"><a href="#仮想マシンの移動に失敗するシナリオ" class="headerlink" title="仮想マシンの移動に失敗するシナリオ"></a>仮想マシンの移動に失敗するシナリオ</h3><p>こちらは、弊社で情報が確認でき次第、随時内容をアップデートする予定です。</p><h4 id="仮想マシン移動失敗シナリオその-1-Hyper-V-ホストの-Credential-Guard-が有効になっている"><a href="#仮想マシン移動失敗シナリオその-1-Hyper-V-ホストの-Credential-Guard-が有効になっている" class="headerlink" title="仮想マシン移動失敗シナリオその 1: Hyper-V ホストの Credential Guard が有効になっている"></a>仮想マシン移動失敗シナリオその 1: Hyper-V ホストの Credential Guard が有効になっている</h4><p>Windows OS には Credential Guard という機能が存在します。<br>こちらの詳細は、下記の弊社公開情報に記載されております。<br><a href="https://learn.microsoft.com/ja-jp/windows/security/identity-protection/credential-guard/how-it-works">Credential Guard のしくみ - Windows Security | Microsoft Learn</a><br>お客様の環境によってはこちらの機能が有効化されている可能性がありますが、仮想マシン移動時においては問題となる場合がございます。<br>その理由として、この機能が有効化されていると、仮想マシン移動時に使用される認証方式の 1 つである CredSSP が利用できなくなるように制限がかかるためです。<br>Kerberos 認証に対しては制限がかからないため、こちらの設定をご利用のお客様においては、以下のいずれかの実施が必要となります。</p><ul><li>Credential Guard を無効化する。</li><li>仮想マシン移動時の認証方式を CredSSP から Kerberos に変更する。</li></ul><p>Credential Guard の有効化状況は、下記弊社公開情報の “Credential Guard が有効になっているかどうかを確認する” 項以下に記載された手順から確認いただけます。<br><a href="https://learn.microsoft.com/ja-jp/windows/security/identity-protection/credential-guard/configure?tabs=intune">Credential Guard の構成 - Windows Security | Microsoft Learn</a><br>まずはこちらの手順で、Credential Guard が有効化されているかを確認いただく必要がございます。</p><p>お客様によっては、Credential Guard は、目的があって有効化されている状況が多いかと思います。<br>その場合は無効化が難しいと思うので、仮想マシン移動のシナリオがどうしても必要という状況であれば、認証方式を Kerberos に切り替える以外に対処方法はございません。<br>幸いこの操作は SCVMM 側において簡単に実施いただけますので、手順をご紹介いたします。</p><ol><li>SCVMM サーバーに管理者権限でログインし、SCVMM コンソールを開きます。</li><li>SCVMM コンソール画面左下ペインの [ファブリック] をクリックします。</li><li>画面左ペインの [サーバー] -&gt; [すべてのホスト] をクリックします。</li><li>ライブマイグレーション移行元、および移行先のホストを右クリックし、[プロパティ] を開きます。<br>(クラスター間で仮想マシンのライブマイグレーションを実施される場合、各種クラスターに配置されたノード全台に対して設定を実施いただくことを推奨いたします。)</li><li>表示されたプロパティ ウィンドウ左の [移行の設定] をクリックします。</li><li>[認証プロトコル] 項内の “Kerberos を使用する” チェックを入力し、[OK] をクリックして設定を保存します。</li></ol><p>手順は以上となります。<br>同一ドメイン環境の仮想マシン移動であれば Kerberos 認証をご利用いただけますので、Kerberos 認証をご利用いただく設定が一般的となります。</p><h4 id="仮想マシン移動失敗シナリオその-2-構成バージョンのサポート"><a href="#仮想マシン移動失敗シナリオその-2-構成バージョンのサポート" class="headerlink" title="仮想マシン移動失敗シナリオその 2: 構成バージョンのサポート"></a>仮想マシン移動失敗シナリオその 2: 構成バージョンのサポート</h4><p>Hyper-V 上に作成された仮想マシンは、いずれも例外なく構成バージョンという内容が構成されます。<br>この構成バージョンは OS 毎に既定で仮想マシン作成時に展開されるバージョンが決められております。<br>既定で展開される構成バージョンとは異なるバージョンで仮想マシンを展開いただく場合、コマンド経由で仮想マシンを作成いただく必要がございます。</p><p>今回の問題としては、仮想マシンの構成バージョンによっては、その構成バージョンが移行先ではサポートされていないバージョンに該当し、結果移行が失敗する可能性があるということです。<br>例えば以下の Hyper-V サーバーの構成を考えます。</p><ul><li>Windows Server 2016:<br>サポートされる最も新しい構成バージョンは 8.0 で、仮想マシン展開時の既定のバージョンもこちらになります。<br>構成バージョン 9.0 はサポートされません。</li><li>Windows Server 2019:<br>サポートされる最も新しい構成バージョンは 9.0 で、仮想マシン展開時の既定のバージョンもこちらになります。<br>構成バージョン 8.0 はサポートされます。</li></ul><p>この際、いずれも既定の構成バージョンの設定で、Windows Server 2019 Hyper-V 上で仮想マシンを作成したとします。<br>この際展開される仮想マシンは構成バージョンが 9.0 となります。<br>この仮想マシンを Windows Server 2016 Hyper-V に移行しようとすると、移行先がサポートしない構成バージョンであるとして、移行に失敗します。<br>例えば SCVMM コンソール上でこの移行操作を実施すると、以下エラーが発生して操作が失敗します。<br><img src="SCVMM_VMVersion_MigrationError.png"></p><p>逆のパターンとして、Windows Server 2016 で作成された仮想マシンを Windows Server 2019 に移行するシナリオを考えます。<br>Windows Server 2016 Hyper-V で作成される仮想マシンは、既定で構成バージョンが 8.0 となります。<br>Windows Server 2019 Hyper-V では構成バージョン 8.0 の仮想マシンはサポートされております。<br>そのため、構成バージョンが 8.0 で動作している Windows Server 2016 Hyper-V の仮想マシンは、問題なく Windows Server 2019 Hyper-V へ移行できます。</p><p>構成バージョンのアップグレードは可能ですが、ダウングレードは実施出来ません。<br>そのため、構成バージョン 9.0 の仮想マシンを Windows Server 2016 Hyper-V に移行することは出来ません。<br>移行の際は、構成バージョンについても十分にご留意いただいた上で操作を実施いただく必要があるとご認識をいただけると幸いです。</p><p>仮想マシンの構成バージョンに関する情報は、以下の弊社公開情報に詳細が纏められております。<br><a href="https://learn.microsoft.com/ja-jp/windows-server/virtualization/hyper-v/deploy/upgrade-virtual-machine-version-in-hyper-v-on-windows-or-windows-server">Hyper-V の仮想マシンのバージョンをアップグレードする (Windows または Windows Server) | Microsoft Learn</a><br>OS による構成バージョンのサポートや、各構成バージョンで利用可能な機能といった、大変有用な情報が纏められております。</p>]]>
     </content>
     <id>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</id>
     <link href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/"/>
@@ -338,7 +338,7 @@
 <p>今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、]]>
     </summary>
     <title>SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</title>
-    <updated>2026-07-05T07:50:11.486Z</updated>
+    <updated>2026-07-05T08:12:55.073Z</updated>
   </entry>
   <entry>
     <author>
@@ -356,7 +356,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</title>
-    <updated>2026-07-05T07:50:11.387Z</updated>
+    <updated>2026-07-05T08:12:54.975Z</updated>
   </entry>
   <entry>
     <author>
@@ -366,7 +366,7 @@
     <category term="SCVMM" scheme="https://jpsystemcenter.github.io/blog/tags/SCVMM/"/>
     <category term="VM の強制削除および再登録" scheme="https://jpsystemcenter.github.io/blog/tags/VM-%E3%81%AE%E5%BC%B7%E5%88%B6%E5%89%8A%E9%99%A4%E3%81%8A%E3%82%88%E3%81%B3%E5%86%8D%E7%99%BB%E9%8C%B2/"/>
     <content>
-      <![CDATA[<span id="more"></span><p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p><p>本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除して、再登録する方法をご紹介いたします。</p><h2 id="SCVMM-の-DB-で保持している情報が不整合になってしまうシナリオ"><a href="#SCVMM-の-DB-で保持している情報が不整合になってしまうシナリオ" class="headerlink" title="SCVMM の DB で保持している情報が不整合になってしまうシナリオ"></a>SCVMM の DB で保持している情報が不整合になってしまうシナリオ</h2><p>下図は SCVMM の構成イメージとなりますが、SCVMM では管理している VM や Hyper-V ホストの情報を DB （SQL Server）で保持しております。<br><img src="/blog/SCVMM/SCVMM_reregisterVM/0101.png"></p><p>発生シナリオは幾つかございますが、例えば  SCVMM で管理している VM を WSFC マネージャーで別ホストにマイグレーションした場合やHyper-V マネージャーから VM を削除した場合、SCVMM がその VM を見失ってしまい SCVMM のコンソールで見た場合に VM のステータスが <code> ”不足” （英語表記： missing）</code> となってしまう場合があります<br><img src="/blog/SCVMM/SCVMM_reregisterVM/0102.png"></p><p>参考：<a href="https://learn.microsoft.com/ja-jp/troubleshoot/system-center/vmm/remove-missing-virtual-machines">不足している状態の仮想マシンを削除する</a></p><p>また上記公開情報にも記載しているように ステータスが ”不足”になるだけでなく、同じ VM が複数のホスト上にあるように見え、重複して存在しているように見える場合もございます。</p><p>上述したようなシナリオの場合、下記手順で一度 SCVMM の DB から VM や Hyper-V ホストの情報を削除して、再登録することで是正できる場合がありますのでその手順を記載いたします。</p><h2 id="VM-を削除して再登録する手順"><a href="#VM-を削除して再登録する手順" class="headerlink" title="VM を削除して再登録する手順"></a>VM を削除して再登録する手順</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.SCVMM サーバーに SCVMM の管理者ロールに属するユーザーでログインし、Virtual Machine Manager Command Shell を管理者として起動します</span><br><span class="line">2.以下のコマンドレットを実行します。Nameオプションには仮想マシン名、VMHostオプションには仮想マシンを所有する仮想化ホストサーバー名を指定します。</span><br><span class="line">　$VMs = Get-SCVirtualMachine -Name &quot;&lt;仮想マシン名&gt;&quot; -VMHost &quot; &lt;仮想マシンを所有する仮想化ホストサーバー&gt;&quot;</span><br><span class="line">3.以下のコマンドを実行し、今回削除する対象である仮想マシン の情報のみが表示されることを確認します。</span><br><span class="line">　$VMs</span><br><span class="line">4.Remove-SCVirtualMachine コマンドレットを Force オプションと、対象仮想マシンの情報が格納された変数を指定し、実行します。</span><br><span class="line">　Remove-SCVirtualMachine $VMs -Force</span><br><span class="line">　** -Force オプションをつけない場合、仮想マシン自体がファイルごと削除されます。ご注意ください。**</span><br><span class="line">　上記実行後、SCVMM より対象仮想マシンの情報が削除されていることをご確認ください。</span><br><span class="line">5.SCVMM コンソールにてホストに対して [バーチャルマシンの更新] を実行し、削除した仮想マシンを改めて検出します。</span><br></pre></td></tr></table></figure><p>上記シナリオで記載したように 2 つの Hyper-V ホスト上に同じ VM が登録されてしまっている場合は、実態として存在していない Hyper-V ホスト上の VM を削除したいので、<br>その場合 <code>-VMHost</code> で指定するホストは削除したい VM をホストしている Hyper-V ホストを指定ください。</p><p><strong>VM の再登録が不要であれば、手順は 5 は実施いただく必要ございません。</strong></p><p>■コマンド実行時の画面<br><img src="/blog/SCVMM/SCVMM_reregisterVM/0201.png"></p><p><em>作業の影響範囲</em><br>上記コマンドの影響範囲につきまして、上述している通り、 SCVMM が持つデータベース内の情報のみ削除するため、<strong>仮想マシンへの動作影響はありません</strong>。<br>しかしながら、SCVMM が持つ固有の情報（規定では使用されていない項目となります）については削除されます。<br>こちらは Hyper-V ホストでは管理しておらず、SCVMM のみが管理している情報であるためです。<br>固有の情報は以下が該当致します。<br>・仮想マシンのコストセンター (仮想マシンのプロパティ画面の全般タブ)<br>・仮想マシンのタグ (仮想マシンのプロパティ画面の全般タブ<br>・仮想マシンのクラウド (仮想マシンのプロパティ画面の全般タブ<br>・仮想マシンのカスタム プロパティ (仮想マシンのプロパティ画面のカスタム プロパティ タブ)<br>・仮想マシンのセルフサービス クォータポイント (仮想マシンのプロパティ画面の設定タブ)<br>・仮想マシンの所有者 (仮想マシンのプロパティ画面のアクセスタブ)<br>・仮想マシンのセルフサービス所有者、セルフサービスユーザー (仮想マシンのプロパティ画面のアクセスタブ)</p>]]>
+      <![CDATA[<span id="more"></span><p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p><p>本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除して、再登録する方法をご紹介いたします。</p><h2 id="SCVMM-の-DB-で保持している情報が不整合になってしまうシナリオ"><a href="#SCVMM-の-DB-で保持している情報が不整合になってしまうシナリオ" class="headerlink" title="SCVMM の DB で保持している情報が不整合になってしまうシナリオ"></a>SCVMM の DB で保持している情報が不整合になってしまうシナリオ</h2><p>下図は SCVMM の構成イメージとなりますが、SCVMM では管理している VM や Hyper-V ホストの情報を DB （SQL Server）で保持しております。<br><img src="0101.png"></p><p>発生シナリオは幾つかございますが、例えば  SCVMM で管理している VM を WSFC マネージャーで別ホストにマイグレーションした場合やHyper-V マネージャーから VM を削除した場合、SCVMM がその VM を見失ってしまい SCVMM のコンソールで見た場合に VM のステータスが <code> ”不足” （英語表記： missing）</code> となってしまう場合があります<br><img src="0102.png"></p><p>参考：<a href="https://learn.microsoft.com/ja-jp/troubleshoot/system-center/vmm/remove-missing-virtual-machines">不足している状態の仮想マシンを削除する</a></p><p>また上記公開情報にも記載しているように ステータスが ”不足”になるだけでなく、同じ VM が複数のホスト上にあるように見え、重複して存在しているように見える場合もございます。</p><p>上述したようなシナリオの場合、下記手順で一度 SCVMM の DB から VM や Hyper-V ホストの情報を削除して、再登録することで是正できる場合がありますのでその手順を記載いたします。</p><h2 id="VM-を削除して再登録する手順"><a href="#VM-を削除して再登録する手順" class="headerlink" title="VM を削除して再登録する手順"></a>VM を削除して再登録する手順</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.SCVMM サーバーに SCVMM の管理者ロールに属するユーザーでログインし、Virtual Machine Manager Command Shell を管理者として起動します</span><br><span class="line">2.以下のコマンドレットを実行します。Nameオプションには仮想マシン名、VMHostオプションには仮想マシンを所有する仮想化ホストサーバー名を指定します。</span><br><span class="line">　$VMs = Get-SCVirtualMachine -Name &quot;&lt;仮想マシン名&gt;&quot; -VMHost &quot; &lt;仮想マシンを所有する仮想化ホストサーバー&gt;&quot;</span><br><span class="line">3.以下のコマンドを実行し、今回削除する対象である仮想マシン の情報のみが表示されることを確認します。</span><br><span class="line">　$VMs</span><br><span class="line">4.Remove-SCVirtualMachine コマンドレットを Force オプションと、対象仮想マシンの情報が格納された変数を指定し、実行します。</span><br><span class="line">　Remove-SCVirtualMachine $VMs -Force</span><br><span class="line">　** -Force オプションをつけない場合、仮想マシン自体がファイルごと削除されます。ご注意ください。**</span><br><span class="line">　上記実行後、SCVMM より対象仮想マシンの情報が削除されていることをご確認ください。</span><br><span class="line">5.SCVMM コンソールにてホストに対して [バーチャルマシンの更新] を実行し、削除した仮想マシンを改めて検出します。</span><br></pre></td></tr></table></figure><p>上記シナリオで記載したように 2 つの Hyper-V ホスト上に同じ VM が登録されてしまっている場合は、実態として存在していない Hyper-V ホスト上の VM を削除したいので、<br>その場合 <code>-VMHost</code> で指定するホストは削除したい VM をホストしている Hyper-V ホストを指定ください。</p><p><strong>VM の再登録が不要であれば、手順は 5 は実施いただく必要ございません。</strong></p><p>■コマンド実行時の画面<br><img src="0201.png"></p><p><em>作業の影響範囲</em><br>上記コマンドの影響範囲につきまして、上述している通り、 SCVMM が持つデータベース内の情報のみ削除するため、<strong>仮想マシンへの動作影響はありません</strong>。<br>しかしながら、SCVMM が持つ固有の情報（規定では使用されていない項目となります）については削除されます。<br>こちらは Hyper-V ホストでは管理しておらず、SCVMM のみが管理している情報であるためです。<br>固有の情報は以下が該当致します。<br>・仮想マシンのコストセンター (仮想マシンのプロパティ画面の全般タブ)<br>・仮想マシンのタグ (仮想マシンのプロパティ画面の全般タブ<br>・仮想マシンのクラウド (仮想マシンのプロパティ画面の全般タブ<br>・仮想マシンのカスタム プロパティ (仮想マシンのプロパティ画面のカスタム プロパティ タブ)<br>・仮想マシンのセルフサービス クォータポイント (仮想マシンのプロパティ画面の設定タブ)<br>・仮想マシンの所有者 (仮想マシンのプロパティ画面のアクセスタブ)<br>・仮想マシンのセルフサービス所有者、セルフサービスユーザー (仮想マシンのプロパティ画面のアクセスタブ)</p>]]>
     </content>
     <id>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/</id>
     <link href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_reregisterVM/"/>
@@ -377,7 +377,7 @@
 <p>本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除]]>
     </summary>
     <title>VM の強制削除および再登録</title>
-    <updated>2026-07-05T07:50:11.544Z</updated>
+    <updated>2026-07-05T08:12:55.132Z</updated>
   </entry>
   <entry>
     <author>
@@ -387,7 +387,7 @@
     <category term="howto" scheme="https://jpsystemcenter.github.io/blog/tags/howto/"/>
     <category term="パフォーマンス カウンター" scheme="https://jpsystemcenter.github.io/blog/tags/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC/"/>
     <content>
-      <![CDATA[<span id="more"></span><p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p><p>本日は System Center Operations Manager（以下、SCOM） に採取されたパフォーマンス カウンターの情報を DB から採取する方法についてご紹介いたします。</p><h2 id="留意事項"><a href="#留意事項" class="headerlink" title="留意事項"></a>留意事項</h2><p>Update Rollup の適用などにより DB のテーブルの型などが変更される可能性がございます。<br>各テーブルの仕様については公開しておりません。</p><h2 id="パフォーマンス-カウンターが採取される仕組み"><a href="#パフォーマンス-カウンターが採取される仕組み" class="headerlink" title="パフォーマンス カウンターが採取される仕組み"></a>パフォーマンス カウンターが採取される仕組み</h2><p>せっかくですので、まず実際に DB からパフォーマンスカウンターを取得するクエリの説明の前に Microsoft Monitoring Agent （以後、MMA と記載します）がパフォーマンスカウンターを採取して、SCOM 管理サーバーに連携する仕組み、流れをご紹介いたします。<br>実際のパフォーマンス カウンターを採取する方法を知りたい方は <a href="#DB-%E3%81%8B%E3%82%89%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%82%AF%E3%82%A8%E3%83%AA">DB からパフォーマンス カウンターを取得するクエリ</a>  からご参照ください。</p><h3 id="エージェントと-SCOM-管理サーバーの通信"><a href="#エージェントと-SCOM-管理サーバーの通信" class="headerlink" title="エージェントと SCOM 管理サーバーの通信"></a>エージェントと SCOM 管理サーバーの通信</h3><p>以下ページに記載のとおりですが、MMA は採取した情報（パフォーマンス カウンター情報など）を SCOM 管理サーバーへ TCP 5723 ポート向け送ります<br>下図で “(local and remote)” と記載ございますが、本日の内容は local つまり、MMA がインストールされているマシンの情報を採取する内容とご認識いただければと存じます。<br><a href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-planning-agent-deployment?view=sc-om-2022&tabs=Windows#communication-between-agents-and-management-servers">Operations Manager エージェント</a><br><img src="/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/0101.png"></p><p>SCOM 管理サーバーで NW キャプチャを採取すると以下のように確認することが出来ます。</p><table><thead><tr><th>IP アドレス</th><th>通信しているコンピュータ</th></tr></thead><tbody><tr><td>172.16.1.31</td><td>監視対象コンピューター</td></tr><tr><td>172.16.1.41</td><td>SCOM 管理サーバー</td></tr></tbody></table><p><img src="/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/0102.png"></p><h3 id="MMA-の実行プロセスとパフォーマンスカウンターを採取するプロセス"><a href="#MMA-の実行プロセスとパフォーマンスカウンターを採取するプロセス" class="headerlink" title="MMA の実行プロセスとパフォーマンスカウンターを採取するプロセス"></a>MMA の実行プロセスとパフォーマンスカウンターを採取するプロセス</h3><p>監視対象コンピューター （※）にインストールされた MMA は下図でわかるよう Windows のサービスとして登録され、その実行ファイル名は ”HealthService.exe” です。<br><img src="/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/0103.png"></p><p>実際にパフォーマンスカウンターを採取するプロセスは ”HealthService.exe”  から呼び出される ”MonitoringHost.exe” となります。<br>※ SCOM 管理サーバーにも MMA はインストールされております</p><p>MMA がインストールされているマシンには SCOM 管理サーバーから情報を採取するための xml 形式の設定ファイルがダウンロードされます。<br>この xml ファイルの設定（対象パフォーマンスカウンターや実行インターバル、など）に従い ”MonitoringHost.exe” が採取こととなります。</p><p>具体的には xml ファイル内に定義されたスクリプト（その中で WMI クエリなどを実行）に従い採取しております。</p><p>ダウンロードされた xml ファイルは以下パスにて確認いただけます。<br>C:\Program Files\Microsoft Monitoring Agent\Agent\Health Service State\Management Packs</p><h2 id="DB-からパフォーマンス-カウンターを取得するクエリ"><a href="#DB-からパフォーマンス-カウンターを取得するクエリ" class="headerlink" title="DB からパフォーマンス カウンターを取得するクエリ"></a>DB からパフォーマンス カウンターを取得するクエリ</h2><p>ここまでで MMA がパフォーマンス カウンターを採取する仕組みを記載しましたが、SCOM 管理サーバーまで届いたパフォーマンスカウンターは Operations Manager DB に格納されます。<br>Operations Console のパフォーマンス ビューなどで確認できる監視対象のパフォーマンス カウンターはこの DB の情報を取得して、表示させている事となります。</p><p>そのため、Operations Console から取得できないような情報を DB から SQL クエリを実行して採取することが出来ます。</p><p>具体的には下記クエリとなります。</p><p>&#x2F;&#x2F;クエリ例</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">R.RuleName,</span><br><span class="line">PCV.ObjectName,</span><br><span class="line">PCV.CounterName,</span><br><span class="line">PCV.InstanceName,</span><br><span class="line">PDAV.SampleValue,</span><br><span class="line">PDAV.TimeAdded,</span><br><span class="line">PDAV.TimeSampled,</span><br><span class="line">BME.FullName,</span><br><span class="line">BME.Path    </span><br><span class="line">from PerformanceDataAllView PDAV with (nolock)</span><br><span class="line">inner join PerformanceCounterView PCV with (nolock) on PDAV.PerformanceSourceInternalId=PCV.PerformanceSourceInternalId</span><br><span class="line">inner join Rules R with (nolock) on PCV.RuleId=R.RuleId</span><br><span class="line">inner join BaseManagedEntity BME with (nolock) on PCV.ManagedEntityId=BME.BaseManagedEntityId</span><br><span class="line"></span><br><span class="line">-- 抽出条件はお客様の条件に従い適宜ご変更ください --</span><br><span class="line">where BME.path like &#x27;%サーバー名%&#x27;</span><br><span class="line">and CounterName like &#x27;%カウンター名%&#x27;</span><br><span class="line">and  R.rulename like &#x27;%rule ID%&#x27;</span><br><span class="line">order by PDAV.TimeAdded desc</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>例えば上記クエリの  ”サーバー名” と “カウンター名”に実際の監視対象コンピューターと確認したいパフォーマンス カウンターを入力して実行すると下図のように取得することが可能となります。</p><p>&#x2F;&#x2F; SSMS でのクエリ実行イメージ<br><img src="/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/0201.png"></p>]]>
+      <![CDATA[<span id="more"></span><p>皆様こんにちは、System Center サポートチームの 佐藤 です。</p><p>本日は System Center Operations Manager（以下、SCOM） に採取されたパフォーマンス カウンターの情報を DB から採取する方法についてご紹介いたします。</p><h2 id="留意事項"><a href="#留意事項" class="headerlink" title="留意事項"></a>留意事項</h2><p>Update Rollup の適用などにより DB のテーブルの型などが変更される可能性がございます。<br>各テーブルの仕様については公開しておりません。</p><h2 id="パフォーマンス-カウンターが採取される仕組み"><a href="#パフォーマンス-カウンターが採取される仕組み" class="headerlink" title="パフォーマンス カウンターが採取される仕組み"></a>パフォーマンス カウンターが採取される仕組み</h2><p>せっかくですので、まず実際に DB からパフォーマンスカウンターを取得するクエリの説明の前に Microsoft Monitoring Agent （以後、MMA と記載します）がパフォーマンスカウンターを採取して、SCOM 管理サーバーに連携する仕組み、流れをご紹介いたします。<br>実際のパフォーマンス カウンターを採取する方法を知りたい方は <a href="#DB-%E3%81%8B%E3%82%89%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9-%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%82%AF%E3%82%A8%E3%83%AA">DB からパフォーマンス カウンターを取得するクエリ</a>  からご参照ください。</p><h3 id="エージェントと-SCOM-管理サーバーの通信"><a href="#エージェントと-SCOM-管理サーバーの通信" class="headerlink" title="エージェントと SCOM 管理サーバーの通信"></a>エージェントと SCOM 管理サーバーの通信</h3><p>以下ページに記載のとおりですが、MMA は採取した情報（パフォーマンス カウンター情報など）を SCOM 管理サーバーへ TCP 5723 ポート向け送ります<br>下図で “(local and remote)” と記載ございますが、本日の内容は local つまり、MMA がインストールされているマシンの情報を採取する内容とご認識いただければと存じます。<br><a href="https://learn.microsoft.com/ja-jp/system-center/scom/plan-planning-agent-deployment?view=sc-om-2022&tabs=Windows#communication-between-agents-and-management-servers">Operations Manager エージェント</a><br><img src="0101.png"></p><p>SCOM 管理サーバーで NW キャプチャを採取すると以下のように確認することが出来ます。</p><table><thead><tr><th>IP アドレス</th><th>通信しているコンピュータ</th></tr></thead><tbody><tr><td>172.16.1.31</td><td>監視対象コンピューター</td></tr><tr><td>172.16.1.41</td><td>SCOM 管理サーバー</td></tr></tbody></table><p><img src="0102.png"></p><h3 id="MMA-の実行プロセスとパフォーマンスカウンターを採取するプロセス"><a href="#MMA-の実行プロセスとパフォーマンスカウンターを採取するプロセス" class="headerlink" title="MMA の実行プロセスとパフォーマンスカウンターを採取するプロセス"></a>MMA の実行プロセスとパフォーマンスカウンターを採取するプロセス</h3><p>監視対象コンピューター （※）にインストールされた MMA は下図でわかるよう Windows のサービスとして登録され、その実行ファイル名は ”HealthService.exe” です。<br><img src="0103.png"></p><p>実際にパフォーマンスカウンターを採取するプロセスは ”HealthService.exe”  から呼び出される ”MonitoringHost.exe” となります。<br>※ SCOM 管理サーバーにも MMA はインストールされております</p><p>MMA がインストールされているマシンには SCOM 管理サーバーから情報を採取するための xml 形式の設定ファイルがダウンロードされます。<br>この xml ファイルの設定（対象パフォーマンスカウンターや実行インターバル、など）に従い ”MonitoringHost.exe” が採取こととなります。</p><p>具体的には xml ファイル内に定義されたスクリプト（その中で WMI クエリなどを実行）に従い採取しております。</p><p>ダウンロードされた xml ファイルは以下パスにて確認いただけます。<br>C:\Program Files\Microsoft Monitoring Agent\Agent\Health Service State\Management Packs</p><h2 id="DB-からパフォーマンス-カウンターを取得するクエリ"><a href="#DB-からパフォーマンス-カウンターを取得するクエリ" class="headerlink" title="DB からパフォーマンス カウンターを取得するクエリ"></a>DB からパフォーマンス カウンターを取得するクエリ</h2><p>ここまでで MMA がパフォーマンス カウンターを採取する仕組みを記載しましたが、SCOM 管理サーバーまで届いたパフォーマンスカウンターは Operations Manager DB に格納されます。<br>Operations Console のパフォーマンス ビューなどで確認できる監視対象のパフォーマンス カウンターはこの DB の情報を取得して、表示させている事となります。</p><p>そのため、Operations Console から取得できないような情報を DB から SQL クエリを実行して採取することが出来ます。</p><p>具体的には下記クエリとなります。</p><p>&#x2F;&#x2F;クエリ例</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">R.RuleName,</span><br><span class="line">PCV.ObjectName,</span><br><span class="line">PCV.CounterName,</span><br><span class="line">PCV.InstanceName,</span><br><span class="line">PDAV.SampleValue,</span><br><span class="line">PDAV.TimeAdded,</span><br><span class="line">PDAV.TimeSampled,</span><br><span class="line">BME.FullName,</span><br><span class="line">BME.Path    </span><br><span class="line">from PerformanceDataAllView PDAV with (nolock)</span><br><span class="line">inner join PerformanceCounterView PCV with (nolock) on PDAV.PerformanceSourceInternalId=PCV.PerformanceSourceInternalId</span><br><span class="line">inner join Rules R with (nolock) on PCV.RuleId=R.RuleId</span><br><span class="line">inner join BaseManagedEntity BME with (nolock) on PCV.ManagedEntityId=BME.BaseManagedEntityId</span><br><span class="line"></span><br><span class="line">-- 抽出条件はお客様の条件に従い適宜ご変更ください --</span><br><span class="line">where BME.path like &#x27;%サーバー名%&#x27;</span><br><span class="line">and CounterName like &#x27;%カウンター名%&#x27;</span><br><span class="line">and  R.rulename like &#x27;%rule ID%&#x27;</span><br><span class="line">order by PDAV.TimeAdded desc</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>例えば上記クエリの  ”サーバー名” と “カウンター名”に実際の監視対象コンピューターと確認したいパフォーマンス カウンターを入力して実行すると下図のように取得することが可能となります。</p><p>&#x2F;&#x2F; SSMS でのクエリ実行イメージ<br><img src="0201.png"></p>]]>
     </content>
     <id>https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/</id>
     <link href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_howto_getPerformanceData_fromDB/"/>
@@ -398,6 +398,6 @@
 <p>本日は System Center Operations Manager（以下、SCOM） に採取されたパフォーマンス カウンターの情報]]>
     </summary>
     <title>パフォーマンス データを DB から取得する方法</title>
-    <updated>2026-07-05T07:50:11.426Z</updated>
+    <updated>2026-07-05T08:12:55.013Z</updated>
   </entry>
 </feed>
