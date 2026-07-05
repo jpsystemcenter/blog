@@ -101,6 +101,15 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_SCOM_Monitor/</loc>
+    
+    <lastmod>2026-07-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
     
     <lastmod>2026-07-05</lastmod>
@@ -128,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_SCOM_Monitor/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -138,15 +147,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
-    
-    <lastmod>2026-07-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -308,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDB_optimizeindex/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -335,7 +335,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -344,7 +344,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -362,15 +362,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/</loc>
-    
-    <lastmod>2026-07-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Install_Manual/</loc>
     
     <lastmod>2026-07-05</lastmod>
@@ -380,7 +371,16 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
+    
+    <lastmod>2026-07-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -407,7 +407,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
     
     <lastmod>2026-07-05</lastmod>
     
@@ -448,13 +448,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/Agent/</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/Audit-Collection-Service-ACS/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -463,6 +456,13 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/Trouble/</loc>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/tags/Agent/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -532,14 +532,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/OperationsManager/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/OperationsManagerDW/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/OperationsManagerDW/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/OperationsManager/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -637,14 +637,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/SCXAgent/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/VBS/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/VBS/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/SCXAgent/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -686,14 +686,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/Library-Server/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/%E7%9B%A3%E8%A6%96/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/%E7%9B%A3%E8%A6%96/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/Library-Server/</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
