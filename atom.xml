@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Japan System Center Support</rights>
   <subtitle>日本マイクロソフトの System Center に関するサポート情報のブログです。</subtitle>
   <title>Japan System Center Support Blog</title>
-  <updated>2026-07-05T08:50:49.118Z</updated>
+  <updated>2026-07-05T09:04:19.707Z</updated>
   <entry>
     <author>
       <name>Japan System Center Support</name>
@@ -27,7 +27,7 @@
       <![CDATA[<p>SCVMM における WORKGROUP クラスターのサポート状況をまとめた記事になります。<br><br></p>]]>
     </summary>
     <title>SCVMM でライブ マイグレーションをサポートする WORKGROUP クラスターを管理することができない既知事象のご説明</title>
-    <updated>2026-07-05T08:50:49.118Z</updated>
+    <updated>2026-07-05T09:04:19.707Z</updated>
   </entry>
   <entry>
     <author>
@@ -36,7 +36,7 @@
     <category term="SCOM" scheme="https://jpsystemcenter.github.io/blog/tags/SCOM/"/>
     <category term="Trubleshooting" scheme="https://jpsystemcenter.github.io/blog/tags/Trubleshooting/"/>
     <content>
-      <![CDATA[<p>皆様こんにちは、System Center サポート チームです。<br>今回は、System Center Operations Manager (SCOM) で Windows Server 2022 または Windows Server 2025 から ESENT イベント ログを収集した際に、SCOM コンソール上でイベントの説明が文字化けして表示される事象についてご紹介します。</p><span id="more"></span><p>本事象については、System Center Operations Manager のリリース ノートにも既知の問題として記載されています。<br>・<a href="https://learn.microsoft.com/en-us/system-center/scom/release-notes-om?view=sc-om-2025#esent-event-log-descriptions-appear-garbled">Release notes for System Center Operations Manager</a></p><p>本記事では、リリース ノートの内容を補足する形で、事象の概要、発生条件、原因、および現時点での考慮事項について説明します。</p><h2 id="事象の概要"><a href="#事象の概要" class="headerlink" title="事象の概要"></a>事象の概要</h2><p>SCOM でイベント ログ収集ルールを構成し、Windows Server 2022 または Windows Server 2025 上で記録された ESENT イベントを収集した場合、SCOM コンソールのイベント ビュー上で Description が文字化けすることがあります。</p><h2 id="確認している発生条件"><a href="#確認している発生条件" class="headerlink" title="確認している発生条件"></a>確認している発生条件</h2><p>弊社で確認している範囲では、以下の OS から ESENT イベントを収集した場合に本事象が発生します。</p><ul><li>Windows Server 2022</li><li>Windows Server 2025</li></ul><p>また、事象は主に以下のような条件で確認されています。</p><ul><li>SCOM で Windows イベント ログを収集するルールを構成している</li><li>監視対象サーバーで ESENT ソースのイベントが記録される</li><li>SCOM コンソールのイベント ビューで、収集された ESENT イベントの Description を確認する</li><li>SCOM の表示言語が日本語になっている</li></ul><p>なお、すべてのイベント ソースで同様に発生するものではなく、ESENT イベントで確認されている事象です。</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>本事象は、Windows Server 2022 以降における ESENT イベントのメッセージ リソースの文字コードと、SCOM エージェント側のメッセージ文字列処理の組み合わせによって発生します。<br>Windows のイベント メッセージは、イベント ソースに対応するメッセージ テーブル リソースを参照して組み立てられます。このメッセージ テーブル リソースでは、MESSAGE_RESOURCE_ENTRY という構造体が使用され、Flags の値によって文字列の形式が示されます。従来、SCOM エージェントはこの Flags が 0x1、つまり UNICODE であるかどうかを判断し、UNICODE でない場合は ANSI の文字列として処理していました。しかし、Windows Server 2022 以降の ESENT イベントでは、メッセージ テーブル リソース内の MESSAGE_RESOURCE_ENTRY の Flags が 0x2 (UTF-8) を示す値に変更されていることを確認しています。<br>このため、SCOM エージェントが UTF-8 の文字列を ANSI として処理してしまい、日本語などのマルチバイト文字が正しく変換されず、SCOM コンソール上で文字化けして表示されます。</p><h2 id="影響範囲"><a href="#影響範囲" class="headerlink" title="影響範囲"></a>影響範囲</h2><p>本事象による主な影響は、SCOM コンソール上で表示される ESENT イベントの説明が文字化けすることです。<br>イベントの発生自体、イベント ID、ソース、レベル、記録日時、コンピューター名などの基本的なイベント情報については、通常どおり収集されます。そのため、イベントの発生有無やイベント ID を条件とした監視自体が直ちに失敗する事象ではありません。<br>ただし、SCOM コンソール上でイベントの説明文を確認して内容を判断する運用を行っている場合、説明文の判読が難しくなる可能性があります。</p><h2 id="対処および回避策について"><a href="#対処および回避策について" class="headerlink" title="対処および回避策について"></a>対処および回避策について</h2><p>残念ながら現時点でサポートされる対処法や回避策はございません。</p><h2 id="参考情報"><a href="#参考情報" class="headerlink" title="参考情報"></a>参考情報</h2><p><a href="https://learn.microsoft.com/en-us/system-center/scom/release-notes-om?view=sc-om-2025#esent-event-log-descriptions-appear-garbled">Release notes for System Center Operations Manager</a></p><hr><p>本記事の内容は以上となります。</p><p>Windows Server 2022 または Windows Server 2025 の ESENT イベントを SCOM で収集しており、SCOM コンソール上でイベント説明が文字化けして表示される場合は、本記事の内容をご確認ください。</p><p>※本情報の内容は、作成日時点でのものであり、予告なく変更される場合があります。</p>]]>
+      <![CDATA[<p>皆様こんにちは、System Center サポート チームです。<br>今回は、System Center Operations Manager (SCOM) で Windows Server 2022 または Windows Server 2025 から ESENT イベント ログを収集した際に、SCOM コンソール上でイベントの説明が文字化けして表示される事象についてご紹介します。</p><span id="more"></span><p>本事象については、System Center Operations Manager のリリース ノートにも既知の問題として記載されています。<br>・<a href="https://learn.microsoft.com/en-us/system-center/scom/release-notes-om?view=sc-om-2025#esent-event-log-descriptions-appear-garbled">Release notes for System Center Operations Manager</a></p><p>本記事では、リリース ノートの内容を補足する形で、事象の概要、発生条件、原因、および現時点での考慮事項について説明します。</p><h2 id="事象の概要"><a href="#事象の概要" class="headerlink" title="事象の概要"></a>事象の概要</h2><p>SCOM でイベント ログ収集ルールを構成し、Windows Server 2022 または Windows Server 2025 上で記録された ESENT イベントを収集した場合、SCOM コンソールのイベント ビュー上で Description が文字化けすることがあります。</p><h2 id="確認している発生条件"><a href="#確認している発生条件" class="headerlink" title="確認している発生条件"></a>確認している発生条件</h2><p>弊社で確認している範囲では、以下の OS から ESENT イベントを収集した場合に本事象が発生します。</p><ul><li>Windows Server 2022</li><li>Windows Server 2025</li></ul><p>また、事象は主に以下のような条件で確認されています。</p><ul><li>SCOM で Windows イベント ログを収集するルールを構成している</li><li>監視対象サーバーで ESENT ソースのイベントが記録される</li><li>SCOM コンソールのイベント ビューで、収集された ESENT イベントの Description を確認する</li><li>SCOM の表示言語が日本語になっている</li></ul><p>なお、すべてのイベント ソースで同様に発生するものではなく、ESENT イベントで確認されている事象です。</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>本事象は、Windows Server 2022 以降における ESENT イベントのメッセージ リソースの文字コードと、SCOM エージェント側のメッセージ文字列処理の組み合わせによって発生します。<br>Windows のイベント メッセージは、イベント ソースに対応するメッセージ テーブル リソースを参照して組み立てられます。このメッセージ テーブル リソースでは、MESSAGE_RESOURCE_ENTRY という構造体が使用され、Flags の値によって文字列の形式が示されます。従来、SCOM エージェントはこの Flags が 0x1、つまり UNICODE であるかどうかを判断し、UNICODE でない場合は ANSI の文字列として処理していました。しかし、Windows Server 2022 以降の ESENT イベントでは、メッセージ テーブル リソース内の MESSAGE_RESOURCE_ENTRY の Flags が 0x2 (UTF-8) を示す値に変更されていることを確認しています。<br>このため、SCOM エージェントが UTF-8 の文字列を ANSI として処理してしまい、日本語などのマルチバイト文字が正しく変換されず、SCOM コンソール上で文字化けして表示されます。</p><h2 id="影響範囲"><a href="#影響範囲" class="headerlink" title="影響範囲"></a>影響範囲</h2><p>本事象による主な影響は、SCOM コンソール上で表示される ESENT イベントの説明が文字化けすることです。<br>イベントの発生自体、イベント ID、ソース、レベル、記録日時、コンピューター名などの基本的なイベント情報については、通常どおり収集されます。そのため、イベントの発生有無やイベント ID を条件とした監視自体が直ちに失敗する事象ではありません。<br>ただし、SCOM コンソール上でイベントの説明文を確認して内容を判断する運用を行っている場合、説明文の判読が難しくなる可能性があります。</p><h2 id="対処および回避策について"><a href="#対処および回避策について" class="headerlink" title="対処および回避策について"></a>対処および回避策について</h2><p>残念ながら現時点でサポートされる対処法や回避策はございません。</p><h2 id="参考情報"><a href="#参考情報" class="headerlink" title="参考情報"></a>参考情報</h2><p><a href="https://learn.microsoft.com/en-us/system-center/scom/release-notes-om?view=sc-om-2025#esent-event-log-descriptions-appear-garbled">Release notes for System Center Operations Manager</a></p><hr><p>本記事の内容は以上となります。</p><p>Windows Server 2022 または Windows Server 2025 の ESENT イベントを SCOM で収集しており、SCOM コンソール上でイベント説明が文字化けして表示される場合は、本記事の内容をご確認ください。</p>]]>
     </content>
     <id>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/</id>
     <link href="https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/"/>
@@ -45,7 +45,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポート チームです。<br>今回は、System Center Operations Manager (SCOM) で Windows Server 2022 または Windows Server 2025 から ESENT イベント ログを収集した際に、SCOM コンソール上でイベントの説明が文字化けして表示される事象についてご紹介します。</p>]]>
     </summary>
     <title>SCOM で収集した ESENT イベント ログの説明が文字化けする事象について</title>
-    <updated>2026-07-05T08:50:48.966Z</updated>
+    <updated>2026-07-05T09:04:19.554Z</updated>
   </entry>
   <entry>
     <author>
@@ -65,7 +65,7 @@
       <![CDATA[<p>本記事では、System Center 製品全般で利用可能なトラブルシューティング用のログ採取手順をまとめています。</p>]]>
     </summary>
     <title>System Center 製品で使用される汎用的なログ採取手順</title>
-    <updated>2026-07-05T08:50:49.131Z</updated>
+    <updated>2026-07-05T09:04:19.720Z</updated>
   </entry>
   <entry>
     <author>
@@ -85,7 +85,7 @@
       <![CDATA[<p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCVMM</title>
-    <updated>2026-07-05T08:50:49.080Z</updated>
+    <updated>2026-07-05T09:04:19.667Z</updated>
   </entry>
   <entry>
     <author>
@@ -106,7 +106,7 @@
       <![CDATA[<p>This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCOM</title>
-    <updated>2026-07-05T08:50:48.989Z</updated>
+    <updated>2026-07-05T09:04:19.577Z</updated>
   </entry>
   <entry>
     <author>
@@ -124,7 +124,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM を使用して SCVMM 環境を監視する構成手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM を用いた SCVMM 環境の監視</title>
-    <updated>2026-07-05T08:50:49.063Z</updated>
+    <updated>2026-07-05T09:04:19.650Z</updated>
   </entry>
   <entry>
     <author>
@@ -144,7 +144,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、SCVMM の運用上オブジェクトに write ロックが発生したことによって、仮想マシンの操作が行えなくなった場合の対処方法をご案内します。<br><br></p>]]>
     </summary>
     <title>write ロックによってジョブの実行が行えなくなる事象の対処方法</title>
-    <updated>2026-07-05T08:50:49.038Z</updated>
+    <updated>2026-07-05T09:04:19.626Z</updated>
   </entry>
   <entry>
     <author>
@@ -162,7 +162,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM の機能紹介</title>
-    <updated>2026-07-05T08:50:49.017Z</updated>
+    <updated>2026-07-05T09:04:19.605Z</updated>
   </entry>
   <entry>
     <author>
@@ -180,7 +180,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする <strong>「Azure Arc SCVMM」</strong> についてご紹介します。<br><br></p>]]>
     </summary>
     <title>Azure Arc SCVMM の紹介</title>
-    <updated>2026-07-05T08:50:49.017Z</updated>
+    <updated>2026-07-05T09:04:19.605Z</updated>
   </entry>
   <entry>
     <author>
@@ -198,7 +198,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</title>
-    <updated>2026-07-05T08:50:49.029Z</updated>
+    <updated>2026-07-05T09:04:19.617Z</updated>
   </entry>
   <entry>
     <author>
@@ -219,7 +219,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。</p>]]>
     </summary>
     <title>SCOM OperationsManagerDW データベースの容量削減手順</title>
-    <updated>2026-07-05T08:50:48.987Z</updated>
+    <updated>2026-07-05T09:04:19.575Z</updated>
   </entry>
   <entry>
     <author>
@@ -240,7 +240,7 @@
       <![CDATA[<p>本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。</p>]]>
     </summary>
     <title>SCOM で使用する一般的なログ収集方法</title>
-    <updated>2026-07-05T08:50:48.988Z</updated>
+    <updated>2026-07-05T09:04:19.576Z</updated>
   </entry>
   <entry>
     <author>
@@ -261,7 +261,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。</p>]]>
     </summary>
     <title>SCOM OperationsManager データベースの unused 領域開放手順</title>
-    <updated>2026-07-05T08:50:48.986Z</updated>
+    <updated>2026-07-05T09:04:19.574Z</updated>
   </entry>
   <entry>
     <author>
@@ -280,7 +280,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの保科です。<br>本日は、System Center Operations Manager (以後 SCOM と表記します) で、Windows OS のメモリ使用率を監視する方法をご紹介いたします。</p>]]>
     </summary>
     <title>SCOM でメモリ使用率を監視する方法</title>
-    <updated>2026-07-05T08:50:48.987Z</updated>
+    <updated>2026-07-05T09:04:19.575Z</updated>
   </entry>
   <entry>
     <author>
@@ -298,7 +298,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で トラステッド プラットフォーム モジュール (TPM) が有効な仮想マシンを管理する方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM で TPM が有効な仮想マシンを管理する方法</title>
-    <updated>2026-07-05T08:50:49.123Z</updated>
+    <updated>2026-07-05T09:04:19.713Z</updated>
   </entry>
   <entry>
     <author>
@@ -317,7 +317,7 @@
 <p>System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ サーバー) の構築、類似の仮想スイッチの設定を簡易的に反映できる設定 (論理スイッチ) などが利用できます。また、VMWare vCenter と連携することで VMWare VM を Hyper-V VM に移行することができます。<br><br>SCVMM の構成は、IT インフラ環境の規模や運用要件に応じて変わりますが、検証等の目的で簡易的に最短で SCVMM を構築されたいケースがあります。そういったケースに備えて、本記事では、1 台の Windows Server に SCVMM の主コンポーネントの SCVMM 管理サーバーと SCVMM コンソールをインストールして、SCVMM コンソールにサインインできるまでの手順を画面ショット付きで紹介します。</p>]]>
     </summary>
     <title>SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</title>
-    <updated>2026-07-05T08:50:49.038Z</updated>
+    <updated>2026-07-05T09:04:19.626Z</updated>
   </entry>
   <entry>
     <author>
@@ -338,7 +338,7 @@
 <p>今回は、System Center Virtual Machine Manager (SCVMM) の機能としてご利用いただける、]]>
     </summary>
     <title>SCVMM のクラスター間ライブ マイグレーションの動作仕様、および仮想マシン移動時のエラーの対処方法</title>
-    <updated>2026-07-05T08:50:49.062Z</updated>
+    <updated>2026-07-05T09:04:19.650Z</updated>
   </entry>
   <entry>
     <author>
@@ -356,7 +356,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、ハードウェア ベースのセキュリティ機能の CET (Control-flow Enforcement Technology) が有効な場合、SCOM エージェントのプロセスが短時間でクラッシュする既知の問題の対処方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM エージェント サーバーの CET (Control-flow Enforcement Technology) 無効化について</title>
-    <updated>2026-07-05T08:50:48.964Z</updated>
+    <updated>2026-07-05T09:04:19.552Z</updated>
   </entry>
   <entry>
     <author>
@@ -377,7 +377,7 @@
 <p>本日は System Center Virtual Machine Manager （以後、SCVMM）で管理している VM を強制削除]]>
     </summary>
     <title>VM の強制削除および再登録</title>
-    <updated>2026-07-05T08:50:49.120Z</updated>
+    <updated>2026-07-05T09:04:19.709Z</updated>
   </entry>
   <entry>
     <author>
@@ -398,6 +398,6 @@
 <p>本日は System Center Operations Manager（以下、SCOM） に採取されたパフォーマンス カウンターの情報]]>
     </summary>
     <title>パフォーマンス データを DB から取得する方法</title>
-    <updated>2026-07-05T08:50:49.002Z</updated>
+    <updated>2026-07-05T09:04:19.590Z</updated>
   </entry>
 </feed>
