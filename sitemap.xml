@@ -137,6 +137,15 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
+    
+    <lastmod>2026-07-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
     
     <lastmod>2026-07-07</lastmod>
@@ -146,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_HealthCheck/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -173,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -182,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -254,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -263,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -389,6 +398,24 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
+    
+    <lastmod>2026-07-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
+    
+    <lastmod>2026-07-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
     
     <lastmod>2026-07-07</lastmod>
@@ -408,24 +435,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
-    
-    <lastmod>2026-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
-    
-    <lastmod>2026-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -562,14 +571,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/SCXAgent/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/SCVMM/</loc>
     <lastmod>2026-07-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/SCVMM/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/SCXAgent/</loc>
     <lastmod>2026-07-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
