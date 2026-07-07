@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_agent_failures/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -317,6 +317,15 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
+    
+    <lastmod>2026-07-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
     
     <lastmod>2026-07-07</lastmod>
@@ -335,7 +344,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -345,15 +354,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
-    
-    <lastmod>2026-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -407,7 +407,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -416,7 +416,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
     
     <lastmod>2026-07-07</lastmod>
     
@@ -640,13 +640,6 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/tags/General/</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/SQL-Server/</loc>
     <lastmod>2026-07-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
