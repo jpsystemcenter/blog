@@ -4,7 +4,7 @@ date: 2022-02-16 12:00:00
 tags:
   - General
   - HowTo
-  - SQL Server
+  - データベース
 disableDisclaimer: false
 ---
 

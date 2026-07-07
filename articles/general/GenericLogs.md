@@ -3,8 +3,8 @@ title: System Center 製品で使用される汎用的なログ採取手順
 date: 2026-06-09 12:00:00
 tags:
   - General
-  - Troubleshoot
-  - SQL Server
+  - トラブルシューティング
+  - データベース
   - ネットワーク
 disableDisclaimer: false
 ---
