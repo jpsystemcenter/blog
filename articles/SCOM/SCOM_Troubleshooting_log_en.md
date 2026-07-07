@@ -3,9 +3,8 @@ title: Common Log Collection Methods Used in SCOM
 date: 2026-05-15 00:00:00
 tags:
   - SCOM
-  - Operations Manager
-  - Troubleshoot
   - Troubleshooting
+  - トラブルシューティング
   - Log Collection
 ---
 

@@ -3,7 +3,7 @@ title: SCVMM でライブ マイグレーションをサポートする WORKGROU
 date: 2026-06-26 09:00:00
 tags:
   - SCVMM
-  - Troubleshoot
+  - トラブルシューティング
 ---
 
 

@@ -3,7 +3,8 @@ title: SCOM で収集した ESENT イベント ログの説明が文字化けす
 date: 2026-06-22 09:00:00
 tags:
   - SCOM
-  - Trubleshooting
+  - トラブルシューティング
+  - モニター
 ---
 
 皆様こんにちは、System Center サポート チームです。

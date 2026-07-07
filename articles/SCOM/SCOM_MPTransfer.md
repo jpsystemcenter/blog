@@ -3,6 +3,7 @@ title: SCOM 管理パック移行による別環境への設定移行
 date: 2022-08-23 12:00:00
 tags:
   - SCOM
+  - HowTo
   - アップグレード
   - 新環境への移行
 disableDisclaimer: false

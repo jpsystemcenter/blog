@@ -3,8 +3,8 @@ title: SCOM 2012 R2 エージェントのアンインストール時のトラブ
 date: 2022-02-04 12:00:00
 tags:
   - SCOM
-  - Troubleshoot
-  - Agent
+  - トラブルシューティング
+  - SCOM エージェント
 disableDisclaimer: false
 ---
 

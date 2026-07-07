@@ -3,7 +3,7 @@ title: SCOM 2019 以降で Windows 検出ウィザードで検出失敗
 date: 2022-08-03 15:00:00
 tags:
   - SCOM
-  - Troubleshoot
+  - トラブルシューティング
 ---
 
 <!-- more -->

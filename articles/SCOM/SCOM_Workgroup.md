@@ -3,6 +3,7 @@ title: WORKGROUP コンピューターの管理方法について
 date: 2023-07-21 17:00:00
 tags:
   - SCOM
+  - HowTo
   - アップグレード
   - 新環境への移行
 ---

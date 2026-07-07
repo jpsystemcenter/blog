@@ -4,8 +4,8 @@ date: 2022-01-12 12:00:00
 tags:
   - SCVMM
   - HowTo
-  - Agent
-  - Library Server
+  - SCVMM エージェント
+  - ライブラリ サーバー
 disableDisclaimer: false
 ---
 

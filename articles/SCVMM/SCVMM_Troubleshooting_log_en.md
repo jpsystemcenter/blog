@@ -4,7 +4,7 @@ date: 2026-05-25 13:00:00
 tags:
   - SCVMM
   - Troubleshoot
-  - Troubleshooting
+  - トラブルシューティング
   - Log Collection
 ---
 

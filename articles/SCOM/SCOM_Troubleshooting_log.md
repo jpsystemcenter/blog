@@ -3,8 +3,6 @@ title: SCOM で使用する一般的なログ収集方法
 date: 2025-01-03 17:00:00
 tags:
   - SCOM
-  - Operations Manager
-  - Troubleshoot
   - トラブルシューティング
   - ログ収集
 ---

@@ -3,7 +3,7 @@ title: VM の強制削除および再登録
 date: 2024-03-24 22:00:00
 tags:
   - SCVMM
-  - Troubleshoot
+  - トラブルシューティング
   - VM の強制削除および再登録
 ---
 

@@ -3,8 +3,8 @@ title: SCOM でメモリ使用率を監視する方法
 date: 2024-10-31 12:00:00
 tags:
   - SCOM
-  - howto
-  - スクリプト監視
+  - HowTo
+  - モニター
 disableDisclaimer: false
 ---
 

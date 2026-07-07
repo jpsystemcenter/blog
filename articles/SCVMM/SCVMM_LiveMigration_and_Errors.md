@@ -4,7 +4,7 @@ date: 2024-04-01 17:20:00
 tags:
   - SCVMM
   - HowTo
-  - Migration
+  - マイグレーション
 disableDisclaimer: false
 ---
 

@@ -3,8 +3,8 @@ title: UNIX/Linuxログファイルの監視をカスタマイズして、個別
 date: 2022-11-28 12:00:00
 tags:
   - SCOM
-  - Operations Manager
-  - ログ監視
+  - HowTo
+  - モニター
 ---
 
 <!-- more -->

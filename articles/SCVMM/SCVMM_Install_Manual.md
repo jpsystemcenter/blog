@@ -4,6 +4,7 @@ date: 2024-09-16 10:00:00
 tags:
   - SCVMM
   - インストール
+  - HowTo
 ---
 
 皆様こんにちは、System Center サポートチームの 石原 です。

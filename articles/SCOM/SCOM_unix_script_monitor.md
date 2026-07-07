@@ -3,10 +3,8 @@ title: スクリプト監視の設定手順 - UNIX/Linux 編
 date: 2022-10-31 18:00:00
 tags:
   - SCOM
-  - Operations Manager
-  - スクリプト
-  - スクリプト監視
-  - スクリプト実行
+  - モニター
+  - HowTo
 ---
 
 皆様こんにちは、System Center サポートチームの 石原 です。

@@ -4,8 +4,7 @@ date: 2022-07-07 12:00:00
 tags:
   - SCVMM
   - HowTo
-  - SCVMM Server
-  - Job
+  - ジョブ履歴
 disableDisclaimer: false
 ---
 

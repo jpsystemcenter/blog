@@ -4,8 +4,9 @@ date: 2026-07-06 09:00:00
 tags:
   - SCOM
   - HowTo
+  - インストール
   - SCOM サーバーの構成
-  - Database
+  - データベース
 ---
 
 皆様こんにちは、System Center サポートチームの 石原 です。 

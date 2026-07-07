@@ -3,7 +3,8 @@ title: SCOM の各種キャッシュクリアの手順
 date: 2023-08-02 17:00:00
 tags:
   - SCOM
-  - Trouble
+  - トラブルシューティング
+  - HowTo
 ---
 
 皆様こんにちは、System Center サポートチームの 石原 です。

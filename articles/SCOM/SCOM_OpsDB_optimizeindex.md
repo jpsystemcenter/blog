@@ -3,9 +3,8 @@ title: SCOM OperationsManager データベースの unused 領域開放手順
 date: 2024-11-01 12:00:00
 tags:
   - SCOM
-  - Trouble
-  - Database
-  - OperationsManager
+  - トラブルシューティング
+  - データベース
 disableDisclaimer: false
 ---
 

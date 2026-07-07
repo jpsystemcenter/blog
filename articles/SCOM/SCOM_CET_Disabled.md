@@ -3,7 +3,7 @@ title: SCOM エージェント サーバーの CET (Control-flow Enforcement Tec
 date: 2024-03-26 17:00:00
 tags:
   - SCOM
-  - Trouble
+  - トラブルシューティング
 ---
 
 皆様こんにちは、System Center サポートチームの 石原 です。

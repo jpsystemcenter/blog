@@ -3,7 +3,8 @@ title: SCOM 管理サーバー構築手順 ～ 全画面ショット付き
 date: 2023-01-25 10:00:00
 tags:
   - SCOM
-  - Operations Manager
+  - SCOM サーバーの構成
+  - HowTo
   - インストール
 ---
 
