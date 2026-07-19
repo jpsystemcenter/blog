@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_WGClusterIssue/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -65,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_error_makeVMfromtemplete/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_WGClusterIssue/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -101,24 +101,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
-    
-    <lastmod>2026-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_SCOM_Monitor/</loc>
-    
-    <lastmod>2026-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
     
     <lastmod>2026-07-19</lastmod>
@@ -137,6 +119,24 @@
   </url>
   
   <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
+    
+    <lastmod>2026-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_SCOM_Monitor/</loc>
+    
+    <lastmod>2026-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
     
     <lastmod>2026-07-19</lastmod>
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_HealthCheck/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_DeleteWriteLock/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_HealthCheck/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -191,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -353,7 +353,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -362,7 +362,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ManagementPacks/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_MPTransfer/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -389,15 +389,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/</loc>
-    
-    <lastmod>2026-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
     
     <lastmod>2026-07-19</lastmod>
@@ -408,6 +399,15 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
+    
+    <lastmod>2026-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
