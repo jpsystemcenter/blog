@@ -101,15 +101,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
-    
-    <lastmod>2026-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</loc>
     
     <lastmod>2026-07-19</lastmod>
@@ -137,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -146,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_HealthCheck/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Install_Manual/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -164,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Conversion/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_HealthCheck/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -173,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Conversion/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -192,6 +183,15 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/scxagent_install_uninstall/</loc>
+    
+    <lastmod>2026-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_About/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_highmemory_MonitoringHost/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_construction/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -380,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -389,7 +389,16 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Install_Manual/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/</loc>
+    
+    <lastmod>2026-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -416,7 +425,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_2012R2_Uninstall-TroubleCase/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_ESENT_EVENT_LOG/</loc>
     
     <lastmod>2026-07-19</lastmod>
     
@@ -425,16 +434,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_AccessError_0x00000005/</loc>
-    
-    <lastmod>2026-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_Install_Manual/</loc>
     
     <lastmod>2026-07-19</lastmod>
     

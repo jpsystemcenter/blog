@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/003.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/004.png">
 <meta property="article:published_time" content="2023-03-29T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-19T04:26:55.780Z">
+<meta property="article:modified_time" content="2026-07-19T05:21:04.587Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCVMM">
 <meta property="article:tag" content="トラブルシューティング">
@@ -180,7 +180,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+eb45ec22-8b2f-59c9-af8d-da5646ee0fff%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Troubleshooting_log%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/" data-id="cuidRYCIMOuLtnxxaoCWauXnu" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/" data-id="cuidOWAUDWTGxIWPIGXbNl8lD" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -297,17 +297,17 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
 <ol>
 <li>SCVMM 管理サーバーに管理者権限を持つユーザーでサインインします。</li>
 <li>C ドライブ直下に C:\temp フォルダーを作成します。（既に存在する場合は不要です。）</li>
-<li>PowerShell Script “<a href="Get-SCVMM-Environment-Data.zip">Get-SCVMM-Environment-Data.zip</a>“ をダウンロードし、SCVMM 管理サーバー上の任意のフォルダーへ保存して解凍します。</li>
+<li>PowerShell スクリプト “<a href="Get-SCVMM-Environment-Data.zip">Get-SCVMM-Environment-Data.zip</a>“ をダウンロードし、SCVMM 管理サーバー上の任意のフォルダーへ保存して解凍します。</li>
 <li>スタートメニューより [Virtual Machine Manager Command Shell] を実行します。</li>
-<li>Script を解凍したフォルダーへ移動し、以下のコマンドを実行します。</li>
+<li>スクリプトを解凍したフォルダーへ移動し、以下のコマンドを実行します。</li>
 </ol>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\Get-SCVMM-Environment-Data.ps1</span><br></pre></td></tr></table></figure>
 <ol start="6">
 <li>SCVMM 管理サーバーの FQDN (例：scvmm2025.domain1.local) を入力し、Enter キーを押下します。</li>
-<li>実行完了後、C:\temp 配下に “SCVMM_Data_YYYYMMDD-HHMMSS.zip” が出力されます。</li>
-<li>出力された「SCVMM_Data_YYYYMMDD-HHMMSS.zip」を弊社までお送りください。<br> <img src="009.png"></li>
+<li>実行完了後、C:\temp 配下に「SCVMM_Data_YYYYMMDD-HHMMSS.zip」が出力されます。</li>
+<li>出力された「SCVMM_Data_YYYYMMDD-HHMMSS.zip」を弊社までお送りください。</li>
 </ol>
-<p>※ 補足<br>本 Script では、SCVMM サーバー情報、管理対象コンピューター情報、ストレージ情報、ネットワーク情報等を取得し、ZIP ファイルとして出力します。</p>
+<p>※ 実行例<br>本スクリプトをでは、SCVMM サーバー情報、管理対象コンピューター情報、ストレージ情報、ネットワーク情報等を取得し、ZIP ファイルとして出力します。<br><img src="009.png"></p>
 <h2 id="No-4-クラスター-ホスト-仮想マシンのプロパティ画面"><a href="#No-4-クラスター-ホスト-仮想マシンのプロパティ画面" class="headerlink" title="[No.4 クラスター&#x2F;ホスト&#x2F;仮想マシンのプロパティ画面]"></a>[No.4 クラスター&#x2F;ホスト&#x2F;仮想マシンのプロパティ画面]</h2><p>SCVMM で管理しているクラスターやホスト、仮想マシンでステータス異常などの警告が発生している場合、発生している警告と設定内容の確認のために該当のプロパティ画面の画面ショットをお送りいただいております。<br>各情報の取得方法は下記の通りです。<br><br><b>■ 取得手順</b></p>
 <ol>
 <li>SCVMM コンソールにログインします。</li>
