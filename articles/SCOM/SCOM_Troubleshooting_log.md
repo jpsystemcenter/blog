@@ -95,21 +95,24 @@ order by [Alert].Alert_xxxx.RaisedDateTime desc
 5. CSV 形式で出力したファイルを弊社までお寄せください。
 
 ## 環境情報
-SCOM に登録されている管理サーバーや監視対象サーバーの情報を一覧で取得できます。
-各種問題調査を行う際に、これらのコマンドで出力される結果の情報が、調査の早期解決に至る場合がございます。
+問題が発生している環境やご利用状況を把握するため、SCOM 環境の構成情報を取得させていただいております。
+簡易的に情報を取得できる PowerShell Script をご用意しておりますので、以下の手順で情報を取得し、出力された ZIP ファイルをご提供ください。
 
-1. SCOM 管理サーバーに、SCOM 管理者権限を持つアカウントでログインします。
-2. 事前に、C ドライブの直下に “temp” という名前のフォルダを作成します。
-3. [スタート] メニューより [Operations Manager Shell] を実行します。
-4. 以下のコマンドを実行します。
+1. SCOM 管理サーバーに、SCOM 管理者権限を持つアカウントでサインインします。
+2. C ドライブ直下に C:\temp フォルダーを作成します。（既に存在する場合は不要です。）
+3. PowerShell スクリプト "[Get-SCOM-Environment-Data.zip](Get-SCOM-Environment-Data.zip)"をダウンロードし、SCOM 管理サーバー上の任意のフォルダーへ保存して解凍します。
+4. [スタート] メニューより [Operations Manager Shell] を実行します。
+5. スクリプトを解凍したフォルダーへ移動し、以下のコマンドを実行します。
 ```
-Get-SCOMManagementServer | export-csv -path "c:/temp/SCOMMS.csv" -encoding UTF8
-Get-SCOMGatewayManagementServer | export-csv -path "c:/temp/Gateway.csv" -encoding UTF8
-Get-scomagent | export-csv -path "c:/temp/agents.csv" -encoding UTF8
-Get-scxagent | export-csv -path "C:\temp\SCXAgent.csv" -encoding utf8
-Get-SCOMAgentlessManagedComputer | export-csv -path "C:\temp\Agentless.csv" -encoding utf8
+.\Get-SCOM-Environment-Data.ps1
 ```
-5. temp フォルダに出力された各種 CSV を個別に、もしくは temp フォルダの圧縮ファイルを弊社までお寄せください。
+6. 実行完了後、C:\temp 配下に「SCOM_Data_YYYYMMDD-HHMMSS.zip」が出力されます。
+7. 出力された「SCOM_Data_YYYYMMDD-HHMMSS.zip」を弊社までお送りください。
+
+※ 実行例
+本スクリプトをでは、SCOM サーバー情報、管理対象コンピューター情報、直近のアラート情報などを取得し、ZIP ファイルとして出力します。
+![](003.png)
+
 
 ## インストールログ
 インストールログの調査は、SCOM のインストールやエージェントのプッシュインストール等インストールに関する操作が正常に行えない場合に調査する資料となります。
@@ -224,22 +227,6 @@ FormatTracing.cmd R
 参考:
 [診断トレースを使用する - Operations Manager | Microsoft Learn](https://docs.microsoft.com/ja-jp/system-center/scom/manage-overview-management-pack?view=sc-om-2022)
 (SCOM 診断ログについて記載された弊社ドキュメントです。)
-
-
-## SCOM 環境情報
-SCOM のトラブルシューティングでは、SCOM 管理サーバー・SCOM エージェントのバージョン、更新プログラム ロールアップのバージョン、起動状態などを正確に把握する必要があります。
-これらの情報は Operations Manager Shell を利用して、CSV 形式で一覧として取得します。
-1. SCOM 管理サーバー、SCOM 管理者権限を持つアカウントでログインします。
-2. 事前に、C ドライブの直下に “temp” という名前のフォルダを作成します。
-3. [スタート] メニューより [Operations Manager Shell] を実行します。
-4. 以下のコマンドを実行します。
-```
-Get-SCOMManagementServer | export-csv -path "c:/temp/SCOMManagementServer.csv" -encoding UTF8
-Get-SCOMAgent | export-csv -path "c:/temp/SCOMAgent.csv" -encoding UTF8
-Get-SCXAgent | export-csv -path "c:/temp/SCXAgent.csv" -encoding UTF8
-```
-5. 出力された SCOMManagementServer.csv, SCOMAgent.csv, SCXAgent.csv を弊社までお寄せください。
-
 
 ## システム情報
 SCOM のトラブルシューティングでは、サーバー自身の情報 (Windows Server のバージョン、インストールされたソフトウェア、サービス一覧など) が必要になることがあります。
