@@ -1,5 +1,5 @@
 ﻿---
-title: SCOM 2025 を SQL Server 2025 で構成するする際の注意点
+title: SCOM 2025 を SQL Server 2025 で構成する際の注意点
 date: 2026-07-06 09:00:00
 tags:
   - SCOM
