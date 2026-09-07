@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Japan System Center Support</rights>
   <subtitle>日本マイクロソフトの System Center に関するサポート情報のブログです。</subtitle>
   <title>Japan System Center Support Blog</title>
-  <updated>2026-09-07T11:07:11.461Z</updated>
+  <updated>2026-09-07T11:17:19.881Z</updated>
   <entry>
     <author>
       <name>Japan System Center Support</name>
@@ -18,16 +18,16 @@
     <category term="HowTo" scheme="https://jpsystemcenter.github.io/blog/tags/HowTo/"/>
     <category term="SCVMM" scheme="https://jpsystemcenter.github.io/blog/tags/SCVMM/"/>
     <content>
-      <![CDATA[<h2 id="皆様こんにちは、System-Center-サポートチームの-石原-です。今回は、SCVMM-テンプレートを用いた仮想マシンの展開方法についてご紹介します。"><a href="#皆様こんにちは、System-Center-サポートチームの-石原-です。今回は、SCVMM-テンプレートを用いた仮想マシンの展開方法についてご紹介します。" class="headerlink" title="皆様こんにちは、System Center サポートチームの 石原 です。今回は、SCVMM テンプレートを用いた仮想マシンの展開方法についてご紹介します。"></a>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM テンプレートを用いた仮想マシンの展開方法についてご紹介します。</h2><span id="more"></span><h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>Hyper-V 環境で同じような構成の仮想マシンを複数展開する場合、SCVMM のテンプレート機能を利用すると、展開作業を効率化できます。以下の通り、Windows VM と Linux VM では、テンプレートの作成手順が異なります。</p><h3 id="●-Windows-VM-の場合"><a href="#●-Windows-VM-の場合" class="headerlink" title="● Windows VM の場合"></a>● Windows VM の場合</h3><ol><li>テンプレート化する仮想マシンを作成し、必要な設定やアプリケーションを導入します。</li><li>仮想マシンをシャットダウンし、SCVMM コンソールからテンプレートとして登録します。</li><li>登録したテンプレートから、新しい仮想マシンを展開します。</li></ol><h3 id="●-Linux-系-VM-の場合"><a href="#●-Linux-系-VM-の場合" class="headerlink" title="● Linux 系 VM の場合"></a>● Linux 系 VM の場合</h3><ol><li>テンプレート化する仮想マシンを作成し、必要な設定やアプリケーションを導入します。</li><li>仮想マシンに <strong>Linux 用 VMM ゲスト エージェント</strong>をインストールし、シャットダウンします。</li><li>仮想マシンをライブラリに保管します。</li><li>SCVMM コンソールからテンプレートとして登録します。</li><li>登録したテンプレートから、新しい仮想マシンを展開します。</li></ol><h2 id="SCVMM-のサポート-OS-について"><a href="#SCVMM-のサポート-OS-について" class="headerlink" title="SCVMM のサポート OS について"></a>SCVMM のサポート OS について</h2><p>SCVMM における仮想マシンのサポートは、「仮想マシンの管理」と「作成・テンプレート化」の 2 つの観点に分けられます。</p><h3 id="①-仮想マシンの管理"><a href="#①-仮想マシンの管理" class="headerlink" title="① 仮想マシンの管理"></a>① 仮想マシンの管理</h3><p>SCVMM では、サポート対象の Hyper-V ホストまたは VMware ESXi ホスト上で動作する仮想マシンを管理できます。<br>主な管理操作には、状態確認、設定変更、起動・停止、ライブ マイグレーションなどがあります。ホスト側でサポートされるゲスト OS や仮想アプライアンスは、基本的に SCVMM の管理対象となります。</p><p>詳細は、以下の公開情報をご確認ください。</p><ul><li><a href="https://learn.microsoft.com/ja-jp/system-center/vmm/system-requirements?view=sc-vmm-2025#vms-in-the-vmm-fabric">VMM のシステム要件 - VMM ファブリック内の VM</a><br><img src="001.png"></li></ul><h3 id="②-仮想マシンの作成・テンプレート化"><a href="#②-仮想マシンの作成・テンプレート化" class="headerlink" title="② 仮想マシンの作成・テンプレート化"></a>② 仮想マシンの作成・テンプレート化</h3><p>SCVMM から仮想マシンを作成、テンプレート化する場合は、対象のゲスト OS が SCVMM のサポート対象である必要があります。<br>特に Linux VM では、Linux ディストリビューションが <strong>Linux 用 VMM ゲスト エージェント</strong>のサポート対象であることをご確認ください。サポート対象外の OS では、テンプレートの作成や展開が正常に完了しない可能性があります。</p><p>サポート対象の Linux OS につきましては、以下の公開情報をご確認ください。</p><ul><li><a href="https://learn.microsoft.com/ja-jp/system-center/vmm/whats-new-in-vmm?view=sc-vmm-2025#support-for-the-latest-linux-guest-operating-systems">VMM の新機能</a><br><img src="002.png"></li></ul><p>サポート対象の Linux OS は、Update Rollup で追加される場合があります。ご利用の SCVMM バージョンに対応する最新のリリース ノートもご確認ください。<br>2026 年 9 月現在、SCVMM 2025 の最新リリースは Update Rollup 1 です。</p><ul><li><a href="https://support.microsoft.com/ja-jp/servicing/management-tools/virtual-machine-manager/update/2025/09/update-rollup-1-for-system-center-2025-virtual-machine-manager">Update Rollup 1 for System Center 2025 Virtual Machine Manager</a><br><img src="003.png"></li></ul><hr><h2 id="テンプレートの作成手順と展開手順について"><a href="#テンプレートの作成手順と展開手順について" class="headerlink" title="テンプレートの作成手順と展開手順について"></a>テンプレートの作成手順と展開手順について</h2><p>SCVMM 2025 UR1 にてサポート対象に追加された RHEL10 を例に、テンプレートの作成手順と展開手順をご紹介します。</p><h3 id="１．SCVMM-コンソールにて-RHEL10-の仮想マシンを作成"><a href="#１．SCVMM-コンソールにて-RHEL10-の仮想マシンを作成" class="headerlink" title="１．SCVMM コンソールにて RHEL10 の仮想マシンを作成"></a>１．SCVMM コンソールにて RHEL10 の仮想マシンを作成</h3><p>SCVMM コンソールから、仮想マシンの作成ウィザードを起動します。<br><img src="004.png"></p><blockquote><p><strong>注意</strong></p><p>Linux VM で第 2 世代を選択する場合、セキュア ブート テンプレートには <code>MicrosoftUEFICertificateAuthority</code> を指定します。</p><ul><li><a href="https://learn.microsoft.com/ja-jp/windows-server/virtualization/hyper-v/generation-2-virtual-machine-security-features#secure-boot">Hyper-V 第 2 世代仮想マシンのセキュリティ機能</a><br><img src="005.png"></li></ul></blockquote><p>RHEL 10 は SCVMM 2025 UR1 からサポート対象となっているため、ゲスト OS の一覧から選択できます。<br><img src="006.png"></p><p>空の仮想マシンが作成されたら、RHEL 10 の ISO イメージをマウントして OS をインストールします。<br><img src="007.png"></p><p>今回はマスター VM の動作確認用として、デスクトップにテキスト ファイルを配置しておきます。<br><img src="008.png"></p><h3 id="２．Linux-用-VMM-ゲスト-エージェント-をインストール"><a href="#２．Linux-用-VMM-ゲスト-エージェント-をインストール" class="headerlink" title="２．Linux 用 VMM ゲスト エージェント をインストール"></a>２．Linux 用 VMM ゲスト エージェント をインストール</h3><p>テンプレート化するマスター VM の準備が完了したら、Linux 用 VMM ゲスト エージェントをインストールします。</p><p>Linux 用 VMM ゲスト エージェントのインストール用ファイルは、SCVMM 管理サーバーの以下のフォルダーに格納されています。<br>使用するファイルは [install] ファイルと [scvmmguestagent.***.x64.tar] ファイルの２つのファイルです。</p><pre><code>C:\Program Files\Microsoft System Center\Virtual Machine Manager\agents\Linux</code></pre><p>ゲスト エージェントのモジュールは Update Rollup ごとに異なるため、SCVMM 管理サーバーのバージョンに対応するファイルを使用してください。SCVMM 2025 UR1 では、[scvmmguestagent.1.0.4.1032.x64.tar] を使用します。</p><p>これらのファイルを Linux VM にコピーし、実行権限を付与した後、次のコマンドでインストールします。</p><pre><code>sudo chmod +x installsudo ./install scvmmguestagent.1.0.0.544.x64.tar</code></pre><p><img src="009.png"></p><p>念のため、一度 OS を再起動し、以下のコマンドでゲスト エージェントの状態を確認します。<br>正常に起動していた場合、テンプレート化の準備は完了です。</p><pre><code>sudo systemctl status scvmmguestagent</code></pre><p><img src="010.png"></p><ul><li><a href="https://learn.microsoft.com/ja-jp/system-center/vmm/vm-linux?view=sc-vmm-2025#install-the-vmm-guest-agent">ご参考：VMM ゲスト エージェントのインストール</a></li></ul><h3 id="３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管"><a href="#３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管" class="headerlink" title="３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管"></a>３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管</h3><p>仮想マシンをシャットダウンした後、対象の仮想マシンをホストする Hyper-V ホストにログインし、仮想ハード ディスクを SCVMM のライブラリ共有にコピーします。<br><img src="011.png"></p><p>ライブラリ共有にコピーされたことを確認します。<br><img src="012.png"></p><h3 id="４．SCVMM-コンソールからテンプレートとして登録"><a href="#４．SCVMM-コンソールからテンプレートとして登録" class="headerlink" title="４．SCVMM コンソールからテンプレートとして登録"></a>４．SCVMM コンソールからテンプレートとして登録</h3><p>SCVMM コンソールで仮想ディスクを選択し、VM テンプレートの作成を開始します。<br><img src="013.png"></p><p>ハードウェア構成や OS の設定を確認し、必要に応じて変更したうえでテンプレートを作成します。<br><img src="014.png"></p><p>以上で、VM テンプレートの作成は完了です。<br><img src="015.png"></p><h3 id="５．テンプレートから新しい仮想マシンを展開"><a href="#５．テンプレートから新しい仮想マシンを展開" class="headerlink" title="５．テンプレートから新しい仮想マシンを展開"></a>５．テンプレートから新しい仮想マシンを展開</h3><p>SCVMM コンソールから仮想マシンの作成ウィザードを起動し、作成したテンプレートを選択します。<br><img src="016.png"></p><p>ハードウェア構成や OS の設定には、テンプレートの設定を引き継ぐことができます。必要に応じて、仮想マシン名やネットワーク設定などを変更します。ここでは、コンピューター名を「VMbyTemplate」に設定します。<br><img src="017.png"></p><p>ウィザードを完了すると、テンプレートから新しい仮想マシンが展開されます。<br><img src="018.png"></p><p>展開された仮想マシンを起動します。<br><img src="019.png"></p><p>仮想マシンにログインし、コンピューター名が「VMbyTemplate」に設定されていることを確認します。また、マスター VM で作成したテキストファイルが引き継がれていることも確認できます。<br><img src="020.png"></p><hr><h2 id="テンプレート仮想マシンに関する補足情報"><a href="#テンプレート仮想マシンに関する補足情報" class="headerlink" title="テンプレート仮想マシンに関する補足情報"></a>テンプレート仮想マシンに関する補足情報</h2><p>SCVMMによるテンプレート化では、仮想マシン内の情報を初期化する処理は行われません。このため、マスター VM に含まれる情報のうち、展開後の仮想マシンへ引き継ぐ必要がないものは、あらかじめ削除しておくことを推奨します。<br>また、Linux VMをテンプレート化した場合、Linux用VMMゲストエージェントはインストールされた状態で引き継がれます。テンプレートから展開した仮想マシンで不要な場合は、手動で削除してください。</p><hr><p>以上で、SCVMM テンプレートを用いた仮想マシンの展開方法のご紹介は終了です。<br>本記事が、仮想マシンの展開の効率化の一助となれば幸いです。</p>]]>
+      <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM テンプレートを用いた仮想マシンの展開方法についてご紹介します。<br><br></p><span id="more"></span><h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>Hyper-V 環境で同じような構成の仮想マシンを複数展開する場合、SCVMM のテンプレート機能を利用すると、展開作業を効率化できます。以下の通り、Windows VM と Linux VM では、テンプレートの作成手順が異なります。</p><h3 id="●-Windows-VM-の場合"><a href="#●-Windows-VM-の場合" class="headerlink" title="● Windows VM の場合"></a>● Windows VM の場合</h3><ol><li>テンプレート化する仮想マシンを作成し、必要な設定やアプリケーションを導入します。</li><li>仮想マシンをシャットダウンし、SCVMM コンソールからテンプレートとして登録します。</li><li>登録したテンプレートから、新しい仮想マシンを展開します。</li></ol><h3 id="●-Linux-系-VM-の場合"><a href="#●-Linux-系-VM-の場合" class="headerlink" title="● Linux 系 VM の場合"></a>● Linux 系 VM の場合</h3><ol><li>テンプレート化する仮想マシンを作成し、必要な設定やアプリケーションを導入します。</li><li>仮想マシンに <strong>Linux 用 VMM ゲスト エージェント</strong>をインストールし、シャットダウンします。</li><li>仮想マシンをライブラリに保管します。</li><li>SCVMM コンソールからテンプレートとして登録します。</li><li>登録したテンプレートから、新しい仮想マシンを展開します。</li></ol><h2 id="SCVMM-のサポート-OS-について"><a href="#SCVMM-のサポート-OS-について" class="headerlink" title="SCVMM のサポート OS について"></a>SCVMM のサポート OS について</h2><p>SCVMM における仮想マシンのサポートは、「仮想マシンの管理」と「作成・テンプレート化」の 2 つの観点に分けられます。</p><h3 id="①-仮想マシンの管理"><a href="#①-仮想マシンの管理" class="headerlink" title="① 仮想マシンの管理"></a>① 仮想マシンの管理</h3><p>SCVMM では、サポート対象の Hyper-V ホストまたは VMware ESXi ホスト上で動作する仮想マシンを管理できます。<br>主な管理操作には、状態確認、設定変更、起動・停止、ライブ マイグレーションなどがあります。ホスト側でサポートされるゲスト OS や仮想アプライアンスは、基本的に SCVMM の管理対象となります。</p><p>詳細は、以下の公開情報をご確認ください。</p><ul><li><a href="https://learn.microsoft.com/ja-jp/system-center/vmm/system-requirements?view=sc-vmm-2025#vms-in-the-vmm-fabric">VMM のシステム要件 - VMM ファブリック内の VM</a><br><img src="001.png"></li></ul><h3 id="②-仮想マシンの作成・テンプレート化"><a href="#②-仮想マシンの作成・テンプレート化" class="headerlink" title="② 仮想マシンの作成・テンプレート化"></a>② 仮想マシンの作成・テンプレート化</h3><p>SCVMM から仮想マシンを作成、テンプレート化する場合は、対象のゲスト OS が SCVMM のサポート対象である必要があります。<br>特に Linux VM では、Linux ディストリビューションが <strong>Linux 用 VMM ゲスト エージェント</strong>のサポート対象であることをご確認ください。サポート対象外の OS では、テンプレートの作成や展開が正常に完了しない可能性があります。</p><p>サポート対象の Linux OS につきましては、以下の公開情報をご確認ください。</p><ul><li><a href="https://learn.microsoft.com/ja-jp/system-center/vmm/whats-new-in-vmm?view=sc-vmm-2025#support-for-the-latest-linux-guest-operating-systems">VMM の新機能</a><br><img src="002.png"></li></ul><p>サポート対象の Linux OS は、Update Rollup で追加される場合があります。ご利用の SCVMM バージョンに対応する最新のリリース ノートもご確認ください。<br>2026 年 9 月現在、SCVMM 2025 の最新リリースは Update Rollup 1 です。</p><ul><li><a href="https://support.microsoft.com/ja-jp/servicing/management-tools/virtual-machine-manager/update/2025/09/update-rollup-1-for-system-center-2025-virtual-machine-manager">Update Rollup 1 for System Center 2025 Virtual Machine Manager</a><br><img src="003.png"></li></ul><hr><h2 id="テンプレートの作成手順と展開手順について"><a href="#テンプレートの作成手順と展開手順について" class="headerlink" title="テンプレートの作成手順と展開手順について"></a>テンプレートの作成手順と展開手順について</h2><p>SCVMM 2025 UR1 にてサポート対象に追加された RHEL10 を例に、テンプレートの作成手順と展開手順をご紹介します。</p><h3 id="１．SCVMM-コンソールにて-RHEL10-の仮想マシンを作成"><a href="#１．SCVMM-コンソールにて-RHEL10-の仮想マシンを作成" class="headerlink" title="１．SCVMM コンソールにて RHEL10 の仮想マシンを作成"></a>１．SCVMM コンソールにて RHEL10 の仮想マシンを作成</h3><p>SCVMM コンソールから、仮想マシンの作成ウィザードを起動します。<br><img src="004.png"></p><blockquote><p><strong>注意</strong></p><p>Linux VM で第 2 世代を選択する場合、セキュア ブート テンプレートには <code>MicrosoftUEFICertificateAuthority</code> を指定します。</p><ul><li><a href="https://learn.microsoft.com/ja-jp/windows-server/virtualization/hyper-v/generation-2-virtual-machine-security-features#secure-boot">Hyper-V 第 2 世代仮想マシンのセキュリティ機能</a><br><img src="005.png"></li></ul></blockquote><p>RHEL 10 は SCVMM 2025 UR1 からサポート対象となっているため、ゲスト OS の一覧から選択できます。<br><img src="006.png"></p><p>空の仮想マシンが作成されたら、RHEL 10 の ISO イメージをマウントして OS をインストールします。<br><img src="007.png"></p><p>今回はマスター VM の動作確認用として、デスクトップにテキスト ファイルを配置しておきます。<br><img src="008.png"></p><h3 id="２．Linux-用-VMM-ゲスト-エージェント-をインストール"><a href="#２．Linux-用-VMM-ゲスト-エージェント-をインストール" class="headerlink" title="２．Linux 用 VMM ゲスト エージェント をインストール"></a>２．Linux 用 VMM ゲスト エージェント をインストール</h3><p>テンプレート化するマスター VM の準備が完了したら、Linux 用 VMM ゲスト エージェントをインストールします。</p><p>Linux 用 VMM ゲスト エージェントのインストール用ファイルは、SCVMM 管理サーバーの以下のフォルダーに格納されています。<br>使用するファイルは [install] ファイルと [scvmmguestagent.***.x64.tar] ファイルの２つのファイルです。</p><pre><code>C:\Program Files\Microsoft System Center\Virtual Machine Manager\agents\Linux</code></pre><p>ゲスト エージェントのモジュールは Update Rollup ごとに異なるため、SCVMM 管理サーバーのバージョンに対応するファイルを使用してください。SCVMM 2025 UR1 では、[scvmmguestagent.1.0.4.1032.x64.tar] を使用します。</p><p>これらのファイルを Linux VM にコピーし、実行権限を付与した後、次のコマンドでインストールします。</p><pre><code>sudo chmod +x installsudo ./install scvmmguestagent.1.0.0.544.x64.tar</code></pre><p><img src="009.png"></p><p>念のため、一度 OS を再起動し、以下のコマンドでゲスト エージェントの状態を確認します。<br>正常に起動していた場合、テンプレート化の準備は完了です。</p><pre><code>sudo systemctl status scvmmguestagent</code></pre><p><img src="010.png"></p><ul><li><a href="https://learn.microsoft.com/ja-jp/system-center/vmm/vm-linux?view=sc-vmm-2025#install-the-vmm-guest-agent">ご参考：VMM ゲスト エージェントのインストール</a></li></ul><h3 id="３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管"><a href="#３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管" class="headerlink" title="３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管"></a>３．仮想マシンをシャットダウンし、仮想マシンをライブラリに保管</h3><p>仮想マシンをシャットダウンした後、対象の仮想マシンをホストする Hyper-V ホストにログインし、仮想ハード ディスクを SCVMM のライブラリ共有にコピーします。<br><img src="011.png"></p><p>ライブラリ共有にコピーされたことを確認します。<br><img src="012.png"></p><h3 id="４．SCVMM-コンソールからテンプレートとして登録"><a href="#４．SCVMM-コンソールからテンプレートとして登録" class="headerlink" title="４．SCVMM コンソールからテンプレートとして登録"></a>４．SCVMM コンソールからテンプレートとして登録</h3><p>SCVMM コンソールで仮想ディスクを選択し、VM テンプレートの作成を開始します。<br><img src="013.png"></p><p>ハードウェア構成や OS の設定を確認し、必要に応じて変更したうえでテンプレートを作成します。<br><img src="014.png"></p><p>以上で、VM テンプレートの作成は完了です。<br><img src="015.png"></p><h3 id="５．テンプレートから新しい仮想マシンを展開"><a href="#５．テンプレートから新しい仮想マシンを展開" class="headerlink" title="５．テンプレートから新しい仮想マシンを展開"></a>５．テンプレートから新しい仮想マシンを展開</h3><p>SCVMM コンソールから仮想マシンの作成ウィザードを起動し、作成したテンプレートを選択します。<br><img src="016.png"></p><p>ハードウェア構成や OS の設定には、テンプレートの設定を引き継ぐことができます。必要に応じて、仮想マシン名やネットワーク設定などを変更します。ここでは、コンピューター名を「VMbyTemplate」に設定します。<br><img src="017.png"></p><p>ウィザードを完了すると、テンプレートから新しい仮想マシンが展開されます。<br><img src="018.png"></p><p>展開された仮想マシンを起動します。<br><img src="019.png"></p><p>仮想マシンにログインし、コンピューター名が「VMbyTemplate」に設定されていることを確認します。また、マスター VM で作成したテキストファイルが引き継がれていることも確認できます。<br><img src="020.png"></p><hr><h2 id="テンプレート仮想マシンに関する補足情報"><a href="#テンプレート仮想マシンに関する補足情報" class="headerlink" title="テンプレート仮想マシンに関する補足情報"></a>テンプレート仮想マシンに関する補足情報</h2><p>SCVMMによるテンプレート化では、仮想マシン内の情報を初期化する処理は行われません。このため、マスター VM に含まれる情報のうち、展開後の仮想マシンへ引き継ぐ必要がないものは、あらかじめ削除しておくことを推奨します。<br>また、Linux VMをテンプレート化した場合、Linux用VMMゲストエージェントはインストールされた状態で引き継がれます。テンプレートから展開した仮想マシンで不要な場合は、手動で削除してください。</p><hr><p>以上で、SCVMM テンプレートを用いた仮想マシンの展開方法のご紹介は終了です。<br>本記事が、仮想マシンの展開の効率化の一助となれば幸いです。</p>]]>
     </content>
     <id>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Template/</id>
     <link href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Template/"/>
     <published>2026-09-07T10:00:00.000Z</published>
     <summary>
-      <![CDATA[<h2 id="皆様こんにちは、System-Center-サポートチームの-石原-です。今回は、SCVMM-テンプレートを用いた仮想マシンの展開方法についてご紹介します。"><a href="#皆様こんにちは、System-Center-サポートチームの-石原-です。今回は、SCVMM-テンプレートを用いた仮想マシンの展開方法についてご紹介します。" class="headerlink" title="皆様こんにちは、System Center サポートチームの 石原 です。今回は、SCVMM テンプレートを用いた仮想マシンの展開方法についてご紹介します。"></a>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM テンプレートを用いた仮想マシンの展開方法についてご紹介します。</h2>]]>
+      <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM テンプレートを用いた仮想マシンの展開方法についてご紹介します。<br><br></p>]]>
     </summary>
     <title>SCVMM テンプレートを用いた仮想マシンの展開方法</title>
-    <updated>2026-09-07T11:07:11.461Z</updated>
+    <updated>2026-09-07T11:17:19.881Z</updated>
   </entry>
   <entry>
     <author>
@@ -45,7 +45,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理している Hyper-V ホストやクラスターの情報を強制的に削除し、再登録する方法をご紹介します。<br><br></p>]]>
     </summary>
     <title>SCVMM の ホスト情報、クラスター情報の強制削除および再登録</title>
-    <updated>2026-09-07T11:07:11.422Z</updated>
+    <updated>2026-09-07T11:17:19.841Z</updated>
   </entry>
   <entry>
     <author>
@@ -63,15 +63,15 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM 環境が正常に動作しているかを簡易的に確認する方法についてご紹介します。<br><br></p>]]>
     </summary>
     <title>SCVMM 環境の正常性確認について</title>
-    <updated>2026-09-07T11:07:11.417Z</updated>
+    <updated>2026-09-07T11:17:19.837Z</updated>
   </entry>
   <entry>
     <author>
       <name>Japan System Center Support</name>
     </author>
     <category term="SCOM" scheme="https://jpsystemcenter.github.io/blog/tags/SCOM/"/>
-    <category term="HowTo" scheme="https://jpsystemcenter.github.io/blog/tags/HowTo/"/>
     <category term="SCOM サーバーの構成" scheme="https://jpsystemcenter.github.io/blog/tags/SCOM-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%A7%8B%E6%88%90/"/>
+    <category term="HowTo" scheme="https://jpsystemcenter.github.io/blog/tags/HowTo/"/>
     <category term="インストール" scheme="https://jpsystemcenter.github.io/blog/tags/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/"/>
     <category term="データベース" scheme="https://jpsystemcenter.github.io/blog/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/"/>
     <content>
@@ -85,7 +85,7 @@
 <p>System Center Operations Manager 2025 (SCOM 2025) は、データベースとして SQL Server 2017、2019、2022 をサポートしています。また、SCOM 2025 に更新プログラムのロールアップ 1 (UR1) を適用することで、SQL Server 2025 もサポートされます。<br>今回は、SCOM 2025 に UR1 を適用し、SQL Server 2025 を利用する手順についてご紹介します。</p>]]>
     </summary>
     <title>SCOM 2025 を SQL Server 2025 で構成する際の注意点</title>
-    <updated>2026-09-07T11:07:11.357Z</updated>
+    <updated>2026-09-07T11:17:19.777Z</updated>
   </entry>
   <entry>
     <author>
@@ -103,7 +103,7 @@
       <![CDATA[<p>SCVMM における WORKGROUP クラスターのサポート状況をまとめた記事になります。<br><br></p>]]>
     </summary>
     <title>SCVMM でライブ マイグレーションをサポートする WORKGROUP クラスターを管理することができない既知事象のご説明</title>
-    <updated>2026-09-07T11:07:11.524Z</updated>
+    <updated>2026-09-07T11:17:19.943Z</updated>
   </entry>
   <entry>
     <author>
@@ -122,7 +122,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポート チームです。<br>今回は、System Center Operations Manager (SCOM) で Windows Server 2022 または Windows Server 2025 から ESENT イベント ログを収集した際に、SCOM コンソール上でイベントの説明が文字化けして表示される事象についてご紹介します。</p>]]>
     </summary>
     <title>SCOM で収集した ESENT イベント ログの説明が文字化けする事象について</title>
-    <updated>2026-09-07T11:07:11.333Z</updated>
+    <updated>2026-09-07T11:17:19.753Z</updated>
   </entry>
   <entry>
     <author>
@@ -142,7 +142,7 @@
       <![CDATA[<p>本記事では、System Center 製品全般で利用可能なトラブルシューティング用のログ採取手順をまとめています。</p>]]>
     </summary>
     <title>System Center 製品で使用される汎用的なログ採取手順</title>
-    <updated>2026-09-07T11:07:11.538Z</updated>
+    <updated>2026-09-07T11:17:19.958Z</updated>
   </entry>
   <entry>
     <author>
@@ -162,7 +162,7 @@
       <![CDATA[<p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCVMM</title>
-    <updated>2026-09-07T11:07:11.482Z</updated>
+    <updated>2026-09-07T11:17:19.902Z</updated>
   </entry>
   <entry>
     <author>
@@ -182,7 +182,7 @@
       <![CDATA[<p>This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.</p>]]>
     </summary>
     <title>Common Log Collection Methods Used in SCOM</title>
-    <updated>2026-09-07T11:07:11.364Z</updated>
+    <updated>2026-09-07T11:17:19.783Z</updated>
   </entry>
   <entry>
     <author>
@@ -201,7 +201,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCOM を使用して SCVMM 環境を監視する構成手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCOM を用いた SCVMM 環境の監視</title>
-    <updated>2026-09-07T11:07:11.453Z</updated>
+    <updated>2026-09-07T11:17:19.872Z</updated>
   </entry>
   <entry>
     <author>
@@ -221,7 +221,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、SCVMM の運用上オブジェクトに write ロックが発生したことによって、仮想マシンの操作が行えなくなった場合の対処方法をご案内します。<br><br></p>]]>
     </summary>
     <title>write ロックによってジョブの実行が行えなくなる事象の対処方法</title>
-    <updated>2026-09-07T11:07:11.417Z</updated>
+    <updated>2026-09-07T11:17:19.837Z</updated>
   </entry>
   <entry>
     <author>
@@ -239,7 +239,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 保科 です。<br>今回は、はじめて SCVMM をご利用いただく方に向けて、SCVMM とは何ができるのか？という点を説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM の機能紹介</title>
-    <updated>2026-09-07T11:07:11.394Z</updated>
+    <updated>2026-09-07T11:17:19.813Z</updated>
   </entry>
   <entry>
     <author>
@@ -257,7 +257,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で管理しているオンプレミスの Hyper-V 環境を、Azure ポータルから操作できるようにする <strong>「Azure Arc SCVMM」</strong> についてご紹介します。<br><br></p>]]>
     </summary>
     <title>Azure Arc SCVMM の紹介</title>
-    <updated>2026-09-07T11:07:11.395Z</updated>
+    <updated>2026-09-07T11:17:19.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -275,7 +275,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM を用いて VMWare VM を Hyper-V VM に変換する手順について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM を使用した VMware 仮想マシンの Hyper-V 仮想マシンへの変換</title>
-    <updated>2026-09-07T11:07:11.407Z</updated>
+    <updated>2026-09-07T11:17:19.827Z</updated>
   </entry>
   <entry>
     <author>
@@ -295,7 +295,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のデータウェアハウスデータベースのデータ削除手順についてご紹介いたします。</p>]]>
     </summary>
     <title>SCOM OperationsManagerDW データベースの容量削減手順</title>
-    <updated>2026-09-07T11:07:11.356Z</updated>
+    <updated>2026-09-07T11:17:19.775Z</updated>
   </entry>
   <entry>
     <author>
@@ -314,7 +314,7 @@
       <![CDATA[<p>本記事は SCOM でトラブルシューティングを行う際、調査を行うために収集する一般的なログとその取得方法を解説いたします。</p>]]>
     </summary>
     <title>SCOM で使用する一般的なログ収集方法</title>
-    <updated>2026-09-07T11:07:11.362Z</updated>
+    <updated>2026-09-07T11:17:19.782Z</updated>
   </entry>
   <entry>
     <author>
@@ -334,7 +334,7 @@
 <p>今回は、System Center Operations Manager (SCOM) のベース内で増加した unused 領域を開放する手順をご紹介します。</p>]]>
     </summary>
     <title>SCOM OperationsManager データベースの unused 領域開放手順</title>
-    <updated>2026-09-07T11:07:11.356Z</updated>
+    <updated>2026-09-07T11:17:19.775Z</updated>
   </entry>
   <entry>
     <author>
@@ -353,7 +353,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの保科です。<br>本日は、System Center Operations Manager (以後 SCOM と表記します) で、Windows OS のメモリ使用率を監視する方法をご紹介いたします。</p>]]>
     </summary>
     <title>SCOM でメモリ使用率を監視する方法</title>
-    <updated>2026-09-07T11:07:11.356Z</updated>
+    <updated>2026-09-07T11:17:19.775Z</updated>
   </entry>
   <entry>
     <author>
@@ -371,7 +371,7 @@
       <![CDATA[<p>皆様こんにちは、System Center サポートチームの 石原 です。<br>今回は、SCVMM で トラステッド プラットフォーム モジュール (TPM) が有効な仮想マシンを管理する方法について説明します。<br><br></p>]]>
     </summary>
     <title>SCVMM で TPM が有効な仮想マシンを管理する方法</title>
-    <updated>2026-09-07T11:07:11.530Z</updated>
+    <updated>2026-09-07T11:17:19.950Z</updated>
   </entry>
   <entry>
     <author>
@@ -391,6 +391,6 @@
 <p>System Center Virtual Machine Manager（以後 SCVMM）は、複数の Windows Server フェールオーバー クラスター環境を統合管理するシステムです。異なるクラスター間で仮想マシンのライブ マイグレーションが可能になるほか、システム全体で参照可能なファイル置き場 (ライブラリ サーバー) の構築、類似の仮想スイッチの設定を簡易的に反映できる設定 (論理スイッチ) などが利用できます。また、VMWare vCenter と連携することで VMWare VM を Hyper-V VM に移行することができます。<br><br>SCVMM の構成は、IT インフラ環境の規模や運用要件に応じて変わりますが、検証等の目的で簡易的に最短で SCVMM を構築されたいケースがあります。そういったケースに備えて、本記事では、1 台の Windows Server に SCVMM の主コンポーネントの SCVMM 管理サーバーと SCVMM コンソールをインストールして、SCVMM コンソールにサインインできるまでの手順を画面ショット付きで紹介します。</p>]]>
     </summary>
     <title>SCVMM 管理サーバー構築手順 ～ 全画面ショット付き</title>
-    <updated>2026-09-07T11:07:11.427Z</updated>
+    <updated>2026-09-07T11:17:19.846Z</updated>
   </entry>
 </feed>
