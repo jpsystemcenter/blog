@@ -38,4 +38,10 @@ tags:
 dnf install langpacks-en glibc-all-langpacks -y
 ```
 
-
+こちらでも解消されない場合はログを調査する必要がございます。
+[SCVMM で使用する一般的なログ収集方法](https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/) の手順に沿ってログを採取します。
+このシナリオにおいて採取いただく資料は下記でございます。
+- [No.1 トレースログ] (SCVMM サーバーと、仮想マシンをデプロイする Hyper-V ホストを対象に採取します)
+- [No.2 ジョブ一覧]
+- [No.3 SCVMM 環境情報 (SCVMM サーバー情報, ホスト情報, 仮想マシン情報)]
+- [No.7 VMM ゲスト エージェントのログ]
