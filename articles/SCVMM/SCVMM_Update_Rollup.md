@@ -19,6 +19,7 @@ tags:
 各々のバージョンの初期公開時のモジュールを一般公開版 (GA：General Availability) と呼びます。一般公開版のリリース後、機能追加や不具合修正、セキュリティ対策等の更新プログラムは、更新プログラムのロールアップ (UR：Update Rollup) として提供されます。そのため、SCVMM を最新の状態に維持するためには、更新プログラムのロールアップを適用いただく必要があります。
 
 各々のバージョンの 更新プログラムのロールアップのリリース状況は以下サイトをご参照ください。
+　・[SCVMM 2025： System Center Virtual Machine Managerのビルド バージョンをリリースする | Microsoft Learn](https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2025)
 　・[SCVMM 2022： System Center Virtual Machine Managerのビルド バージョンをリリースする | Microsoft Learn](https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2022)
 　・[SCVMM 2019： System Center Virtual Machine Managerのビルド バージョンをリリースする | Microsoft Learn](https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2019)
 　・[SCVMM 2016： System Center Virtual Machine Managerのビルド バージョンをリリースする | Microsoft Learn](https://learn.microsoft.com/ja-jp/system-center/vmm/release-build-versions?view=sc-vmm-2016)
@@ -26,6 +27,7 @@ tags:
 なお、セキュリティ対策以外の更新プログラム (機能追加や不具合修正) は、原則、メインストリーム サポート期間中 (SCVMM 2022, SCVMM 2019 <span style="color: red; ">※2023/11/20 時点</span>) の製品に対して提供されます。延長サポート期間中 (SCVMM 2016 <span style="color: red; ">※2023/11/20 時点</span>) の製品には、セキュリティ対策の更新プログラムのみが提供されます。
 
 各バージョンのサポート状況につきましては以下のサイトをご参照ください。
+　・[System Center 2025 Virtual Machine Manager - Microsoft Lifecycle | Microsoft Learn](https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2025-virtual-machine-manager)
 　・[System Center 2022 Virtual Machine Manager - Microsoft Lifecycle | Microsoft Learn](https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2022-virtual-machine-manager)
 　・[System Center 2019 Virtual Machine Manager - Microsoft Lifecycle | Microsoft Learn](https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2019-virtual-machine-manager)
 　・[System Center 2016 Virtual Machine Manager - Microsoft Lifecycle | Microsoft Learn](https://learn.microsoft.com/ja-jp/lifecycle/products/system-center-2016-virtual-machine-manager)
@@ -114,6 +116,25 @@ UR のモジュールは、Windows インストーラ形式のファイル ( msp
 下記公開情報に記載の通り、基本的にはアプリケーション単位でシャットダウンして、システム全体 (OS) のシャットダウンにつながらないような考慮になっておりますが、可能性という意味では発生し得る点をご認識ください。
 　参考：再起動マネージャーでの Windows インストーラーの使用
 　https://learn.microsoft.com/ja-jp/windows/win32/msi/using-windows-installer-with-restart-manager
+
+
+## UR 適用による SCVMM や Hyper-V ホストへの影響
+1. VMM エージェント未更新による影響:
+SCVMM コンソール、および SCVMM サーバーへのロールアップ適用後、Hyper-V ホストにインストールされている、SCVMM エージェントの更新も合わせて行って頂くことをご推奨しております。
+エージェントの更新が未実施であった場合でも、仮想マシン、Hyper-V ホストの動作自体へ影響はございません。
+※ SCVMM からの操作に失敗する事象はまれに発生しております。
+2. UR 適用対象の OS 再起動の可能性:
+[UR 適用時の OS 再起動の可能性について](#UR-適用時の-OS-再起動の可能性について) 項の通り、SCVMM エージェントの更新にて再起動は原則発生致しませんが、他更新プログラム適用等で再起動待ち状態となっている状況等では再起動が発生する可能性がございます。
+ホスト側で再起動が発生しうるかはログからは判断がつきませんため、念のため、エージェントの更新の前に該当ホスト上の仮想マシンをマイグレーションして頂く等、ご対応頂ければと存じます。
+3. vmms サービスの瞬間的な停止とそれによる VM フェールオーバー発生の可能性:
+SCVMM エージェントのアップデートを実施いただく際、そのサーバー側で vmms サービスが 1 秒程停止し、その後サービスが起動する動作が何度か行われます。
+このサービスは Hyper-V 上で動作する仮想マシンの動作には必須のサービスではございませんので、停止によって仮想マシンへの動作影響は原則として発生いたしません。
+このサービスが停止することで Hyper-V 上の “Hyper-V マネージャー” で仮想マシンを管理いただくことができなくなりますのでご注意ください。
+また、Hyper-V クラスターを構成されている場合、このサービスの停止がトリガーとなってそのノードが使用不可能な状態と判断され、そのノード上で動作する仮想マシンがそれ以外のノードにフェールオーバーする可能性もごくまれにございます。
+通常であれば vmms サービスが 1 秒程度停止する状況ではこのような動作が起こることは非常にまれではございますが、わずかながらに可能性がある点についてもご留意ください。
+なお、この動作は SCVMM エージェントのインストール時にも発生します。
+切り分けのため SCVMM エージェントを入れ替える必要がある、という状況においても vmms サービスの動向にご注意ください。
+
 
 ---
 
