@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/003.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/004.png">
 <meta property="article:published_time" content="2023-03-29T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-20T06:10:58.602Z">
+<meta property="article:modified_time" content="2026-09-07T08:08:03.072Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="SCVMM">
 <meta property="article:tag" content="トラブルシューティング">
@@ -180,7 +180,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+eb45ec22-8b2f-59c9-af8d-da5646ee0fff%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Troubleshooting_log%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Troubleshooting_log.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/" data-id="cuid_IvhhHLBPJP1FYMCcW6Uw" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/" data-id="cuid6qxckUdQsv5-vE96TQQS1" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -227,6 +227,11 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
       <td style="text-align:center">6</td>
       <td><a href="#No-6-イベントログ">イベントログ</a></td>
       <td>不具合動作が発生した時間帯のイベントログを確認して、該当時間の OS や SCVMM の状態を確認します。</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">7</td>
+      <td><a href="#No-7-VMM ゲスト エージェントのログ">VMM ゲスト エージェントのログ</a></td>
+      <td>Linux VM テンプレートから仮想マシンをデプロイできない、デプロイがタイムアウトする現象の調査で使用します。</td>
     </tr>
   </tbody>
 </table>
@@ -331,6 +336,9 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
 <p>作業手順は下記弊社公開ドキュメントに沿って、イベント ログを「evt(x) 形式」と「csv 形式」の両方でエクスポートの実施をお願いします。<br><a href="https://learn.microsoft.com/ja-jp/security-updates/planningandimplementationguide/19871931">監査の管理 ‐ イベント ログの保存 | Microsoft Learn</a></p>
 <p>取得対象のログは下記 7 点でございます。<br>　- Application<br>　- システム<br>　- セキュリティ<br>　- WinRM-Operational （VMM サーバーのみ）(※1)<br>　- WMIActivity-Operational (※1)<br>　- Admin (※2)<br>　- Operational (※2)</p>
 <p>(※1) のログは [アプリケーションとサービス ログ] -&gt; [Microsoft] -&gt; [Windows] を展開すると表示されます。<br>(※1) のイベントログが表示されない場合、そのサーバーから (※1) のイベントログの採取は不要でございます。<br>(※2) のログは [アプリケーションとサービス ログ] -&gt; [Microsoft] -&gt; [VirtualMachineManager] -&gt; [Server] を展開すると表示されます。<br>(※2) のイベントログが表示されない場合、そのサーバーから (※2) のイベントログの採取は不要でございます。</p>
+<h2 id="No-7-VMM-ゲスト-エージェントのログ"><a href="#No-7-VMM-ゲスト-エージェントのログ" class="headerlink" title="[No.7 VMM ゲスト エージェントのログ]"></a>[No.7 VMM ゲスト エージェントのログ]</h2><p>Linux VM テンプレートから仮想マシンのデプロイに失敗する場合、VMM ゲスト エージェントのログ確認が必要となります。<br>また、syslog も併せて連携をいただくことで、VMM ゲスト エージェントのサービスやプロセスに問題が発生していた場合、その特定が可能となる場合がございます。<br>以下のディレクトリを丸ごと、もしくはファイルを採取します。</p>
+<p>採取するディレクトリ:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/opt/microsoft/scvmmguestagent/log</span><br></pre></td></tr></table></figure></p>
+<p>採取するファイル:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/log/messages</span><br></pre></td></tr></table></figure></p>
 
       
       
