@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Template/019.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Template/020.png">
 <meta property="article:published_time" content="2026-09-07T10:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-07T11:17:19.881Z">
+<meta property="article:modified_time" content="2026-09-09T02:10:46.896Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="HowTo">
 <meta property="article:tag" content="SCVMM">
@@ -190,7 +190,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+6ee80b16-1202-5314-9f8d-8aef7957cb5d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSCVMM+%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E4%BB%AE%E6%83%B3%E3%83%9E%E3%82%B7%E3%83%B3%E3%81%AE%E5%B1%95%E9%96%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Template%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Template.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Template.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Template/" data-id="cuidr5xXsb5E0P_Q6iNleK0sm" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Template/" data-id="cuidf_UPPXyLWbF0pZpTHv4rZ" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -247,6 +247,12 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
 <pre><code>sudo chmod +x install
 sudo ./install scvmmguestagent.1.0.0.544.x64.tar</code></pre>
 <p><img src="009.png"></p>
+<p>コマンドを実行する際、Windows と Linux の改行コードの差異に起因して以下のエラーが発生する場合がございます。</p>
+<pre>bad interpreter: No such file or directory</pre>
+<p>エラーが発生する場合は、以下コマンドを実行し、改行コードを Linux 用に訂正します。</p>
+<pre>sed -i 's/\r//' install</pre>
+
+
 <p>念のため、一度 OS を再起動し、以下のコマンドでゲスト エージェントの状態を確認します。<br>正常に起動していた場合、テンプレート化の準備は完了です。</p>
 <pre><code>sudo systemctl status scvmmguestagent</code></pre>
 <p><img src="010.png"></p>
@@ -264,7 +270,33 @@ sudo ./install scvmmguestagent.1.0.0.544.x64.tar</code></pre>
 <p>展開された仮想マシンを起動します。<br><img src="019.png"></p>
 <p>仮想マシンにログインし、コンピューター名が「VMbyTemplate」に設定されていることを確認します。また、マスター VM で作成したテキストファイルが引き継がれていることも確認できます。<br><img src="020.png"></p>
 <hr>
-<h2 id="テンプレート仮想マシンに関する補足情報"><a href="#テンプレート仮想マシンに関する補足情報" class="headerlink" title="テンプレート仮想マシンに関する補足情報"></a>テンプレート仮想マシンに関する補足情報</h2><p>SCVMMによるテンプレート化では、仮想マシン内の情報を初期化する処理は行われません。このため、マスター VM に含まれる情報のうち、展開後の仮想マシンへ引き継ぐ必要がないものは、あらかじめ削除しておくことを推奨します。<br>また、Linux VMをテンプレート化した場合、Linux用VMMゲストエージェントはインストールされた状態で引き継がれます。テンプレートから展開した仮想マシンで不要な場合は、手動で削除してください。</p>
+<h2 id="テンプレート仮想マシンに関する補足情報"><a href="#テンプレート仮想マシンに関する補足情報" class="headerlink" title="テンプレート仮想マシンに関する補足情報"></a>テンプレート仮想マシンに関する補足情報</h2><h3 id="１．テンプレートに伴う初期化の有無"><a href="#１．テンプレートに伴う初期化の有無" class="headerlink" title="１．テンプレートに伴う初期化の有無"></a>１．テンプレートに伴う初期化の有無</h3><p>SCVMMによるテンプレート化では、仮想マシン内の情報を初期化する処理は行われません。このため、マスター VM に含まれる情報のうち、展開後の仮想マシンへ引き継ぐ必要がないものは、あらかじめ削除しておくことを推奨します。</p>
+<h3 id="２．Linux-の-VMM-ゲスト-エージェントの扱い"><a href="#２．Linux-の-VMM-ゲスト-エージェントの扱い" class="headerlink" title="２．Linux の VMM ゲスト エージェントの扱い"></a>２．Linux の VMM ゲスト エージェントの扱い</h3><p>Linux VM をテンプレート化し、そのテンプレートから VM を展開すると、Linux 用 VMM ゲスト エージェントは SCVMM のバージョンによって以下の動作で扱われます。</p>
+<ul>
+<li>SCVMM 2019 以前: </li>
+<li>VMM ゲスト エージェントは VM 展開後削除される。</li>
+<li>SCVMM 2022 以降: </li>
+<li>VMM ゲスト エージェントはインストールされた状態で引き継がれる。VMM ゲスト エージェントのサービス自動起動も有効化状態を維持する。</li>
+</ul>
+<p>VMM ゲスト エージェントは、VM テンプレートから VM を展開する際、テンプレートの内容を OS に反映させるために使用します。<br>SCVMM 2022 以降で、展開した VM を以降テンプレート化するご予定がございませんでしたら、VMM ゲスト エージェント サービスの自動起動を無効化したり、VMM ゲスト エージェントの削除を行います。</p>
+<pre>
+• サービスの自動起動の無効化:
+systemctl disable scvmmguestagent
+
+• サービスの自動起動の有効化:
+systemctl enable scvmmguestagent
+
+・VMM ゲスト エージェントのアンインストール:
+./install -r
+(VMM ゲスト エージェントのインストールで使用した [install] ファイルを使用します。
+VMM ゲスト エージェントの tar ファイルは不要です。)
+</pre>
+
+<h3 id="３．VMM-ゲスト-エージェントのアップデート方法"><a href="#３．VMM-ゲスト-エージェントのアップデート方法" class="headerlink" title="３．VMM ゲスト エージェントのアップデート方法"></a>３．VMM ゲスト エージェントのアップデート方法</h3><p>SCVMM に UR を適用すると、同じく VMM ゲスト エージェントのバージョンも更新されます。<br>Linux VM にインストールされた VMM ゲスト エージェントを更新する場合、インストール時と同じように、[install] ファイルと最新版の tar ファイルを、それぞれ同じディレクトリに配置します。<br>その後下記のコマンドを実行します。</p>
+<pre>
+./install -u -v <対象の tar ファイル名の内バージョン数値に該当する箇所の文字列>
+</pre>
+<p>インストール時と異なり、tar ファイル名を指定するのではなく、バージョン数値に該当する箇所の文字列のみ指定する必要があります。<br>例えば “scvmmguestagent.1.0.0.544.x64.tar” を使用する場合、&lt;対象の tar ファイル名の内バージョン数値に該当する箇所の文字列&gt; の箇所には 1.0.0.544 を指定する必要があります。</p>
 <hr>
 <p>以上で、SCVMM テンプレートを用いた仮想マシンの展開方法のご紹介は終了です。<br>本記事が、仮想マシンの展開の効率化の一助となれば幸いです。</p>
 
