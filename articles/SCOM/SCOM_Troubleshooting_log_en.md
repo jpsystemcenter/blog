@@ -39,7 +39,7 @@ If a database issue is suspected, collect event logs from this computer.
 Typically, event logs from these servers are required when SCOM processing is slow, data is missing, or SCOM is not functioning.
 If the SQL Server hosting the SCOM database exists on an SCOM Management Server, you do not need to pay special attention to this point.
 
-Use the following steps to collect event logs.
+<b>Use the following steps to collect event logs.</b>
 1. Open Event Viewer on the target computer.
 A reliable way to open it is to press [win] + [R], directly specify "eventvwr.msc", and run it.
 2. In the console tree on the left, click the event log to save.
@@ -93,21 +93,22 @@ order by [Alert].Alert_xxxx.RaisedDateTime desc
 5. Send the exported CSV file to us.
 
 ## Environment Information
-You can obtain a list of information about Management Servers and monitored servers registered in SCOM.
-When investigating various issues, the information output by these commands can sometimes lead to faster resolution.
+To understand the configuration and usage of your SCOM environment, we collect environment information using a PowerShell script. Follow the steps below and provide the generated ZIP file.
 
-1. Sign in to an SCOM Management Server with an account that has SCOM administrator privileges.
-2. Create a folder named "temp" directly under the C drive in advance.
-3. Run [Operations Manager Shell] from the [Start] menu. It's usually located under [Microsoft System Center].
-4. Run the following commands.
+1. Sign in to the SCOM management server using an account with SCOM administrator privileges.
+2. Create the C:\temp folder if it does not already exist.
+3. Download [Get-SCOM-Environment-Data.zip](../SCOM_Troubleshooting_log/Get-SCOM-Environment-Data.zip), save it to a folder on the SCOM management server, and extract it.
+4. Open Operations Manager Shell from the Start menu.
+5. Navigate to the folder containing the extracted script and run:
 ```
-Get-SCOMManagementServer | export-csv -path "c:/temp/SCOMMS.csv" -encoding UTF8
-Get-SCOMGatewayManagementServer | export-csv -path "c:/temp/Gateway.csv" -encoding UTF8
-Get-scomagent | export-csv -path "c:/temp/agents.csv" -encoding UTF8
-Get-scxagent | export-csv -path "C:\temp\SCXAgent.csv" -encoding utf8
-Get-SCOMAgentlessManagedComputer | export-csv -path "C:\temp\Agentless.csv" -encoding utf8
+.\Get-SCOM-Environment-Data.ps1
 ```
-5. Send each CSV output in the temp folder individually, or send a compressed archive of the temp folder.
+6. When the script finishes, a ZIP file named SCOM_Data_YYYYMMDD-HHMMSS.zip is generated under C:\temp.
+7. Send the generated ZIP file to us.
+
+※ Example
+The script collects information about SCOM servers, managed computers, and recent alerts, and packages the results into a ZIP file.
+![](003.png)
 
 ## Installation Logs
 Investigating installation logs is used when installation-related operations cannot be performed successfully, such as SCOM installation or push installation of agents.
