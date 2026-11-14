@@ -16,8 +16,7 @@ This page is based on the below blog entry.
 [SCVMM で使用する一般的なログ収集方法](https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/)
 
 ## Information Required for Troubleshooting
-When troubleshooting SCVMM, we request the following information from customers to understand their environment and SCVMM operations.
-This article explains the purpose of each collection and the procedures for collection.
+When troubleshooting SCVMM, we request the following information from customers to understand their environment and SCVMM operations. This article explains the purpose of each collection and the procedures for collection.
 <table>
   <thead>
     <tr>
@@ -61,63 +60,46 @@ This article explains the purpose of each collection and the procedures for coll
 </table>
 
 ## No.1 Trace Logs and Error Information
-Trace logs, which record operations during an issue reproduction when unexpected events occur, are the most valuable information for root cause investigation.
-In trace log investigation, identifying the date/time when the error occurred and the exact error message is also important.
-Below, we introduce methods for acquiring trace log and error message information.
+When an unexpected issue occurs, trace logs collected while reproducing the issue help us investigate the processing flow and identify the cause. The exact error message and the time the error occurred are also important.
 
 <b>■ Trace Log Collection Procedure</b>
-On the SCVMM server and the virtualization host server (Hyper-V server) where the problem occurred, collect information in parallel following the steps below.
-1. Run Command Prompt as administrator.
+Perform the following procedure on both the SCVMM management server and the affected virtualization host (Hyper-V server), collecting traces simultaneously.
+1. Open Command Prompt as administrator.
 2. Create a VMM folder (C:\VMMlogs).
-3. Execute the following commands in order to start VMM trace collection:
- - Preparation (1)
- [Target for Execution] SCVMM Server:
- ```
- logman delete VMM
- ```
- [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:
- ```
- logman delete WinRM
- logman delete WMI
- ```
- (*) When executing the above commands, you may see a message "Data Collector Set was not found." This is not a problem and you may just ignore it.
- - Preparation (2)
- [Target for Execution] SCVMM Server:
- ```
- logman create trace VMM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_VMMLog.ETL -p Microsoft-VirtualMachineManager-Debug -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
- ```
- [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:
- ```
- logman create trace WinRM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WinRM.ETL -p Microsoft-Windows-WinRM 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
- logman create trace WMI -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WMI.ETL -p WMI_Tracing 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
- ```
- (*) Trace files up to a maximum of 2GB each will be collected under "C:\VMMlogs" using the -max option. Before executing, please confirm the free space on the C drive in advance, or specify a drive with larger capacity.
+3. Run the following commands in order.
+ - Preparation: Remove existing data collector sets
+```
+logman delete VMM
+logman delete WinRM
+logman delete WMI
+```
+ (*) If a message indicates that the data collector set was not found, you can disregard it and continue.
+ - Preparation: Create trace data collector sets
+```
+logman create trace VMM -v mmddhhmm -ow -o C:\VMMLogs\%computername%_VMMLog.ETL -p Microsoft-VirtualMachineManager-Debug -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
+logman create trace WinRM -v mmddhhmm -ow -o C:\VMMLogs\%computername%_WinRM.ETL -p Microsoft-Windows-WinRM 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
+logman create trace WMI -v mmddhhmm -ow -o C:\VMMLogs\%computername%_WMI.ETL -p WMI_Tracing 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
+```
+ (*) Each trace file has a maximum size of 2 GB, as specified by the -max option. Before starting, ensure that the C: drive has sufficient free space, or change the output paths to a drive with sufficient capacity.
  - Start Collection (ETL files will be created under the C:\VMMlogs folder)
- [Target for Execution] SCVMM Server:
- ```
- logman start VMM
- ```
- [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:
- ```
- logman start WinRM
- logman start WMI
- ```
- 
-4. Execute the issue reproduction steps. <b><font color="red">* The trace logs during this process will be used for analysis.</font></b><br>
- 
-5. Execute the following commands in order to stop trace collection:
- [Target for Execution] SCVMM Server:
-  ```
- logman stop VMM
- logman delete VMM
- ```
- [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:
- ```
- logman stop WinRM
- logman stop WMI
- logman delete WinRM
- logman delete WMI
- ```
+```
+logman start VMM
+logman start WinRM
+logman start WMI
+```
+
+4. Reproduce the issue. <b><font color="red">* The trace logs during this process will be used for analysis.</font></b><br>
+
+5. After reproducing the issue, run the following commands on both servers to stop trace collection and remove the data collector sets.
+```
+logman stop VMM
+logman stop WinRM
+logman stop WMI
+logman delete WinRM
+logman delete WMI
+logman delete VMM
+```
+
 6. Execute the following command on each etl file to convert the trace file (a .txt file will be generated):
  ```
  netsh trace convert C:\VMMlogs\<Computer Name>_<Each ETL File>.etl
@@ -165,30 +147,24 @@ The method for obtaining the job list is as follows:
  
  
 ## No.3 SCVMM Environment Information (SCVMM Server Information, Host Information, Virtual Machine Information)
-When we need to understand the environment where the problem occurred and usage status, we request SCVMM version information, information on hosts managed by SCVMM, and virtual machine information.
-The methods for acquiring each piece of information are as follows:
+To understand the configuration and usage of your SCVMM environment, we collect environment information using a PowerShell script. Follow the steps below and provide the generated ZIP file.
  
 <b>■ Collection Procedure</b>
-1. Log in to the SCVMM management server with administrator privileges.
-2. Create a folder named "temp" directly under the C drive in advance.
-3. From the Start menu, execute [Virtual Machine Manager Command Shell].
-4. Execute the following command to obtain SCVMM server information:
- ```
- Get-SCVMMServer -ComputerName "*** FQDN of VMM Server ***" | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8
- ```
- Example) Get-SCVMMServer -ComputerName "VMMServer01.Contoso.com" | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8
-5. Execute the following commands to obtain information on hosts managed by SCVMM:
- ```
- Get-SCVMHost | export-csv -path C:\temp\Hostlist.csv -encoding UTF8
- Get-SCVMHostCluster | export-csv -path C:\temp\Clusterlist.csv -encoding UTF8
- Get-SCVMMManagedComputer | export-csv -path C:\temp\ManagedComputer.csv -encoding UTF8
- ```
-6. Execute the following command to obtain information on virtual machines managed by SCVMM:
- ```
- Get-SCVirtualMachine | export-csv -path C:\temp\VirtualMachine.csv -encoding UTF8
- ```
-7. Send the "VMMinfo.csv", "Hostlist.csv", "Clusterlist.csv", "ManagedComputer.csv", and "VirtualMachine.csv" files output to the "temp" folder to us.<br><br>
- 
+1. Sign in to the SCVMM management server using an account with administrator privileges.
+2. Create the C:\temp folder if it does not already exist.
+3. Download [Get-SCVMM-Environment-Data.zip](../SCVMM_Troubleshooting_log/Get-SCVMM-Environment-Data.zip), save it to a folder on the SCVMM management server, and extract it.
+4. Open Virtual Machine Manager Command Shell from the Start menu.
+5. Navigate to the folder containing the extracted script and run:
+```
+.\Get-SCVMM-Environment-Data.ps1
+```
+6. Enter the FQDN of the SCVMM management server—for example, scvmm2025.domain1.local—and press Enter.
+7. When the script finishes, a ZIP file named SCVMM_Data_YYYYMMDD-HHMMSS.zip is generated under C:\temp.
+8. Send the generated ZIP file to Microsoft Support.
+
+※ Sample
+The script collects information about the SCVMM server, managed computers, storage, and networks, and packages the results into a ZIP file.
+![](009.png)
 
 ## No.4 Cluster/Host/Virtual Machine Property Screens
 When warnings such as status abnormalities occur on clusters, hosts, or virtual machines managed by SCVMM, we request screenshots of the corresponding property screens to confirm the occurring warnings and configuration details.
