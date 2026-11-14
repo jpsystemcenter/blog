@@ -68,6 +68,7 @@ Perform the following procedure on both the SCVMM management server and the affe
 2. Create a VMM folder (C:\VMMlogs).
 3. Run the following commands in order.
  - Preparation: Remove existing data collector sets
+  [Applicable servers] The SCVMM management server and the affected virtualization host server.
 ```
 logman delete VMM
 logman delete WinRM
@@ -75,6 +76,7 @@ logman delete WMI
 ```
  (*) If a message indicates that the data collector set was not found, you can disregard it and continue.
  - Preparation: Create trace data collector sets
+  [Applicable servers] The SCVMM management server and the affected virtualization host server.
 ```
 logman create trace VMM -v mmddhhmm -ow -o C:\VMMLogs\%computername%_VMMLog.ETL -p Microsoft-VirtualMachineManager-Debug -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
 logman create trace WinRM -v mmddhhmm -ow -o C:\VMMLogs\%computername%_WinRM.ETL -p Microsoft-Windows-WinRM 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048
@@ -82,15 +84,16 @@ logman create trace WMI -v mmddhhmm -ow -o C:\VMMLogs\%computername%_WMI.ETL -p 
 ```
  (*) Each trace file has a maximum size of 2 GB, as specified by the -max option. Before starting, ensure that the C: drive has sufficient free space, or change the output paths to a drive with sufficient capacity.
  - Start Collection (ETL files will be created under the C:\VMMlogs folder)
+  [Applicable servers] The SCVMM management server and the affected virtualization host server.
 ```
 logman start VMM
 logman start WinRM
 logman start WMI
 ```
-
 4. Reproduce the issue. <b><font color="red">* The trace logs during this process will be used for analysis.</font></b><br>
 
 5. After reproducing the issue, run the following commands on both servers to stop trace collection and remove the data collector sets.
+  [Applicable servers] The SCVMM management server and the affected virtualization host server.
 ```
 logman stop VMM
 logman stop WinRM
@@ -99,12 +102,10 @@ logman delete WinRM
 logman delete WMI
 logman delete VMM
 ```
-
 6. Execute the following command on each etl file to convert the trace file (a .txt file will be generated):
  ```
  netsh trace convert C:\VMMlogs\<Computer Name>_<Each ETL File>.etl
  ```
- (*) <Each ETL File> includes three types: WMI, WinRM, and VMMLog.
 7. Compress the C:\VMMlogs folder and send it to us.<br><br>
 
 
