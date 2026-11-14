@@ -13,14 +13,16 @@
 <meta property="og:site_name" content="Japan System Center Support Blog">
 <meta property="og:description" content="This article explains common logs collected for investigation and how to obtain them when performing troubleshooting in SCOM.">
 <meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log_en/003.png">
 <meta property="article:published_time" content="2026-05-14T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-14T16:10:31.167Z">
+<meta property="article:modified_time" content="2026-11-14T16:27:01.223Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="Log Collection">
 <meta property="article:tag" content="SCOM">
 <meta property="article:tag" content="Troubleshooting">
 <meta property="article:tag" content="トラブルシューティング">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log_en/003.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan System Center Support Blog" type="application/atom+xml">
   
@@ -171,7 +173,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+9d83987f-c4a4-5ed8-94bb-6a384250b940%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BCommon+Log+Collection+Methods+Used+in+SCOM%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCOM%2FSCOM_Troubleshooting_log_en%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCOM%2FSCOM_Troubleshooting_log_en.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCOM%2FSCOM_Troubleshooting_log_en.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log_en/" data-id="cuid4HulLX-nyY6UyglpH5va7" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCOM/SCOM_Troubleshooting_log_en/" data-id="cuid66VmpVBVoakbgPfs_2EuF" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -187,7 +189,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
 <li>Monitored Windows computers where the issue occurred:<br>If monitoring issues are occurring, collect event logs from all monitored computers where the issue is occurring.<br>(You may select and collect from 2 ~ 3 issued computers if there’s too many issued monitored computers.)<br>If troubleshooting is for an SCOM-wide issue rather than an issue on a specific monitored computer, collecting logs from these computers is unnecessary.</li>
 <li>SQL Server host running the SCOM databases:<br>If a database issue is suspected, collect event logs from this computer.<br>Typically, event logs from these servers are required when SCOM processing is slow, data is missing, or SCOM is not functioning.<br>If the SQL Server hosting the SCOM database exists on an SCOM Management Server, you do not need to pay special attention to this point.</li>
 </ul>
-<p>Use the following steps to collect event logs.</p>
+<p><b>Use the following steps to collect event logs.</b></p>
 <ol>
 <li><p>Open Event Viewer on the target computer.<br>A reliable way to open it is to press [win] + [R], directly specify “eventvwr.msc”, and run it.</p>
 </li>
@@ -231,17 +233,20 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
 <li>Results are displayed at the bottom of the screen. Right-click any of the column name in the result grid and click [Save Results As…].</li>
 <li>Send the exported CSV file to us.</li>
 </ol>
-<h2 id="Environment-Information"><a href="#Environment-Information" class="headerlink" title="Environment Information"></a>Environment Information</h2><p>You can obtain a list of information about Management Servers and monitored servers registered in SCOM.<br>When investigating various issues, the information output by these commands can sometimes lead to faster resolution.</p>
+<h2 id="Environment-Information"><a href="#Environment-Information" class="headerlink" title="Environment Information"></a>Environment Information</h2><p>To understand the configuration and usage of your SCOM environment, we collect environment information using a PowerShell script. Follow the steps below and provide the generated ZIP file.</p>
 <ol>
-<li>Sign in to an SCOM Management Server with an account that has SCOM administrator privileges.</li>
-<li>Create a folder named “temp” directly under the C drive in advance.</li>
-<li>Run [Operations Manager Shell] from the [Start] menu. It’s usually located under [Microsoft System Center].</li>
-<li>Run the following commands.</li>
+<li>Sign in to the SCOM management server using an account with SCOM administrator privileges.</li>
+<li>Create the C:\temp folder if it does not already exist.</li>
+<li>Download <a href="../SCOM_Troubleshooting_log/Get-SCOM-Environment-Data.zip">Get-SCOM-Environment-Data.zip</a>, save it to a folder on the SCOM management server, and extract it.</li>
+<li>Open Operations Manager Shell from the Start menu.</li>
+<li>Navigate to the folder containing the extracted script and run:</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Get-SCOMManagementServer | export-csv -path &quot;c:/temp/SCOMMS.csv&quot; -encoding UTF8</span><br><span class="line">Get-SCOMGatewayManagementServer | export-csv -path &quot;c:/temp/Gateway.csv&quot; -encoding UTF8</span><br><span class="line">Get-scomagent | export-csv -path &quot;c:/temp/agents.csv&quot; -encoding UTF8</span><br><span class="line">Get-scxagent | export-csv -path &quot;C:\temp\SCXAgent.csv&quot; -encoding utf8</span><br><span class="line">Get-SCOMAgentlessManagedComputer | export-csv -path &quot;C:\temp\Agentless.csv&quot; -encoding utf8</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>Send each CSV output in the temp folder individually, or send a compressed archive of the temp folder.</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\Get-SCOM-Environment-Data.ps1</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>When the script finishes, a ZIP file named SCOM_Data_YYYYMMDD-HHMMSS.zip is generated under C:\temp.</li>
+<li>Send the generated ZIP file to us.</li>
 </ol>
+<p>※ Example<br>The script collects information about SCOM servers, managed computers, and recent alerts, and packages the results into a ZIP file.<br><img src="003.png"></p>
 <h2 id="Installation-Logs"><a href="#Installation-Logs" class="headerlink" title="Installation Logs"></a>Installation Logs</h2><p>Investigating installation logs is used when installation-related operations cannot be performed successfully, such as SCOM installation or push installation of agents.<br>If an installation-related issue occurs, these logs need to be investigated.<br>The logs are stored in the following folder.</p>
 <blockquote>
 <p>C:\Users&lt;Username used when installing SCOM&gt;\AppData\Local\SCOM</p>
