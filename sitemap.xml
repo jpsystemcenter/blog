@@ -110,15 +110,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
-    
-    <lastmod>2026-11-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Renew_Crtificate/</loc>
     
     <lastmod>2026-11-14</lastmod>
@@ -128,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_SCOM_Monitor/</loc>
     
     <lastmod>2026-11-14</lastmod>
     
@@ -137,7 +128,16 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_SCOM_Monitor/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Job_History/</loc>
+    
+    <lastmod>2026-11-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_LiveMigration_and_Errors/</loc>
     
     <lastmod>2026-11-14</lastmod>
     
@@ -353,7 +353,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
     
     <lastmod>2026-11-14</lastmod>
     
@@ -362,7 +362,7 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_OpsDW_deletedata/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_RAMPercentMonitor/</loc>
     
     <lastmod>2026-11-14</lastmod>
     
@@ -434,15 +434,6 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
-    
-    <lastmod>2026-11-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CacheClear/</loc>
     
     <lastmod>2026-11-14</lastmod>
@@ -453,6 +444,15 @@
   
   <url>
     <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_DCOM_influence/</loc>
+    
+    <lastmod>2026-11-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpsystemcenter.github.io/blog/SCOM/SCOM_CET_Disabled/</loc>
     
     <lastmod>2026-11-14</lastmod>
     
@@ -631,14 +631,14 @@
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/%E3%83%9E%E3%82%A4%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/SCOM-%E9%80%A3%E6%90%BA/</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpsystemcenter.github.io/blog/tags/SCOM-%E9%80%A3%E6%90%BA/</loc>
+    <loc>https://jpsystemcenter.github.io/blog/tags/%E3%83%9E%E3%82%A4%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
