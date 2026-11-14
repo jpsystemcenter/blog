@@ -17,12 +17,13 @@
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/006.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/008.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/007.png">
+<meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/009.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/001.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/002.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/003.png">
 <meta property="og:image" content="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/004.png">
 <meta property="article:published_time" content="2026-05-25T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-09T02:11:44.120Z">
+<meta property="article:modified_time" content="2026-11-14T16:05:49.991Z">
 <meta property="article:author" content="Japan System Center Support">
 <meta property="article:tag" content="Log Collection">
 <meta property="article:tag" content="SCVMM">
@@ -180,7 +181,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         
         <a href="https://github.com/jpsystemcenter/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+cc3e3c8f-73c5-5037-b870-3d121eaf2471%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BCommon+Log+Collection+Methods+Used+in+SCVMM%5D%28https%3A%2F%2Fjpsystemcenter.github.io%2Fblog%2FSCVMM%2FSCVMM_Troubleshooting_log_en%2F%29%0A*+Content+Source%3A+%5Barticles%2FSCVMM%2FSCVMM_Troubleshooting_log_en.md%5D%28https%3A%2F%2Fgithub.com%2Fjpsystemcenter%2Fblob%2Fmain%2Farticles%2FSCVMM%2FSCVMM_Troubleshooting_log_en.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/" data-id="cuidY6uAIjuKxIQfLQBiXCsAz" class="article-share-link">共有</a>
+        <a data-url="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log_en/" data-id="cuidef3nXP9B_uODq2od6yZ82" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -188,7 +189,7 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
         <p>Hello everyone,<br>This article explains the methods for acquiring logs and other information that are frequently collected when investigating troubles that occur in System Center Virtual Machine Manager (hereinafter, SCVMM).</p>
 <span id="more"></span>
 <p>This page is based on the below blog entry.<br><a href="https://jpsystemcenter.github.io/blog/SCVMM/SCVMM_Troubleshooting_log/">SCVMM で使用する一般的なログ収集方法</a></p>
-<h2 id="Information-Required-for-Troubleshooting"><a href="#Information-Required-for-Troubleshooting" class="headerlink" title="Information Required for Troubleshooting"></a>Information Required for Troubleshooting</h2><p>When troubleshooting SCVMM, we request the following information from customers to understand their environment and SCVMM operations.<br>This article explains the purpose of each collection and the procedures for collection.</p>
+<h2 id="Information-Required-for-Troubleshooting"><a href="#Information-Required-for-Troubleshooting" class="headerlink" title="Information Required for Troubleshooting"></a>Information Required for Troubleshooting</h2><p>When troubleshooting SCVMM, we request the following information from customers to understand their environment and SCVMM operations. This article explains the purpose of each collection and the procedures for collection.</p>
 <table>
   <thead>
     <tr>
@@ -231,36 +232,41 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
   </tbody>
 </table>
 
-<h2 id="No-1-Trace-Logs-and-Error-Information"><a href="#No-1-Trace-Logs-and-Error-Information" class="headerlink" title="No.1 Trace Logs and Error Information"></a>No.1 Trace Logs and Error Information</h2><p>Trace logs, which record operations during an issue reproduction when unexpected events occur, are the most valuable information for root cause investigation.<br>In trace log investigation, identifying the date&#x2F;time when the error occurred and the exact error message is also important.<br>Below, we introduce methods for acquiring trace log and error message information.</p>
-<p><b>■ Trace Log Collection Procedure</b><br>On the SCVMM server and the virtualization host server (Hyper-V server) where the problem occurred, collect information in parallel following the steps below.</p>
+<h2 id="No-1-Trace-Logs-and-Error-Information"><a href="#No-1-Trace-Logs-and-Error-Information" class="headerlink" title="No.1 Trace Logs and Error Information"></a>No.1 Trace Logs and Error Information</h2><p>When an unexpected issue occurs, trace logs collected while reproducing the issue help us investigate the processing flow and identify the cause. The exact error message and the time the error occurred are also important.</p>
+<p><b>■ Trace Log Collection Procedure</b><br>Perform the following procedure on both the SCVMM management server and the affected virtualization host (Hyper-V server), collecting traces simultaneously.</p>
 <ol>
-<li>Run Command Prompt as administrator.</li>
+<li>Open Command Prompt as administrator.</li>
 <li>Create a VMM folder (C:\VMMlogs).</li>
-<li>Execute the following commands in order to start VMM trace collection:</li>
+<li>Run the following commands in order.</li>
 </ol>
 <ul>
-<li>Preparation (1)<br> [Target for Execution] SCVMM Server:</li>
+<li>Preparation: Remove existing data collector sets</li>
 </ul>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman delete VMM</span><br></pre></td></tr></table></figure>
-<p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br></pre></td></tr></table></figure><br> (*) When executing the above commands, you may see a message “Data Collector Set was not found.” This is not a problem and you may just ignore it.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">logman delete VMM</span><br><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br></pre></td></tr></table></figure>
+<p> (*) If a message indicates that the data collector set was not found, you can disregard it and continue.</p>
 <ul>
-<li>Preparation (2)<br> [Target for Execution] SCVMM Server:</li>
+<li>Preparation: Create trace data collector sets</li>
 </ul>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman create trace VMM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_VMMLog.ETL -p Microsoft-VirtualMachineManager-Debug -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br></pre></td></tr></table></figure>
-<p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman create trace WinRM -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WinRM.ETL -p Microsoft-Windows-WinRM 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br><span class="line">logman create trace WMI -v mmddhhmm -ow -o C:\VMMlogs\%computername%_WMI.ETL -p WMI_Tracing 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br></pre></td></tr></table></figure><br> (*) Trace files up to a maximum of 2GB each will be collected under “C:\VMMlogs” using the -max option. Before executing, please confirm the free space on the C drive in advance, or specify a drive with larger capacity.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">logman create trace VMM -v mmddhhmm -ow -o C:\VMMLogs\%computername%_VMMLog.ETL -p Microsoft-VirtualMachineManager-Debug -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br><span class="line">logman create trace WinRM -v mmddhhmm -ow -o C:\VMMLogs\%computername%_WinRM.ETL -p Microsoft-Windows-WinRM 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br><span class="line">logman create trace WMI -v mmddhhmm -ow -o C:\VMMLogs\%computername%_WMI.ETL -p WMI_Tracing 0xffff 0x5 -nb 16 16 -bs 1024 -mode Circular -f bincirc -max 2048</span><br></pre></td></tr></table></figure>
+<p> (*) Each trace file has a maximum size of 2 GB, as specified by the -max option. Before starting, ensure that the C: drive has sufficient free space, or change the output paths to a drive with sufficient capacity.</p>
 <ul>
-<li>Start Collection (ETL files will be created under the C:\VMMlogs folder)<br> [Target for Execution] SCVMM Server:</li>
+<li>Start Collection (ETL files will be created under the C:\VMMlogs folder)</li>
 </ul>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logman start VMM</span><br></pre></td></tr></table></figure>
-<p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman start WinRM</span><br><span class="line">logman start WMI</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">logman start VMM</span><br><span class="line">logman start WinRM</span><br><span class="line">logman start WMI</span><br></pre></td></tr></table></figure>
+
 <ol start="4">
-<li><p>Execute the issue reproduction steps. <b><font color="red">* The trace logs during this process will be used for analysis.</font></b><br></p>
+<li><p>Reproduce the issue. <b><font color="red">* The trace logs during this process will be used for analysis.</font></b><br></p>
 </li>
-<li><p>Execute the following commands in order to stop trace collection:<br> [Target for Execution] SCVMM Server:</p>
+<li><p>After reproducing the issue, run the following commands on both servers to stop trace collection and remove the data collector sets.</p>
 </li>
 </ol>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logman stop VMM</span><br><span class="line">logman delete VMM</span><br></pre></td></tr></table></figure>
-<p> [Target for Execution] SCVMM Server and virtualization host server where the problem occurred:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logman stop WinRM</span><br><span class="line">logman stop WMI</span><br><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br></pre></td></tr></table></figure><br>6. Execute the following command on each etl file to convert the trace file (a .txt file will be generated):<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh trace convert C:\VMMlogs\&lt;Computer Name&gt;_&lt;Each ETL File&gt;.etl</span><br></pre></td></tr></table></figure><br> (*) <Each ETL File> includes three types: WMI, WinRM, and VMMLog.<br>7. Compress the C:\VMMlogs folder and send it to us.<br><br></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">logman stop VMM</span><br><span class="line">logman stop WinRM</span><br><span class="line">logman stop WMI</span><br><span class="line">logman delete WinRM</span><br><span class="line">logman delete WMI</span><br><span class="line">logman delete VMM</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>Execute the following command on each etl file to convert the trace file (a .txt file will be generated):</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh trace convert C:\VMMlogs\&lt;Computer Name&gt;_&lt;Each ETL File&gt;.etl</span><br></pre></td></tr></table></figure>
+<p> (*) <Each ETL File> includes three types: WMI, WinRM, and VMMLog.<br>7. Compress the C:\VMMlogs folder and send it to us.<br><br></p>
 <p><b>■ Error Information Collection Procedure</b><br>Depending on the error occurrence situation, collect one of the following pieces of information:</p>
 <p><b>(1) When errors occur in job results</b><br>A typical error occurrence situation in SCVMM is when operations or configuration changes are made and errors occur in jobs during execution.<br>In this case, collect information following these steps:</p>
 <ol>
@@ -283,16 +289,22 @@ Contributors: <ul style="display: inline-block; list-style:none" id="contributor
 <ol start="5">
 <li>Send the “scjob.csv” file output to the “temp” folder to us.<br><br></li>
 </ol>
-<h2 id="No-3-SCVMM-Environment-Information-SCVMM-Server-Information-Host-Information-Virtual-Machine-Information"><a href="#No-3-SCVMM-Environment-Information-SCVMM-Server-Information-Host-Information-Virtual-Machine-Information" class="headerlink" title="No.3 SCVMM Environment Information (SCVMM Server Information, Host Information, Virtual Machine Information)"></a>No.3 SCVMM Environment Information (SCVMM Server Information, Host Information, Virtual Machine Information)</h2><p>When we need to understand the environment where the problem occurred and usage status, we request SCVMM version information, information on hosts managed by SCVMM, and virtual machine information.<br>The methods for acquiring each piece of information are as follows:</p>
+<h2 id="No-3-SCVMM-Environment-Information-SCVMM-Server-Information-Host-Information-Virtual-Machine-Information"><a href="#No-3-SCVMM-Environment-Information-SCVMM-Server-Information-Host-Information-Virtual-Machine-Information" class="headerlink" title="No.3 SCVMM Environment Information (SCVMM Server Information, Host Information, Virtual Machine Information)"></a>No.3 SCVMM Environment Information (SCVMM Server Information, Host Information, Virtual Machine Information)</h2><p>To understand the configuration and usage of your SCVMM environment, we collect environment information using a PowerShell script. Follow the steps below and provide the generated ZIP file.</p>
 <p><b>■ Collection Procedure</b></p>
 <ol>
-<li>Log in to the SCVMM management server with administrator privileges.</li>
-<li>Create a folder named “temp” directly under the C drive in advance.</li>
-<li>From the Start menu, execute [Virtual Machine Manager Command Shell].</li>
-<li>Execute the following command to obtain SCVMM server information:</li>
+<li>Sign in to the SCVMM management server using an account with administrator privileges.</li>
+<li>Create the C:\temp folder if it does not already exist.</li>
+<li>Download <a href="../SCVMM_Troubleshooting_log/Get-SCVMM-Environment-Data.zip">Get-SCVMM-Environment-Data.zip</a>, save it to a folder on the SCVMM management server, and extract it.</li>
+<li>Open Virtual Machine Manager Command Shell from the Start menu.</li>
+<li>Navigate to the folder containing the extracted script and run:</li>
 </ol>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVMMServer -ComputerName &quot;*** FQDN of VMM Server ***&quot; | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8</span><br></pre></td></tr></table></figure>
-<p> Example) Get-SCVMMServer -ComputerName “VMMServer01.Contoso.com” | export-csv -path C:\temp\VMMinfo.csv -encoding UTF8<br>5. Execute the following commands to obtain information on hosts managed by SCVMM:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVMHost | export-csv -path C:\temp\Hostlist.csv -encoding UTF8</span><br><span class="line">Get-SCVMHostCluster | export-csv -path C:\temp\Clusterlist.csv -encoding UTF8</span><br><span class="line">Get-SCVMMManagedComputer | export-csv -path C:\temp\ManagedComputer.csv -encoding UTF8</span><br></pre></td></tr></table></figure><br>6. Execute the following command to obtain information on virtual machines managed by SCVMM:<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-SCVirtualMachine | export-csv -path C:\temp\VirtualMachine.csv -encoding UTF8</span><br></pre></td></tr></table></figure><br>7. Send the “VMMinfo.csv”, “Hostlist.csv”, “Clusterlist.csv”, “ManagedComputer.csv”, and “VirtualMachine.csv” files output to the “temp” folder to us.<br><br></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\Get-SCVMM-Environment-Data.ps1</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>Enter the FQDN of the SCVMM management server—for example, scvmm2025.domain1.local—and press Enter.</li>
+<li>When the script finishes, a ZIP file named SCVMM_Data_YYYYMMDD-HHMMSS.zip is generated under C:\temp.</li>
+<li>Send the generated ZIP file to Microsoft Support.</li>
+</ol>
+<p>※ Sample<br>The script collects information about the SCVMM server, managed computers, storage, and networks, and packages the results into a ZIP file.<br><img src="009.png"></p>
 <h2 id="No-4-Cluster-Host-Virtual-Machine-Property-Screens"><a href="#No-4-Cluster-Host-Virtual-Machine-Property-Screens" class="headerlink" title="No.4 Cluster&#x2F;Host&#x2F;Virtual Machine Property Screens"></a>No.4 Cluster&#x2F;Host&#x2F;Virtual Machine Property Screens</h2><p>When warnings such as status abnormalities occur on clusters, hosts, or virtual machines managed by SCVMM, we request screenshots of the corresponding property screens to confirm the occurring warnings and configuration details.<br>The methods for acquiring each piece of information are as follows.<br><br><b>■ Collection Procedure</b></p>
 <ol>
 <li>Log in to the SCVMM console.</li>
